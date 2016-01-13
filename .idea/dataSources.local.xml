@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="PostgreSQL - citynexus@localhost" uuid="cde8f84e-ebb3-49b5-9ea3-90efccbec9c3">
+      <secret-storage>master_key</secret-storage>
+      <user-name>homestead</user-name>
+      <schema-pattern>citynexus.pg_catalog citynexus.public</schema-pattern>
+      <default-schemas>citynexus.pg_catalog citynexus.public</default-schemas>
+    </data-source>
+  </component>
+</project>

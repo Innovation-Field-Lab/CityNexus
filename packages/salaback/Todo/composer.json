@@ -1,0 +1,22 @@
+{
+  "name": "alaback/todo",
+  "description": "a Todo app",
+
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Sean Alaback",
+      "email": "sean.alaback@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4:": {
+      "alaback\\Todo": "src/"
+    }
+  },
+  "minimum-stability": "dev",
+  "require": {
+    "laravel/laravel": "5.1.*",
+    "illuminate/support": "~5"
+  },
+}

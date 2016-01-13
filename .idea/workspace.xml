@@ -2,149 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f245d100-7fe6-4351-ad10-4ca55977e733" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dataSources.ids" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Listeners/.gitkeep" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Policies/.gitkeep" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/migrations/.gitkeep" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/seeds/.gitkeep" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/packages/salaback/tabler" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/favicon.ico" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/vendor/.gitkeep" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.env.example" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gitattributes" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/.name" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/blade.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/citynexus.iml" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/php.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Console/Commands/Inspire.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Console/Kernel.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Events/Event.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Exceptions/Handler.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/AuthController.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/PasswordController.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Http/Controllers/Controller.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Http/Middleware/Authenticate.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Http/Middleware/EncryptCookies.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Http/Middleware/RedirectIfAuthenticated.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Http/Middleware/VerifyCsrfToken.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Http/Requests/Request.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Http/routes.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Jobs/Job.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Property.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Providers/EventServiceProvider.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Providers/PackageServiceProvider.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/User.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/artisan" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bootstrap.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bootstrap/app.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bootstrap/autoload.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bootstrap/cache/.gitignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/composer.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/composer.lock" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/config/app.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/config/auth.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/config/broadcasting.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/config/cache.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/config/citynexus.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/config/compile.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/config/database.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/config/datatables.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/config/excel.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/config/filesystems.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/config/mail.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/config/queue.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/config/services.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/config/session.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/config/tabler.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/config/view.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/.gitignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/factories/ModelFactory.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_100000_create_password_resets_table.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/migrations/2015_01_10_000000_create_properties_table.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/migrations/2015_01_10_000000_create_scores_table.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/migrations/2015_10_01_000000_create_tables_table.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gulpfile.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/composer.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/Http/CitynexusController.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/PackageServiceProvider.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/config.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/helpers/DatasetQuery.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/helpers/ScoreBuilder.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/migrations/2015_01_10_000000_create_properties_table.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/models/Note.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/models/Property.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/routes.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/tests/testRiskScore.php" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/views/index.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/views/property/_data_panel.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/views/property/_note.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/views/property/_profile_panel.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/views/property/show.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/views/reports/dashboard.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/views/reports/maps/heatmap.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/views/reports/maps/mappoints.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/views/risk-score/datafields.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/views/risk-score/dataset.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/views/risk-score/fieldsettings.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/views/risk-score/new.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/views/risk-score/settings_line.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/views/upload/property.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/packages/salaback/Todo/composer.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/packages/salaback/Todo/src/Http/TodoController.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/packages/salaback/Todo/src/Http/routes.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/packages/salaback/Todo/src/TodoServiceProvider.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/packages/salaback/Todo/src/migrations/2015_10_01_000000_create_todo_table.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/packages/salaback/Todo/views/todo-list.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/phpspec.yml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/phpunit.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/.htaccess" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/css/app.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/css/app.css.map" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/index.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/all.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/all.js.map" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/robots.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/vendor/datatables/buttons.server-side.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/readme.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/assets/js/app.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/assets/js/bootstrap.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/assets/sass/app.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/lang/en/auth.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/lang/en/pagination.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/lang/en/passwords.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/lang/en/validation.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/errors/503.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/layout/header.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/layout/master.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/vendor/datatables/print.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/vendor/datatables/script.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/welcome.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/app/.gitignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/debugbar/.gitignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/framework/.gitignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/framework/cache/.gitignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/framework/sessions/.gitignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/framework/views/.gitignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/logs/.gitignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tests/ExampleTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tests/TestCase.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/salaback/tabler" afterPath="$PROJECT_DIR$/packages/salaback/tabler" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/citynexus/CityNexus/composer.json" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/composer.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/Http/CitynexusController.php" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/Http/CitynexusController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/PackageServiceProvider.php" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/PackageServiceProvider.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/config.php" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/config.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/helpers/DatasetQuery.php" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/helpers/DatasetQuery.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/helpers/ScoreBuilder.php" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/helpers/ScoreBuilder.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/migrations/2015_01_10_000000_create_properties_table.php" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/migrations/2015_01_10_000000_create_properties_table.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/models/Note.php" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/models/Note.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/models/Property.php" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/models/Property.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/routes.php" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/routes.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/tests/testRiskScore.php" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/tests/testRiskScore.php" />
     </list>
     <ignored path="citynexus.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -188,7 +60,7 @@
           <file leaf-file-name="new.blade.php" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/packages/citynexus/CityNexus/src/views/risk-score/new.blade.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="4.7910447">
+                <state vertical-scroll-proportion="4.8636365">
                   <caret line="46" column="7" selection-start-line="46" selection-start-column="7" selection-end-line="46" selection-end-column="7" />
                   <folding />
                 </state>
@@ -204,7 +76,7 @@
               <file leaf-file-name="CitynexusController.php" pinned="false" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/packages/citynexus/CityNexus/src/Http/CitynexusController.php">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state vertical-scroll-proportion="4.7910447">
+                    <state vertical-scroll-proportion="4.8636365">
                       <caret line="49" column="51" selection-start-line="49" selection-start-column="51" selection-end-line="49" selection-end-column="51" />
                       <folding>
                         <element signature="e#44#80#0#PHP" expanded="true" />
@@ -220,7 +92,7 @@
               <file leaf-file-name="testRiskScore.php" pinned="false" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/packages/citynexus/CityNexus/src/tests/testRiskScore.php">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state vertical-scroll-proportion="4.7910447">
+                    <state vertical-scroll-proportion="4.8636365">
                       <caret line="23" column="0" selection-start-line="18" selection-start-column="13" selection-end-line="23" selection-end-column="0" />
                       <folding>
                         <element signature="e#7#59#0#PHP" expanded="true" />
@@ -984,6 +856,13 @@
       <option name="number" value="Default" />
       <updated>1443581438644</updated>
     </task>
+    <task id="LOCAL-00001" summary="Updates">
+      <created>1452728138155</created>
+      <option name="number" value="00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1452728138155</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1002,9 +881,10 @@
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17465389" sideWeight="0.30135134" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27544427" sideWeight="0.699594" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32876712" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.08885299" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.7472678" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.7493151" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24920128" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.465847" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -1031,6 +911,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Updates" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updates" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1158,6 +1042,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.530303">
           <caret line="21" column="40" selection-start-line="21" selection-start-column="40" selection-end-line="21" selection-end-column="40" />
+          <folding>
+            <marker date="1452190112000" expanded="true" signature="15:559" placeholder="..." />
+            <marker date="1452190112000" expanded="true" signature="241:435" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1165,6 +1053,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.12903225">
           <caret line="4" column="2" selection-start-line="4" selection-start-column="2" selection-end-line="4" selection-end-column="2" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1179,6 +1068,23 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.4945055">
           <caret line="12" column="20" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
+          <folding>
+            <marker date="1452197493000" expanded="true" signature="0:1476" placeholder="{&quot;name&quot;: &quot;laravel/laravel&quot;...}" />
+            <marker date="1452197493000" expanded="true" signature="180:346" placeholder="{&quot;php&quot;: &quot;&gt;=5.5.9&quot;...}" />
+            <marker date="1452197493000" expanded="true" signature="367:554" placeholder="{&quot;fzaninotto/faker&quot;: &quot;~1.4&quot;...}" />
+            <marker date="1452197493000" expanded="true" signature="572:833" placeholder="{...}" />
+            <marker date="1452197493000" expanded="true" signature="594:628" placeholder="[...]" />
+            <marker date="1452197493000" expanded="true" signature="647:827" placeholder="{&quot;App\&quot;: &quot;app/&quot;...}" />
+            <marker date="1452197493000" expanded="true" signature="855:927" placeholder="{...}" />
+            <marker date="1452197493000" expanded="true" signature="877:921" placeholder="[...]" />
+            <marker date="1452197493000" expanded="true" signature="944:1415" placeholder="{...}" />
+            <marker date="1452197493000" expanded="true" signature="974:1062" placeholder="[...]" />
+            <marker date="1452197493000" expanded="true" signature="1090:1142" placeholder="[...]" />
+            <marker date="1452197493000" expanded="true" signature="1171:1217" placeholder="[...]" />
+            <marker date="1452197493000" expanded="true" signature="1256:1322" placeholder="[...]" />
+            <marker date="1452197493000" expanded="true" signature="1359:1409" placeholder="[...]" />
+            <marker date="1452197493000" expanded="true" signature="1431:1474" placeholder="{&quot;preferred-install&quot;: &quot;dist&quot;...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1186,6 +1092,22 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="9.056603">
           <caret line="160" column="48" selection-start-line="160" selection-start-column="48" selection-end-line="160" selection-end-column="48" />
+          <folding>
+            <marker date="1452198187000" expanded="true" signature="15:8522" placeholder="..." />
+            <marker date="1452198187000" expanded="true" signature="23:446" placeholder="..." />
+            <marker date="1452198187000" expanded="true" signature="497:913" placeholder="..." />
+            <marker date="1452198187000" expanded="true" signature="957:1381" placeholder="..." />
+            <marker date="1452198187000" expanded="true" signature="1417:1856" placeholder="..." />
+            <marker date="1452198187000" expanded="true" signature="1889:2320" placeholder="..." />
+            <marker date="1452198187000" expanded="true" signature="2362:2783" placeholder="..." />
+            <marker date="1452198187000" expanded="true" signature="2875:3369" placeholder="..." />
+            <marker date="1452198187000" expanded="true" signature="3403:3835" placeholder="..." />
+            <marker date="1452198187000" expanded="true" signature="3859:5884" placeholder="..." />
+            <marker date="1452198187000" expanded="true" signature="3871:3931" placeholder="..." />
+            <marker date="1452198187000" expanded="true" signature="5344:5398" placeholder="..." />
+            <marker date="1452198187000" expanded="true" signature="5894:6308" placeholder="..." />
+            <marker date="1452198187000" expanded="true" signature="6330:8518" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1193,6 +1115,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.41267943">
           <caret line="24" column="11" selection-start-line="24" selection-start-column="11" selection-end-line="24" selection-end-column="11" />
+          <folding>
+            <marker date="1450120237000" expanded="false" signature="11:94" placeholder="..." />
+            <marker date="1450120237000" expanded="true" signature="137:874" placeholder="{...}" />
+            <marker date="1450120237000" expanded="true" signature="147:207" placeholder=" Run the migrations. ..." />
+            <marker date="1450120237000" expanded="true" signature="234:719" placeholder="{...}" />
+            <marker date="1450120237000" expanded="true" signature="264:711" placeholder="..." />
+            <marker date="1450120237000" expanded="true" signature="310:710" placeholder="..." />
+            <marker date="1450120237000" expanded="true" signature="728:792" placeholder=" Reverse the migrations. ..." />
+            <marker date="1450120237000" expanded="true" signature="821:872" placeholder="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1200,6 +1132,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.6293706">
           <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+          <folding>
+            <marker date="1449437438000" expanded="false" signature="11:94" placeholder="..." />
+            <marker date="1449437438000" expanded="true" signature="141:1162" placeholder="{...}" />
+            <marker date="1449437438000" expanded="true" signature="151:211" placeholder=" Run the migrations. ..." />
+            <marker date="1449437438000" expanded="true" signature="238:1010" placeholder="{...}" />
+            <marker date="1449437438000" expanded="true" signature="268:1002" placeholder="..." />
+            <marker date="1449437438000" expanded="true" signature="311:1001" placeholder="..." />
+            <marker date="1449437438000" expanded="true" signature="1019:1083" placeholder=" Reverse the migrations. ..." />
+            <marker date="1449437438000" expanded="true" signature="1112:1160" placeholder="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1214,6 +1156,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.4568528">
           <caret line="31" column="5" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
+          <folding>
+            <marker date="1452210252000" expanded="false" signature="11:94" placeholder="..." />
+            <marker date="1452210252000" expanded="true" signature="139:744" placeholder="..." />
+            <marker date="1452210252000" expanded="true" signature="148:208" placeholder=" Run the migrations. ..." />
+            <marker date="1452210252000" expanded="true" signature="235:582" placeholder="{...}" />
+            <marker date="1452210252000" expanded="true" signature="265:574" placeholder="..." />
+            <marker date="1452210252000" expanded="true" signature="311:574" placeholder="{...}" />
+            <marker date="1452210252000" expanded="true" signature="591:655" placeholder=" Reverse the migrations. ..." />
+            <marker date="1452210252000" expanded="true" signature="684:742" placeholder="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1221,6 +1173,46 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.4054054">
           <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding>
+            <marker date="1452275413000" expanded="true" signature="77:4019" placeholder="..." />
+            <marker date="1452275413000" expanded="true" signature="115:4005" placeholder="..." />
+            <marker date="1452275413000" expanded="true" signature="151:273" placeholder="..." />
+            <marker date="1452275413000" expanded="true" signature="189:258" placeholder="..." />
+            <marker date="1452275413000" expanded="true" signature="306:3870" placeholder="..." />
+            <marker date="1452275413000" expanded="true" signature="345:3487" placeholder="..." />
+            <marker date="1452275413000" expanded="true" signature="399:629" placeholder="..." />
+            <marker date="1452275413000" expanded="true" signature="451:531" placeholder="..." />
+            <marker date="1452275413000" expanded="true" signature="684:2100" placeholder="..." />
+            <marker date="1452275413000" expanded="true" signature="733:2073" placeholder="..." />
+            <marker date="1452275413000" expanded="true" signature="845:2042" placeholder="..." />
+            <marker date="1452275413000" expanded="true" signature="983:1961" placeholder="..." />
+            <marker date="1452275413000" expanded="true" signature="1108:1627" placeholder="..." />
+            <marker date="1452275413000" expanded="true" signature="1173:1584" placeholder="..." />
+            <marker date="1452275413000" expanded="true" signature="1403:1538" placeholder="..." />
+            <marker date="1452275413000" expanded="true" signature="1795:1922" placeholder="..." />
+            <marker date="1452275413000" expanded="true" signature="2154:3464" placeholder="..." />
+            <marker date="1452275413000" expanded="true" signature="2206:2304" placeholder="..." />
+            <marker date="1452275413000" expanded="true" signature="2353:2735" placeholder="..." />
+            <marker date="1452275413000" expanded="true" signature="2400:2704" placeholder="..." />
+            <marker date="1452275413000" expanded="true" signature="2784:3437" placeholder="..." />
+            <marker date="1452275413000" expanded="true" signature="2848:3406" placeholder="..." />
+            <marker date="1452275413000" expanded="true" signature="3527:3851" placeholder="..." />
+            <marker date="1452275413000" expanded="true" signature="3581:3680" placeholder="..." />
+            <marker date="1452275413000" expanded="false" signature="3633:3646" placeholder="..." />
+            <marker date="1452275413000" expanded="true" signature="3734:3828" placeholder="..." />
+            <marker date="1452275413000" expanded="false" signature="3781:3794" placeholder="..." />
+            <marker date="1452275413000" expanded="true" signature="3907:3990" placeholder="..." />
+            <marker date="1452275413000" expanded="true" signature="3947:3971" placeholder="..." />
+            <marker date="1452275413000" expanded="true" signature="4053:4629" placeholder="..." />
+            <marker date="1452275413000" expanded="true" signature="4082:4619" placeholder="{...}" />
+            <marker date="1452275413000" expanded="true" signature="4228:4287" placeholder="{&quot;zoom&quot;: 14...}" />
+            <marker date="1452275413000" expanded="true" signature="4398:4574" placeholder="{...}" />
+            <marker date="1452275413000" expanded="true" signature="4462:4556" placeholder="{&quot;heading&quot;: 34...}" />
+            <marker date="1452275413000" expanded="true" signature="4650:4784" placeholder="..." />
+            <marker date="1452275413000" expanded="true" signature="4793:5403" placeholder="..." />
+            <marker date="1452275413000" expanded="true" signature="5413:5497" placeholder="..." />
+            <marker date="1452275413000" expanded="true" signature="5433:5487" placeholder="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1277,6 +1269,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.4908722">
           <caret line="25" column="5" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="5" />
+          <folding>
+            <marker date="1452286165000" expanded="true" signature="77:690" placeholder="..." />
+            <marker date="1452286165000" expanded="true" signature="115:687" placeholder="..." />
+            <marker date="1452286165000" expanded="true" signature="151:254" placeholder="..." />
+            <marker date="1452286165000" expanded="true" signature="189:239" placeholder="..." />
+            <marker date="1452286165000" expanded="true" signature="287:676" placeholder="..." />
+            <marker date="1452286165000" expanded="true" signature="358:661" placeholder="..." />
+            <marker date="1452286165000" expanded="true" signature="382:640" placeholder="..." />
+            <marker date="1452286165000" expanded="true" signature="403:615" placeholder="..." />
+            <marker date="1452286165000" expanded="true" signature="919:1437" placeholder="..." />
+            <marker date="1452286165000" expanded="true" signature="938:1426" placeholder="{...}" />
+            <marker date="1452286165000" expanded="true" signature="981:1418" placeholder="{&quot;processing&quot;: true...}" />
+            <marker date="1452286165000" expanded="true" signature="1113:1408" placeholder="[...]" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1291,6 +1297,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.4366198">
           <caret line="35" column="56" selection-start-line="35" selection-start-column="56" selection-end-line="35" selection-end-column="56" />
+          <folding>
+            <marker date="1452295046000" expanded="false" signature="11:94" placeholder="..." />
+            <marker date="1452295046000" expanded="true" signature="143:1575" placeholder="..." />
+            <marker date="1452295046000" expanded="true" signature="152:212" placeholder=" Run the migrations. ..." />
+            <marker date="1452295046000" expanded="true" signature="239:1413" placeholder="{...}" />
+            <marker date="1452295046000" expanded="true" signature="269:1405" placeholder="..." />
+            <marker date="1452295046000" expanded="true" signature="319:1405" placeholder="{...}" />
+            <marker date="1452295046000" expanded="true" signature="1422:1486" placeholder=" Reverse the migrations. ..." />
+            <marker date="1452295046000" expanded="true" signature="1515:1573" placeholder="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1298,6 +1314,22 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.62611276">
           <caret line="37" column="7" selection-start-line="37" selection-start-column="7" selection-end-line="37" selection-end-column="7" />
+          <folding>
+            <marker date="1452616790000" expanded="true" signature="132:1179" placeholder="{...}" />
+            <marker date="1452616790000" expanded="true" signature="143:230" placeholder=" Perform post-registration booting of services. ..." />
+            <marker date="1452616790000" expanded="true" signature="259:833" placeholder="{...}" />
+            <marker date="1452616790000" expanded="true" signature="312:366" placeholder="..." />
+            <marker date="1452616790000" expanded="true" signature="394:474" placeholder="..." />
+            <marker date="1452616790000" expanded="true" signature="395:473" placeholder="..." />
+            <marker date="1452616790000" expanded="true" signature="503:592" placeholder="..." />
+            <marker date="1452616790000" expanded="true" signature="504:581" placeholder="..." />
+            <marker date="1452616790000" expanded="true" signature="621:714" placeholder="..." />
+            <marker date="1452616790000" expanded="true" signature="622:699" placeholder="..." />
+            <marker date="1452616790000" expanded="true" signature="843:914" placeholder=" Register the service provider. ..." />
+            <marker date="1452616790000" expanded="true" signature="947:1020" placeholder="{...}" />
+            <marker date="1452616790000" expanded="true" signature="1029:1113" placeholder=" Get the services provided by the provider. ..." />
+            <marker date="1452616790000" expanded="true" signature="1146:1177" placeholder="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1326,6 +1358,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.8898305">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1443581069000" expanded="true" signature="68:531" placeholder="{...}" />
+            <marker date="1443581069000" expanded="true" signature="78:168" placeholder=" The base URL to use while testing the application. ..." />
+            <marker date="1443581069000" expanded="true" signature="224:319" placeholder=" Creates the application. ..." />
+            <marker date="1443581069000" expanded="true" signature="361:529" placeholder="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1333,6 +1371,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7669492">
           <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding>
+            <marker date="1443581069000" expanded="false" signature="11:169" placeholder="..." />
+            <marker date="1443581069000" expanded="true" signature="205:402" placeholder="{...}" />
+            <marker date="1443581069000" expanded="true" signature="215:288" placeholder=" A basic functional test example. ..." />
+            <marker date="1443581069000" expanded="true" signature="329:400" placeholder="{...}" />
+            <marker date="1443581069000" expanded="true" signature="381:392" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1340,6 +1385,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.8053097">
           <caret line="33" column="7" selection-start-line="33" selection-start-column="7" selection-end-line="33" selection-end-column="7" />
+          <folding>
+            <marker date="1452194876000" expanded="true" signature="31:1233" placeholder="..." />
+            <marker date="1452194876000" expanded="true" signature="38:873" placeholder="..." />
+            <marker date="1452194876000" expanded="true" signature="457:557" placeholder="..." />
+            <marker date="1452194876000" expanded="true" signature="648:839" placeholder="..." />
+            <marker date="1452194876000" expanded="true" signature="880:1225" placeholder="..." />
+            <marker date="1452194876000" expanded="true" signature="887:985" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1347,6 +1400,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7345133">
           <caret line="38" column="10" selection-start-line="38" selection-start-column="10" selection-end-line="38" selection-end-column="10" />
+          <folding>
+            <marker date="1452633833000" expanded="true" signature="51:2286" placeholder="..." />
+            <marker date="1452633833000" expanded="true" signature="79:2279" placeholder="..." />
+            <marker date="1452633833000" expanded="true" signature="115:580" placeholder="..." />
+            <marker date="1452633833000" expanded="true" signature="272:498" placeholder="..." />
+            <marker date="1452633833000" expanded="true" signature="639:2246" placeholder="..." />
+            <marker date="1452633833000" expanded="true" signature="679:2231" placeholder="..." />
+            <marker date="1452633833000" expanded="true" signature="778:1136" placeholder="..." />
+            <marker date="1452633833000" expanded="true" signature="1004:1114" placeholder="..." />
+            <marker date="1452633833000" expanded="true" signature="1174:1663" placeholder="..." />
+            <marker date="1452633833000" expanded="true" signature="1399:1641" placeholder="..." />
+            <marker date="1452633833000" expanded="true" signature="1701:2213" placeholder="..." />
+            <marker date="1452633833000" expanded="true" signature="1932:2191" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1368,6 +1435,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.30973452">
           <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
+          <folding>
+            <marker date="1451529056000" expanded="true" signature="28:202" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1375,12 +1445,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5294118">
           <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding>
+            <marker date="1452636399000" expanded="false" signature="9:390" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/packages/citynexus/CityNexus/src/tests/testRiskScore.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="4.7910447">
+        <state vertical-scroll-proportion="4.8636365">
           <caret line="23" column="0" selection-start-line="18" selection-start-column="13" selection-end-line="23" selection-end-column="0" />
           <folding>
             <element signature="e#7#59#0#PHP" expanded="true" />
@@ -1392,12 +1465,32 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="51" selection-start-line="0" selection-start-column="51" selection-end-line="0" selection-end-column="51" />
+          <folding>
+            <marker date="1452636992000" expanded="true" signature="125:2475" placeholder="..." />
+            <marker date="1452636992000" expanded="true" signature="208:609" placeholder="..." />
+            <marker date="1452636992000" expanded="true" signature="320:598" placeholder="..." />
+            <marker date="1452636992000" expanded="true" signature="392:583" placeholder="..." />
+            <marker date="1452636992000" expanded="true" signature="671:1501" placeholder="..." />
+            <marker date="1452636992000" expanded="true" signature="704:1148" placeholder="..." />
+            <marker date="1452636992000" expanded="true" signature="827:1133" placeholder="..." />
+            <marker date="1452636992000" expanded="true" signature="892:1114" placeholder="..." />
+            <marker date="1452636992000" expanded="true" signature="1181:1401" placeholder="..." />
+            <marker date="1452636992000" expanded="true" signature="1294:1386" placeholder="..." />
+            <marker date="1452636992000" expanded="true" signature="1559:2468" placeholder="..." />
+            <marker date="1452636992000" expanded="true" signature="1592:2106" placeholder="..." />
+            <marker date="1452636992000" expanded="true" signature="1709:2091" placeholder="..." />
+            <marker date="1452636992000" expanded="true" signature="1768:2000" placeholder="..." />
+            <marker date="1452636992000" expanded="true" signature="2139:2368" placeholder="..." />
+            <marker date="1452636992000" expanded="true" signature="2262:2353" placeholder="..." />
+            <marker date="1452636992000" expanded="true" signature="2485:2676" placeholder="..." />
+            <marker date="1452636992000" expanded="true" signature="2523:2666" placeholder="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/packages/citynexus/CityNexus/src/Http/CitynexusController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="4.7910447">
+        <state vertical-scroll-proportion="4.8636365">
           <caret line="49" column="51" selection-start-line="49" selection-start-column="51" selection-end-line="49" selection-end-column="51" />
           <folding>
             <element signature="e#44#80#0#PHP" expanded="true" />
@@ -1409,6 +1502,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.6902655">
           <caret line="24" column="34" selection-start-line="24" selection-start-column="34" selection-end-line="24" selection-end-column="34" />
+          <folding>
+            <marker date="1452637597000" expanded="true" signature="17:395" placeholder="..." />
+            <marker date="1452637597000" expanded="true" signature="170:353" placeholder="..." />
+            <marker date="1452637597000" expanded="true" signature="405:904" placeholder="..." />
+            <marker date="1452637597000" expanded="true" signature="444:894" placeholder="{...}" />
+            <marker date="1452637597000" expanded="true" signature="549:807" placeholder="{&quot;url&quot;: '/{{config(&quot;citynexus.root_directory&quot;)}}/risk-score/data-field/'...}" />
+            <marker date="1452637597000" expanded="true" signature="677:797" placeholder="{&quot;_token&quot;: &quot;{{csrf_token()}}&quot;...}" />
+            <marker date="1452637597000" expanded="true" signature="831:886" placeholder="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1416,12 +1518,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="52" selection-start-line="0" selection-start-column="52" selection-end-line="0" selection-end-column="52" />
+          <folding>
+            <marker date="1450579120000" expanded="true" signature="56:217" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/packages/citynexus/CityNexus/src/views/risk-score/new.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="4.7910447">
+        <state vertical-scroll-proportion="4.8636365">
           <caret line="46" column="7" selection-start-line="46" selection-start-column="7" selection-end-line="46" selection-end-column="7" />
           <folding />
         </state>

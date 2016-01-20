@@ -1,6 +1,5 @@
 <?php namespace CityNexus\CityNexus;
 
-use app\Helpers\Risk;
 use Illuminate\Database\Eloquent\Model;
 
 class Property extends Model {

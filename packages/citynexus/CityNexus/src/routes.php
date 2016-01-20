@@ -25,4 +25,8 @@ Route::get( config('citynexus.root_directory') . '/risk-score/data-fields', 'Cit
 
 Route::get( config('citynexus.root_directory') . '/risk-score/data-field', 'CityNexus\CityNexus\Http\CitynexusController@getRiskscoreDatafield');
 
-Route::post( config('citynexus.root_directory') . '/risk-score/create-element', 'CityNexus\CityNexus\Http\CitynexusController@postCreateElement');
+Route::get( config('citynexus.root_directory') . '/risk-score/create-element', 'CityNexus\CityNexus\Http\CitynexusController@getCreateElement');
+
+Route::post( config('citynexus.root_directory') . '/risk-score/save-score', 'CityNexus\CityNexus\Http\CitynexusController@postSaveScore');
+
+Route::get( config('citynexus.root_directory') . '/risk-score/generate-score', 'CityNexus\CityNexus\Http\CitynexusController@getGenerateScore');

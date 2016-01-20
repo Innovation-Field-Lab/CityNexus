@@ -10,15 +10,23 @@
         </div>
         <div class="panel-body">
             <div class="col-sm-6">
-                <b>Select Data Set</b>
-                @include('citynexus::risk-score.dataset')
-                <form id="new-risk-score">
-                    <div class="list-group" id="score-elements">
+                <form id="new-risk-score" method="post" action="/{{config('citynexus.root_directory')}}/risk-score/save-score">
+                    {!! csrf_field() !!}
 
+                    <label for="name" class="control-label">Score Name</label>
+                    <input type="text" class="form-control" id="name" name="name"
+                                   value="{{old('name')}}"/>
+                    <br>
+                    <div class="list-group" id="score-elements">
+                        <div class="list-group-item well">Score Elements</div>
                     </div>
+                    <input type="submit" class="btn btn-primary" value="Save Score">
                 </form>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-6 well">
+                <b>Select Data Set</b>
+                @include('citynexus::risk-score.dataset')
+                <br>
                 <form id="new-score-element" onsubmit="return false">
                 <div id="datafields"></div>
                 </form>
@@ -48,15 +56,16 @@
 
     function addToScore()
     {
-        var formData = $('#new-score-element').serializeArray();
+        var formData = $('#new-score-element').serialize();
 
         $.ajax({
-            url: "/{{config("citynexus.root_directory")}}/risk-score/create-element",
-            type: "post",
+            url: "/{{config("citynexus.root_directory")}}/risk-score/create-element?" + formData,
+            type: "get",
             data: {
-                _token: "{{csrf_token()}}",
-                form_data: formData
+                _token: "{{csrf_token()}}"
             }
+        }).success(function( data ) {
+            $("#score-elements").append( data );
         })
     }
 </script>

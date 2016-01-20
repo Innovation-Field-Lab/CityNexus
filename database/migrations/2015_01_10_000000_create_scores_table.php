@@ -12,13 +12,11 @@ class CreateScoresTable extends Migration {
      */
     public function up()
     {
-        Schema::create('citynexus_scores', function(Blueprint $table)
-        {
+        Schema::create('citynexus_scores', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->json('formula');
-            $table->string('unit')->nullable();
-            $table->integer('units')->nullable();
+            $table->json('elements')->nullable();
+            $table->string('name')->nullable();
+            $table->string('scope')->nullable();
             $table->timestamps();
         });
     }

@@ -28,10 +28,8 @@ class CreatePropertiesTable extends Migration {
             $table->integer('map')->nullable();
             $table->string('lot')->nullable();
             $table->string('type')->nullable();
-            $table->integer('fin_risk')->nullable();
-            $table->integer('psych_risk')->nullable();
-            $table->integer('physical_risk')->nullable();
-            $table->integer('risk')->nullable();
+            $table->string('tiger_line_id')->nullable();
+            $table->string('side')->nullable();
             $table->integer('alias_of')->nullable();
             $table->boolean('review')->default('false');
             $table->timestamps();

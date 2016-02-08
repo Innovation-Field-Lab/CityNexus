@@ -17,6 +17,7 @@ class CreateScoresTable extends Migration {
             $table->json('elements')->nullable();
             $table->string('name')->nullable();
             $table->string('scope')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

@@ -4,6 +4,7 @@
 namespace CityNexus\CityNexus;
 
 
+use App\Property;
 use Carbon\Carbon;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -19,33 +20,75 @@ class ScoreBuilder
 
     public function genScore($record, $elements)
     {
-        $score = null;
+        $score = 0;
 
         $today = Carbon::today();
 
+
+
         foreach($elements as $i)
         {
-            if($i->scope == 'last')
+            $value = null;
+
+            if($i->scope == 'score')
             {
-                if($i->period != null)
+                if(DB::table('citynexus_scores_' . $i->table_id)->exists())
                 {
+                    $value = DB::table('citynexus_scores_' . $i->table_id)
+                        ->where(config('tabler.index_id'), $record->id)
+                        ->pluck('score');
+                    if($value != null)
+                    {
+                        $score = $score + $this->calcElement($value, $i);
+                    }
+                }
+
+            }
+
+            elseif($i->scope == 'last') {
+                if ($i->period != null) {
                     $value = DB::table($i->table_name)
                         ->where(config('tabler.index_id'), $record->id)
                         ->where('updated_at', '>', $today->subDays($i->period))
                         ->value($i->key);
+                } else {
+                    $value = DB::table($i->table_name)
+                        ->where(config('tabler.index_id'), $record->id)
+                        ->value($i->key);
+                }
+
+                if($value != null)
+                {
+                    $score = $score + $this->calcElement($value, $i);
+                }
+
+            }
+
+            elseif($i->scope == 'all')
+            {
+                if($i->period != null)
+                {
+                    $values[] = DB::table($i->table_name)
+                        ->where(config('tabler.index_id'), $record->id)
+                        ->where('updated_at', '>', $today->subDays($i->period))
+                        ->select($i->key)
+                        ->get();
                 }
                 else
                 {
-                    $value = DB::table($i->table_name)->value($i->key);
+                    $values[] = DB::table($i->table_name)
+                        ->where(config('tabler.index_id'), $record->id)
+                        ->select($i->key)
+                        ->get();
                 }
 
-                $score = $score + $this->calcElement($value, $i);
-
+                if($values != null)
+                {
+                    foreach($values as $value) $score = $score + $this->calcElement($value, $i);
+                }
             }
         }
-
         return $score;
-
     }
 
     public function calcElement($value, $score)
@@ -53,15 +96,18 @@ class ScoreBuilder
         $return = null;
 
         if($score->function == 'func') $return = $this->runFunc($value, $score);
+        if($score->function == 'float') $return = $this->runFunc($value, $score);
         elseif($score->function == 'range') $return = $this->runRange($value, $score);
+        elseif($score->function == 'empty') $return = $this->runRange($value, $score);
         return $return;
     }
+
     private function runFunc($value, $score)
     {
-        if($score->func == '+') return $value + $score->value;
-        elseif($score->func == '-') return $value - $score->value;
-        elseif($score->func == '*') return $value * $score->value;
-        elseif($score->func == '/') return $value / $score->value;
+        if($score->func == '+') return $value + $score->factor;
+        elseif($score->func == '-') return $value - $score->factor;
+        elseif($score->func == '*') return $value * $score->factor;
+        elseif($score->func == '/') return $value / $score->factor;
         else return null;
 
     }
@@ -74,4 +120,5 @@ class ScoreBuilder
         else return null;
 
     }
+
 }

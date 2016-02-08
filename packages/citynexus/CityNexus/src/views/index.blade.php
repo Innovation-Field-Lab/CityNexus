@@ -13,10 +13,8 @@
                 <thead>
                 <tr>
                     <th>Id</th>
-                    <th>House Number</th>
-                    <th>Street Name</th>
-                    <th>Street Type</th>
-                    <th>Unit</th>
+                    <th>Address</th>
+                    <th></th>
                 </tr>
                 </thead>
             </table>
@@ -37,12 +35,15 @@
             processing: true,
             serverSide: true,
             ajax: '/citynexus/properties-data/',
+            buttons:['excel', 'print'],
             columns: [
-                { data: 'id', name: 'id' },
-                { data: 'house_number', name: 'house_number' },
-                { data: 'street_name', name: 'street_name' },
-                { data: 'street_type', name: 'street_type' },
-                { data: 'unit', name: 'unit' },
+                { data: 'id', name: 'ID' },
+                { data: 'full_address', name: 'Full Name' },
+                {
+                    "mData": null,
+                    "bSortable": false,
+                    "mRender": function (o) { return '<a class="btn btn-sm btn-primary" href="/{{config('citynexus.root_directory')}}/property?property_id=' + o.id + '">' + 'Details' + '</a>'; }
+                }
             ]
         });
     });

@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\User;
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
 
@@ -36,9 +37,19 @@ class Authenticate
     {
         if ($this->auth->guest()) {
             if ($request->ajax()) {
-                return response('Unauthorized.', 401);
+                if ($request->getUri() == '/api-query/add-to') {
+                    return $next($request);
+                } else {
+                    return response('Unauthorized.', 401);
+                }
             } else {
-                return redirect()->guest('auth/login');
+
+                if(User::count() == null)
+                {
+                    return view('auth.register');
+                } else {
+                    return redirect()->guest('auth/login');
+                }
             }
         }
 

@@ -27,7 +27,7 @@ class DatasetQuery
 
                 //add each object to array
                 foreach ($results as $result) {
-                    $return[$table->table_title][] = $result;
+                    $return[$table->id][] = $result;
                 }
             }
         }

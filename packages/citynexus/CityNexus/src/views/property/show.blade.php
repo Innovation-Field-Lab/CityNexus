@@ -19,14 +19,16 @@
 
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                            <div class="panel-group " id="accordion" role="tablist" aria-multiselectable="true">
                                 @foreach($datasets as $key => $dataset)
-                                <div class="panel panel-default">
-                                    <div class="panel-heading" role="tab" id="{{preg_replace('/\s+/', '_', $key)}}_heading">
+                                <div class="panel panel-default ">
+                                    <div class="panel-heading " role="tab" id="{{preg_replace('/\s+/', '_', $key)}}_heading">
                                         <h4 class="panel-title">
                                             <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#{{preg_replace('/\s+/', '_', $key)}}_detail" aria-expanded="false" aria-controls="collapseTwo">
-                                                <i class="fa fa-shield"></i> {{$key}}
+                                                {{$tables->find($key)->table_title}}
                                             </a>
+                                            <a class="glyphicon glyphicon-cog pull-right" href="/{{config('tabler.root_directory')}}/edit-table?table_id={{$key}}"></a>
+
                                         </h4>
                                     </div>
                                     <div id="{{preg_replace('/\s+/', '_', $key)}}_detail" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
@@ -64,7 +66,7 @@
                         </div>
                     </div>
                 </div>
-
+                @if($property->lat != null && $property->long != null)
                 <div class="col-sm-4">
                     <div class="panel panel-default">
                             <div id="pano" style="height: 250px"></div>
@@ -73,6 +75,7 @@
                         <div id="map" style="height: 250px"></div>
                     </div>
                 </div>
+                @endif
             </div>
             <div class="panel-body">
                 <div class="col-sm-12">
@@ -84,6 +87,17 @@
 
 @stop
 
+@push('style')
+
+    <style>
+        .dataset {
+           overflow: auto;
+            overflow-y: hidden;
+        }
+    </style>
+
+@endpush
+
 @push('js_footer')
 
 <script>
@@ -93,15 +107,11 @@
         var point = {lat: {{$property->lat}}, lng:{{$property->long}} };
         var map = new google.maps.Map(document.getElementById('map'), {
             center: point,
-            zoom: 14
+            zoom: 16
         });
         var panorama = new google.maps.StreetViewPanorama(
                 document.getElementById('pano'), {
                     position: point,
-                    pov: {
-                        heading: 34,
-                        pitch: 10
-                    }
                 });
         map.setStreetView(panorama);
     }

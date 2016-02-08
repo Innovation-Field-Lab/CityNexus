@@ -1,12 +1,12 @@
-<input type="hidden" name="table_id" value="{{$dataset->id}}">
-<input type="hidden" name="table_title" value="{{$dataset->table_title}}">
-<input type="hidden" name="table_name" value="{{$dataset->table_name}}">
+    <input type="hidden" name="table_id" value="{{$dataset->id}}">
+    <input type="hidden" name="table_title" value="{{$dataset->table_title}}">
+    <input type="hidden" name="table_name" value="{{$dataset->table_name}}">
 
     <label>Select Data Field</label>
     <select name="" class="form-control" id="datafield">
         <option value="">[Select Data Field]</option>
         @foreach($scheme as $i)
-            <option value="{{$i->key}}">{{$i->name}}</option>
+            <option value="{{$i->key}}">{{$i->name}} [{{$i->type}}]</option>
         @endforeach 
     </select>
     <div id="fieldsettings"></div>

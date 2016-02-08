@@ -7,7 +7,7 @@
                 <td>{{$property->id}}</td>
             </tr>
 
-            {{-- TODO: Create preferences to choose displayed property variables --}}
+            {{--TODO: Create preferences to choose displayed property variables --}}
             {{--<tr>--}}
                 {{--<th scope="row">Occupancy</th>--}}
                 {{--<td>{{$property->assessor->occupancy}}</td>--}}

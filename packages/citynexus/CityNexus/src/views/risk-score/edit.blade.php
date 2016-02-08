@@ -5,20 +5,23 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <div class="panel-title">
-                Create New Risk Score
+                Edit Risk Score
             </div>
         </div>
         <div class="panel-body">
             <div class="col-sm-6">
-                <form id="new-risk-score" method="post" action="/{{config('citynexus.root_directory')}}/risk-score/save-score">
+                <form id="new-risk-score" method="post" action="/{{config('citynexus.root_directory')}}/risk-score/save-score?score_id={{$score->id}}">
                     {!! csrf_field() !!}
 
                     <label for="name" class="control-label">Score Name</label>
                     <input type="text" class="form-control" id="name" name="name"
-                                   value="{{old('name')}}"/>
+                                   value="{{$score->name}}"/>
                     <br>
                     <div class="list-group" id="score-elements">
                         <div class="list-group-item well">Score Elements</div>
+                        @foreach(json_decode($score->elements, true) as $element)
+                            @include('citynexus::risk-score.element')
+                            @endforeach
                     </div>
                     <input type="submit" class="btn btn-primary" value="Save Score">
                 </form>
@@ -74,6 +77,11 @@
             $("#score-elements").append( data );
         })
     }
+
+    function removeFromScore(id)
+    {
+        $('#' + id).remove();
+    };
 </script>
 
 @endpush

@@ -11,22 +11,36 @@
 |
 */
 
-Route::get( config('citynexus.root_directory') . '/property', 'CityNexus\CityNexus\Http\CitynexusController@getProperty');
+Route::group(['middleware' => 'auth', 'prefix' => config('tabler.root_directory') ], function() {
 
-Route::get( config('citynexus.root_directory') . '/properties', 'CityNexus\CityNexus\Http\CitynexusController@getProperties');
-Route::get( config('citynexus.root_directory') . '/properties-data', 'CityNexus\CityNexus\Http\CitynexusController@getPropertiesData');
+
+    Route::get('/property', 'CityNexus\CityNexus\Http\CitynexusController@getProperty');
+    Route::get('/properties', 'CityNexus\CityNexus\Http\CitynexusController@getProperties');
+    Route::get('/properties-data', 'CityNexus\CityNexus\Http\CitynexusController@getPropertiesData');
 
 
 // Score Builder
 
-Route::get( config('citynexus.root_directory') . '/risk-score/new', 'CityNexus\CityNexus\Http\CitynexusController@getRiskscoreCreate');
+    Route::get('/risk-score/scores', 'CityNexus\CityNexus\Http\CitynexusController@getScores');
 
-Route::get( config('citynexus.root_directory') . '/risk-score/data-fields', 'CityNexus\CityNexus\Http\CitynexusController@getRiskscoreDatafields');
+    Route::get('/risk-score/new', 'CityNexus\CityNexus\Http\CitynexusController@getRiskscoreCreate');
 
-Route::get( config('citynexus.root_directory') . '/risk-score/data-field', 'CityNexus\CityNexus\Http\CitynexusController@getRiskscoreDatafield');
+    Route::post('/risk-score/update-score', 'CityNexus\CityNexus\Http\CitynexusController@postUpdateScore');
 
-Route::get( config('citynexus.root_directory') . '/risk-score/create-element', 'CityNexus\CityNexus\Http\CitynexusController@getCreateElement');
+    Route::get('/risk-score/data-fields', 'CityNexus\CityNexus\Http\CitynexusController@getRiskscoreDatafields');
 
-Route::post( config('citynexus.root_directory') . '/risk-score/save-score', 'CityNexus\CityNexus\Http\CitynexusController@postSaveScore');
+    Route::get('/risk-score/data-field', 'CityNexus\CityNexus\Http\CitynexusController@getRiskscoreDatafield');
 
-Route::get( config('citynexus.root_directory') . '/risk-score/generate-score', 'CityNexus\CityNexus\Http\CitynexusController@getGenerateScore');
+    Route::get('/risk-score/create-element', 'CityNexus\CityNexus\Http\CitynexusController@getCreateElement');
+
+    Route::post('/risk-score/save-score', 'CityNexus\CityNexus\Http\CitynexusController@postSaveScore');
+
+    Route::get('/risk-score/edit-score', 'CityNexus\CityNexus\Http\CitynexusController@getEditScore');
+
+    Route::get('/risk-score/duplicate-score', 'CityNexus\CityNexus\Http\CitynexusController@getDuplicateScore');
+
+    Route::get('/risk-score/generate-score', 'CityNexus\CityNexus\Http\CitynexusController@getGenerateScore');
+
+    Route::get('/risk-score/heat-map', 'CityNexus\CityNexus\Http\CitynexusController@getRiskscoreHeatmap');
+
+});

@@ -11,7 +11,7 @@ use CityNexus\CityNexus\Score;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
 use Salaback\Tabler\Table;
-use Yajra\Datatables\Datatables;
+//use Yajra\Datatables\Datatables;
 use CityNexus\CityNexus\ScoreBuilder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Schema\Blueprint;
@@ -37,9 +37,7 @@ class CitynexusController extends Controller
 
     public function getPropertiesData()
     {
-        $property = Property::select('id', 'full_address')->get();
-
-        return Datatables::of($property)->make(true);
+        return Datatables::of(Property::select('*')->get())->make(true);
     }
 
     public function getRiskscoreCreate()
@@ -130,8 +128,8 @@ class CitynexusController extends Controller
             'name' => 'required|max:255',
             'elements' => 'required'
         ]);
-        // test if there is a score_id
 
+        // test if there is a score_id
         if($request->get('score_id') != null)
         {
             $score = Score::find($request->get('score_id'));
@@ -227,7 +225,7 @@ class CitynexusController extends Controller
         }
 
 
-        if(DB::table($table)->count() != 0)  { DB::table($table)->delete(); }
+//        if(DB::table($table)->count() != 0)  { DB::table($table)->delete(); }
 
         $jobs = array();
 
@@ -235,7 +233,6 @@ class CitynexusController extends Controller
         {
             $this->dispatch(new GenerateScore($elements, $table, $property));
         }
-
             $this->dispatch(new GenerateScore($elements, $score->id, FALSE));
     }
 }

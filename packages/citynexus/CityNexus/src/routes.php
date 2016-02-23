@@ -11,7 +11,7 @@
 |
 */
 
-Route::group(['middleware' => 'auth', 'prefix' => config('tabler.root_directory') ], function() {
+Route::group(['middleware' => 'auth', 'prefix' => config('citynexus.root_directory') ], function() {
 
 
     Route::get('/property', 'CityNexus\CityNexus\Http\CitynexusController@getProperty');

@@ -148,7 +148,6 @@ return [
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Salaback\Tabler\PackageServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
-        Yajra\Datatables\DatatablesServiceProvider::class,
     ],
 
     /*

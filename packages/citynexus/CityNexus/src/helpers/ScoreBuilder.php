@@ -99,16 +99,20 @@ class ScoreBuilder
         if($score->function == 'float') $return = $this->runFunc($value, $score);
         elseif($score->function == 'range') $return = $this->runRange($value, $score);
         elseif($score->function == 'empty') $return = $this->runRange($value, $score);
+        else $return = $this->runText($value, $score);
         return $return;
     }
 
     private function runFunc($value, $score)
     {
-        if($score->func == '+') return $value + $score->factor;
-        elseif($score->func == '-') return $value - $score->factor;
-        elseif($score->func == '*') return $value * $score->factor;
-        elseif($score->func == '/') return $value / $score->factor;
-        else return null;
+
+        if($score->func == '+') $return = $value + $score->factor;
+        elseif($score->func == '-') $return = $value - $score->factor;
+        elseif($score->func == '*') $return = $value * $score->factor;
+        elseif($score->func == '/') $return = $value / $score->factor;
+        else $return = null;
+
+        return $return;
 
     }
 
@@ -119,6 +123,17 @@ class ScoreBuilder
 
         else return null;
 
+    }
+
+    private function runText($value, $score)
+    {
+        if($score->function == 'notempty' && $value != null) { return $score->result; }
+        elseif($score->function == 'empty' && $value == null) { return $score->result; }
+        elseif($score->function == 'equals' && $value == $score->test) { return $score->result; }
+        elseif($score->function == 'doesntequal' && $value != $score->test) { return $score->result; }
+        elseif($score->function == 'contains'&& strpos($value, $score->test) != false) { return $score->result; }
+        elseif($score->function == 'doesntcontain'&& strpos($value, $score->test) == false) { return $score->result; }
+        else return null;
     }
 
 }

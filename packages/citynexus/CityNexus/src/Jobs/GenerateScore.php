@@ -24,7 +24,7 @@ class GenerateScore extends Job implements SelfHandling, ShouldQueue
      *
      * @param string $elements
      * @param string $table
-     * @param Property $property
+     * @param string $property
      */
     public function __construct($elements, $table, $properties)
     {
@@ -58,7 +58,7 @@ class GenerateScore extends Job implements SelfHandling, ShouldQueue
                 $p_score = $scoreBuilder->genScore($property, $this->elements);
 
                 //Create Score record
-                $record[] = [
+                $records[] = [
                     'property_id' => $property->id,
                     'score' => $p_score,
                     'updated_at' => Carbon::now(),
@@ -66,7 +66,7 @@ class GenerateScore extends Job implements SelfHandling, ShouldQueue
                 ];
             }
 
-            DB::table($this->table)->insert($record);
+            DB::table($this->table)->insert($records);
         }
 
     }

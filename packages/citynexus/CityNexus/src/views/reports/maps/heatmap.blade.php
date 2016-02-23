@@ -80,10 +80,14 @@
     // Heatmap data
     function getPoints() {
         return [@foreach($data as $item)
+               @if($item->lat != null)
                     {
                 location: new google.maps.LatLng({{$item->lat}}, {{$item->long}}),
                 weight: Math.pow({{$item->score}})
-    }, @endforeach  ];
+
+    },
+            @endif
+        @endforeach  ];
     }
 
     function refresh()

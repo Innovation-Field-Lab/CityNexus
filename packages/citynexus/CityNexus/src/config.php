@@ -48,5 +48,17 @@ return [
                 ['maps_to' => 'reports_filed', 'type' => 'integer']
             ]
         ]
-    ]
+    ],
+
+    // The route directory where the tabler routes will be hosted
+
+    "tabler_directory" => "tabler",
+
+    // Sync points
+
+    "sync" => [],
+
+    // Index field
+
+    'index_id' => '',
 ];

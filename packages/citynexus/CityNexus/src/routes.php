@@ -44,3 +44,24 @@ Route::group(['middleware' => 'auth', 'prefix' => config('citynexus.root_directo
     Route::get('/risk-score/heat-map', 'CityNexus\CityNexus\Http\CitynexusController@getRiskscoreHeatmap');
 
 });
+
+// Tabler Features
+
+Route::group(['middleware' => 'auth', 'prefix' => config('tabler.root_directory') ], function() {
+
+    Route::get('/uploader', 'Salaback\Tabler\Http\TablerController@getUploader');
+    Route::post('/uploader', 'Salaback\Tabler\Http\TablerController@postUploader');
+
+    Route::get('/create-scheme/', 'Salaback\Tabler\Http\TablerController@getCreateScheme');
+    Route::post('/create-scheme', 'Salaback\Tabler\Http\TablerController@postCreateScheme');
+
+    Route::get('/new-upload/', 'Salaback\Tabler\Http\TablerController@getNewUpload');
+    Route::post('/new-upload/', 'Salaback\Tabler\Http\TablerController@postNewUpload');
+
+    Route::get('/edit-table/', 'Salaback\Tabler\Http\TablerController@getEditTable');
+    Route::post('/update-table/', 'Salaback\Tabler\Http\TablerController@postUpdateTable');
+
+    Route::get('/', 'Salaback\Tabler\Http\TablerController@getIndex');
+
+});
+

@@ -4,12 +4,10 @@
 namespace CityNexus\CityNexus;
 
 
-use App\Property;
 use Carbon\Carbon;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
-use Salaback\Tabler\Table;
 
 class ScoreBuilder
 {
@@ -48,12 +46,12 @@ class ScoreBuilder
             elseif($i->scope == 'last') {
                 if ($i->period != null) {
                     $value = DB::table($i->table_name)
-                        ->where(config('tabler.index_id'), $record->id)
+                        ->where(config('citynexus.index_id'), $record->id)
                         ->where('updated_at', '>', $today->subDays($i->period))
                         ->value($i->key);
                 } else {
                     $value = DB::table($i->table_name)
-                        ->where(config('tabler.index_id'), $record->id)
+                        ->where(config('citynexus.index_id'), $record->id)
                         ->value($i->key);
                 }
 
@@ -69,7 +67,7 @@ class ScoreBuilder
                 if($i->period != null)
                 {
                     $values[] = DB::table($i->table_name)
-                        ->where(config('tabler.index_id'), $record->id)
+                        ->where(config('citynexus.index_id'), $record->id)
                         ->where('updated_at', '>', $today->subDays($i->period))
                         ->select($i->key)
                         ->get();
@@ -77,7 +75,7 @@ class ScoreBuilder
                 else
                 {
                     $values[] = DB::table($i->table_name)
-                        ->where(config('tabler.index_id'), $record->id)
+                        ->where(config('citynexus.index_id'), $record->id)
                         ->select($i->key)
                         ->get();
                 }

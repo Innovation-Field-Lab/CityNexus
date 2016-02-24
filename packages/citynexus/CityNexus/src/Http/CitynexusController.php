@@ -10,7 +10,7 @@ use CityNexus\CityNexus\GenerateScore;
 use CityNexus\CityNexus\Score;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
-use Salaback\Tabler\Table;
+use CityNexus\CityNexus\Table;
 use CityNexus\CityNexus\ScoreBuilder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Schema\Blueprint;

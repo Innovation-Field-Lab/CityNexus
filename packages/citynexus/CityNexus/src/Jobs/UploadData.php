@@ -3,8 +3,6 @@
 namespace CityNexus\CityNexus;
 
 use App\Jobs\Job;
-use CityNexus\CityNexus\Property;
-use Carbon\Carbon;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Bus\SelfHandling;

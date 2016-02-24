@@ -18,11 +18,11 @@ class TablerController extends Controller
     public function getIndex()
     {
         $tables = Table::all();
-        return view('tabler::index', compact('tables'));
+        return view('citynexus::index', compact('tables'));
     }
     public function getUploader()
     {
-        return view('tabler::uploader');
+        return view('citynexus::uploader');
     }
 
     public function postUploader(Request $request)
@@ -34,7 +34,7 @@ class TablerController extends Controller
 
         $table = Table::create(['raw_upload' => json_encode(end($table))]);
 
-        return redirect(action('\Salaback\Tabler\Http\TablerController@getCreateScheme', ['table_id' => $table->id]));
+        return redirect(action('\CityNexus\CityNexus\Http\TablerController@getCreateScheme', ['table_id' => $table->id]));
     }
 
     public function getCreateScheme(Request $request)
@@ -45,7 +45,7 @@ class TablerController extends Controller
         $table = end($table);
         $table_id = $request->get('table_id');
 
-        return view('tabler::create-scheme', compact('table', 'typer', 'table_id'));
+        return view('citynexus::create-scheme', compact('table', 'typer', 'table_id'));
     }
 
     /**

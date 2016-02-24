@@ -1,8 +1,6 @@
-<?php namespace Salaback\Tabler;
+<?php namespace CityNexus\CityNexus;
 
 use Illuminate\Database\Eloquent\Model;
-
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Table extends Model {
 

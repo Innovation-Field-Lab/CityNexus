@@ -26,8 +26,8 @@ class TableBuilder
                 $table->increments('id');
 
                 // Add another index field if one is set in the config file.
-                if (config('tabler.index_id') != null && config('tabler.index_id') != 'id') {
-                    $table->integer(config('tabler.index_id'))->nullable();
+                if (config('citynexus.index_id') != null && config('tabler.index_id') != 'id') {
+                    $table->integer(config('citynexus.index_id'))->nullable();
                 }
 
                 foreach ($fields as $field) {
@@ -139,9 +139,9 @@ class TableBuilder
     {
         $return = ['full_address' => null, 'house_number' => null, 'street_name' => null, 'street_type' => null, 'unit' => null];
 
-        $streets = config('tabler.street_types');
+        $streets = config('citynexus.street_types');
 
-        $units = config('tabler.unit_types');
+        $units = config('citynexus.unit_types');
 
         $parts = null;
 

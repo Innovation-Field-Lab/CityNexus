@@ -33,6 +33,7 @@ class PackageServiceProvider extends ServiceProvider
         require __DIR__ . '/helpers/DatasetQuery.php';
         require __DIR__ . '/helpers/ScoreBuilder.php';
         require __DIR__ . '/Jobs/GenerateScore.php';
+        require __DIR__ . '/models/Property.php';
         require __DIR__ . '/models/Score.php';
     }
 

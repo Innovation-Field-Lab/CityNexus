@@ -76,16 +76,16 @@ class TablerController extends Controller
         return redirect('/tabler/');
     }
 
-    public function getNewUpload(Request $request)
+    public function getNewUpload($id)
     {
-        $table = Table::find($request->get('table_id'));
-        return view('tabler::new-upload', compact('table'));
+        $table = Table::find($id);
+        return view('citynexus::tabler.new-upload', compact('table'));
     }
 
 
-    public function postNewUpload(Request $request)
+    public function postNewUpload($id, Request $request)
     {
-        $table = Table::find($request->get('table_id'));
+        $table = Table::find($id);
 
         //get uploaded file
         $file = $request->file('file');

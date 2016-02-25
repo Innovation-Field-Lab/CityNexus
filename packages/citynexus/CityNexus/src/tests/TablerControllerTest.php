@@ -76,4 +76,17 @@ class TablerControllerTest extends TestCase
     }
 
 
+    /**
+     *
+     * Test that there is an upload page for "Test Table Upload"
+     *
+     */
+    public function testGetNewUpload()
+    {
+        $table = \CityNexus\CityNexus\Table::create(['table_title' => 'Test Table', 'scheme' => '{"tt":{"show":"true","name":"Tt","type":"string","key":"tt","sync":"","push":""},"account":{"show":"true","name":"Account","type":"string","key":"account","sync":"","push":""},"location":{"show":"true","name":"Location","type":"string","key":"location","sync":"full_address","push":""},"tax":{"show":"true","name":"Tax","type":"float","key":"tax","sync":"","push":""},"betterments":{"show":"true","name":"Betterments","type":"float","key":"betterments","sync":"","push":""},"interest":{"show":"true","name":"Interest","type":"float","key":"interest","sync":"","push":""},"demand":{"show":"true","name":"Demand","type":"float","key":"demand","sync":"","push":""},"charges":{"show":"true","name":"Charges","type":"float","key":"charges","sync":"","push":""},"trs_paid_interest":{"show":"true","name":"Trs Paid Interest","type":"float","key":"trs_paid_interest","sync":"","push":""},"credits":{"show":"true","name":"Credits","type":"float","key":"credits","sync":"","push":""},"bal_due":{"show":"true","name":"Bal Due","type":"float","key":"bal_due","sync":"","push":""},"trs_chgs":{"show":"true","name":"Trs Chgs","type":"float","key":"trs_chgs","sync":"","push":""},"trs_accrued_interest":{"show":"true","name":"Trs Accrued Interest","type":"float","key":"trs_accrued_interest","sync":"","push":""},"total_due":{"show":"true","name":"Total Due","type":"float","key":"total_due","sync":"","push":""},"lat":{"show":"true","name":"Lat","type":"float","key":"lat","sync":"","push":"lat"},"longit":{"show":"true","name":"Longit","type":"float","key":"longit","sync":"","push":"long"},"geomerge":{"name":"Geomerge","type":"string","key":"geomerge","sync":"","push":""},"geostatus":{"name":"Geostatus","type":"string","key":"geostatus","sync":"","push":""},"city":{"name":"City","type":"string","key":"city","sync":"","push":""},"state":{"name":"State","type":"string","key":"state","sync":"","push":""},"database":{"name":"Database","type":"string","key":"database","sync":"","push":""},"geoid":{"name":"Geoid","type":"integer","key":"geoid","sync":"","push":""}}']);
+
+        $this->visit('/' . config('citynexus.tabler_root') . '/new-upload/' . $table->id)
+            ->see('<b>Test Table</b> Upload');
+    }
+
 }

@@ -18,11 +18,11 @@ class TablerController extends Controller
     public function getIndex()
     {
         $tables = Table::all();
-        return view('citynexus::index', compact('tables'));
+        return view('citynexus::tabler.index', compact('tables'));
     }
     public function getUploader()
     {
-        return view('citynexus::uploader');
+        return view('citynexus::tabler.uploader');
     }
 
     public function postUploader(Request $request)
@@ -30,6 +30,7 @@ class TablerController extends Controller
         $this->validate($request, [
                 'file' => 'required'
             ]);
+
         $table = Excel::load($request->file('file'), function($reader){$reader->toArray();});
 
         $table = Table::create(['raw_upload' => json_encode(end($table))]);
@@ -37,27 +38,31 @@ class TablerController extends Controller
         return redirect(action('\CityNexus\CityNexus\Http\TablerController@getCreateScheme', ['table_id' => $table->id]));
     }
 
-    public function getCreateScheme(Request $request)
+    public function getCreateScheme($id)
     {
 
-        $table = json_decode(Table::find($request->get('table_id'))->raw_upload);
+        $table = json_decode(Table::find($id)->raw_upload);
         $typer = new Typer();
+        $builder = new TableBuilder();
         $table = end($table);
-        $table_id = $request->get('table_id');
+        $table_id = $id;
 
-        return view('citynexus::create-scheme', compact('table', 'typer', 'table_id'));
+        return view('citynexus::tabler.create-scheme', compact('table', 'typer', 'table_id', 'builder'));
     }
 
     /**
      * @param Request $request
      */
-    public function postCreateScheme(Request $request)
+    public function postCreateScheme($id, Request $request)
     {
+        $this->validate($request, [
+           'table_name' => 'max:255|required'
+        ]);
         $tabler = new TableBuilder();
 
-
-        $table = Table::find($request->get('table_id'));
-        $table->scheme = json_encode($request->get('map'));
+        $map = $request->get('map');
+        $table = Table::find($id);
+        $table->scheme = json_encode($map);
         $table->table_title = $request->get('table_name');
         $table->table_name = $tabler->create($table);
         $table->table_description = $request->get('table_description');
@@ -111,7 +116,6 @@ class TablerController extends Controller
     {
         $this->validate($request, [
             'table_title' => 'max:255|required',
-            'table_description' => 'required',
             'map' => 'required'
         ]);
 

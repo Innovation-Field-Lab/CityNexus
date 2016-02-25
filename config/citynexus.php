@@ -59,7 +59,7 @@ return [
 
     // The route directory where the tabler routes will be hosted
 
-    "tabel_directory" => "tabler",
+    "tabler_root" => "tabler",
 
     // Sync points
 

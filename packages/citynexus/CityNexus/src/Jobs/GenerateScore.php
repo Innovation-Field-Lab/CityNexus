@@ -3,7 +3,6 @@
 namespace CityNexus\CityNexus;
 
 use App\Jobs\Job;
-use App\Property;
 use Carbon\Carbon;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
@@ -42,6 +41,7 @@ class GenerateScore extends Job implements SelfHandling, ShouldQueue
      */
     public function handle()
     {
+        $records = null;
         if($this->properties == false)
         {
             $score = Score::find($this->table);

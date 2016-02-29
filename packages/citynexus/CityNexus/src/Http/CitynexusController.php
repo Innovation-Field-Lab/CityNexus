@@ -3,15 +3,14 @@
 namespace CityNexus\CityNexus\Http;
 
 use App\Http\Controllers\Controller;
-use App\Property;
+use CityNexus\CityNexus\Property;
 use Carbon\Carbon;
 use CityNexus\CityNexus\DatasetQuery;
 use CityNexus\CityNexus\GenerateScore;
 use CityNexus\CityNexus\Score;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
-use Salaback\Tabler\Table;
-//use Yajra\Datatables\Datatables;
+use CityNexus\CityNexus\Table;
 use CityNexus\CityNexus\ScoreBuilder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Schema\Blueprint;

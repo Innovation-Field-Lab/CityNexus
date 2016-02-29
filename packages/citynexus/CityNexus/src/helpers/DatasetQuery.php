@@ -8,7 +8,6 @@ use Carbon\Carbon;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
-use Salaback\Tabler\Table;
 
 class DatasetQuery
 {

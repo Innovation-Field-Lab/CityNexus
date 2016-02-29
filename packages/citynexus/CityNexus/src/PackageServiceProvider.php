@@ -30,10 +30,18 @@ class PackageServiceProvider extends ServiceProvider
             __DIR__ . '/migrations/' => database_path('migrations')
         ], 'migrations');
 
-        require __DIR__ . '/helpers/DatasetQuery.php';
-        require __DIR__ . '/helpers/ScoreBuilder.php';
-        require __DIR__ . '/Jobs/GenerateScore.php';
-        require __DIR__ . '/models/Score.php';
+        include_once __DIR__ . '/helpers/DatasetQuery.php';
+        include_once __DIR__ . '/helpers/ScoreBuilder.php';
+        include_once __DIR__ . '/Jobs/GenerateScore.php';
+        include_once __DIR__ . '/models/Property.php';
+        include_once __DIR__ . '/models/Score.php';
+
+        //Load in the classes
+        include_once __DIR__ . '/helpers/Typer.php';
+        include_once __DIR__ . '/helpers/TableBuilder.php';
+        include_once __DIR__ . '/Models/Table.php';
+        include_once __DIR__ . '/Jobs/UploadData.php';
+
     }
 
 

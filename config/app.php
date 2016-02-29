@@ -146,7 +146,6 @@ return [
         App\Providers\RouteServiceProvider::class,
         CityNexus\CityNexus\PackageServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
-        Salaback\Tabler\PackageServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
     ],
 

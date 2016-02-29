@@ -2,12 +2,13 @@
     "name": "citynexus/citynexus",
     "description": "A citywide performance management analytics platform",
     "require": {
+        "php": ">=5.3.0",
         "illuminate/support": "~5"
     },
     "license": "MIT",
     "autoload": {
-        "psr-4:": {
-            "citynexus\\CityNexus": "src/"
+        "psr-4": {
+            "citynexus\\CityNexus\\": "src/"
         }
     },
     "authors": [

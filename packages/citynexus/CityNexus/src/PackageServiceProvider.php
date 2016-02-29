@@ -39,7 +39,7 @@ class PackageServiceProvider extends ServiceProvider
         //Load in the classes
         include_once __DIR__ . '/helpers/Typer.php';
         include_once __DIR__ . '/helpers/TableBuilder.php';
-        include_once __DIR__ . '/Models/Table.php';
+        include_once __DIR__ . '/models/Table.php';
         include_once __DIR__ . '/Jobs/UploadData.php';
 
     }

@@ -29,7 +29,7 @@
                                 {{$table->updated_at->diffForHumans()}}
                             </td>
                             <td>
-                                <a class="btn btn-sm btn-primary" href="/{{config('citynexus.tabler_root')}}/upload?table_id={{$table->id}}">Upload</a>
+                                <a class="btn btn-sm btn-primary" href="/{{config('citynexus.tabler_root')}}/new-upload/{{$table->id}}">Upload</a>
                             </td>
                         </tr>
                     @endforeach

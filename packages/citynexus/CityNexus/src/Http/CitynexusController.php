@@ -4,7 +4,6 @@ namespace CityNexus\CityNexus\Http;
 
 use App\Http\Controllers\Controller;
 use CityNexus\CityNexus\Property;
-use Carbon\Carbon;
 use CityNexus\CityNexus\DatasetQuery;
 use CityNexus\CityNexus\GenerateScore;
 use CityNexus\CityNexus\Score;
@@ -179,6 +178,10 @@ class CitynexusController extends Controller
         return view('citynexus::risk-score.edit', compact('score', 'datasets'));
     }
 
+    /**
+     * @param Request $request
+     * @return string
+     */
     public function postUpdateScore(Request $request)
     {
         $score = Score::find($request->get('score_id'));
@@ -190,7 +193,6 @@ class CitynexusController extends Controller
         // Put score as pending
         $score->status = 'pending';
         $score->save();
-
 
         // TODO: Queue up a notification for the users that their score is done and touch the score model.
 

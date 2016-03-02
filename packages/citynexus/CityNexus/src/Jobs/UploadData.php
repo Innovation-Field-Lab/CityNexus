@@ -14,10 +14,7 @@ class UploadData extends Job implements SelfHandling, ShouldQueue
     use InteractsWithQueue, SerializesModels;
 
     private $data;
-    private $table;
-    private $scheme;
-    private $syncValues;
-    private $pushValues;
+    private $options;
     private $table_name;
 
     /**
@@ -31,11 +28,14 @@ class UploadData extends Job implements SelfHandling, ShouldQueue
     {
 
         $this->data = $data;
-        $this->table = $table;
-        $this->table_name = $table->table_name;
-        $this->scheme = $scheme;
-        $this->syncValues = $syncValues;
-        $this->pushValues = $pushValues;
+        $this->options = [
+            'table' => $table,
+            'tableName' => $table->table_name,
+            'scheme' => $scheme,
+            'syncValues' => $syncValues,
+            'pushValues' => $pushValues
+        ];
+
     }
 
     /**
@@ -49,39 +49,7 @@ class UploadData extends Job implements SelfHandling, ShouldQueue
         //Process each individual record
         foreach($this->data as $i)
         {
-            //Create a empty array of the record
-            $record = [];
-
-            //if there is a sync value, identify the index id
-            if( count( $this->syncValues ) > 0)
-            {
-                $record[config('tabler.index_id')] = $tabler->findSyncId( config('tabler.index_table'), $i, $this->syncValues);
-            }
-
-            //add remaining elements to the array
-            $record = $tabler->addElements( $record, $i, $this->scheme);
-
-            foreach($this->scheme as $field)
-            {
-                if($field->type == 'integer' or $field->type == 'float')
-                {
-                    if(array_key_exists($field->key, $record)) $record[$field->key] = floatval($record[$field->key]);
-                }
-            }
-
-            DB::table($this->table_name)->insert($record);
-
-            //If there are push values, update the primary property record
-            if(count($this->pushValues) > 0)
-            {
-                $property = Property::find($record['property_id']);
-                foreach ($this->pushValues as $key => $value)
-                {
-                    $property->$value = $i[$key];
-                }
-                $property->save();
-            }
-
+            $tabler->addRecord($i, $this->options);
         }
 
     }

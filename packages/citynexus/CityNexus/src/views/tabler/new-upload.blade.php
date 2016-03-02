@@ -8,7 +8,7 @@
                 <b>{{$table->table_title}}</b> Upload
             </div>
             <div class="panel-body">
-                <form action="/{{config('citynexus.tabler_root')}}/new-upload/" method="post" enctype="multipart/form-data">
+                <form action="/{{config('citynexus.tabler_root')}}/new-upload/{{$table->id}}" method="post" enctype="multipart/form-data">
                     {{csrf_field()}}
                     <div class="alert alert-info">
                         Please upload a csv file with the following titles in the first row.<br>

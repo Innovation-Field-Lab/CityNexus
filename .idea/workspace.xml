@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list id="f245d100-7fe6-4351-ad10-4ca55977e733" name="Default" comment="Create and process score" />
-    <list default="true" id="43cbeb70-df19-4bd0-8d81-005af99ed574" name="Failed commit: Default" comment="remove tabler from composer&#10;">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/migrations/2016_03_02_163601_create_settings.php" />
+    <list default="true" id="43cbeb70-df19-4bd0-8d81-005af99ed574" name="Failed commit: Default" comment="move">
       <change type="DELETED" beforePath="$PROJECT_DIR$/app/Setting.php" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -567,7 +566,13 @@
       <option name="project" value="LOCAL" />
       <updated>1456936037786</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Create settings migration and model&#10;">
+      <created>1457148074179</created>
+      <option name="number" value="00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1457148074180</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TodoView">
@@ -633,7 +638,8 @@
     <MESSAGE value="Add migrations" />
     <MESSAGE value="Refactoring add record function from upload data job to tableBuilder" />
     <MESSAGE value="remove tabler from composer&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="remove tabler from composer&#10;" />
+    <MESSAGE value="Create settings migration and model&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Create settings migration and model&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -778,6 +784,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.6995074">
           <caret line="1451" column="109" selection-start-line="1451" selection-start-column="109" selection-end-line="1451" selection-end-column="109" />
+          <folding />
         </state>
       </provider>
     </entry>

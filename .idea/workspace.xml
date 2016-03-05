@@ -3,13 +3,9 @@
   <component name="ChangeListManager">
     <list id="f245d100-7fe6-4351-ad10-4ca55977e733" name="Default" comment="Create and process score" />
     <list default="true" id="43cbeb70-df19-4bd0-8d81-005af99ed574" name="Failed commit: Default" comment="remove tabler from composer&#10;">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/migrations/2016_03_02_163601_create_settings.php" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Setting.php" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/Http/CitynexusController.php" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/Http/CitynexusController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/Jobs/UploadData.php" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/Jobs/UploadData.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/helpers/TableBuilder.php" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/helpers/TableBuilder.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/routes.php" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/routes.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/views/tabler/index.blade.php" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/views/tabler/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/views/tabler/new-upload.blade.php" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/views/tabler/new-upload.blade.php" />
     </list>
     <ignored path="citynexus.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -46,12 +42,14 @@
     <splitter split-orientation="horizontal" split-proportion="0.5">
       <split-first>
         <leaf>
-          <file leaf-file-name="UploadData.php" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/packages/citynexus/CityNexus/src/Jobs/UploadData.php">
+          <file leaf-file-name="2016_03_02_163601_create_settings.php" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/database/migrations/2016_03_02_163601_create_settings.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.5990566">
-                  <caret line="45" column="28" selection-start-line="45" selection-start-column="28" selection-end-line="45" selection-end-column="28" />
-                  <folding />
+                <state vertical-scroll-proportion="0.6603774">
+                  <caret line="28" column="43" selection-start-line="28" selection-start-column="43" selection-end-line="28" selection-end-column="43" />
+                  <folding>
+                    <element signature="e#7#48#0#PHP" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -60,11 +58,11 @@
       </split-first>
       <split-second>
         <leaf>
-          <file leaf-file-name="TableBuilder.php" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/packages/citynexus/CityNexus/src/helpers/TableBuilder.php">
+          <file leaf-file-name="Setting.php" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/packages/citynexus/CityNexus/src/models/Setting.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.49056605">
-                  <caret line="284" column="42" selection-start-line="284" selection-start-column="42" selection-end-line="284" selection-end-column="42" />
+                <state vertical-scroll-proportion="0.25943395">
+                  <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -85,7 +83,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/Http/Middleware/GlobalAuth.php" />
         <option value="$PROJECT_DIR$/app/Http/Kernel.php" />
         <option value="$PROJECT_DIR$/packages/salaback/tabler/src/Http/routes.php" />
         <option value="$PROJECT_DIR$/app/Http/Middleware/Authenticate.php" />
@@ -136,6 +133,7 @@
         <option value="$PROJECT_DIR$/packages/citynexus/CityNexus/src/views/tabler/new-upload.blade.php" />
         <option value="$PROJECT_DIR$/packages/citynexus/CityNexus/src/helpers/TableBuilder.php" />
         <option value="$PROJECT_DIR$/packages/citynexus/CityNexus/src/Jobs/UploadData.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2016_03_02_163601_create_settings.php" />
       </list>
     </option>
   </component>
@@ -330,165 +328,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="citynexus" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="citynexus" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="packages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="citynexus" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CityNexus" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tabler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="citynexus" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="citynexus" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="packages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="citynexus" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CityNexus" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="property" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="citynexus" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="citynexus" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="packages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="citynexus" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CityNexus" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Jobs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="citynexus" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="citynexus" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="packages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="citynexus" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CityNexus" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Http" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="citynexus" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="citynexus" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="packages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="citynexus" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CityNexus" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="helpers" />
+              <option name="myItemId" value="models" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -503,6 +343,38 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="database" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="citynexus" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="citynexus" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="database" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="migrations" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="citynexus" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="citynexus" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -521,19 +393,19 @@
     <property name="FullScreen" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/packages/citynexus/CityNexus/src/migrations" />
-      <recent name="$PROJECT_DIR$/packages/citynexus/CityNexus/src/tests" />
-      <recent name="$PROJECT_DIR$/tests" />
-      <recent name="$PROJECT_DIR$/tests/citynexus" />
-      <recent name="$PROJECT_DIR$/packages/citynexus/CityNexus/src/models" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/packages/citynexus/CityNexus/src/views/tabler" />
       <recent name="$PROJECT_DIR$/packages/citynexus/CityNexus/src/tests" />
       <recent name="$PROJECT_DIR$/packages/citynexus/CityNexus/src/Jobs" />
       <recent name="$PROJECT_DIR$/packages/citynexus/CityNexus/src/views/risk-score" />
       <recent name="$PROJECT_DIR$/resources/views/includes" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/packages/citynexus/CityNexus/src/models" />
+      <recent name="$PROJECT_DIR$/packages/citynexus/CityNexus/src/migrations" />
+      <recent name="$PROJECT_DIR$/packages/citynexus/CityNexus/src/tests" />
+      <recent name="$PROJECT_DIR$/tests" />
+      <recent name="$PROJECT_DIR$/tests/citynexus" />
     </key>
   </component>
   <component name="RunManager">
@@ -714,13 +586,13 @@
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21243942" sideWeight="0.35714287" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30777422" sideWeight="0.64285713" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14109589" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.68442625" sideWeight="0.47738287" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.68379444" sideWeight="0.47550586" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.52868855" sideWeight="0.509693" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1276252" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34683794" sideWeight="0.31256655" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34683794" sideWeight="0.3109691" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32871288" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24920128" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34683794" sideWeight="0.6874334" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34683794" sideWeight="0.6890309" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.111600585" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -758,10 +630,10 @@
     <MESSAGE value="Move migrations to package&#10;" />
     <MESSAGE value="Make package useable in packlist" />
     <MESSAGE value="typo in tables include&#10;" />
-    <MESSAGE value="remove tabler from composer&#10;" />
     <MESSAGE value="Add migrations" />
     <MESSAGE value="Refactoring add record function from upload data job to tableBuilder" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactoring add record function from upload data job to tableBuilder" />
+    <MESSAGE value="remove tabler from composer&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="remove tabler from composer&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1218,19 +1090,166 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/packages/citynexus/CityNexus/src/helpers/TableBuilder.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.49056605">
-          <caret line="284" column="42" selection-start-line="284" selection-start-column="42" selection-end-line="284" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/packages/citynexus/CityNexus/src/Jobs/UploadData.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5990566">
           <caret line="45" column="28" selection-start-line="45" selection-start-column="28" selection-end-line="45" selection-end-column="28" />
+          <folding>
+            <marker date="1456935971000" expanded="false" signature="43:258" placeholder="..." />
+            <marker date="1456935971000" expanded="true" signature="325:1243" placeholder="{...}" />
+            <marker date="1456935971000" expanded="true" signature="449:588" placeholder=" Create a new job instance. ..." />
+            <marker date="1456935971000" expanded="true" signature="672:945" placeholder="{...}" />
+            <marker date="1456935971000" expanded="true" signature="735:936" placeholder="..." />
+            <marker date="1456935971000" expanded="true" signature="954:1011" placeholder=" Execute the job. ..." />
+            <marker date="1456935971000" expanded="true" signature="1042:1241" placeholder="{...}" />
+            <marker date="1456935971000" expanded="true" signature="1162:1234" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2016_02_07_204712_create_api_keys_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4245283">
+          <caret line="19" column="11" selection-start-line="14" selection-start-column="7" selection-end-line="19" selection-end-column="11" />
+          <folding>
+            <marker date="1456785857000" expanded="false" signature="11:94" placeholder="..." />
+            <marker date="1456785857000" expanded="true" signature="138:628" placeholder="{...}" />
+            <marker date="1456785857000" expanded="true" signature="148:208" placeholder=" Run the migrations. ..." />
+            <marker date="1456785857000" expanded="true" signature="235:478" placeholder="{...}" />
+            <marker date="1456785857000" expanded="true" signature="265:470" placeholder="..." />
+            <marker date="1456785857000" expanded="true" signature="306:469" placeholder="..." />
+            <marker date="1456785857000" expanded="true" signature="487:551" placeholder=" Reverse the migrations. ..." />
+            <marker date="1456785857000" expanded="true" signature="580:626" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2016_01_22_173937_create_groups_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1456785857000" expanded="false" signature="11:94" placeholder="..." />
+            <marker date="1456785857000" expanded="true" signature="137:543" placeholder="{...}" />
+            <marker date="1456785857000" expanded="true" signature="147:207" placeholder=" Run the migrations. ..." />
+            <marker date="1456785857000" expanded="true" signature="234:395" placeholder="{...}" />
+            <marker date="1456785857000" expanded="true" signature="264:387" placeholder="..." />
+            <marker date="1456785857000" expanded="true" signature="303:386" placeholder="..." />
+            <marker date="1456785857000" expanded="true" signature="404:468" placeholder=" Reverse the migrations. ..." />
+            <marker date="1456785857000" expanded="true" signature="497:541" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2016_01_21_225410_create_jobs_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1456785857000" expanded="false" signature="11:94" placeholder="..." />
+            <marker date="1456785857000" expanded="true" signature="135:929" placeholder="{...}" />
+            <marker date="1456785857000" expanded="true" signature="145:205" placeholder=" Run the migrations. ..." />
+            <marker date="1456785857000" expanded="true" signature="232:783" placeholder="{...}" />
+            <marker date="1456785857000" expanded="true" signature="262:775" placeholder="..." />
+            <marker date="1456785857000" expanded="true" signature="299:774" placeholder="..." />
+            <marker date="1456785857000" expanded="true" signature="792:856" placeholder=" Reverse the migrations. ..." />
+            <marker date="1456785857000" expanded="true" signature="885:927" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2015_01_10_000000_create_properties_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.30660376">
+          <caret line="14" column="24" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="33" />
+          <folding>
+            <marker date="1456785857000" expanded="false" signature="11:94" placeholder="..." />
+            <marker date="1456785857000" expanded="true" signature="143:1465" placeholder="..." />
+            <marker date="1456785857000" expanded="true" signature="152:212" placeholder=" Run the migrations. ..." />
+            <marker date="1456785857000" expanded="true" signature="239:1303" placeholder="{...}" />
+            <marker date="1456785857000" expanded="true" signature="269:1295" placeholder="..." />
+            <marker date="1456785857000" expanded="true" signature="319:1295" placeholder="{...}" />
+            <marker date="1456785857000" expanded="true" signature="1312:1376" placeholder=" Reverse the migrations. ..." />
+            <marker date="1456785857000" expanded="true" signature="1405:1463" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/packages/citynexus/CityNexus/src/helpers/TableBuilder.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6792453">
+          <caret line="292" column="24" selection-start-line="292" selection-start-column="24" selection-end-line="292" selection-end-column="24" />
+          <folding>
+            <marker date="1456935450000" expanded="false" signature="45:272" placeholder="..." />
+            <marker date="1456935450000" expanded="true" signature="292:9085" placeholder="{...}" />
+            <marker date="1456935450000" expanded="true" signature="329:1215" placeholder="{...}" />
+            <marker date="1456935450000" expanded="true" signature="502:1179" placeholder="..." />
+            <marker date="1456935450000" expanded="true" signature="530:1168" placeholder="..." />
+            <marker date="1456935450000" expanded="true" signature="586:1167" placeholder="..." />
+            <marker date="1456935450000" expanded="true" signature="851:947" placeholder="..." />
+            <marker date="1456935450000" expanded="true" signature="995:1115" placeholder="..." />
+            <marker date="1456935450000" expanded="true" signature="1253:1374" placeholder="{...}" />
+            <marker date="1456935450000" expanded="true" signature="1385:1434" placeholder=" @param $scheme ..." />
+            <marker date="1456935450000" expanded="true" signature="1485:1785" placeholder="{...}" />
+            <marker date="1456935450000" expanded="true" signature="1628:1752" placeholder="..." />
+            <marker date="1456935450000" expanded="true" signature="1685:1742" placeholder="..." />
+            <marker date="1456935450000" expanded="true" signature="1794:1890" placeholder=" @param $table_name ..." />
+            <marker date="1456935450000" expanded="true" signature="1954:2815" placeholder="{...}" />
+            <marker date="1456935450000" expanded="true" signature="2030:2107" placeholder="{...}" />
+            <marker date="1456935450000" expanded="true" signature="2288:2295" placeholder="..." />
+            <marker date="1456935450000" expanded="true" signature="2317:2321" placeholder="..." />
+            <marker date="1456935450000" expanded="true" signature="2389:2785" placeholder="{...}" />
+            <marker date="1456935450000" expanded="true" signature="2766:2773" placeholder="..." />
+            <marker date="1456935450000" expanded="true" signature="2861:3586" placeholder="{...}" />
+            <marker date="1456935450000" expanded="true" signature="3029:3066" placeholder="..." />
+            <marker date="1456935450000" expanded="true" signature="3098:3156" placeholder="{...}" />
+            <marker date="1456935450000" expanded="true" signature="3317:3354" placeholder="..." />
+            <marker date="1456935450000" expanded="true" signature="3380:3419" placeholder="..." />
+            <marker date="1456935450000" expanded="true" signature="3445:3465" placeholder="..." />
+            <marker date="1456935450000" expanded="true" signature="3497:3555" placeholder="{...}" />
+            <marker date="1456935450000" expanded="true" signature="3595:3622" placeholder=" @param $input ..." />
+            <marker date="1456935450000" expanded="true" signature="3670:6198" placeholder="{...}" />
+            <marker date="1456935450000" expanded="true" signature="4031:4346" placeholder="{...}" />
+            <marker date="1456935450000" expanded="true" signature="4438:4860" placeholder="{...}" />
+            <marker date="1456935450000" expanded="true" signature="4921:5715" placeholder="{...}" />
+            <marker date="1456935450000" expanded="true" signature="4994:5123" placeholder="{...}" />
+            <marker date="1456935450000" expanded="true" signature="5174:5325" placeholder="{...}" />
+            <marker date="1456935450000" expanded="true" signature="5342:5673" placeholder="{...}" />
+            <marker date="1456935450000" expanded="true" signature="5408:5516" placeholder="{...}" />
+            <marker date="1456935450000" expanded="true" signature="5537:5659" placeholder="{...}" />
+            <marker date="1456935450000" expanded="true" signature="6207:6315" placeholder=" @param $house_number ..." />
+            <marker date="1456935450000" expanded="true" signature="6401:6484" placeholder="{...}" />
+            <marker date="1456935450000" expanded="true" signature="6493:6581" placeholder=" @param $record ..." />
+            <marker date="1456935450000" expanded="true" signature="6638:6933" placeholder="{...}" />
+            <marker date="1456935450000" expanded="true" signature="6680:6902" placeholder="{...}" />
+            <marker date="1456935450000" expanded="true" signature="6726:6785" placeholder="..." />
+            <marker date="1456935450000" expanded="true" signature="6981:7687" placeholder="{...}" />
+            <marker date="1456935450000" expanded="true" signature="7732:9083" placeholder="{...}" />
+            <marker date="1456935450000" expanded="true" signature="7913:8060" placeholder="{...}" />
+            <marker date="1456935450000" expanded="true" signature="8226:8647" placeholder="{...}" />
+            <marker date="1456935450000" expanded="true" signature="8305:8447" placeholder="{...}" />
+            <marker date="1456935450000" expanded="true" signature="8494:8637" placeholder="{...}" />
+            <marker date="1456935450000" expanded="true" signature="8825:9077" placeholder="{...}" />
+            <marker date="1456935450000" expanded="true" signature="8962:9036" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/packages/citynexus/CityNexus/src/models/Setting.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.25943395">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2016_03_02_163601_create_settings.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6603774">
+          <caret line="28" column="43" selection-start-line="28" selection-start-column="43" selection-end-line="28" selection-end-column="43" />
+          <folding>
+            <element signature="e#7#48#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -67,7 +67,7 @@ class TablerController extends Controller
         $table->table_name = $tabler->create($table);
         $table->table_description = $request->get('table_description');
 
-        $this->processUpload( $table, json_decode($table->raw_upload, true));
+        $this->processUpload( $table, json_decode($table->raw_upload, true)->parsed );
 
         $table->raw_upload = null;
         $table->save();
@@ -179,6 +179,8 @@ class TablerController extends Controller
 
             return redirect()->back();
         }
+
+        Artisan::call('queue:listen');
 
         Session::flash('flash_success', "Upload has been successfully queued.");
 

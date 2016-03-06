@@ -33,8 +33,7 @@ class TablerController extends Controller
 
         $table = Excel::load($request->file('file'), function($reader){$reader->toArray();});
 
-        dd($table);
-
+        dd(json_encode(end($table));
 
         $table = Table::create(['raw_upload' => json_encode(end($table))]);
 

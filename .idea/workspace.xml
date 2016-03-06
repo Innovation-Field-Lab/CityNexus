@@ -48,13 +48,13 @@
     <favorites_list name="citynexus" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="vertical" split-proportion="0.29889807">
+    <splitter split-orientation="vertical" split-proportion="0.47477362">
       <split-first>
         <leaf>
           <file leaf-file-name="GenerateScore.php" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/packages/citynexus/CityNexus/src/Jobs/GenerateScore.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="1.3902439">
+                <state vertical-scroll-proportion="1.0879766">
                   <caret line="70" column="0" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
                   <folding>
                     <marker date="1457285034000" expanded="false" signature="43:61" placeholder="..." />
@@ -70,8 +70,8 @@
           <file leaf-file-name="TablerController.php" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/packages/citynexus/CityNexus/src/Http/TablerController.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.5531915">
-                  <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+                <state vertical-scroll-proportion="0.43569553">
+                  <caret line="35" column="70" selection-start-line="35" selection-start-column="70" selection-end-line="35" selection-end-column="70" />
                   <folding />
                 </state>
               </provider>
@@ -1535,7 +1535,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/packages/citynexus/CityNexus/src/Jobs/GenerateScore.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.3902439">
+        <state vertical-scroll-proportion="1.0879766">
           <caret line="70" column="0" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
           <folding>
             <marker date="1457285034000" expanded="false" signature="43:61" placeholder="..." />
@@ -1660,8 +1660,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/packages/citynexus/CityNexus/src/Http/TablerController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5531915">
-          <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.43569553">
+          <caret line="35" column="70" selection-start-line="35" selection-start-column="70" selection-end-line="35" selection-end-column="70" />
           <folding />
         </state>
       </provider>

@@ -35,16 +35,13 @@ class TablerController extends Controller
 
         $table = Table::create(['raw_upload' => json_encode($table)]);
 
-        dd($table);
-
-
         return redirect(action('\CityNexus\CityNexus\Http\TablerController@getCreateScheme', ['table_id' => $table->id]));
     }
 
     public function getCreateScheme($id)
     {
 
-        $table = json_decode(Table::find($id)->raw_upload);
+        $table = json_decode(Table::find($id)->raw_upload)->parsed;
         $typer = new Typer();
         $builder = new TableBuilder();
         $table = end($table);

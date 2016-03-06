@@ -7,7 +7,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Chelsea CityNexus</a>
+            <a class="navbar-brand" href="/">Chelsea CityNexus</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
@@ -34,6 +34,7 @@
                         <li><a href="/citynexus/risk-score/new">Create New Score</a></li>
                     </ul>
                 </li>
+                <li><a href="/citynexus/settings">Settings</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>

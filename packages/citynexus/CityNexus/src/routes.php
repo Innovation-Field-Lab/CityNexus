@@ -11,45 +11,28 @@
 |
 */
 
+Route::group(['middleware' => 'auth', 'prefix' => config('citynexus.root_directory') . '/risk-score' ], function() {
+
+    Route::controller('/', 'CityNexus\CityNexus\Http\RiskScoreController');
+});
+
 Route::group(['middleware' => 'auth', 'prefix' => config('citynexus.root_directory') ], function() {
 
-
-    Route::get('/property', 'CityNexus\CityNexus\Http\CitynexusController@getProperty');
-    Route::get('/properties', 'CityNexus\CityNexus\Http\CitynexusController@getProperties');
-    Route::get('/properties-data', 'CityNexus\CityNexus\Http\CitynexusController@getPropertiesData');
-
-
-// Score Builder
-
-    Route::get('/risk-score/scores', 'CityNexus\CityNexus\Http\CitynexusController@getScores');
-
-    Route::get('/risk-score/new', 'CityNexus\CityNexus\Http\CitynexusController@getRiskscoreCreate');
-
-    Route::post('/risk-score/update-score', 'CityNexus\CityNexus\Http\CitynexusController@postUpdateScore');
-
-    Route::get('/risk-score/data-fields', 'CityNexus\CityNexus\Http\CitynexusController@getRiskscoreDatafields');
-
-    Route::get('/risk-score/data-field', 'CityNexus\CityNexus\Http\CitynexusController@getRiskscoreDatafield');
-
-    Route::get('/risk-score/create-element', 'CityNexus\CityNexus\Http\CitynexusController@getCreateElement');
-
-    Route::post('/risk-score/save-score', 'CityNexus\CityNexus\Http\CitynexusController@postSaveScore');
-
-    Route::get('/risk-score/edit-score', 'CityNexus\CityNexus\Http\CitynexusController@getEditScore');
-
-    Route::get('/risk-score/duplicate-score', 'CityNexus\CityNexus\Http\CitynexusController@getDuplicateScore');
-
-    Route::get('/risk-score/generate-score', 'CityNexus\CityNexus\Http\CitynexusController@getGenerateScore');
-
-    Route::get('/risk-score/heat-map', 'CityNexus\CityNexus\Http\CitynexusController@getRiskscoreHeatmap');
+    Route::controller('/', 'CityNexus\CityNexus\Http\CitynexusController');
 
 });
 
 // Tabler Features
 
-Route::group(['middleware' => 'auth', 'prefix' => config('tabler.root_directory') ], function() {
+Route::group(['middleware' => 'auth', 'prefix' => config('citynexus.tabler_root') ], function() {
 
 Route::controller('/', 'CityNexus\CityNexus\Http\TablerController');
 
 });
 
+Route::group(['middleware' => 'auth'], function() {
+
+    Route::get('/', 'CityNexus\CityNexus\Http\CityNexusController@getIndex');
+
+
+});

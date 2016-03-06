@@ -13,7 +13,8 @@ class CreateSettings extends Migration
     public function up()
     {
         Schema::create('citynexus_settings', function (Blueprint $table) {
-            $table->string('id')->unique();
+            $table->increments('id');
+            $table->string('key');
             $table->string('value')->nullable();
             $table->integer('user_id')->nullable();
             $table->timestamps();

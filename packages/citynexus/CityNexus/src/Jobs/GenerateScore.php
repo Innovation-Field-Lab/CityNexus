@@ -45,7 +45,7 @@ class GenerateScore extends Job implements SelfHandling, ShouldQueue
         if($this->properties == false)
         {
             $score = Score::find($this->table);
-            $score->status = 'complete';
+            $score->status = 'complete';{}
             $score->save();
 
             return null;
@@ -55,6 +55,7 @@ class GenerateScore extends Job implements SelfHandling, ShouldQueue
             foreach ($this->properties as $property) {
                 //Generate score
                 $scoreBuilder = new ScoreBuilder();
+
                 $p_score = $scoreBuilder->genScore($property, $this->elements);
 
                 //Create Score record
@@ -64,9 +65,12 @@ class GenerateScore extends Job implements SelfHandling, ShouldQueue
                     'updated_at' => Carbon::now(),
                     'created_at' => Carbon::now()
                 ];
-            }
 
+
+            }
             DB::table($this->table)->insert($records);
+
+
         }
 
     }

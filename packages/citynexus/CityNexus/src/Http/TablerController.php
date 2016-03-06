@@ -109,7 +109,7 @@ class TablerController extends Controller
     {
         $table = Table::find($request->get('table_id'));
         $scheme = json_decode($table->scheme);
-        return view('tabler::edit', compact('table', 'scheme'));
+        return view('citynexus::tabler.edit', compact('table', 'scheme'));
     }
 
     public function postUpdateTable(Request $request)

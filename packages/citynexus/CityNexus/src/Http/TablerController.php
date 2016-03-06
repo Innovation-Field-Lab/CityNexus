@@ -2,6 +2,7 @@
 
 namespace CityNexus\CityNexus\Http;
 
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Session;
 use Mockery\CountValidator\Exception;
 use CityNexus\CityNexus\Typer;
@@ -67,7 +68,7 @@ class TablerController extends Controller
         $table->table_name = $tabler->create($table);
         $table->table_description = $request->get('table_description');
 
-        $this->processUpload( $table, json_decode($table->raw_upload, true)->parsed );
+        $this->processUpload( $table, json_decode($table->raw_upload, true)['parsed'] );
 
         $table->raw_upload = null;
         $table->save();

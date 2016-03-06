@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="3263814719">
+  <component name="DataSourceManagerImpl" format="xml" hash="2227851161">
     <data-source source="LOCAL" name="CityNexus Local" uuid="666f2b23-1614-439d-b911-e87c74779b4a">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:54320/citynexus</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="Heroku Production CN" uuid="f5eb7fc7-96c8-4b05-89e0-d1889591970e">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://ec2-107-20-224-236.compute-1.amazonaws.com:5432/ddlpugb4it94s8</jdbc-url>
     </data-source>
   </component>
 </project>

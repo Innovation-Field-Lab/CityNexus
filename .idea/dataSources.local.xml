@@ -4,5 +4,13 @@
     <data-source name="CityNexus Local" uuid="666f2b23-1614-439d-b911-e87c74779b4a">
       <user-name>homestead</user-name>
     </data-source>
+    <data-source name="Heroku Production CN" uuid="f5eb7fc7-96c8-4b05-89e0-d1889591970e">
+      <secret-storage>master_key</secret-storage>
+      <user-name>rdorcwhibtidhb</user-name>
+      <ssl-config>
+        <client-key>$PROJECT_DIR$/citynexus.key</client-key>
+        <enabled>true</enabled>
+      </ssl-config>
+    </data-source>
   </component>
 </project>

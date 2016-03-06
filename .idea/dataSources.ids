@@ -1682,4 +1682,7 @@ reserved_at</columns>
       </key>
     </database-model>
   </data-source>
+  <data-source name="Heroku Production CN" uuid="f5eb7fc7-96c8-4b05-89e0-d1889591970e">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
 </component>

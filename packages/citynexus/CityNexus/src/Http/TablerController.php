@@ -33,6 +33,9 @@ class TablerController extends Controller
 
         $table = Excel::load($request->file('file'), function($reader){$reader->toArray();});
 
+        dd($table);
+
+
         $table = Table::create(['raw_upload' => json_encode(end($table))]);
 
         return redirect(action('\CityNexus\CityNexus\Http\TablerController@getCreateScheme', ['table_id' => $table->id]));

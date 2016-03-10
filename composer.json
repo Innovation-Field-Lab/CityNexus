@@ -8,7 +8,8 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
         "barryvdh/laravel-debugbar": "^2.0",
-        "yajra/laravel-datatables-oracle":"~6.0"
+        "yajra/laravel-datatables-oracle":"~6.0",
+        "iron-io/iron_mq": "4.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -37,7 +38,8 @@
             "php artisan optimize"
         ],
         "pre-update-cmd": [
-            "php artisan clear-compiled"
+            "php artisan clear-compiled",
+            "php artisan queue:work"
         ],
         "post-update-cmd": [
             "php artisan optimize"

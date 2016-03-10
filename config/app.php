@@ -147,6 +147,7 @@ return [
         CityNexus\CityNexus\PackageServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
+
     ],
 
     /*

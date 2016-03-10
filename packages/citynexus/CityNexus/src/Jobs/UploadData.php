@@ -15,7 +15,6 @@ class UploadData extends Job implements SelfHandling, ShouldQueue
 
     private $data;
     private $options;
-    private $table_name;
 
     /**
      * Create a new job instance.

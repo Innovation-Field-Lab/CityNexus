@@ -59,16 +59,17 @@ return [
 
         'iron' => [
             'driver'  => 'iron',
-            'host'    => 'mq-aws-us-east-1.iron.io',
-            'token'   => 'your-token',
-            'project' => 'your-project-id',
-            'queue'   => 'your-queue-name',
+            'host'    => 'mq-aws-eu-west-1-1.iron.io',
+            'token'   => 'WtyjV2jx7YARnaCQ7fxa',
+            'project' => '56dc83e9ac66fa000600010b',
+            'queue'   => 'citynexus-cn',
             'encrypt' => true,
         ],
 
         'redis' => [
             'driver' => 'redis',
-            'connection' => 'default',
+            'connection' => 'pub-redis-12126.us-east-1-2.1.ec2.garantiadata.com:12126',
+            'password' => 'iT43cxg9qjoTXEd0',
             'queue'  => 'default',
             'expire' => 60,
         ],

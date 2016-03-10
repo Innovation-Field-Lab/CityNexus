@@ -67,12 +67,12 @@ class TablerController extends Controller
         $table->table_title = $request->get('table_name');
         $table->table_name = $tabler->create($table);
         $table->table_description = $request->get('table_description');
+        $table->save();
 
         $this->processUpload( $table, json_decode($table->raw_upload, true)['parsed'] );
 
         $table->raw_upload = null;
         $table->save();
-
 
         return redirect('/tabler/');
     }
@@ -165,7 +165,7 @@ class TablerController extends Controller
 
         $pushValues = $tabler->findValues( $table->scheme, 'push' );
 
-        $data = array_chunk($data, 500);
+        $data = array_chunk($data, 100);
 
         try
         {

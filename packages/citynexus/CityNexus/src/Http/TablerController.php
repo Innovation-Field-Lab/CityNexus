@@ -181,7 +181,7 @@ class TablerController extends Controller
             return redirect()->back();
         }
 
-        Artisan::call('queue:listen');
+//        Artisan::call('queue:listen');
 
         Session::flash('flash_success', "Upload has been successfully queued.");
 

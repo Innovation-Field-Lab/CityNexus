@@ -33,7 +33,7 @@ class RiskScoreController extends Controller
             ->with('scores', Score::all());
     }
 
-    public function getDatafields(Request $request)
+    public function getDataFields(Request $request)
     {
         if($request->get('dataset_id') == '_scores')
         {
@@ -51,7 +51,7 @@ class RiskScoreController extends Controller
 
     }
 
-    public function getDatafield(Request $request)
+    public function getDataField(Request $request)
     {
         $dataset = Table::find($request->get('table_id'));
         $scheme = json_decode($dataset->scheme, false);

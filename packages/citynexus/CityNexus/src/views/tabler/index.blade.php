@@ -12,6 +12,7 @@
                 <table class="table" id="table">
                     <thead>
                     <td>Name</td>
+                    <td>Record Count</td>
                     <td>Created</td>
                     <td>Last Upload</td>
                     <td></td>
@@ -21,6 +22,9 @@
                         <tr>
                             <td>
                                 {{$table->table_title}}
+                            </td>
+                            <td>
+                                {{\Illuminate\Support\Facades\DB::table($table->table_name)->count()}}
                             </td>
                             <td>
                                 {{$table->created_at->diffForHumans()}}

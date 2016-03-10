@@ -103,6 +103,8 @@ class TablerController extends Controller
 
         Session::flash('flash_success', 'Data successfully uploaded!');
 
+        $table->touch();
+
         return redirect('/tabler/');
     }
 

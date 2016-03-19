@@ -2,6 +2,7 @@
 
 namespace CityNexus\CityNexus\Http;
 
+use CityNexus\CityNexus\Property;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Session;
 use Mockery\CountValidator\Exception;
@@ -190,5 +191,11 @@ class TablerController extends Controller
         // TODO: Send alert to uploading user that process is complete
 
         return true;
+    }
+
+    public function getMergeRecords($id)
+    {
+        $property = Property::find($id);
+        return view('citynexus::property.merge', compact('property'));
     }
 }

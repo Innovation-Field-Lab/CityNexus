@@ -56,15 +56,6 @@ class CitynexusController extends Controller
             ->with('scores', Score::all());
     }
 
-    public function getSettings()
-    {
-        $app_s = Setting::all();
-        $user_s = Setting::where('user_id', Auth::id());
-
-        return view('citynexus::settings.edit', compact('app_s', 'user_s'));
-
-    }
-
 
     private function runScore($score, $elements)
     {

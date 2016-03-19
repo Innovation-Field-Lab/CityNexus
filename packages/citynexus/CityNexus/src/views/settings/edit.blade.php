@@ -21,6 +21,11 @@
                                     Application Settings
                                 </a>
                             </li>
+                            <li role="presentation" class="">
+                                <a href="#users" role="tab" id="users-tab" data-toggle="tab" aria-controls="users" aria-expanded="false">
+                                    User Accounts
+                                </a>
+                            </li>
                         </ul>
                         <div id="myTabContent" class="tab-content">
                             <div role="tabpanel" class="tab-pane fade active in" id="user" aria-labelledby="home-tab">
@@ -47,6 +52,13 @@
                                                        value="@if(old('gmaps_key')){{old('gmaps_key')}}@elseif($app_s->where('key', 'gmaps_key')->count() > 0 ) {{$app_s->where(['key' => 'gmaps_key'])->first()}}@endif"/>
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="users" aria-labelledby="users-tab">
+                                <div class="panel">
+                                    <div class="panel-body">
+                                        @include('citynexus::settings._users')
                                     </div>
                                 </div>
                             </div>

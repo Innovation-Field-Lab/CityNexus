@@ -59,12 +59,22 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
+        if(User::count() == 0) {
+            return User::create([
+                'first_name' => $data['first_name'],
+                'last_name' => $data['last_name'],
+                'email' => $data['email'],
+                'password' => bcrypt($data['password']),
+                'auth' => true,
+                'permissions' => json_encode([
+                    'upload' => true,
+                    'dataset' => true,
+                    'score' => true
+                ])
+            ]);
+        }
 
-        return User::create([
-            'first_name' => $data['first_name'],
-            'last_name' => $data['last_name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+        else
+            return response('error', 404);
     }
 }

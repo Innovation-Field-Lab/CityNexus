@@ -10,1906 +10,589 @@
       <schema id="2" parent="1" name="public">
         <object-id>2200</object-id>
         <comment>standard public schema</comment>
-        <introspection-state-number>195420</introspection-state-number>
-        <introspection-timestamp>2016-03-06.14:12:28.494</introspection-timestamp>
+        <introspection-state-number>773</introspection-state-number>
+        <introspection-timestamp>2016-03-19.14:15:05.889</introspection-timestamp>
       </schema>
       <sequence id="3" parent="2" name="api_keys_id_seq">
-        <object-id>35624</object-id>
-        <state-number>175137</state-number>
+        <object-id>16495</object-id>
+        <state-number>761</state-number>
       </sequence>
       <sequence id="4" parent="2" name="citynexus_properties_id_seq">
-        <object-id>35553</object-id>
-        <state-number>175122</state-number>
+        <object-id>16424</object-id>
+        <state-number>746</state-number>
       </sequence>
       <sequence id="5" parent="2" name="citynexus_reports_id_seq">
-        <object-id>35613</object-id>
-        <state-number>175135</state-number>
+        <object-id>16484</object-id>
+        <state-number>759</state-number>
       </sequence>
-      <sequence id="6" parent="2" name="citynexus_scores_1_id_seq">
-        <object-id>35727</object-id>
-        <state-number>191616</state-number>
+      <sequence id="6" parent="2" name="citynexus_scores_id_seq">
+        <object-id>16439</object-id>
+        <state-number>748</state-number>
       </sequence>
-      <sequence id="7" parent="2" name="citynexus_scores_2_id_seq">
-        <object-id>49292</object-id>
-        <state-number>194865</state-number>
+      <sequence id="7" parent="2" name="citynexus_settings_id_seq">
+        <object-id>16506</object-id>
+        <state-number>763</state-number>
       </sequence>
-      <sequence id="8" parent="2" name="citynexus_scores_3_id_seq">
-        <object-id>41025</object-id>
-        <state-number>193074</state-number>
+      <sequence id="8" parent="2" name="groups_id_seq">
+        <object-id>16473</object-id>
+        <state-number>755</state-number>
       </sequence>
-      <sequence id="9" parent="2" name="citynexus_scores_4_id_seq">
-        <object-id>49275</object-id>
-        <state-number>194845</state-number>
+      <sequence id="9" parent="2" name="jobs_id_seq">
+        <object-id>16461</object-id>
+        <state-number>752</state-number>
       </sequence>
-      <sequence id="10" parent="2" name="citynexus_scores_5_id_seq">
-        <object-id>49463</object-id>
-        <state-number>195364</state-number>
+      <sequence id="10" parent="2" name="tabler_tables_id_seq">
+        <object-id>16450</object-id>
+        <state-number>750</state-number>
       </sequence>
-      <sequence id="11" parent="2" name="citynexus_scores_id_seq">
-        <object-id>35568</object-id>
-        <state-number>175124</state-number>
+      <sequence id="11" parent="2" name="users_id_seq">
+        <object-id>16403</object-id>
+        <state-number>739</state-number>
       </sequence>
-      <sequence id="12" parent="2" name="citynexus_settings_id_seq">
-        <object-id>49167</object-id>
-        <state-number>194798</state-number>
-      </sequence>
-      <sequence id="13" parent="2" name="groups_id_seq">
-        <object-id>35602</object-id>
-        <state-number>175131</state-number>
-      </sequence>
-      <sequence id="14" parent="2" name="jobs_id_seq">
-        <object-id>35590</object-id>
-        <state-number>175128</state-number>
-      </sequence>
-      <sequence id="15" parent="2" name="tabler__id_seq">
-        <object-id>41072</object-id>
-        <state-number>193159</state-number>
-      </sequence>
-      <sequence id="16" parent="2" name="tabler_assessors_data_id_seq">
-        <object-id>35637</object-id>
-        <state-number>175147</state-number>
-      </sequence>
-      <sequence id="17" parent="2" name="tabler_bag_o_dick_id_seq">
-        <object-id>49487</object-id>
-        <state-number>195420</state-number>
-      </sequence>
-      <sequence id="18" parent="2" name="tabler_fire_id_seq">
-        <object-id>35693</object-id>
-        <state-number>191440</state-number>
-      </sequence>
-      <sequence id="19" parent="2" name="tabler_isd_id_seq">
-        <object-id>41013</object-id>
-        <state-number>193032</state-number>
-      </sequence>
-      <sequence id="20" parent="2" name="tabler_planning_dept_id_seq">
-        <object-id>41083</object-id>
-        <state-number>193184</state-number>
-      </sequence>
-      <sequence id="21" parent="2" name="tabler_planningish_dept_id_seq">
-        <object-id>41094</object-id>
-        <state-number>193185</state-number>
-      </sequence>
-      <sequence id="22" parent="2" name="tabler_police_department_id_seq">
-        <object-id>35681</object-id>
-        <state-number>191436</state-number>
-      </sequence>
-      <sequence id="23" parent="2" name="tabler_tables_id_seq">
-        <object-id>35579</object-id>
-        <state-number>175126</state-number>
-      </sequence>
-      <sequence id="24" parent="2" name="tabler_treasury_id_seq">
-        <object-id>40995</object-id>
-        <state-number>192188</state-number>
-      </sequence>
-      <sequence id="25" parent="2" name="tabler_vacancies_id_seq">
-        <object-id>35669</object-id>
-        <state-number>191183</state-number>
-      </sequence>
-      <sequence id="26" parent="2" name="users_id_seq">
-        <object-id>35532</object-id>
-        <state-number>175115</state-number>
-      </sequence>
-      <table id="27" parent="2" name="api_keys">
-        <object-id>35626</object-id>
-        <state-number>175137</state-number>
+      <table id="12" parent="2" name="api_keys">
+        <object-id>16497</object-id>
+        <state-number>761</state-number>
       </table>
-      <table id="28" parent="2" name="citynexus_properties">
-        <object-id>35555</object-id>
-        <state-number>175122</state-number>
+      <table id="13" parent="2" name="citynexus_properties">
+        <object-id>16426</object-id>
+        <state-number>746</state-number>
       </table>
-      <table id="29" parent="2" name="citynexus_reports">
-        <object-id>35615</object-id>
-        <state-number>175135</state-number>
+      <table id="14" parent="2" name="citynexus_reports">
+        <object-id>16486</object-id>
+        <state-number>759</state-number>
       </table>
-      <table id="30" parent="2" name="citynexus_scores">
-        <object-id>35570</object-id>
-        <state-number>175124</state-number>
+      <table id="15" parent="2" name="citynexus_scores">
+        <object-id>16441</object-id>
+        <state-number>748</state-number>
       </table>
-      <table id="31" parent="2" name="citynexus_scores_1">
-        <object-id>35729</object-id>
-        <state-number>191616</state-number>
+      <table id="16" parent="2" name="citynexus_settings">
+        <object-id>16508</object-id>
+        <state-number>763</state-number>
       </table>
-      <table id="32" parent="2" name="citynexus_scores_2">
-        <object-id>49294</object-id>
-        <state-number>194865</state-number>
+      <table id="17" parent="2" name="group_user">
+        <object-id>16481</object-id>
+        <state-number>757</state-number>
       </table>
-      <table id="33" parent="2" name="citynexus_scores_3">
-        <object-id>41027</object-id>
-        <state-number>193074</state-number>
+      <table id="18" parent="2" name="groups">
+        <object-id>16475</object-id>
+        <state-number>755</state-number>
       </table>
-      <table id="34" parent="2" name="citynexus_scores_4">
-        <object-id>49277</object-id>
-        <state-number>194845</state-number>
+      <table id="19" parent="2" name="jobs">
+        <object-id>16463</object-id>
+        <state-number>752</state-number>
       </table>
-      <table id="35" parent="2" name="citynexus_scores_5">
-        <object-id>49465</object-id>
-        <state-number>195364</state-number>
+      <table id="20" parent="2" name="migrations">
+        <object-id>16400</object-id>
+        <state-number>738</state-number>
       </table>
-      <table id="36" parent="2" name="citynexus_settings">
-        <object-id>49169</object-id>
-        <state-number>194798</state-number>
+      <table id="21" parent="2" name="password_resets">
+        <object-id>16416</object-id>
+        <state-number>742</state-number>
       </table>
-      <table id="37" parent="2" name="group_user">
-        <object-id>35610</object-id>
-        <state-number>175133</state-number>
+      <table id="22" parent="2" name="tabler_tables">
+        <object-id>16452</object-id>
+        <state-number>750</state-number>
       </table>
-      <table id="38" parent="2" name="groups">
-        <object-id>35604</object-id>
-        <state-number>175131</state-number>
+      <table id="23" parent="2" name="users">
+        <object-id>16405</object-id>
+        <state-number>773</state-number>
       </table>
-      <table id="39" parent="2" name="jobs">
-        <object-id>35592</object-id>
-        <state-number>175128</state-number>
-      </table>
-      <table id="40" parent="2" name="migrations">
-        <object-id>35529</object-id>
-        <state-number>175114</state-number>
-      </table>
-      <table id="41" parent="2" name="password_resets">
-        <object-id>35545</object-id>
-        <state-number>175118</state-number>
-      </table>
-      <table id="42" parent="2" name="tabler_">
-        <object-id>41074</object-id>
-        <state-number>193159</state-number>
-      </table>
-      <table id="43" parent="2" name="tabler_assessors_data">
-        <object-id>35639</object-id>
-        <state-number>175147</state-number>
-      </table>
-      <table id="44" parent="2" name="tabler_bag_o_dick">
-        <object-id>49489</object-id>
-        <state-number>195420</state-number>
-      </table>
-      <table id="45" parent="2" name="tabler_fire">
-        <object-id>35695</object-id>
-        <state-number>191440</state-number>
-      </table>
-      <table id="46" parent="2" name="tabler_isd">
-        <object-id>41015</object-id>
-        <state-number>193032</state-number>
-      </table>
-      <table id="47" parent="2" name="tabler_planning_dept">
-        <object-id>41085</object-id>
-        <state-number>193184</state-number>
-      </table>
-      <table id="48" parent="2" name="tabler_planningish_dept">
-        <object-id>41096</object-id>
-        <state-number>193185</state-number>
-      </table>
-      <table id="49" parent="2" name="tabler_police_department">
-        <object-id>35683</object-id>
-        <state-number>191446</state-number>
-      </table>
-      <table id="50" parent="2" name="tabler_tables">
-        <object-id>35581</object-id>
-        <state-number>175126</state-number>
-      </table>
-      <table id="51" parent="2" name="tabler_treasury">
-        <object-id>40997</object-id>
-        <state-number>192188</state-number>
-      </table>
-      <table id="52" parent="2" name="tabler_vacancies">
-        <object-id>35671</object-id>
-        <state-number>191183</state-number>
-      </table>
-      <table id="53" parent="2" name="users">
-        <object-id>35534</object-id>
-        <state-number>175115</state-number>
-      </table>
-      <column id="54" parent="27" name="id">
-        <state-number>175137</state-number>
+      <column id="24" parent="12" name="id">
+        <state-number>761</state-number>
         <mandatory>1</mandatory>
         <data-type>integer</data-type>
         <default-expression>nextval(&apos;api_keys_id_seq&apos;::regclass)</default-expression>
       </column>
-      <column id="55" parent="27" name="password">
-        <state-number>175137</state-number>
+      <column id="25" parent="12" name="password">
+        <state-number>761</state-number>
         <mandatory>1</mandatory>
         <data-type>integer</data-type>
       </column>
-      <column id="56" parent="27" name="permissions">
-        <state-number>175137</state-number>
+      <column id="26" parent="12" name="permissions">
+        <state-number>761</state-number>
         <mandatory>1</mandatory>
         <data-type>json</data-type>
       </column>
-      <column id="57" parent="27" name="created_at">
-        <state-number>175137</state-number>
+      <column id="27" parent="12" name="created_at">
+        <state-number>761</state-number>
         <mandatory>1</mandatory>
         <data-type>timestamp(0)</data-type>
       </column>
-      <column id="58" parent="27" name="updated_at">
-        <state-number>175137</state-number>
+      <column id="28" parent="12" name="updated_at">
+        <state-number>761</state-number>
         <mandatory>1</mandatory>
         <data-type>timestamp(0)</data-type>
       </column>
-      <index id="59" parent="27" name="api_keys_pkey">
-        <object-id>35633</object-id>
+      <index id="29" parent="12" name="api_keys_pkey">
+        <object-id>16504</object-id>
         <columns>id</columns>
         <unique>1</unique>
       </index>
-      <key id="60" parent="27" name="api_keys_pkey">
+      <key id="30" parent="12" name="api_keys_pkey">
         <columns>id</columns>
         <underlying-index>api_keys_pkey</underlying-index>
         <primary>1</primary>
       </key>
-      <column id="61" parent="28" name="id">
-        <state-number>175122</state-number>
+      <column id="31" parent="13" name="id">
+        <state-number>746</state-number>
         <mandatory>1</mandatory>
         <data-type>integer</data-type>
         <default-expression>nextval(&apos;citynexus_properties_id_seq&apos;::regclass)</default-expression>
       </column>
-      <column id="62" parent="28" name="full_address">
-        <state-number>175122</state-number>
+      <column id="32" parent="13" name="full_address">
+        <state-number>746</state-number>
         <data-type>varchar(255)</data-type>
       </column>
-      <column id="63" parent="28" name="house_number">
-        <state-number>175122</state-number>
+      <column id="33" parent="13" name="house_number">
+        <state-number>746</state-number>
         <data-type>varchar(255)</data-type>
       </column>
-      <column id="64" parent="28" name="street_name">
-        <state-number>175122</state-number>
+      <column id="34" parent="13" name="street_name">
+        <state-number>746</state-number>
         <data-type>varchar(255)</data-type>
       </column>
-      <column id="65" parent="28" name="street_type">
-        <state-number>175122</state-number>
+      <column id="35" parent="13" name="street_type">
+        <state-number>746</state-number>
         <data-type>varchar(255)</data-type>
       </column>
-      <column id="66" parent="28" name="unit">
-        <state-number>175122</state-number>
+      <column id="36" parent="13" name="unit">
+        <state-number>746</state-number>
         <data-type>varchar(255)</data-type>
       </column>
-      <column id="67" parent="28" name="city">
-        <state-number>175122</state-number>
+      <column id="37" parent="13" name="city">
+        <state-number>746</state-number>
         <mandatory>1</mandatory>
         <data-type>varchar(255)</data-type>
         <default-expression>&apos;chelsea&apos;::character varying</default-expression>
       </column>
-      <column id="68" parent="28" name="state">
-        <state-number>175122</state-number>
+      <column id="38" parent="13" name="state">
+        <state-number>746</state-number>
         <mandatory>1</mandatory>
         <data-type>varchar(255)</data-type>
         <default-expression>&apos;ma&apos;::character varying</default-expression>
       </column>
-      <column id="69" parent="28" name="zip">
-        <state-number>175122</state-number>
+      <column id="39" parent="13" name="zip">
+        <state-number>746</state-number>
         <mandatory>1</mandatory>
         <data-type>varchar(255)</data-type>
         <default-expression>&apos;02150&apos;::character varying</default-expression>
       </column>
-      <column id="70" parent="28" name="lat">
-        <state-number>175122</state-number>
+      <column id="40" parent="13" name="lat">
+        <state-number>746</state-number>
         <data-type>varchar(255)</data-type>
       </column>
-      <column id="71" parent="28" name="long">
-        <state-number>175122</state-number>
+      <column id="41" parent="13" name="long">
+        <state-number>746</state-number>
         <data-type>varchar(255)</data-type>
       </column>
-      <column id="72" parent="28" name="map">
-        <state-number>175122</state-number>
+      <column id="42" parent="13" name="map">
+        <state-number>746</state-number>
         <data-type>integer</data-type>
       </column>
-      <column id="73" parent="28" name="lot">
-        <state-number>175122</state-number>
+      <column id="43" parent="13" name="lot">
+        <state-number>746</state-number>
         <data-type>varchar(255)</data-type>
       </column>
-      <column id="74" parent="28" name="type">
-        <state-number>175122</state-number>
+      <column id="44" parent="13" name="type">
+        <state-number>746</state-number>
         <data-type>varchar(255)</data-type>
       </column>
-      <column id="75" parent="28" name="tiger_line_id">
-        <state-number>175122</state-number>
+      <column id="45" parent="13" name="tiger_line_id">
+        <state-number>746</state-number>
         <data-type>varchar(255)</data-type>
       </column>
-      <column id="76" parent="28" name="side">
-        <state-number>175122</state-number>
+      <column id="46" parent="13" name="side">
+        <state-number>746</state-number>
         <data-type>varchar(255)</data-type>
       </column>
-      <column id="77" parent="28" name="alias_of">
-        <state-number>175122</state-number>
+      <column id="47" parent="13" name="alias_of">
+        <state-number>746</state-number>
         <data-type>integer</data-type>
       </column>
-      <column id="78" parent="28" name="review">
-        <state-number>175122</state-number>
+      <column id="48" parent="13" name="review">
+        <state-number>746</state-number>
         <mandatory>1</mandatory>
         <data-type>boolean</data-type>
         <default-expression>false</default-expression>
       </column>
-      <column id="79" parent="28" name="created_at">
-        <state-number>175122</state-number>
+      <column id="49" parent="13" name="created_at">
+        <state-number>746</state-number>
         <mandatory>1</mandatory>
         <data-type>timestamp(0)</data-type>
       </column>
-      <column id="80" parent="28" name="updated_at">
-        <state-number>175122</state-number>
+      <column id="50" parent="13" name="updated_at">
+        <state-number>746</state-number>
         <mandatory>1</mandatory>
         <data-type>timestamp(0)</data-type>
       </column>
-      <index id="81" parent="28" name="citynexus_properties_pkey">
-        <object-id>35566</object-id>
+      <index id="51" parent="13" name="citynexus_properties_pkey">
+        <object-id>16437</object-id>
         <columns>id</columns>
         <unique>1</unique>
       </index>
-      <key id="82" parent="28" name="citynexus_properties_pkey">
+      <key id="52" parent="13" name="citynexus_properties_pkey">
         <columns>id</columns>
         <underlying-index>citynexus_properties_pkey</underlying-index>
         <primary>1</primary>
       </key>
-      <column id="83" parent="29" name="id">
-        <state-number>175135</state-number>
+      <column id="53" parent="14" name="id">
+        <state-number>759</state-number>
         <mandatory>1</mandatory>
         <data-type>integer</data-type>
         <default-expression>nextval(&apos;citynexus_reports_id_seq&apos;::regclass)</default-expression>
       </column>
-      <column id="84" parent="29" name="name">
-        <state-number>175135</state-number>
+      <column id="54" parent="14" name="name">
+        <state-number>759</state-number>
         <mandatory>1</mandatory>
         <data-type>varchar(255)</data-type>
       </column>
-      <column id="85" parent="29" name="setting">
-        <state-number>175135</state-number>
+      <column id="55" parent="14" name="setting">
+        <state-number>759</state-number>
         <mandatory>1</mandatory>
         <data-type>json</data-type>
       </column>
-      <column id="86" parent="29" name="access">
-        <state-number>175135</state-number>
+      <column id="56" parent="14" name="access">
+        <state-number>759</state-number>
         <mandatory>1</mandatory>
         <data-type>json</data-type>
       </column>
-      <column id="87" parent="29" name="created_at">
-        <state-number>175135</state-number>
+      <column id="57" parent="14" name="created_at">
+        <state-number>759</state-number>
         <mandatory>1</mandatory>
         <data-type>timestamp(0)</data-type>
       </column>
-      <column id="88" parent="29" name="updated_at">
-        <state-number>175135</state-number>
+      <column id="58" parent="14" name="updated_at">
+        <state-number>759</state-number>
         <mandatory>1</mandatory>
         <data-type>timestamp(0)</data-type>
       </column>
-      <index id="89" parent="29" name="citynexus_reports_pkey">
-        <object-id>35622</object-id>
+      <index id="59" parent="14" name="citynexus_reports_pkey">
+        <object-id>16493</object-id>
         <columns>id</columns>
         <unique>1</unique>
       </index>
-      <key id="90" parent="29" name="citynexus_reports_pkey">
+      <key id="60" parent="14" name="citynexus_reports_pkey">
         <columns>id</columns>
         <underlying-index>citynexus_reports_pkey</underlying-index>
         <primary>1</primary>
       </key>
-      <column id="91" parent="30" name="id">
-        <state-number>175124</state-number>
+      <column id="61" parent="15" name="id">
+        <state-number>748</state-number>
         <mandatory>1</mandatory>
         <data-type>integer</data-type>
         <default-expression>nextval(&apos;citynexus_scores_id_seq&apos;::regclass)</default-expression>
       </column>
-      <column id="92" parent="30" name="elements">
-        <state-number>175124</state-number>
+      <column id="62" parent="15" name="elements">
+        <state-number>748</state-number>
         <data-type>json</data-type>
       </column>
-      <column id="93" parent="30" name="name">
-        <state-number>175124</state-number>
+      <column id="63" parent="15" name="name">
+        <state-number>748</state-number>
         <data-type>varchar(255)</data-type>
       </column>
-      <column id="94" parent="30" name="scope">
-        <state-number>175124</state-number>
+      <column id="64" parent="15" name="scope">
+        <state-number>748</state-number>
         <data-type>varchar(255)</data-type>
       </column>
-      <column id="95" parent="30" name="status">
-        <state-number>175124</state-number>
+      <column id="65" parent="15" name="status">
+        <state-number>748</state-number>
         <data-type>varchar(255)</data-type>
       </column>
-      <column id="96" parent="30" name="created_at">
-        <state-number>175124</state-number>
+      <column id="66" parent="15" name="created_at">
+        <state-number>748</state-number>
         <mandatory>1</mandatory>
         <data-type>timestamp(0)</data-type>
       </column>
-      <column id="97" parent="30" name="updated_at">
-        <state-number>175124</state-number>
+      <column id="67" parent="15" name="updated_at">
+        <state-number>748</state-number>
         <mandatory>1</mandatory>
         <data-type>timestamp(0)</data-type>
       </column>
-      <index id="98" parent="30" name="citynexus_scores_pkey">
-        <object-id>35577</object-id>
+      <index id="68" parent="15" name="citynexus_scores_pkey">
+        <object-id>16448</object-id>
         <columns>id</columns>
         <unique>1</unique>
       </index>
-      <key id="99" parent="30" name="citynexus_scores_pkey">
+      <key id="69" parent="15" name="citynexus_scores_pkey">
         <columns>id</columns>
         <underlying-index>citynexus_scores_pkey</underlying-index>
         <primary>1</primary>
       </key>
-      <column id="100" parent="31" name="id">
-        <state-number>191616</state-number>
-        <mandatory>1</mandatory>
-        <data-type>integer</data-type>
-        <default-expression>nextval(&apos;citynexus_scores_1_id_seq&apos;::regclass)</default-expression>
-      </column>
-      <column id="101" parent="31" name="property_id">
-        <state-number>191616</state-number>
-        <mandatory>1</mandatory>
-        <data-type>integer</data-type>
-      </column>
-      <column id="102" parent="31" name="score">
-        <state-number>191616</state-number>
-        <data-type>double precision</data-type>
-      </column>
-      <column id="103" parent="31" name="created_at">
-        <state-number>191616</state-number>
-        <mandatory>1</mandatory>
-        <data-type>timestamp(0)</data-type>
-      </column>
-      <column id="104" parent="31" name="updated_at">
-        <state-number>191616</state-number>
-        <mandatory>1</mandatory>
-        <data-type>timestamp(0)</data-type>
-      </column>
-      <index id="105" parent="31" name="citynexus_scores_1_pkey">
-        <object-id>35733</object-id>
-        <columns>id</columns>
-        <unique>1</unique>
-      </index>
-      <key id="106" parent="31" name="citynexus_scores_1_pkey">
-        <columns>id</columns>
-        <underlying-index>citynexus_scores_1_pkey</underlying-index>
-        <primary>1</primary>
-      </key>
-      <column id="107" parent="32" name="id">
-        <state-number>194865</state-number>
-        <mandatory>1</mandatory>
-        <data-type>integer</data-type>
-        <default-expression>nextval(&apos;citynexus_scores_2_id_seq&apos;::regclass)</default-expression>
-      </column>
-      <column id="108" parent="32" name="property_id">
-        <state-number>194865</state-number>
-        <mandatory>1</mandatory>
-        <data-type>integer</data-type>
-      </column>
-      <column id="109" parent="32" name="score">
-        <state-number>194865</state-number>
-        <data-type>double precision</data-type>
-      </column>
-      <column id="110" parent="32" name="created_at">
-        <state-number>194865</state-number>
-        <mandatory>1</mandatory>
-        <data-type>timestamp(0)</data-type>
-      </column>
-      <column id="111" parent="32" name="updated_at">
-        <state-number>194865</state-number>
-        <mandatory>1</mandatory>
-        <data-type>timestamp(0)</data-type>
-      </column>
-      <index id="112" parent="32" name="citynexus_scores_2_pkey">
-        <object-id>49298</object-id>
-        <columns>id</columns>
-        <unique>1</unique>
-      </index>
-      <key id="113" parent="32" name="citynexus_scores_2_pkey">
-        <columns>id</columns>
-        <underlying-index>citynexus_scores_2_pkey</underlying-index>
-        <primary>1</primary>
-      </key>
-      <column id="114" parent="33" name="id">
-        <state-number>193074</state-number>
-        <mandatory>1</mandatory>
-        <data-type>integer</data-type>
-        <default-expression>nextval(&apos;citynexus_scores_3_id_seq&apos;::regclass)</default-expression>
-      </column>
-      <column id="115" parent="33" name="property_id">
-        <state-number>193074</state-number>
-        <mandatory>1</mandatory>
-        <data-type>integer</data-type>
-      </column>
-      <column id="116" parent="33" name="score">
-        <state-number>193074</state-number>
-        <data-type>double precision</data-type>
-      </column>
-      <column id="117" parent="33" name="created_at">
-        <state-number>193074</state-number>
-        <mandatory>1</mandatory>
-        <data-type>timestamp(0)</data-type>
-      </column>
-      <column id="118" parent="33" name="updated_at">
-        <state-number>193074</state-number>
-        <mandatory>1</mandatory>
-        <data-type>timestamp(0)</data-type>
-      </column>
-      <index id="119" parent="33" name="citynexus_scores_3_pkey">
-        <object-id>41031</object-id>
-        <columns>id</columns>
-        <unique>1</unique>
-      </index>
-      <key id="120" parent="33" name="citynexus_scores_3_pkey">
-        <columns>id</columns>
-        <underlying-index>citynexus_scores_3_pkey</underlying-index>
-        <primary>1</primary>
-      </key>
-      <column id="121" parent="34" name="id">
-        <state-number>194845</state-number>
-        <mandatory>1</mandatory>
-        <data-type>integer</data-type>
-        <default-expression>nextval(&apos;citynexus_scores_4_id_seq&apos;::regclass)</default-expression>
-      </column>
-      <column id="122" parent="34" name="property_id">
-        <state-number>194845</state-number>
-        <mandatory>1</mandatory>
-        <data-type>integer</data-type>
-      </column>
-      <column id="123" parent="34" name="score">
-        <state-number>194845</state-number>
-        <data-type>double precision</data-type>
-      </column>
-      <column id="124" parent="34" name="created_at">
-        <state-number>194845</state-number>
-        <mandatory>1</mandatory>
-        <data-type>timestamp(0)</data-type>
-      </column>
-      <column id="125" parent="34" name="updated_at">
-        <state-number>194845</state-number>
-        <mandatory>1</mandatory>
-        <data-type>timestamp(0)</data-type>
-      </column>
-      <index id="126" parent="34" name="citynexus_scores_4_pkey">
-        <object-id>49281</object-id>
-        <columns>id</columns>
-        <unique>1</unique>
-      </index>
-      <key id="127" parent="34" name="citynexus_scores_4_pkey">
-        <columns>id</columns>
-        <underlying-index>citynexus_scores_4_pkey</underlying-index>
-        <primary>1</primary>
-      </key>
-      <column id="128" parent="35" name="id">
-        <state-number>195364</state-number>
-        <mandatory>1</mandatory>
-        <data-type>integer</data-type>
-        <default-expression>nextval(&apos;citynexus_scores_5_id_seq&apos;::regclass)</default-expression>
-      </column>
-      <column id="129" parent="35" name="property_id">
-        <state-number>195364</state-number>
-        <mandatory>1</mandatory>
-        <data-type>integer</data-type>
-      </column>
-      <column id="130" parent="35" name="score">
-        <state-number>195364</state-number>
-        <data-type>double precision</data-type>
-      </column>
-      <column id="131" parent="35" name="created_at">
-        <state-number>195364</state-number>
-        <mandatory>1</mandatory>
-        <data-type>timestamp(0)</data-type>
-      </column>
-      <column id="132" parent="35" name="updated_at">
-        <state-number>195364</state-number>
-        <mandatory>1</mandatory>
-        <data-type>timestamp(0)</data-type>
-      </column>
-      <index id="133" parent="35" name="citynexus_scores_5_pkey">
-        <object-id>49469</object-id>
-        <columns>id</columns>
-        <unique>1</unique>
-      </index>
-      <key id="134" parent="35" name="citynexus_scores_5_pkey">
-        <columns>id</columns>
-        <underlying-index>citynexus_scores_5_pkey</underlying-index>
-        <primary>1</primary>
-      </key>
-      <column id="135" parent="36" name="id">
-        <state-number>194798</state-number>
+      <column id="70" parent="16" name="id">
+        <state-number>763</state-number>
         <mandatory>1</mandatory>
         <data-type>integer</data-type>
         <default-expression>nextval(&apos;citynexus_settings_id_seq&apos;::regclass)</default-expression>
       </column>
-      <column id="136" parent="36" name="key">
-        <state-number>194798</state-number>
+      <column id="71" parent="16" name="key">
+        <state-number>763</state-number>
         <mandatory>1</mandatory>
         <data-type>varchar(255)</data-type>
       </column>
-      <column id="137" parent="36" name="value">
-        <state-number>194798</state-number>
+      <column id="72" parent="16" name="value">
+        <state-number>763</state-number>
         <data-type>varchar(255)</data-type>
       </column>
-      <column id="138" parent="36" name="user_id">
-        <state-number>194798</state-number>
+      <column id="73" parent="16" name="user_id">
+        <state-number>763</state-number>
         <data-type>integer</data-type>
       </column>
-      <column id="139" parent="36" name="created_at">
-        <state-number>194798</state-number>
+      <column id="74" parent="16" name="created_at">
+        <state-number>763</state-number>
         <mandatory>1</mandatory>
         <data-type>timestamp(0)</data-type>
       </column>
-      <column id="140" parent="36" name="updated_at">
-        <state-number>194798</state-number>
+      <column id="75" parent="16" name="updated_at">
+        <state-number>763</state-number>
         <mandatory>1</mandatory>
         <data-type>timestamp(0)</data-type>
       </column>
-      <index id="141" parent="36" name="citynexus_settings_pkey">
-        <object-id>49176</object-id>
+      <index id="76" parent="16" name="citynexus_settings_pkey">
+        <object-id>16515</object-id>
         <columns>id</columns>
         <unique>1</unique>
       </index>
-      <key id="142" parent="36" name="citynexus_settings_pkey">
+      <key id="77" parent="16" name="citynexus_settings_pkey">
         <columns>id</columns>
         <underlying-index>citynexus_settings_pkey</underlying-index>
         <primary>1</primary>
       </key>
-      <column id="143" parent="37" name="group_id">
-        <state-number>175133</state-number>
+      <column id="78" parent="17" name="group_id">
+        <state-number>757</state-number>
         <mandatory>1</mandatory>
         <data-type>integer</data-type>
       </column>
-      <column id="144" parent="37" name="user_id">
-        <state-number>175133</state-number>
+      <column id="79" parent="17" name="user_id">
+        <state-number>757</state-number>
         <mandatory>1</mandatory>
         <data-type>integer</data-type>
       </column>
-      <column id="145" parent="38" name="id">
-        <state-number>175131</state-number>
+      <column id="80" parent="18" name="id">
+        <state-number>755</state-number>
         <mandatory>1</mandatory>
         <data-type>integer</data-type>
         <default-expression>nextval(&apos;groups_id_seq&apos;::regclass)</default-expression>
       </column>
-      <column id="146" parent="38" name="type">
-        <state-number>175131</state-number>
+      <column id="81" parent="18" name="type">
+        <state-number>755</state-number>
         <mandatory>1</mandatory>
         <data-type>varchar(255)</data-type>
       </column>
-      <index id="147" parent="38" name="groups_pkey">
-        <object-id>35608</object-id>
+      <index id="82" parent="18" name="groups_pkey">
+        <object-id>16479</object-id>
         <columns>id</columns>
         <unique>1</unique>
       </index>
-      <key id="148" parent="38" name="groups_pkey">
+      <key id="83" parent="18" name="groups_pkey">
         <columns>id</columns>
         <underlying-index>groups_pkey</underlying-index>
         <primary>1</primary>
       </key>
-      <column id="149" parent="39" name="id">
-        <state-number>175128</state-number>
+      <column id="84" parent="19" name="id">
+        <state-number>752</state-number>
         <mandatory>1</mandatory>
         <data-type>bigint</data-type>
         <default-expression>nextval(&apos;jobs_id_seq&apos;::regclass)</default-expression>
       </column>
-      <column id="150" parent="39" name="queue">
-        <state-number>175128</state-number>
+      <column id="85" parent="19" name="queue">
+        <state-number>752</state-number>
         <mandatory>1</mandatory>
         <data-type>varchar(255)</data-type>
       </column>
-      <column id="151" parent="39" name="payload">
-        <state-number>175128</state-number>
+      <column id="86" parent="19" name="payload">
+        <state-number>752</state-number>
         <mandatory>1</mandatory>
         <data-type>text</data-type>
       </column>
-      <column id="152" parent="39" name="attempts">
-        <state-number>175128</state-number>
+      <column id="87" parent="19" name="attempts">
+        <state-number>752</state-number>
         <mandatory>1</mandatory>
         <data-type>smallint</data-type>
       </column>
-      <column id="153" parent="39" name="reserved">
-        <state-number>175128</state-number>
+      <column id="88" parent="19" name="reserved">
+        <state-number>752</state-number>
         <mandatory>1</mandatory>
         <data-type>smallint</data-type>
       </column>
-      <column id="154" parent="39" name="reserved_at">
-        <state-number>175128</state-number>
+      <column id="89" parent="19" name="reserved_at">
+        <state-number>752</state-number>
         <data-type>integer</data-type>
       </column>
-      <column id="155" parent="39" name="available_at">
-        <state-number>175128</state-number>
+      <column id="90" parent="19" name="available_at">
+        <state-number>752</state-number>
         <mandatory>1</mandatory>
         <data-type>integer</data-type>
       </column>
-      <column id="156" parent="39" name="created_at">
-        <state-number>175128</state-number>
+      <column id="91" parent="19" name="created_at">
+        <state-number>752</state-number>
         <mandatory>1</mandatory>
         <data-type>integer</data-type>
       </column>
-      <index id="157" parent="39" name="jobs_pkey">
-        <object-id>35599</object-id>
+      <index id="92" parent="19" name="jobs_pkey">
+        <object-id>16470</object-id>
         <columns>id</columns>
         <unique>1</unique>
       </index>
-      <index id="158" parent="39" name="jobs_queue_reserved_reserved_at_index">
-        <object-id>35601</object-id>
+      <index id="93" parent="19" name="jobs_queue_reserved_reserved_at_index">
+        <object-id>16472</object-id>
         <columns>queue
 reserved
 reserved_at</columns>
       </index>
-      <key id="159" parent="39" name="jobs_pkey">
+      <key id="94" parent="19" name="jobs_pkey">
         <columns>id</columns>
         <underlying-index>jobs_pkey</underlying-index>
         <primary>1</primary>
       </key>
-      <column id="160" parent="40" name="migration">
-        <state-number>175114</state-number>
+      <column id="95" parent="20" name="migration">
+        <state-number>738</state-number>
         <mandatory>1</mandatory>
         <data-type>varchar(255)</data-type>
       </column>
-      <column id="161" parent="40" name="batch">
-        <state-number>175114</state-number>
+      <column id="96" parent="20" name="batch">
+        <state-number>738</state-number>
         <mandatory>1</mandatory>
         <data-type>integer</data-type>
       </column>
-      <column id="162" parent="41" name="email">
-        <state-number>175118</state-number>
+      <column id="97" parent="21" name="email">
+        <state-number>742</state-number>
         <mandatory>1</mandatory>
         <data-type>varchar(255)</data-type>
       </column>
-      <column id="163" parent="41" name="token">
-        <state-number>175118</state-number>
+      <column id="98" parent="21" name="token">
+        <state-number>742</state-number>
         <mandatory>1</mandatory>
         <data-type>varchar(255)</data-type>
       </column>
-      <column id="164" parent="41" name="created_at">
-        <state-number>175118</state-number>
+      <column id="99" parent="21" name="created_at">
+        <state-number>742</state-number>
         <mandatory>1</mandatory>
         <data-type>timestamp(0)</data-type>
       </column>
-      <index id="165" parent="41" name="password_resets_email_index">
-        <object-id>35551</object-id>
+      <index id="100" parent="21" name="password_resets_email_index">
+        <object-id>16422</object-id>
         <columns>email</columns>
       </index>
-      <index id="166" parent="41" name="password_resets_token_index">
-        <object-id>35552</object-id>
+      <index id="101" parent="21" name="password_resets_token_index">
+        <object-id>16423</object-id>
         <columns>token</columns>
       </index>
-      <column id="167" parent="42" name="id">
-        <state-number>193159</state-number>
-        <mandatory>1</mandatory>
-        <data-type>integer</data-type>
-        <default-expression>nextval(&apos;tabler__id_seq&apos;::regclass)</default-expression>
-      </column>
-      <column id="168" parent="42" name="property_id">
-        <state-number>193159</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="169" parent="42" name="avpid">
-        <state-number>193159</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="170" parent="42" name="map">
-        <state-number>193159</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="171" parent="42" name="lot">
-        <state-number>193159</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="172" parent="42" name="usecode">
-        <state-number>193159</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="173" parent="42" name="sitidx">
-        <state-number>193159</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="174" parent="42" name="nhbd">
-        <state-number>193159</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="175" parent="42" name="location">
-        <state-number>193159</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="176" parent="42" name="saledate">
-        <state-number>193159</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="177" parent="42" name="price">
-        <state-number>193159</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="178" parent="42" name="valcode">
-        <state-number>193159</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="179" parent="42" name="styledesc">
-        <state-number>193159</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="180" parent="42" name="occupancy">
-        <state-number>193159</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="181" parent="42" name="numbedrm">
-        <state-number>193159</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="182" parent="42" name="bldgarealiving">
-        <state-number>193159</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="183" parent="42" name="bldgareagross">
-        <state-number>193159</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="184" parent="42" name="landareainacres">
-        <state-number>193159</state-number>
-        <data-type>double precision</data-type>
-      </column>
-      <column id="185" parent="42" name="ah">
-        <state-number>193159</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="186" parent="42" name="landvalue">
-        <state-number>193159</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="187" parent="42" name="bldgvalue">
-        <state-number>193159</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="188" parent="42" name="parcelvalue">
-        <state-number>193159</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="189" parent="42" name="type">
-        <state-number>193159</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="190" parent="42" name="bookpage">
-        <state-number>193159</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="191" parent="42" name="grantee">
-        <state-number>193159</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="192" parent="42" name="co_granteesname">
-        <state-number>193159</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="193" parent="42" name="mailingaddress">
-        <state-number>193159</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="194" parent="42" name="city">
-        <state-number>193159</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="195" parent="42" name="state">
-        <state-number>193159</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="196" parent="42" name="zip">
-        <state-number>193159</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="197" parent="42" name="l">
-        <state-number>193159</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="198" parent="42" name="complexdesc">
-        <state-number>193159</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="199" parent="42" name="style">
-        <state-number>193159</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="200" parent="42" name="sf">
-        <state-number>193159</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="201" parent="42" name="created_at">
-        <state-number>193159</state-number>
-        <mandatory>1</mandatory>
-        <data-type>timestamp(0)</data-type>
-      </column>
-      <column id="202" parent="42" name="updated_at">
-        <state-number>193159</state-number>
-        <mandatory>1</mandatory>
-        <data-type>timestamp(0)</data-type>
-      </column>
-      <index id="203" parent="42" name="tabler__pkey">
-        <object-id>41081</object-id>
-        <columns>id</columns>
-        <unique>1</unique>
-      </index>
-      <key id="204" parent="42" name="tabler__pkey">
-        <columns>id</columns>
-        <underlying-index>tabler__pkey</underlying-index>
-        <primary>1</primary>
-      </key>
-      <column id="205" parent="43" name="id">
-        <state-number>175147</state-number>
-        <mandatory>1</mandatory>
-        <data-type>integer</data-type>
-        <default-expression>nextval(&apos;tabler_assessors_data_id_seq&apos;::regclass)</default-expression>
-      </column>
-      <column id="206" parent="43" name="property_id">
-        <state-number>175147</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="207" parent="43" name="avpid">
-        <state-number>175147</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="208" parent="43" name="map">
-        <state-number>175147</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="209" parent="43" name="lot">
-        <state-number>175147</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="210" parent="43" name="usecode">
-        <state-number>175147</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="211" parent="43" name="sitidx">
-        <state-number>175147</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="212" parent="43" name="nhbd">
-        <state-number>175147</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="213" parent="43" name="location">
-        <state-number>175147</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="214" parent="43" name="saledate">
-        <state-number>175147</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="215" parent="43" name="price">
-        <state-number>175147</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="216" parent="43" name="valcode">
-        <state-number>175147</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="217" parent="43" name="styledesc">
-        <state-number>175147</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="218" parent="43" name="occupancy">
-        <state-number>175147</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="219" parent="43" name="numbedrm">
-        <state-number>175147</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="220" parent="43" name="bldgarealiving">
-        <state-number>175147</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="221" parent="43" name="bldgareagross">
-        <state-number>175147</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="222" parent="43" name="landareainacres">
-        <state-number>175147</state-number>
-        <data-type>double precision</data-type>
-      </column>
-      <column id="223" parent="43" name="ah">
-        <state-number>175147</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="224" parent="43" name="landvalue">
-        <state-number>175147</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="225" parent="43" name="bldgvalue">
-        <state-number>175147</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="226" parent="43" name="parcelvalue">
-        <state-number>175147</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="227" parent="43" name="type">
-        <state-number>175147</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="228" parent="43" name="bookpage">
-        <state-number>175147</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="229" parent="43" name="grantee">
-        <state-number>175147</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="230" parent="43" name="co_granteesname">
-        <state-number>175147</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="231" parent="43" name="mailingaddress">
-        <state-number>175147</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="232" parent="43" name="city">
-        <state-number>175147</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="233" parent="43" name="state">
-        <state-number>175147</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="234" parent="43" name="zip">
-        <state-number>175147</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="235" parent="43" name="l">
-        <state-number>175147</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="236" parent="43" name="complexdesc">
-        <state-number>175147</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="237" parent="43" name="style">
-        <state-number>175147</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="238" parent="43" name="sf">
-        <state-number>175147</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="239" parent="43" name="lat">
-        <state-number>175147</state-number>
-        <data-type>double precision</data-type>
-      </column>
-      <column id="240" parent="43" name="longit">
-        <state-number>175147</state-number>
-        <data-type>double precision</data-type>
-      </column>
-      <column id="241" parent="43" name="geomerge">
-        <state-number>175147</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="242" parent="43" name="geostatus">
-        <state-number>175147</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="243" parent="43" name="database">
-        <state-number>175147</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="244" parent="43" name="geoid">
-        <state-number>175147</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="245" parent="43" name="created_at">
-        <state-number>175147</state-number>
-        <mandatory>1</mandatory>
-        <data-type>timestamp(0)</data-type>
-      </column>
-      <column id="246" parent="43" name="updated_at">
-        <state-number>175147</state-number>
-        <mandatory>1</mandatory>
-        <data-type>timestamp(0)</data-type>
-      </column>
-      <index id="247" parent="43" name="tabler_assessors_data_pkey">
-        <object-id>35646</object-id>
-        <columns>id</columns>
-        <unique>1</unique>
-      </index>
-      <key id="248" parent="43" name="tabler_assessors_data_pkey">
-        <columns>id</columns>
-        <underlying-index>tabler_assessors_data_pkey</underlying-index>
-        <primary>1</primary>
-      </key>
-      <column id="249" parent="44" name="id">
-        <state-number>195420</state-number>
-        <mandatory>1</mandatory>
-        <data-type>integer</data-type>
-        <default-expression>nextval(&apos;tabler_bag_o_dick_id_seq&apos;::regclass)</default-expression>
-      </column>
-      <column id="250" parent="44" name="property_id">
-        <state-number>195420</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="251" parent="44" name="avpid">
-        <state-number>195420</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="252" parent="44" name="map">
-        <state-number>195420</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="253" parent="44" name="lot">
-        <state-number>195420</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="254" parent="44" name="usecode">
-        <state-number>195420</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="255" parent="44" name="sitidx">
-        <state-number>195420</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="256" parent="44" name="nhbd">
-        <state-number>195420</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="257" parent="44" name="location">
-        <state-number>195420</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="258" parent="44" name="saledate">
-        <state-number>195420</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="259" parent="44" name="price">
-        <state-number>195420</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="260" parent="44" name="valcode">
-        <state-number>195420</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="261" parent="44" name="styledesc">
-        <state-number>195420</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="262" parent="44" name="occupancy">
-        <state-number>195420</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="263" parent="44" name="numbedrm">
-        <state-number>195420</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="264" parent="44" name="bldgarealiving">
-        <state-number>195420</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="265" parent="44" name="bldgareagross">
-        <state-number>195420</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="266" parent="44" name="landareainacres">
-        <state-number>195420</state-number>
-        <data-type>double precision</data-type>
-      </column>
-      <column id="267" parent="44" name="ah">
-        <state-number>195420</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="268" parent="44" name="landvalue">
-        <state-number>195420</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="269" parent="44" name="bldgvalue">
-        <state-number>195420</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="270" parent="44" name="parcelvalue">
-        <state-number>195420</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="271" parent="44" name="type">
-        <state-number>195420</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="272" parent="44" name="bookpage">
-        <state-number>195420</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="273" parent="44" name="grantee">
-        <state-number>195420</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="274" parent="44" name="co_granteesname">
-        <state-number>195420</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="275" parent="44" name="mailingaddress">
-        <state-number>195420</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="276" parent="44" name="city">
-        <state-number>195420</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="277" parent="44" name="state">
-        <state-number>195420</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="278" parent="44" name="zip">
-        <state-number>195420</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="279" parent="44" name="l">
-        <state-number>195420</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="280" parent="44" name="complexdesc">
-        <state-number>195420</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="281" parent="44" name="style">
-        <state-number>195420</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="282" parent="44" name="sf">
-        <state-number>195420</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="283" parent="44" name="lat">
-        <state-number>195420</state-number>
-        <data-type>double precision</data-type>
-      </column>
-      <column id="284" parent="44" name="longit">
-        <state-number>195420</state-number>
-        <data-type>double precision</data-type>
-      </column>
-      <column id="285" parent="44" name="geomerge">
-        <state-number>195420</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="286" parent="44" name="geostatus">
-        <state-number>195420</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="287" parent="44" name="database">
-        <state-number>195420</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="288" parent="44" name="geoid">
-        <state-number>195420</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="289" parent="44" name="created_at">
-        <state-number>195420</state-number>
-        <mandatory>1</mandatory>
-        <data-type>timestamp(0)</data-type>
-      </column>
-      <column id="290" parent="44" name="updated_at">
-        <state-number>195420</state-number>
-        <mandatory>1</mandatory>
-        <data-type>timestamp(0)</data-type>
-      </column>
-      <index id="291" parent="44" name="tabler_bag_o_dick_pkey">
-        <object-id>49496</object-id>
-        <columns>id</columns>
-        <unique>1</unique>
-      </index>
-      <key id="292" parent="44" name="tabler_bag_o_dick_pkey">
-        <columns>id</columns>
-        <underlying-index>tabler_bag_o_dick_pkey</underlying-index>
-        <primary>1</primary>
-      </key>
-      <column id="293" parent="45" name="id">
-        <state-number>191440</state-number>
-        <mandatory>1</mandatory>
-        <data-type>integer</data-type>
-        <default-expression>nextval(&apos;tabler_fire_id_seq&apos;::regclass)</default-expression>
-      </column>
-      <column id="294" parent="45" name="property_id">
-        <state-number>191440</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="295" parent="45" name="address">
-        <state-number>191440</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="296" parent="45" name="city">
-        <state-number>191440</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="297" parent="45" name="state">
-        <state-number>191440</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="298" parent="45" name="lat">
-        <state-number>191440</state-number>
-        <data-type>double precision</data-type>
-      </column>
-      <column id="299" parent="45" name="longit">
-        <state-number>191440</state-number>
-        <data-type>double precision</data-type>
-      </column>
-      <column id="300" parent="45" name="geomerge">
-        <state-number>191440</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="301" parent="45" name="geostatus">
-        <state-number>191440</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="302" parent="45" name="database">
-        <state-number>191440</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="303" parent="45" name="geoid">
-        <state-number>191440</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="304" parent="45" name="created_at">
-        <state-number>191440</state-number>
-        <mandatory>1</mandatory>
-        <data-type>timestamp(0)</data-type>
-      </column>
-      <column id="305" parent="45" name="updated_at">
-        <state-number>191440</state-number>
-        <mandatory>1</mandatory>
-        <data-type>timestamp(0)</data-type>
-      </column>
-      <index id="306" parent="45" name="tabler_fire_pkey">
-        <object-id>35702</object-id>
-        <columns>id</columns>
-        <unique>1</unique>
-      </index>
-      <key id="307" parent="45" name="tabler_fire_pkey">
-        <columns>id</columns>
-        <underlying-index>tabler_fire_pkey</underlying-index>
-        <primary>1</primary>
-      </key>
-      <column id="308" parent="46" name="id">
-        <state-number>193032</state-number>
-        <mandatory>1</mandatory>
-        <data-type>integer</data-type>
-        <default-expression>nextval(&apos;tabler_isd_id_seq&apos;::regclass)</default-expression>
-      </column>
-      <column id="309" parent="46" name="property_id">
-        <state-number>193032</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="310" parent="46" name="full_address">
-        <state-number>193032</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="311" parent="46" name="city">
-        <state-number>193032</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="312" parent="46" name="state">
-        <state-number>193032</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="313" parent="46" name="problem_property">
-        <state-number>193032</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="314" parent="46" name="lat">
-        <state-number>193032</state-number>
-        <data-type>double precision</data-type>
-      </column>
-      <column id="315" parent="46" name="long">
-        <state-number>193032</state-number>
-        <data-type>double precision</data-type>
-      </column>
-      <column id="316" parent="46" name="geomerge">
-        <state-number>193032</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="317" parent="46" name="geostatus">
-        <state-number>193032</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="318" parent="46" name="database">
-        <state-number>193032</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="319" parent="46" name="geoid">
-        <state-number>193032</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="320" parent="46" name="created_at">
-        <state-number>193032</state-number>
-        <mandatory>1</mandatory>
-        <data-type>timestamp(0)</data-type>
-      </column>
-      <column id="321" parent="46" name="updated_at">
-        <state-number>193032</state-number>
-        <mandatory>1</mandatory>
-        <data-type>timestamp(0)</data-type>
-      </column>
-      <index id="322" parent="46" name="tabler_isd_pkey">
-        <object-id>41022</object-id>
-        <columns>id</columns>
-        <unique>1</unique>
-      </index>
-      <key id="323" parent="46" name="tabler_isd_pkey">
-        <columns>id</columns>
-        <underlying-index>tabler_isd_pkey</underlying-index>
-        <primary>1</primary>
-      </key>
-      <column id="324" parent="47" name="id">
-        <state-number>193184</state-number>
-        <mandatory>1</mandatory>
-        <data-type>integer</data-type>
-        <default-expression>nextval(&apos;tabler_planning_dept_id_seq&apos;::regclass)</default-expression>
-      </column>
-      <column id="325" parent="47" name="property_id">
-        <state-number>193184</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="326" parent="47" name="address">
-        <state-number>193184</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="327" parent="47" name="date_of_foreclosure_vacancy">
-        <state-number>193184</state-number>
-        <data-type>timestamp(0)</data-type>
-      </column>
-      <column id="328" parent="47" name="property_management_company">
-        <state-number>193184</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="329" parent="47" name="contact">
-        <state-number>193184</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="330" parent="47" name="year_of_list">
-        <state-number>193184</state-number>
-        <data-type>timestamp(0)</data-type>
-      </column>
-      <column id="331" parent="47" name="created_at">
-        <state-number>193184</state-number>
-        <mandatory>1</mandatory>
-        <data-type>timestamp(0)</data-type>
-      </column>
-      <column id="332" parent="47" name="updated_at">
-        <state-number>193184</state-number>
-        <mandatory>1</mandatory>
-        <data-type>timestamp(0)</data-type>
-      </column>
-      <index id="333" parent="47" name="tabler_planning_dept_pkey">
-        <object-id>41092</object-id>
-        <columns>id</columns>
-        <unique>1</unique>
-      </index>
-      <key id="334" parent="47" name="tabler_planning_dept_pkey">
-        <columns>id</columns>
-        <underlying-index>tabler_planning_dept_pkey</underlying-index>
-        <primary>1</primary>
-      </key>
-      <column id="335" parent="48" name="id">
-        <state-number>193185</state-number>
-        <mandatory>1</mandatory>
-        <data-type>integer</data-type>
-        <default-expression>nextval(&apos;tabler_planningish_dept_id_seq&apos;::regclass)</default-expression>
-      </column>
-      <column id="336" parent="48" name="property_id">
-        <state-number>193185</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="337" parent="48" name="address">
-        <state-number>193185</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="338" parent="48" name="date_of_foreclosure_vacancy">
-        <state-number>193185</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="339" parent="48" name="property_management_company">
-        <state-number>193185</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="340" parent="48" name="contact">
-        <state-number>193185</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="341" parent="48" name="year_of_list">
-        <state-number>193185</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="342" parent="48" name="created_at">
-        <state-number>193185</state-number>
-        <mandatory>1</mandatory>
-        <data-type>timestamp(0)</data-type>
-      </column>
-      <column id="343" parent="48" name="updated_at">
-        <state-number>193185</state-number>
-        <mandatory>1</mandatory>
-        <data-type>timestamp(0)</data-type>
-      </column>
-      <index id="344" parent="48" name="tabler_planningish_dept_pkey">
-        <object-id>41103</object-id>
-        <columns>id</columns>
-        <unique>1</unique>
-      </index>
-      <key id="345" parent="48" name="tabler_planningish_dept_pkey">
-        <columns>id</columns>
-        <underlying-index>tabler_planningish_dept_pkey</underlying-index>
-        <primary>1</primary>
-      </key>
-      <column id="346" parent="49" name="id">
-        <state-number>191436</state-number>
-        <mandatory>1</mandatory>
-        <data-type>integer</data-type>
-        <default-expression>nextval(&apos;tabler_police_department_id_seq&apos;::regclass)</default-expression>
-      </column>
-      <column id="347" parent="49" name="property_id">
-        <state-number>191436</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="348" parent="49" name="address">
-        <state-number>191436</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="349" parent="49" name="city">
-        <state-number>191436</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="350" parent="49" name="state">
-        <state-number>191436</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="351" parent="49" name="calls_for_service">
-        <state-number>191446</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="352" parent="49" name="reports_filed">
-        <state-number>191436</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="353" parent="49" name="lat">
-        <state-number>191436</state-number>
-        <data-type>double precision</data-type>
-      </column>
-      <column id="354" parent="49" name="longit">
-        <state-number>191436</state-number>
-        <data-type>double precision</data-type>
-      </column>
-      <column id="355" parent="49" name="geomerge">
-        <state-number>191436</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="356" parent="49" name="geostatus">
-        <state-number>191436</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="357" parent="49" name="database">
-        <state-number>191436</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="358" parent="49" name="geoid">
-        <state-number>191436</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="359" parent="49" name="created_at">
-        <state-number>191436</state-number>
-        <mandatory>1</mandatory>
-        <data-type>timestamp(0)</data-type>
-      </column>
-      <column id="360" parent="49" name="updated_at">
-        <state-number>191436</state-number>
-        <mandatory>1</mandatory>
-        <data-type>timestamp(0)</data-type>
-      </column>
-      <index id="361" parent="49" name="tabler_police_department_pkey">
-        <object-id>35690</object-id>
-        <columns>id</columns>
-        <unique>1</unique>
-      </index>
-      <key id="362" parent="49" name="tabler_police_department_pkey">
-        <columns>id</columns>
-        <underlying-index>tabler_police_department_pkey</underlying-index>
-        <primary>1</primary>
-      </key>
-      <column id="363" parent="50" name="id">
-        <state-number>175126</state-number>
+      <column id="102" parent="22" name="id">
+        <state-number>750</state-number>
         <mandatory>1</mandatory>
         <data-type>integer</data-type>
         <default-expression>nextval(&apos;tabler_tables_id_seq&apos;::regclass)</default-expression>
       </column>
-      <column id="364" parent="50" name="table_name">
-        <state-number>175126</state-number>
+      <column id="103" parent="22" name="table_name">
+        <state-number>750</state-number>
         <data-type>varchar(255)</data-type>
       </column>
-      <column id="365" parent="50" name="table_title">
-        <state-number>175126</state-number>
+      <column id="104" parent="22" name="table_title">
+        <state-number>750</state-number>
         <data-type>varchar(255)</data-type>
       </column>
-      <column id="366" parent="50" name="name">
-        <state-number>175126</state-number>
+      <column id="105" parent="22" name="name">
+        <state-number>750</state-number>
         <data-type>varchar(255)</data-type>
       </column>
-      <column id="367" parent="50" name="table_description">
-        <state-number>175126</state-number>
+      <column id="106" parent="22" name="table_description">
+        <state-number>750</state-number>
         <data-type>varchar(255)</data-type>
       </column>
-      <column id="368" parent="50" name="scheme">
-        <state-number>175126</state-number>
+      <column id="107" parent="22" name="scheme">
+        <state-number>750</state-number>
         <data-type>json</data-type>
       </column>
-      <column id="369" parent="50" name="raw_upload">
-        <state-number>175126</state-number>
+      <column id="108" parent="22" name="raw_upload">
+        <state-number>750</state-number>
         <data-type>json</data-type>
       </column>
-      <column id="370" parent="50" name="created_at">
-        <state-number>175126</state-number>
+      <column id="109" parent="22" name="created_at">
+        <state-number>750</state-number>
         <mandatory>1</mandatory>
         <data-type>timestamp(0)</data-type>
       </column>
-      <column id="371" parent="50" name="updated_at">
-        <state-number>175126</state-number>
+      <column id="110" parent="22" name="updated_at">
+        <state-number>750</state-number>
         <mandatory>1</mandatory>
         <data-type>timestamp(0)</data-type>
       </column>
-      <index id="372" parent="50" name="tabler_tables_pkey">
-        <object-id>35588</object-id>
+      <index id="111" parent="22" name="tabler_tables_pkey">
+        <object-id>16459</object-id>
         <columns>id</columns>
         <unique>1</unique>
       </index>
-      <key id="373" parent="50" name="tabler_tables_pkey">
+      <key id="112" parent="22" name="tabler_tables_pkey">
         <columns>id</columns>
         <underlying-index>tabler_tables_pkey</underlying-index>
         <primary>1</primary>
       </key>
-      <column id="374" parent="51" name="id">
-        <state-number>192188</state-number>
-        <mandatory>1</mandatory>
-        <data-type>integer</data-type>
-        <default-expression>nextval(&apos;tabler_treasury_id_seq&apos;::regclass)</default-expression>
-      </column>
-      <column id="375" parent="51" name="property_id">
-        <state-number>192188</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="376" parent="51" name="tt">
-        <state-number>192188</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="377" parent="51" name="account">
-        <state-number>192188</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="378" parent="51" name="location">
-        <state-number>192188</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="379" parent="51" name="tax">
-        <state-number>192188</state-number>
-        <data-type>double precision</data-type>
-      </column>
-      <column id="380" parent="51" name="betterments">
-        <state-number>192188</state-number>
-        <data-type>double precision</data-type>
-      </column>
-      <column id="381" parent="51" name="interest">
-        <state-number>192188</state-number>
-        <data-type>double precision</data-type>
-      </column>
-      <column id="382" parent="51" name="demand">
-        <state-number>192188</state-number>
-        <data-type>double precision</data-type>
-      </column>
-      <column id="383" parent="51" name="charges">
-        <state-number>192188</state-number>
-        <data-type>double precision</data-type>
-      </column>
-      <column id="384" parent="51" name="trs_paid_interest">
-        <state-number>192188</state-number>
-        <data-type>double precision</data-type>
-      </column>
-      <column id="385" parent="51" name="credits">
-        <state-number>192188</state-number>
-        <data-type>double precision</data-type>
-      </column>
-      <column id="386" parent="51" name="bal_due">
-        <state-number>192188</state-number>
-        <data-type>double precision</data-type>
-      </column>
-      <column id="387" parent="51" name="trs_chgs">
-        <state-number>192188</state-number>
-        <data-type>double precision</data-type>
-      </column>
-      <column id="388" parent="51" name="trs_accrued_interest">
-        <state-number>192188</state-number>
-        <data-type>double precision</data-type>
-      </column>
-      <column id="389" parent="51" name="total_due">
-        <state-number>192188</state-number>
-        <data-type>double precision</data-type>
-      </column>
-      <column id="390" parent="51" name="lat">
-        <state-number>192188</state-number>
-        <data-type>double precision</data-type>
-      </column>
-      <column id="391" parent="51" name="longit">
-        <state-number>192188</state-number>
-        <data-type>double precision</data-type>
-      </column>
-      <column id="392" parent="51" name="geomerge">
-        <state-number>192188</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="393" parent="51" name="geostatus">
-        <state-number>192188</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="394" parent="51" name="city">
-        <state-number>192188</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="395" parent="51" name="state">
-        <state-number>192188</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="396" parent="51" name="database">
-        <state-number>192188</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="397" parent="51" name="geoid">
-        <state-number>192188</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="398" parent="51" name="created_at">
-        <state-number>192188</state-number>
-        <mandatory>1</mandatory>
-        <data-type>timestamp(0)</data-type>
-      </column>
-      <column id="399" parent="51" name="updated_at">
-        <state-number>192188</state-number>
-        <mandatory>1</mandatory>
-        <data-type>timestamp(0)</data-type>
-      </column>
-      <index id="400" parent="51" name="tabler_treasury_pkey">
-        <object-id>41004</object-id>
-        <columns>id</columns>
-        <unique>1</unique>
-      </index>
-      <key id="401" parent="51" name="tabler_treasury_pkey">
-        <columns>id</columns>
-        <underlying-index>tabler_treasury_pkey</underlying-index>
-        <primary>1</primary>
-      </key>
-      <column id="402" parent="52" name="id">
-        <state-number>191183</state-number>
-        <mandatory>1</mandatory>
-        <data-type>integer</data-type>
-        <default-expression>nextval(&apos;tabler_vacancies_id_seq&apos;::regclass)</default-expression>
-      </column>
-      <column id="403" parent="52" name="property_id">
-        <state-number>191183</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="404" parent="52" name="address">
-        <state-number>191183</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="405" parent="52" name="date_of_foreclosure_vacancy">
-        <state-number>191183</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="406" parent="52" name="property_management_company">
-        <state-number>191183</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="407" parent="52" name="contact">
-        <state-number>191183</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="408" parent="52" name="year_of_list">
-        <state-number>191183</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="409" parent="52" name="lat">
-        <state-number>191183</state-number>
-        <data-type>double precision</data-type>
-      </column>
-      <column id="410" parent="52" name="longit">
-        <state-number>191183</state-number>
-        <data-type>double precision</data-type>
-      </column>
-      <column id="411" parent="52" name="geomerge">
-        <state-number>191183</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="412" parent="52" name="geostatus">
-        <state-number>191183</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="413" parent="52" name="city">
-        <state-number>191183</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="414" parent="52" name="state">
-        <state-number>191183</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="415" parent="52" name="database">
-        <state-number>191183</state-number>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="416" parent="52" name="geoid">
-        <state-number>191183</state-number>
-        <data-type>integer</data-type>
-      </column>
-      <column id="417" parent="52" name="created_at">
-        <state-number>191183</state-number>
-        <mandatory>1</mandatory>
-        <data-type>timestamp(0)</data-type>
-      </column>
-      <column id="418" parent="52" name="updated_at">
-        <state-number>191183</state-number>
-        <mandatory>1</mandatory>
-        <data-type>timestamp(0)</data-type>
-      </column>
-      <index id="419" parent="52" name="tabler_vacancies_pkey">
-        <object-id>35678</object-id>
-        <columns>id</columns>
-        <unique>1</unique>
-      </index>
-      <key id="420" parent="52" name="tabler_vacancies_pkey">
-        <columns>id</columns>
-        <underlying-index>tabler_vacancies_pkey</underlying-index>
-        <primary>1</primary>
-      </key>
-      <column id="421" parent="53" name="id">
-        <state-number>175115</state-number>
+      <column id="113" parent="23" name="id">
+        <state-number>739</state-number>
         <mandatory>1</mandatory>
         <data-type>integer</data-type>
         <default-expression>nextval(&apos;users_id_seq&apos;::regclass)</default-expression>
       </column>
-      <column id="422" parent="53" name="first_name">
-        <state-number>175115</state-number>
+      <column id="114" parent="23" name="first_name">
+        <state-number>739</state-number>
         <mandatory>1</mandatory>
         <data-type>varchar(255)</data-type>
       </column>
-      <column id="423" parent="53" name="last_name">
-        <state-number>175115</state-number>
+      <column id="115" parent="23" name="last_name">
+        <state-number>739</state-number>
         <mandatory>1</mandatory>
         <data-type>varchar(255)</data-type>
       </column>
-      <column id="424" parent="53" name="email">
-        <state-number>175115</state-number>
+      <column id="116" parent="23" name="email">
+        <state-number>739</state-number>
         <mandatory>1</mandatory>
         <data-type>varchar(255)</data-type>
       </column>
-      <column id="425" parent="53" name="password">
-        <state-number>175115</state-number>
+      <column id="117" parent="23" name="password">
+        <state-number>739</state-number>
         <mandatory>1</mandatory>
         <data-type>varchar(60)</data-type>
       </column>
-      <column id="426" parent="53" name="remember_token">
-        <state-number>175115</state-number>
+      <column id="118" parent="23" name="remember_token">
+        <state-number>739</state-number>
         <data-type>varchar(100)</data-type>
       </column>
-      <column id="427" parent="53" name="created_at">
-        <state-number>175115</state-number>
+      <column id="119" parent="23" name="created_at">
+        <state-number>739</state-number>
         <mandatory>1</mandatory>
         <data-type>timestamp(0)</data-type>
       </column>
-      <column id="428" parent="53" name="updated_at">
-        <state-number>175115</state-number>
+      <column id="120" parent="23" name="updated_at">
+        <state-number>739</state-number>
         <mandatory>1</mandatory>
         <data-type>timestamp(0)</data-type>
       </column>
-      <index id="429" parent="53" name="users_pkey">
-        <object-id>35541</object-id>
+      <column id="121" parent="23" name="admin">
+        <state-number>773</state-number>
+        <mandatory>1</mandatory>
+        <data-type>boolean</data-type>
+        <default-expression>false</default-expression>
+      </column>
+      <column id="122" parent="23" name="permissions">
+        <state-number>773</state-number>
+        <data-type>json</data-type>
+      </column>
+      <index id="123" parent="23" name="users_pkey">
+        <object-id>16412</object-id>
         <columns>id</columns>
         <unique>1</unique>
       </index>
-      <index id="430" parent="53" name="users_email_unique">
-        <object-id>35543</object-id>
+      <index id="124" parent="23" name="users_email_unique">
+        <object-id>16414</object-id>
         <columns>email</columns>
         <unique>1</unique>
       </index>
-      <key id="431" parent="53" name="users_pkey">
+      <key id="125" parent="23" name="users_pkey">
         <columns>id</columns>
         <underlying-index>users_pkey</underlying-index>
         <primary>1</primary>
       </key>
-      <key id="432" parent="53" name="users_email_unique">
+      <key id="126" parent="23" name="users_email_unique">
         <columns>email</columns>
         <underlying-index>users_email_unique</underlying-index>
       </key>

@@ -1,7 +1,6 @@
 @extends(config('tabler.template'))
 
 @section(config('tabler.section'))
-    <div class="col-sm-offset-2 col-sm-8">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div class="panel-title">
@@ -40,8 +39,6 @@
                 </table>
             </div>
         </div>
-    </div>
-
 @stop
 
 @push('js_footer')
@@ -52,10 +49,11 @@
         var r = confirm('Are you sure you want to refresh this score?  Doing so will delete and rerun all property scores.');
         if(r)
         {
-            $('#update-' + id).removeClass('btn-primary');
-            $('#update-' + id).addClass('btn-default');
-            $('.update-' + id).addClass('hidden');
-            $('#update-' + id).html('<span class="glyphicon glyphicon-hourglass"></span> Refreshing Score');
+            var update = $('#update-' + id)
+            update.removeClass('btn-primary');
+            update.addClass('btn-default');
+            update.addClass('hidden');
+            update.html('<span class="glyphicon glyphicon-hourglass"></span> Refreshing Score');
 
             $.ajax({
                 url: "/{{config('citynexus.root_directory')}}/risk-score/update-score",

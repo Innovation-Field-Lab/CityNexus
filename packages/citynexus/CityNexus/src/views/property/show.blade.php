@@ -4,6 +4,16 @@
 
     <div class="panel panel-default">
         <div class="panel-heading">
+
+            <div class="dropdown pull-right">
+                <div class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="cursor: pointer">
+                    <i class="glyphicon glyphicon-chevron-down"></i>
+                </div>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li><a href="#">Merge Property</a></li>
+                    <li><a href="#">Add Record</a></li>
+                </ul>
+            </div>
             <div class="panel-title">
                 {{ucwords($property->address())}}
             </div>

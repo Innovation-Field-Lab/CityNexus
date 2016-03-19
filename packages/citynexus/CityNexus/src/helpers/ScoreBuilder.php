@@ -22,8 +22,6 @@ class ScoreBuilder
 
         $today = Carbon::today();
 
-
-
         foreach($elements as $i)
         {
             $value = null;
@@ -67,25 +65,32 @@ class ScoreBuilder
                 if($i->period != null)
                 {
                     $values[] = DB::table($i->table_name)
-                        ->where(config('citynexus.index_id'), $record->id)
+                        ->join('citynexus_properties', $i->table_name . '.' . config('citynexus.index_id'), '=', 'citynexus_properties.id')
                         ->where('updated_at', '>', $today->subDays($i->period))
-                        ->select($i->key)
-                        ->get();
+                        ->where(config('citynexus.index_id'), $record->id)
+                        ->orWhere('citynexus_properties.alias_of', $record->id)
+                        ->lists($i->key);
                 }
                 else
                 {
                     $values[] = DB::table($i->table_name)
+                        ->join('citynexus_properties', $i->table_name . '.' . config('citynexus.index_id'), '=', 'citynexus_properties.id')
                         ->where(config('citynexus.index_id'), $record->id)
-                        ->select($i->key)
-                        ->get();
+                        ->orWhere('citynexus_properties.alias_of', $record->id)
+                        ->lists($i->key);
                 }
-
                 if($values != null)
                 {
-                    foreach($values as $value) $score = $score + $this->calcElement($value, $i);
+                    foreach($values as $value) {
+                        foreach($value as $iv)
+                        {
+                            $score = $score + $this->calcElement($iv, $i);
+                        }
+                    }
                 }
             }
         }
+
         return $score;
     }
 
@@ -94,16 +99,16 @@ class ScoreBuilder
         $return = null;
 
         if($score->function == 'func') $return = $this->runFunc($value, $score);
-        if($score->function == 'float') $return = $this->runFunc($value, $score);
+        elseif($score->function == 'float') $return = $this->runFunc($value, $score);
         elseif($score->function == 'range') $return = $this->runRange($value, $score);
         elseif($score->function == 'empty') $return = $this->runRange($value, $score);
         else $return = $this->runText($value, $score);
+
         return $return;
     }
 
     private function runFunc($value, $score)
     {
-
         if($score->func == '+') $return = $value + $score->factor;
         elseif($score->func == '-') $return = $value - $score->factor;
         elseif($score->func == '*') $return = $value * $score->factor;

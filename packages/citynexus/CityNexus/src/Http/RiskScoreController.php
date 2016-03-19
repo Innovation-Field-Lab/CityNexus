@@ -222,7 +222,7 @@ class RiskScoreController extends Controller
 
     private function runScore($score, $elements)
     {
-        $properties = Property::all()->chunk(1000);
+        $properties = Property::all()->chunk(250);
 
         $table = 'citynexus_scores_' . $score->id;
 
@@ -245,6 +245,5 @@ class RiskScoreController extends Controller
         }
         $this->dispatch(new GenerateScore($elements, $score->id, FALSE));
 
-        Artisan::call('queue:listen');
     }
 }

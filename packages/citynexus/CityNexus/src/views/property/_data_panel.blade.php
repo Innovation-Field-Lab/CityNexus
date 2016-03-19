@@ -14,7 +14,7 @@
         </thead>
         <tbody>
         @foreach($dataset as $row)
-            <tr>
+            <tr @unless($row->property_id == $property->id) class="warning" <?php $disclaimer = true; ?> @endunless>
             @foreach($row as $k => $r)
                 @if(isset($table->$k->show) && $table->$k->show == true)
                 <td>{{$r}}</td>
@@ -25,3 +25,4 @@
         </tbody>
     </table>
 </div>
+@if($disclaimer)<div class="panel-footer warning">* Alias properties highlighted in light yellow</div> <?php $disclaimer = false; ?>@endif

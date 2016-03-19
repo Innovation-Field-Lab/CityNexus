@@ -10,7 +10,7 @@
                     <i class="glyphicon glyphicon-chevron-down"></i>
                 </div>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                    <li><a href="#">Merge Property</a></li>
+                    <li><a href="{{action('\CityNexus\CityNexus\Http\TablerController@getMergeRecords')}}/{{$property->id}}">Merge Property</a></li>
                     <li><a href="#">Add Record</a></li>
                 </ul>
             </div>

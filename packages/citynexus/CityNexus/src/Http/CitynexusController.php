@@ -24,10 +24,10 @@ class CitynexusController extends Controller
         return view('citynexus::index');
     }
 
-    public function getProperty(Request $request)
+    public function getProperty($id)
     {
-        $property = Property::find($request->get('property_id'));
-        $datasets = DatasetQuery::relatedSets( $property->id );
+        $property = Property::find($id);
+        $datasets = DatasetQuery::relatedSets( $id );
         $tables = Table::all();
 
         return view('citynexus::property.show', compact('property', 'datasets', 'tables'));

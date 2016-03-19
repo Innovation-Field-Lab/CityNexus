@@ -198,4 +198,28 @@ class TablerController extends Controller
         $property = Property::find($id);
         return view('citynexus::property.merge', compact('property'));
     }
+
+    public function postMergeSearch(Request $request)
+    {
+        $search = '%' . strtolower($request->get('search')) . '%';
+        $results = Property::where('full_address', 'LIKE', $search)->get(['id', 'full_address']);
+        $id = $request->get('id');
+
+        return view('citynexus::property.merge_results', compact('results', 'id'));
+    }
+
+    public function postMergeRecords(Request $request)
+    {
+        $aliases = $request->alias;
+        $id = $request->get('p_id');
+        foreach($aliases as $i)
+        {
+            $i = Property::find($i);
+            $i->alias_of = $id;
+            $i->save();
+        }
+
+        Session::flash('flash_success', "Records have been recorded as aliases.");
+        return redirect(action('\CityNexus\CityNexus\Http\CitynexusController@getProperty', ['property_id' => $id]));
+    }
 }

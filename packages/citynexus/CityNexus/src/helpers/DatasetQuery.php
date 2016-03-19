@@ -21,8 +21,13 @@ class DatasetQuery
         //Query each table for PID
         foreach($tables as $table)
         {
+            // Find all records on the table for either the property or an alias
             if($table->table_name != null) {
-                $results = DB::table($table->table_name)->where('property_id', $pid)->get();
+                $results = DB::table($table->table_name)
+                    ->join('citynexus_properties', $table->table_name . '.property_id', '=', 'citynexus_properties.id')
+                    ->where('property_id', $pid)
+                    ->orWhere('citynexus_properties.alias_of', $pid)
+                    ->get();
 
                 //add each object to array
                 foreach ($results as $result) {

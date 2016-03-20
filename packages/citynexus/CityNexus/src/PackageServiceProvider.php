@@ -36,6 +36,7 @@ class PackageServiceProvider extends ServiceProvider
         include_once __DIR__ . '/models/Property.php';
         include_once __DIR__ . '/models/Score.php';
         include_once __DIR__ . '/models/Setting.php';
+        include_once __DIR__ . '/models/Note.php';
 
 
         //Load in the classes

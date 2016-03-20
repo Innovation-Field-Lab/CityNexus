@@ -19,6 +19,7 @@ Route::group(['middleware' => 'auth', 'prefix' => config('citynexus.root_directo
 Route::group(['middleware' => 'auth', 'prefix' => config('citynexus.root_directory') ], function() {
 
     Route::controller('/settings', 'CityNexus\CityNexus\Http\CitynexusSettingsController');
+    Route::controller('/notes/', 'CityNexus\CityNexus\Http\NoteController');
     Route::controller('/', 'CityNexus\CityNexus\Http\CitynexusController');
 
 });

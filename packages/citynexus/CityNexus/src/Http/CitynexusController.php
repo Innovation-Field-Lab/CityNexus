@@ -30,18 +30,16 @@ class CitynexusController extends Controller
         $datasets = DatasetQuery::relatedSets( $id );
         $tables = Table::all();
 
-        return view('citynexus::property.show', compact('property', 'datasets', 'tables'));
+        // Initiallizes the variable to disclose aliases in dataset
+        $disclaimer = false;
+
+        return view('citynexus::property.show', compact('property', 'datasets', 'tables', 'disclaimer'));
     }
 
     public function getProperties()
     {
         $properties = Property::all();
         return view('citynexus::property.index', compact('properties'));
-    }
-
-    public function getPropertiesData()
-    {
-        return Datatables::of(Property::select('*')->get())->make(true);
     }
 
     public function getRiskscoreCreate()

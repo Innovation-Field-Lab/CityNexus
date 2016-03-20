@@ -10,6 +10,8 @@ class Note extends Model {
 
     protected $fillable = ['note', 'property_id', 'user_id'];
 
+    protected $table = 'citynexus_notes';
+
     public function creator()
     {
         return $this->belongsTo('App\User', 'user_id', 'id');

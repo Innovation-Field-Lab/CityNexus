@@ -15,4 +15,19 @@ class Property extends Model
     {
         return trim(trim($this->house_number . ' ' . $this->street_name . ' ' . $this->street_type) . ' ' . $this->unit);
     }
+
+    public function aliases()
+    {
+        return $this->hasMany('\CityNexus\CityNexus\Property', 'alias_of');
+    }
+
+    public function aliasOf()
+    {
+        return $this->belongsTo('\CityNexus\CityNexus\Property', 'alias_of');
+    }
+
+    public function notes()
+    {
+        return $this->hasMany('\CityNexus\CityNexus\Note');
+    }
 }

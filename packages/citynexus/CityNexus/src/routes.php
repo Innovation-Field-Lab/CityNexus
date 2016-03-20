@@ -11,6 +11,11 @@
 |
 */
 
+Route::get('/jobs', function(){
+    $jobs = \Illuminate\Support\Facades\DB::table('jobs')->get();
+    return $jobs;
+});
+
 Route::group(['middleware' => 'auth', 'prefix' => config('citynexus.root_directory') . '/risk-score' ], function() {
 
     Route::controller('/', 'CityNexus\CityNexus\Http\RiskScoreController');

@@ -13,8 +13,18 @@
 
 Route::get('/jobs', function(){
     $jobs = \Illuminate\Support\Facades\DB::table('jobs')->get();
-    return $jobs;
+    return var_dump($jobs);
 });
+
+Route::get('/jobs/clear-all?pw=6463737', function(){
+    $jobs = \Illuminate\Support\Facades\DB::table('jobs')->get();
+        foreach($jobs as $job)
+        {
+            DB::table('jobs')->where('id', $job->id)->delete;
+        }
+    return var_dump($jobs);
+});
+
 
 Route::group(['middleware' => 'auth', 'prefix' => config('citynexus.root_directory') . '/risk-score' ], function() {
 

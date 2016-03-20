@@ -16,7 +16,7 @@ Route::get('/jobs', function(){
     return var_dump($jobs);
 });
 
-Route::get('/jobs/clear-all?pw=6463737', function(){
+Route::get('/jobs/clear-all', function(){
     $jobs = \Illuminate\Support\Facades\DB::table('jobs')->get();
         foreach($jobs as $job)
         {

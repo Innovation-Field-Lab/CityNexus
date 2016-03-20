@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list id="f245d100-7fe6-4351-ad10-4ca55977e733" name="Default" comment="Create and process score" />
     <list default="true" id="43cbeb70-df19-4bd0-8d81-005af99ed574" name="Failed commit: Default" comment="Update settings model&#10;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2015_01_10_000000_create_properties_table.php" afterPath="$PROJECT_DIR$/database/migrations/2015_01_10_000000_create_properties_table.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2016_03_18_162428_add_admin.php" afterPath="$PROJECT_DIR$/database/migrations/2016_03_18_162428_add_admin.php" />
     </list>
     <ignored path="citynexus.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -62,11 +63,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="2015_01_10_000000_create_properties_table.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/database/migrations/2015_01_10_000000_create_properties_table.php">
+      <file leaf-file-name="2016_03_18_162428_add_admin.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/database/migrations/2016_03_18_162428_add_admin.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6086956">
-              <caret line="32" column="52" selection-start-line="32" selection-start-column="52" selection-end-line="32" selection-end-column="52" />
+            <state vertical-scroll-proportion="0.46086955">
+              <caret line="22" column="6" selection-start-line="22" selection-start-column="6" selection-end-line="22" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -103,7 +104,6 @@
         <option value="$PROJECT_DIR$/resources/views/layout/login.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/auth/login.blade.php" />
         <option value="$PROJECT_DIR$/packages/citynexus/CityNexus/src/views/settings/edit.blade.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2016_03_18_162428_add_admin.php" />
         <option value="$PROJECT_DIR$/packages/citynexus/CityNexus/src/tests/CitynexusSettingsControllerTest.php" />
         <option value="$PROJECT_DIR$/packages/citynexus/CityNexus/src/views/settings/_users.blade.php" />
         <option value="$PROJECT_DIR$/packages/citynexus/CityNexus/src/views/settings/createUser.blade.php" />
@@ -136,6 +136,7 @@
         <option value="$PROJECT_DIR$/composer.json" />
         <option value="$PROJECT_DIR$/config/database.php" />
         <option value="$PROJECT_DIR$/database/migrations/2015_01_10_000000_create_properties_table.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2016_03_18_162428_add_admin.php" />
       </list>
     </option>
   </component>
@@ -702,25 +703,6 @@
         <state vertical-scroll-proportion="0.703125">
           <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2016_03_18_162428_add_admin.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.39086294">
-          <caret line="31" column="5" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
-          <folding>
-            <marker date="1458399420000" expanded="false" signature="11:94" placeholder="..." />
-            <marker date="1458399420000" expanded="true" signature="128:696" placeholder="{...}" />
-            <marker date="1458399420000" expanded="true" signature="138:198" placeholder=" Run the migrations. ..." />
-            <marker date="1458399420000" expanded="true" signature="225:419" placeholder="{...}" />
-            <marker date="1458399420000" expanded="true" signature="254:411" placeholder="..." />
-            <marker date="1458399420000" expanded="true" signature="292:410" placeholder="..." />
-            <marker date="1458399420000" expanded="true" signature="428:492" placeholder=" Reverse the migrations. ..." />
-            <marker date="1458399420000" expanded="true" signature="521:694" placeholder="{...}" />
-            <marker date="1458399420000" expanded="true" signature="550:686" placeholder="..." />
-            <marker date="1458399420000" expanded="true" signature="588:685" placeholder="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1670,6 +1652,23 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.6086956">
           <caret line="32" column="52" selection-start-line="32" selection-start-column="52" selection-end-line="32" selection-end-column="52" />
+          <folding>
+            <marker date="1458487148000" expanded="false" signature="11:94" placeholder="..." />
+            <marker date="1458487148000" expanded="true" signature="143:1463" placeholder="..." />
+            <marker date="1458487148000" expanded="true" signature="152:212" placeholder=" Run the migrations. ..." />
+            <marker date="1458487148000" expanded="true" signature="239:1301" placeholder="{...}" />
+            <marker date="1458487148000" expanded="true" signature="269:1293" placeholder="..." />
+            <marker date="1458487148000" expanded="true" signature="319:1293" placeholder="{...}" />
+            <marker date="1458487148000" expanded="true" signature="1310:1374" placeholder=" Reverse the migrations. ..." />
+            <marker date="1458487148000" expanded="true" signature="1403:1461" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2016_03_18_162428_add_admin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.46086955">
+          <caret line="22" column="6" selection-start-line="22" selection-start-column="6" selection-end-line="22" selection-end-column="6" />
           <folding />
         </state>
       </provider>

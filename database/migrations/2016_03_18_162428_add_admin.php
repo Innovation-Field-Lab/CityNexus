@@ -13,7 +13,7 @@ class AddAdmin extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->boolean('admin')->default('false');
+            $table->boolean('admin')->default(false);
             $table->json('permissions')->nullable();
         });
     }

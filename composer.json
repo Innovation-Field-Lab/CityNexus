@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
     "name": "laravel/laravel",
     "description": "The Laravel Framework.",
     "keywords": ["framework", "laravel"],
@@ -54,4 +55,25 @@
     "config": {
         "preferred-install": "dist"
     }
+=======
+    "name": "citynexus/citynexus",
+    "description": "A citywide performance management analytics platform",
+    "require": {
+        "php": ">=5.3.0",
+        "illuminate/support": "~5"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "citynexus\\CityNexus\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Sean Alaback",
+            "email": "sean.alaback@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev"
+>>>>>>> 879834a877ce6a1af0127c64b0e1e96f4c282d68
 }

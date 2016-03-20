@@ -3,8 +3,9 @@
   <component name="ChangeListManager">
     <list id="f245d100-7fe6-4351-ad10-4ca55977e733" name="Default" comment="Create and process score" />
     <list default="true" id="43cbeb70-df19-4bd0-8d81-005af99ed574" name="Failed commit: Default" comment="Update settings model&#10;">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.lock" afterPath="$PROJECT_DIR$/composer.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.json" afterPath="$PROJECT_DIR$/composer.json" />
     </list>
     <ignored path="citynexus.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -49,11 +50,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name=".env" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.env">
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.44241574">
-              <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.10948905">
+              <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -72,7 +73,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/packages/citynexus/CityNexus/src/migrations/2015_01_10_000000_create_properties_table.php" />
         <option value="$PROJECT_DIR$/packages/citynexus/CityNexus/src/config.php" />
         <option value="$PROJECT_DIR$/packages/citynexus/CityNexus/src/views/tabler/new-upload.blade.php" />
         <option value="$PROJECT_DIR$/packages/citynexus/CityNexus/src/helpers/TableBuilder.php" />
@@ -121,8 +121,9 @@
         <option value="$PROJECT_DIR$/src/Http/TablerController.php" />
         <option value="$PROJECT_DIR$/packages/citynexus/CityNexus/src/routes.php" />
         <option value="$PROJECT_DIR$/config/queue.php" />
-        <option value="$PROJECT_DIR$/composer.json" />
         <option value="$PROJECT_DIR$/.env" />
+        <option value="$PROJECT_DIR$/composer.json" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -563,64 +564,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/packages/citynexus/CityNexus/src/views/settings/edit.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.512987">
-          <caret line="70" column="19" selection-start-line="70" selection-start-column="12" selection-end-line="70" selection-end-column="19" />
-          <folding>
-            <marker date="1458342884000" expanded="true" signature="77:4369" placeholder="..." />
-            <marker date="1458342884000" expanded="true" signature="99:4366" placeholder="..." />
-            <marker date="1458342884000" expanded="true" signature="141:4355" placeholder="..." />
-            <marker date="1458342884000" expanded="true" signature="181:225" placeholder="..." />
-            <marker date="1458342884000" expanded="true" signature="278:4340" placeholder="..." />
-            <marker date="1458342884000" expanded="true" signature="315:4164" placeholder="..." />
-            <marker date="1458342884000" expanded="true" signature="409:4141" placeholder="..." />
-            <marker date="1458342884000" expanded="true" signature="486:1506" placeholder="..." />
-            <marker date="1458342884000" expanded="true" signature="554:809" placeholder="..." />
-            <marker date="1458342884000" expanded="true" signature="688:775" placeholder="..." />
-            <marker date="1458342884000" expanded="true" signature="871:1155" placeholder="..." />
-            <marker date="1458342884000" expanded="true" signature="1027:1121" placeholder="..." />
-            <marker date="1458342884000" expanded="true" signature="1217:1476" placeholder="..." />
-            <marker date="1458342884000" expanded="true" signature="1355:1442" placeholder="..." />
-            <marker date="1458342884000" expanded="true" signature="1574:4114" placeholder="..." />
-            <marker date="1458342884000" expanded="true" signature="1693:1922" placeholder="..." />
-            <marker date="1458342884000" expanded="true" signature="1743:1887" placeholder="..." />
-            <marker date="1458342884000" expanded="true" signature="1804:1848" placeholder="..." />
-            <marker date="1458342884000" expanded="true" signature="2041:3663" placeholder="..." />
-            <marker date="1458342884000" expanded="true" signature="2093:3628" placeholder="..." />
-            <marker date="1458342884000" expanded="true" signature="2154:3589" placeholder="..." />
-            <marker date="1458342884000" expanded="true" signature="2219:2850" placeholder="..." />
-            <marker date="1458342884000" expanded="true" signature="2412:2803" placeholder="..." />
-            <marker date="1458342884000" expanded="true" signature="2533:2752" placeholder="..." />
-            <marker date="1458342884000" expanded="true" signature="2915:3546" placeholder="..." />
-            <marker date="1458342884000" expanded="true" signature="3108:3499" placeholder="..." />
-            <marker date="1458342884000" expanded="true" signature="3229:3448" placeholder="..." />
-            <marker date="1458342884000" expanded="true" signature="3774:4083" placeholder="..." />
-            <marker date="1458342884000" expanded="true" signature="3826:4048" placeholder="..." />
-            <marker date="1458342884000" expanded="true" signature="3887:4009" placeholder="..." />
-            <marker date="1458342884000" expanded="true" signature="4207:4320" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/packages/citynexus/CityNexus/src/tests/CitynexusSettingsControllerTest.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.41558442">
-          <caret line="21" column="37" selection-start-line="21" selection-start-column="37" selection-end-line="21" selection-end-column="37" />
-          <folding>
-            <marker date="1458400471000" expanded="false" signature="11:169" placeholder="..." />
-            <marker date="1458400471000" expanded="true" signature="225:640" placeholder="{...}" />
-            <marker date="1458400471000" expanded="true" signature="293:343" placeholder=" ..." />
-            <marker date="1458400471000" expanded="true" signature="383:637" placeholder="{...}" />
-            <marker date="1458400471000" expanded="true" signature="443:463" placeholder="..." />
-            <marker date="1458400471000" expanded="true" signature="484:502" placeholder="..." />
-            <marker date="1458400471000" expanded="true" signature="523:552" placeholder="..." />
-            <marker date="1458400471000" expanded="true" signature="574:582" placeholder="..." />
-            <marker date="1458400471000" expanded="true" signature="608:629" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/packages/citynexus/CityNexus/src/tests/RiskScoreControllerTest.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.022727273">
@@ -1518,30 +1461,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/composer.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3488372">
-          <caret line="16" column="32" selection-start-line="16" selection-start-column="32" selection-end-line="16" selection-end-column="32" />
-          <folding>
-            <marker date="1458514426000" expanded="true" signature="0:1522" placeholder="{&quot;name&quot;: &quot;citynexus/citynexus&quot;...}" />
-            <marker date="1458514426000" expanded="true" signature="188:460" placeholder="{&quot;php&quot;: &quot;&gt;=5.5.9&quot;...}" />
-            <marker date="1458514426000" expanded="true" signature="481:629" placeholder="{&quot;fzaninotto/faker&quot;: &quot;~1.4&quot;...}" />
-            <marker date="1458514426000" expanded="true" signature="647:841" placeholder="{...}" />
-            <marker date="1458514426000" expanded="true" signature="669:703" placeholder="[...]" />
-            <marker date="1458514426000" expanded="true" signature="722:835" placeholder="{&quot;App\&quot;: &quot;app/&quot;...}" />
-            <marker date="1458514426000" expanded="true" signature="863:935" placeholder="{...}" />
-            <marker date="1458514426000" expanded="true" signature="885:929" placeholder="[...]" />
-            <marker date="1458514426000" expanded="true" signature="952:1461" placeholder="{...}" />
-            <marker date="1458514426000" expanded="true" signature="982:1070" placeholder="[...]" />
-            <marker date="1458514426000" expanded="true" signature="1098:1188" placeholder="[...]" />
-            <marker date="1458514426000" expanded="true" signature="1217:1263" placeholder="[...]" />
-            <marker date="1458514426000" expanded="true" signature="1302:1368" placeholder="[...]" />
-            <marker date="1458514426000" expanded="true" signature="1405:1455" placeholder="[...]" />
-            <marker date="1458514426000" expanded="true" signature="1477:1520" placeholder="{&quot;preferred-install&quot;: &quot;dist&quot;...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/session.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1601,6 +1520,50 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.44241574">
           <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1443581069000" expanded="true" signature="0:158" placeholder="{&quot;private&quot;: true...}" />
+            <marker date="1443581069000" expanded="true" signature="42:68" placeholder="{&quot;gulp&quot;: &quot;^3.8.8&quot;...}" />
+            <marker date="1443581069000" expanded="true" signature="88:156" placeholder="{&quot;laravel-elixir&quot;: &quot;^3.0.0&quot;...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.47655067">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding>
+            <marker date="1458514612000" expanded="true" signature="0:1523" placeholder="{&quot;name&quot;: &quot;citynexus/citynexus&quot;...}" />
+            <marker date="1458514612000" expanded="true" signature="188:460" placeholder="{&quot;php&quot;: &quot;&gt;=5.5.9&quot;...}" />
+            <marker date="1458514612000" expanded="true" signature="481:629" placeholder="{&quot;fzaninotto/faker&quot;: &quot;~1.4&quot;...}" />
+            <marker date="1458514612000" expanded="true" signature="648:842" placeholder="{...}" />
+            <marker date="1458514612000" expanded="true" signature="670:704" placeholder="[...]" />
+            <marker date="1458514612000" expanded="true" signature="723:836" placeholder="{&quot;App\&quot;: &quot;app/&quot;...}" />
+            <marker date="1458514612000" expanded="true" signature="864:936" placeholder="{...}" />
+            <marker date="1458514612000" expanded="true" signature="886:930" placeholder="[...]" />
+            <marker date="1458514612000" expanded="true" signature="953:1462" placeholder="{...}" />
+            <marker date="1458514612000" expanded="true" signature="983:1071" placeholder="[...]" />
+            <marker date="1458514612000" expanded="true" signature="1099:1189" placeholder="[...]" />
+            <marker date="1458514612000" expanded="true" signature="1218:1264" placeholder="[...]" />
+            <marker date="1458514612000" expanded="true" signature="1303:1369" placeholder="[...]" />
+            <marker date="1458514612000" expanded="true" signature="1406:1456" placeholder="[...]" />
+            <marker date="1458514612000" expanded="true" signature="1478:1521" placeholder="{&quot;preferred-install&quot;: &quot;dist&quot;...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.10948905">
+          <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
           <folding />
         </state>
       </provider>

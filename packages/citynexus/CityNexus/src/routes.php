@@ -20,7 +20,7 @@ Route::get('/jobs/clear-all', function(){
     $jobs = \Illuminate\Support\Facades\DB::table('jobs')->get();
         foreach($jobs as $job)
         {
-            DB::table('jobs')->where('id', $job->id)->delete;
+            DB::table('jobs')->where('id', $job->id)->delete();
         }
     return var_dump($jobs);
 });

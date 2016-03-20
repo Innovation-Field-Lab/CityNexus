@@ -31,7 +31,7 @@ class CreatePropertiesTable extends Migration {
             $table->string('tiger_line_id')->nullable();
             $table->string('side')->nullable();
             $table->integer('alias_of')->nullable();
-            $table->boolean('review')->default('false');
+            $table->boolean('review')->default(false);
             $table->timestamps();
         });
     }

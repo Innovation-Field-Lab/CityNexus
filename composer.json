@@ -11,8 +11,7 @@
         "yajra/laravel-datatables-oracle":"~6.0",
         "iron-io/iron_mq": "4.*",
         "maatwebsite/excel": "~2.0.0",
-        "pda/pheanstalk": "3.*"
-
+        "pda/pheanstalk": "^3.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

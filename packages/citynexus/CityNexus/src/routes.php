@@ -11,6 +11,14 @@
 |
 */
 
+Route::get('test', function()
+{
+
+    $geocode = Geocoder::geocode('23 monmouth Street, somerville ma');
+
+    return  var_dump($geocode);
+});
+
 Route::group(['middleware' => 'auth', 'prefix' => config('citynexus.root_directory') . '/risk-score' ], function() {
 
     Route::controller('/', 'CityNexus\CityNexus\Http\RiskScoreController');

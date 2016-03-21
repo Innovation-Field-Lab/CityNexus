@@ -3,6 +3,7 @@
 namespace CityNexus\CityNexus\Http;
 
 use App\Http\Controllers\Controller;
+use CityNexus\CityNexus\GeocodeJob;
 use CityNexus\CityNexus\Property;
 use CityNexus\CityNexus\DatasetQuery;
 use CityNexus\CityNexus\GenerateScore;
@@ -15,6 +16,8 @@ use CityNexus\CityNexus\Table;
 use CityNexus\CityNexus\ScoreBuilder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Queue;
+use CityNexus\CityNexus\Geocode;
 
 
 class CitynexusController extends Controller
@@ -54,6 +57,20 @@ class CitynexusController extends Controller
             ->with('scores', Score::all());
     }
 
+    public function getRunGeocoding()
+    {
+        $properties = Property::where('lat', null)->orWhere('long', null)->get();
+
+        foreach($properties as $i)
+        {
+            $id = $i->id;
+
+            $this->dispatch(new GeocodeJob($id));
+        }
+
+        return $properties->count();
+    }
+
 
     private function runScore($score, $elements)
     {
@@ -82,4 +99,6 @@ class CitynexusController extends Controller
         }
             $this->dispatch(new GenerateScore($elements, $score->id, FALSE));
     }
+
+
 }

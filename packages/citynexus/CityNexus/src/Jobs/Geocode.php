@@ -7,12 +7,12 @@ use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Queue;
+use Toin0u\Geocoder\Facade\Geocoder;
 
-class UploadData extends Job implements SelfHandling, ShouldQueue
+class GeocodeJob extends Job implements SelfHandling, ShouldQueue
 {
     use InteractsWithQueue, SerializesModels;
-    private $data;
-    private $tableId;
+    private $p_id;
     /**
      * Create a new job instance.
      *
@@ -20,10 +20,9 @@ class UploadData extends Job implements SelfHandling, ShouldQueue
      * @param string $table
      * @param Property $property
      */
-    public function __construct($data, $table_id)
+    public function __construct($id)
     {
-        $this->data = $data;
-        $this->tableId = $table_id;
+        $this->p_id = $id;
     }
     /**
      * Execute the job.
@@ -32,12 +31,16 @@ class UploadData extends Job implements SelfHandling, ShouldQueue
      */
     public function handle()
     {
-        $tabler = new TableBuilder();
-        //Process each individual record
-        foreach($this->data as $i)
+        // Get property record
+        $property = Property::find($this->p_id);
+        $geocode = Geocoder::geocode(   $property->full_address  . ', ' . config('citynexus.city_state'));
+
+        if($geocode)
         {
-            $tabler->addRecord($i, $this->tableId);
+            $property->lat = $geocode->getLatitude();
+            $property->long = $geocode->getLongitude();
         }
 
+        $property->save();
     }
 }

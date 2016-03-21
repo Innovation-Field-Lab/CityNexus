@@ -168,7 +168,7 @@ class TablerController extends Controller
 
         $pushValues = $tabler->findValues( $table->scheme, 'push' );
 
-        $data = array_chunk($data, 10);
+        $data = array_chunk($data, 2);
 
         try
         {

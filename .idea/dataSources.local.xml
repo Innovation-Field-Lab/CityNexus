@@ -1,29 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="dataSourceStorageLocal">
-    <data-source name="PostgreSQL - citynexus@localhost" uuid="34a99987-7e3a-4358-af39-f00db58ea16b">
+    <data-source name="PostgreSQL - citynexus@localhost" uuid="3e68fddb-21f0-49df-9bb4-9a43286f5e2a">
       <secret-storage>master_key</secret-storage>
       <user-name>homestead</user-name>
       <schema-pattern>citynexus.pg_catalog citynexus.public</schema-pattern>
       <default-schemas>citynexus.public</default-schemas>
-    </data-source>
-    <data-source name="PostgreSQL - jdbc:postgresql://172.31.26.134:5432/" uuid="7fd20f54-b924-4273-809a-eec04b9c6560">
-      <secret-storage>master_key</secret-storage>
-      <first-sync>true</first-sync>
-      <user-name>forge</user-name>
-      <ssh-properties>
-        <enabled>true</enabled>
-        <proxy-host>$USER_HOME$/.ssh/pem/Chelsea-cn.pem</proxy-host>
-        <proxy-port>22</proxy-port>
-        <secret-storage>master_key</secret-storage>
-        <user>ubuntu</user>
-        <use-password>false</use-password>
-        <private-key-path>$USER_HOME$/.ssh/pem/Chelsea-cn.pem</private-key-path>
-      </ssh-properties>
-      <ssl-config>
-        <client-key>$USER_HOME$/.ssh/pem/Chelsea-cn.pem</client-key>
-        <enabled>false</enabled>
-      </ssl-config>
     </data-source>
   </component>
 </project>

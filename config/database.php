@@ -42,7 +42,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'beanstalkd'),
+    'default' => env('DB_CONNECTION', 'pgsql'),
 
     /*
     |--------------------------------------------------------------------------

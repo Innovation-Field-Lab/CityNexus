@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="2856996870">
-    <data-source source="LOCAL" name="PostgreSQL - citynexus@localhost" uuid="34a99987-7e3a-4358-af39-f00db58ea16b">
+  <component name="DataSourceManagerImpl" format="xml" hash="3394147237">
+    <data-source source="LOCAL" name="PostgreSQL - citynexus@localhost" uuid="3e68fddb-21f0-49df-9bb4-9a43286f5e2a">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:54320/citynexus</jdbc-url>
-    </data-source>
-    <data-source source="LOCAL" name="PostgreSQL - jdbc:postgresql://172.31.26.134:5432/" uuid="7fd20f54-b924-4273-809a-eec04b9c6560">
-      <driver-ref>postgresql</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://172.31.26.134:5432/</jdbc-url>
     </data-source>
   </component>
 </project>

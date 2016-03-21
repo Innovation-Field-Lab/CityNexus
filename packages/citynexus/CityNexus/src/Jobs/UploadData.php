@@ -36,7 +36,10 @@ class UploadData extends Job implements SelfHandling, ShouldQueue
         //Process each individual record
         foreach($this->data as $i)
         {
-            $tabler->addRecord($i, $this->tableId);
+            $id = $tabler->addRecord($i, $this->tableId);
+
+            $this->dispatch(new GeocodeJob($id));
+
         }
 
     }

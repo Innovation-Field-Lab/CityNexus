@@ -3,14 +3,8 @@
   <component name="ChangeListManager">
     <list id="f245d100-7fe6-4351-ad10-4ca55977e733" name="Default" comment="Create and process score" />
     <list default="true" id="43cbeb70-df19-4bd0-8d81-005af99ed574" name="Failed commit: Default" comment="Update settings model&#10;">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/helpers/Geocode.php" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/citynexus.php" afterPath="$PROJECT_DIR$/config/citynexus.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/Http/CitynexusController.php" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/Http/CitynexusController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/Jobs/UploadData.php" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/Jobs/UploadData.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/PackageServiceProvider.php" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/PackageServiceProvider.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/helpers/TableBuilder.php" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/helpers/TableBuilder.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/routes.php" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/routes.php" />
     </list>
     <ignored path="citynexus.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -81,11 +75,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Geocode.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/packages/citynexus/CityNexus/src/Jobs/Geocode.php">
+      <file leaf-file-name="UploadData.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/packages/citynexus/CityNexus/src/Jobs/UploadData.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.80088496">
-              <caret line="43" column="26" selection-start-line="43" selection-start-column="26" selection-end-line="43" selection-end-column="26" />
+            <state vertical-scroll-proportion="0.7876106">
+              <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -152,9 +146,9 @@
         <option value="$PROJECT_DIR$/packages/citynexus/CityNexus/src/helpers/TableBuilder.php" />
         <option value="$PROJECT_DIR$/packages/citynexus/CityNexus/src/PackageServiceProvider.php" />
         <option value="$PROJECT_DIR$/.env" />
-        <option value="$PROJECT_DIR$/packages/citynexus/CityNexus/src/Jobs/UploadData.php" />
         <option value="$PROJECT_DIR$/packages/citynexus/CityNexus/src/Http/CitynexusController.php" />
         <option value="$PROJECT_DIR$/packages/citynexus/CityNexus/src/Jobs/Geocode.php" />
+        <option value="$PROJECT_DIR$/packages/citynexus/CityNexus/src/Jobs/UploadData.php" />
       </list>
     </option>
   </component>
@@ -1566,26 +1560,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/packages/citynexus/CityNexus/src/Jobs/UploadData.php">
+    <entry file="file://$PROJECT_DIR$/packages/citynexus/CityNexus/src/Jobs/Geocode.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6681416">
-          <caret line="38" column="51" selection-start-line="38" selection-start-column="51" selection-end-line="38" selection-end-column="51" />
+        <state vertical-scroll-proportion="0.80088496">
+          <caret line="43" column="26" selection-start-line="43" selection-start-column="26" selection-end-line="43" selection-end-column="26" />
           <folding>
-            <marker date="1458595154000" expanded="false" signature="41:294" placeholder="..." />
-            <marker date="1458595154000" expanded="true" signature="361:1023" placeholder="{...}" />
-            <marker date="1458595154000" expanded="true" signature="458:597" placeholder=" Create a new job instance. ..." />
-            <marker date="1458595154000" expanded="true" signature="649:726" placeholder="{...}" />
-            <marker date="1458595154000" expanded="true" signature="734:791" placeholder=" Execute the job. ..." />
-            <marker date="1458595154000" expanded="true" signature="822:1021" placeholder="{...}" />
-            <marker date="1458595154000" expanded="true" signature="942:1014" placeholder="{...}" />
+            <marker date="1458595273000" expanded="false" signature="41:331" placeholder="..." />
+            <marker date="1458595273000" expanded="true" signature="398:1167" placeholder="{...}" />
+            <marker date="1458595273000" expanded="true" signature="473:612" placeholder=" Create a new job instance. ..." />
+            <marker date="1458595273000" expanded="true" signature="651:690" placeholder="{...}" />
+            <marker date="1458595273000" expanded="true" signature="698:755" placeholder=" Execute the job. ..." />
+            <marker date="1458595273000" expanded="true" signature="786:1165" placeholder="{...}" />
+            <marker date="1458595273000" expanded="true" signature="1001:1131" placeholder="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/packages/citynexus/CityNexus/src/Http/CitynexusController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5132743">
-          <caret line="61" column="75" selection-start-line="61" selection-start-column="75" selection-end-line="61" selection-end-column="75" />
+        <state vertical-scroll-proportion="0.74115044">
+          <caret line="67" column="26" selection-start-line="67" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
           <folding>
             <marker date="1458595184000" expanded="true" signature="48:613" placeholder="..." />
             <marker date="1458595184000" expanded="true" signature="660:2721" placeholder="{...}" />
@@ -1606,10 +1600,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/packages/citynexus/CityNexus/src/Jobs/Geocode.php">
+    <entry file="file://$PROJECT_DIR$/packages/citynexus/CityNexus/src/Jobs/UploadData.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.80088496">
-          <caret line="43" column="26" selection-start-line="43" selection-start-column="26" selection-end-line="43" selection-end-column="26" />
+        <state vertical-scroll-proportion="0.7876106">
+          <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
           <folding />
         </state>
       </provider>

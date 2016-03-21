@@ -32,16 +32,14 @@ class PackageServiceProvider extends ServiceProvider
 
         include_once __DIR__ . '/helpers/DatasetQuery.php';
         include_once __DIR__ . '/helpers/ScoreBuilder.php';
+        include_once __DIR__ . '/helpers/Geocode.php';
+        include_once __DIR__ . '/helpers/Typer.php';
+        include_once __DIR__ . '/helpers/TableBuilder.php';
         include_once __DIR__ . '/Jobs/GenerateScore.php';
         include_once __DIR__ . '/models/Property.php';
         include_once __DIR__ . '/models/Score.php';
         include_once __DIR__ . '/models/Setting.php';
         include_once __DIR__ . '/models/Note.php';
-
-
-        //Load in the classes
-        include_once __DIR__ . '/helpers/Typer.php';
-        include_once __DIR__ . '/helpers/TableBuilder.php';
         include_once __DIR__ . '/models/Table.php';
         include_once __DIR__ . '/Jobs/UploadData.php';
 

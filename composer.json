@@ -11,7 +11,9 @@
         "yajra/laravel-datatables-oracle":"~6.0",
         "iron-io/iron_mq": "4.*",
         "maatwebsite/excel": "~2.0.0",
-        "pda/pheanstalk": "^3.1"
+        "pda/pheanstalk": "^3.1",
+        "toin0u/geocoder-laravel": "@stable"
+
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -40,8 +42,7 @@
             "php artisan optimize"
         ],
         "pre-update-cmd": [
-            "php artisan clear-compiled",
-            "php artisan queue:work"
+            "php artisan clear-compiled"
         ],
         "post-update-cmd": [
             "php artisan optimize"

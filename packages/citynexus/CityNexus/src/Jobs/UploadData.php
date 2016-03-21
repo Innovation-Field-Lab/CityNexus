@@ -14,7 +14,8 @@ class UploadData extends Job implements SelfHandling, ShouldQueue
     use InteractsWithQueue, SerializesModels;
 
     private $data;
-    private $tableId;
+    private $options;
+    private $table_name;
 
     /**
      * Create a new job instance.
@@ -23,11 +24,17 @@ class UploadData extends Job implements SelfHandling, ShouldQueue
      * @param string $table
      * @param Property $property
      */
-    public function __construct($data, $table_id)
+    public function __construct($data, $table, $scheme, $syncValues, $pushValues)
     {
 
         $this->data = $data;
-        $this->tableId = $table_id;
+        $this->options = [
+            'table' => $table,
+            'tableName' => $table->table_name,
+            'scheme' => $scheme,
+            'syncValues' => $syncValues,
+            'pushValues' => $pushValues
+        ];
 
     }
 
@@ -39,11 +46,10 @@ class UploadData extends Job implements SelfHandling, ShouldQueue
     public function handle()
     {
         $tabler = new TableBuilder();
-
         //Process each individual record
         foreach($this->data as $i)
         {
-            $tabler->addRecord($i, $this->tableId);
+            $tabler->addRecord($i, $this->options);
         }
 
     }

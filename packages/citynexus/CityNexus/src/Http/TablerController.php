@@ -160,7 +160,7 @@ class TablerController extends Controller
     public function processUpload($table, $data)
     {
 
-        $data = array_chunk($data, 100);
+        $data = array_chunk($data, 5);
 
         try
         {

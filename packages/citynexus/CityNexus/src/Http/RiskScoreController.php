@@ -80,7 +80,7 @@ class RiskScoreController extends Controller
         return view('citynexus::reports.ranking', compact('score', 'properties'));
     }
 
-    public function getHeatmap(Request $request)
+    public function getHeatMap(Request $request)
     {
         $rs = Score::find($request->get('score_id'));
         $scores = Score::all();

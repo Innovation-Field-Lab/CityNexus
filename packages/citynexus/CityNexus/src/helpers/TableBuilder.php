@@ -270,21 +270,35 @@ class TableBuilder
 
     }
 
-    public function addRecord($i, $options)
+    public function addRecord($i, $table_id)
     {
         //Create a empty array of the record
         $record = [];
 
+        $tabler = new TableBuilder();
+
+        //get the table
+        $table = \CityNexus\CityNexus\Table::find($table_id);
+
+        //create an array of sync values
+        $syncValues = $tabler->findValues( $table->scheme, 'sync' );
+
+        $pushValues = $tabler->findValues( $table->scheme, 'push' );
+
+        $scheme = json_decode($table->scheme);
+
+
+
         //if there is a sync value, identify the index id
-        if( count( $options['syncValues'] ) > 0)
+        if( count( $syncValues ) > 0)
         {
-            $record[config('tabler.index_id')] = $this->findSyncId( config('tabler.index_table'), $i, $options['syncValues']);
+            $record[config('tabler.index_id')] = $this->findSyncId( config('tabler.index_table'), $i, $syncValues );
         }
 
         //add remaining elements to the array
-        $record = $this->addElements( $record, $i, $options['scheme']);
+        $record = $this->addElements( $record, $i, $scheme);
 
-        foreach($options['scheme'] as $field)
+        foreach($scheme as $field)
         {
             if($field->type == 'integer' or $field->type == 'float')
             {
@@ -296,13 +310,13 @@ class TableBuilder
             }
         }
 
-        DB::table($options['tableName'])->insert($record);
+        DB::table($table->table_name)->insert($record);
 
         //If there are push values, update the primary property record
-        if(count($options['pushValues']) > 0)
+        if(count( $pushValues) > 0)
         {
             $property = Property::find($record['property_id']);
-            foreach ($options['pushValues'] as $key => $value)
+            foreach ($pushValues as $key => $value)
             {
                 $property->$value = $i[$key];
             }

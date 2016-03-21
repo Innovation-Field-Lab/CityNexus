@@ -23,17 +23,11 @@ class UploadData extends Job implements SelfHandling, ShouldQueue
      * @param string $table
      * @param Property $property
      */
-    public function __construct($data, $table, $scheme, $syncValues, $pushValues)
+    public function __construct($data, $table_id)
     {
 
         $this->data = $data;
-        $this->options = [
-            'table' => $table,
-            'tableName' => $table->table_name,
-            'scheme' => $scheme,
-            'syncValues' => $syncValues,
-            'pushValues' => $pushValues
-        ];
+        $this->table_id = $table_id;
 
     }
 
@@ -45,10 +39,11 @@ class UploadData extends Job implements SelfHandling, ShouldQueue
     public function handle()
     {
         $tabler = new TableBuilder();
+
         //Process each individual record
         foreach($this->data as $i)
         {
-            $tabler->addRecord($i, $this->options);
+            $tabler->addRecord($i, $this->table_id);
         }
 
     }

@@ -159,22 +159,14 @@ class TablerController extends Controller
 
     public function processUpload($table, $data)
     {
-        $scheme = json_decode($table->scheme);
 
-        $tabler = new TableBuilder();
-
-        //create an array of sync values
-        $syncValues = $tabler->findValues( $table->scheme, 'sync' );
-
-        $pushValues = $tabler->findValues( $table->scheme, 'push' );
-
-        $data = array_chunk($data, 2);
+        $data = array_chunk($data, 100);
 
         try
         {
             foreach($data as $i)
             {
-                $this->dispatch(new UploadData($i, $table, $scheme, $syncValues, $pushValues));
+                $this->dispatch(new UploadData($i, $table->id));
             }
         }
         catch(Exception $e)

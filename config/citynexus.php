@@ -5,6 +5,9 @@ return [
     // root directory
     'root_directory' => 'citynexus',
 
+    'app_name' => env('CITYNEXUS_NAME', 'CityNexus'),
+    'slogan' => env('CITYNEXUS_SLOGAN', 'Municipal Data Centralization'),
+
     // Layout variables
     "template" => 'layout.master',
     "section" => "main",

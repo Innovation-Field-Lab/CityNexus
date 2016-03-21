@@ -95,14 +95,11 @@ class TablerController extends Controller
         //turn file into an object
         $data = Excel::load($file, function($reader){$reader->toArray();});
 
+        $data = json_encode($data);
 
-        $data = json_encode(end($data));
+        $this->processUpload( $table, json_decode($data, true)['parsed']);
 
-        //process upload
-
-        $this->processUpload( $table, json_decode($data, true));
-
-        Session::flash('flash_success', 'Data successfully uploaded!');
+        Session::flash('flash_success', 'Data successfully uploaded and is being processed!');
 
         $table->touch();
 

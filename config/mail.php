@@ -1,5 +1,17 @@
 <?php
 
+$mail_password = 'c2dd4f93ab30f6db13a63fbc22e67a79';
+$mail_username = 'postmaster@sandbox47964c35f2ac45009d5a691b305c1a48.mailgun.org';
+$mail_from_address = 'postmaster@citynexus.org';
+$mail_from_name = 'CityNexus';
+$mail_smtp = 'smtp.mailgun.org';
+
+//$mail_password = \CityNexus\CityNexus\Setting::where('key', 'mail_password')->pluck('value');
+//$mail_username = \CityNexus\CityNexus\Setting::where('key', 'mail_username')->pluck('value');
+//$mail_from_address = \CityNexus\CityNexus\Setting::where('key', 'mail_from_address')->pluck('value');
+//$mail_from_name = \CityNexus\CityNexus\Setting::where('key', 'mail_from_name')->pluck('value');
+//$mail_smtp = \CityNexus\CityNexus\Setting::where('key', 'mail_smtp')->pluck('value');
+
 return [
 
     /*
@@ -28,7 +40,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+    'host' => env('MAIL_HOST', $mail_smtp),
 
     /*
     |--------------------------------------------------------------------------
@@ -54,7 +66,7 @@ return [
     |
     */
 
-    'from' => ['address' => null, 'name' => null],
+    'from' => ['address' => $mail_from_address, 'name' => $mail_from_name],
 
     /*
     |--------------------------------------------------------------------------
@@ -80,7 +92,7 @@ return [
     |
     */
 
-    'username' => env('MAIL_USERNAME'),
+    'username' => env('MAIL_USERNAME', $mail_username),
 
     /*
     |--------------------------------------------------------------------------
@@ -93,7 +105,7 @@ return [
     |
     */
 
-    'password' => env('MAIL_PASSWORD'),
+    'password' => env('MAIL_PASSWORD', $mail_password),
 
     /*
     |--------------------------------------------------------------------------

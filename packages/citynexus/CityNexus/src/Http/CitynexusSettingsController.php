@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Session;
 use League\Flysystem\Exception;
+use CityNexus\CityNexus\InviteUser;
 
 
 class CitynexusSettingsController extends Controller
@@ -60,6 +61,9 @@ class CitynexusSettingsController extends Controller
 
             //Save the user Model
             $user->save();
+
+            $this->dispatch(new InviteUser($user->id));
+
         }
         catch(\Exception $e) {
             Session::flash('flash_warning', "Uh oh. " . $e);

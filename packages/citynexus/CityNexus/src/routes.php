@@ -11,13 +11,55 @@
 |
 */
 
-Route::get('test', function()
+Route::get('/activate-account/', function()
 {
+    $token = $_GET['key'];
 
-    $geocode = Geocoder::geocode('23 monmouth Street, somerville ma');
 
-    return  var_dump($geocode);
+    if($user = \App\User::where('activation', $token)->first())
+    {
+        return view('citynexus::email.create-password')->with('token', $token);
+    }
+    else
+    {
+        return response('Permission Denied', 403);
+    }
 });
+
+Route::post('/activate-account', function()
+{
+    $password = $_POST['password'];
+    $confirm = $_POST['confirm-password'];
+    $token = $_POST['token'];
+    if($user = \App\User::where('activation', $token)->first())
+    {
+        if($password == $confirm)
+        {
+            $user->activation = null;
+            $user->fill([
+                'password' => Hash::make($password)
+            ])->save();
+
+            \Illuminate\Support\Facades\Auth::loginUsingId( $user->id );
+
+            return redirect('/');
+        }
+        else
+        {
+            \Illuminate\Support\Facades\Session::flash('flash_warning', "Passwords didn't match");
+            return redirect()->back();
+        }
+
+
+
+
+
+
+    }
+
+
+});
+
 
 Route::group(['middleware' => 'auth', 'prefix' => config('citynexus.root_directory') . '/risk-score' ], function() {
 

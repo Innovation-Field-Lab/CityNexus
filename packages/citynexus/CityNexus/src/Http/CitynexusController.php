@@ -3,6 +3,7 @@
 namespace CityNexus\CityNexus\Http;
 
 use App\Http\Controllers\Controller;
+use App\User;
 use CityNexus\CityNexus\GeocodeJob;
 use CityNexus\CityNexus\Property;
 use CityNexus\CityNexus\DatasetQuery;
@@ -71,7 +72,6 @@ class CitynexusController extends Controller
         return $properties->count();
     }
 
-
     private function runScore($score, $elements)
     {
         $properties = Property::all()->chunk(1000);
@@ -92,6 +92,8 @@ class CitynexusController extends Controller
 //        if(DB::table($table)->count() != 0)  { DB::table($table)->delete(); }
 
         $jobs = array();
+
+
 
         foreach($properties as $property)
         {

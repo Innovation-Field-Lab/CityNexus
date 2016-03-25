@@ -310,7 +310,7 @@ class TableBuilder
             }
         }
 
-        $id = DB::table($table->table_name)->insertGetId($record);
+        DB::table($table->table_name)->insertGetId($record);
 
         //If there are push values, update the primary property record
         if(count( $pushValues) > 0)
@@ -323,6 +323,6 @@ class TableBuilder
             $property->save();
         }
 
-        return $id;
+        return $record['property_id'];
     }
 }

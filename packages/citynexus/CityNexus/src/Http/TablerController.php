@@ -211,4 +211,13 @@ class TablerController extends Controller
         Session::flash('flash_success', "Records have been recorded as aliases.");
         return redirect(action('\CityNexus\CityNexus\Http\CitynexusController@getProperty', ['property_id' => $id]));
     }
+
+    public function getRemoveTable($id)
+    {
+        $table = Table::find($id);
+        $table_title = $table->table_title;
+        $table->delete();
+        Session::flash('flash_info', 'Table "' .  $table_title . '" successfully deleted');
+        return redirect()->back();
+    }
 }

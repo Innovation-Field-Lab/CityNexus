@@ -4,7 +4,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div class="panel-title">
-                    All Data Sets
+                    All Risk Scores
                 </div>
             </div>
             <div class="panel-body">
@@ -32,7 +32,6 @@
                                     <a class="btn btn-sm btn-primary update-{{$score->id}}" href="/{{config('citynexus.root_directory')}}/risk-score/ranking/{{$score->id}}">Ranking</a>
                                     @endif
                                     <a class="btn btn-sm btn-primary update-{{$score->id}}" href="/{{config('citynexus.root_directory')}}/risk-score/duplicate-score?score_id={{$score->id}}">Duplicate</a>
-
                                 </td>
                             </tr>
                     @endforeach

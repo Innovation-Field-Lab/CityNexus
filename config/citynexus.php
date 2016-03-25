@@ -49,6 +49,7 @@ return [
     'map_lat' => env('MAP_LAT', 45),
     'map_long' => env('MAP_LONG', 45),
     'map_zoom' => env('MAP_ZOOM', 15),
+    'gmap_api' => env('GMAP_API', 'AIzaSyCI2g5iCOjoJu6i4P25ATKcG1_V3dFfwjI'),
 
     // Address matching arrarys
 

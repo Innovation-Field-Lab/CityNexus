@@ -71,7 +71,6 @@
         ];
 
         map.setOptions({styles: styles});
-
         heatmap = new google.maps.visualization.HeatmapLayer({
             data: getPoints(),
             map: map
@@ -99,6 +98,6 @@
 </script>
 
 <script async defer
-        src="https://maps.googleapis.com/maps/api/js?signed_in=true&libraries=visualization&callback=initMap">
+        src="https://maps.googleapis.com/maps/api/js?signed_in=true&libraries=visualization&key={{config('citynexus.gmap_api')}}&callback=initMap">
 </script>
 @endpush

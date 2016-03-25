@@ -4,6 +4,7 @@
     <list id="f245d100-7fe6-4351-ad10-4ca55977e733" name="Default" comment="Create and process score" />
     <list default="true" id="43cbeb70-df19-4bd0-8d81-005af99ed574" name="Failed commit: Default" comment="Update settings model&#10;">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/citynexus.php" afterPath="$PROJECT_DIR$/config/citynexus.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/views/reports/maps/heatmap.blade.php" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/views/reports/maps/heatmap.blade.php" />
     </list>
     <ignored path="citynexus.iws" />
@@ -96,14 +97,14 @@
     <favorites_list name="citynexus" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="vertical" split-proportion="0.51111114">
+    <splitter split-orientation="vertical" split-proportion="0.18632479">
       <split-first>
         <leaf>
           <file leaf-file-name="citynexus.php" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/config/citynexus.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.61538464">
-                  <caret line="49" column="36" selection-start-line="49" selection-start-column="36" selection-end-line="49" selection-end-column="36" />
+                <state vertical-scroll-proportion="-0.72289157">
+                  <caret line="45" column="0" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -116,8 +117,8 @@
           <file leaf-file-name="heatmap.blade.php" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/packages/citynexus/CityNexus/src/views/reports/maps/heatmap.blade.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.5249042">
-                  <caret line="45" column="42" selection-start-line="45" selection-start-column="42" selection-end-line="45" selection-end-column="42" />
+                <state vertical-scroll-proportion="0.7339246">
+                  <caret line="100" column="53" selection-start-line="100" selection-start-column="53" selection-end-line="100" selection-end-column="68" />
                   <folding />
                 </state>
               </provider>
@@ -173,7 +174,6 @@
         <option value="$PROJECT_DIR$/packages/citynexus/CityNexus/src/Http/CitynexusSettingsController.php" />
         <option value="$PROJECT_DIR$/database/migrations/2016_03_24_170602_add_activation_to_user.php" />
         <option value="$PROJECT_DIR$/config/mail.php" />
-        <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/packages/citynexus/CityNexus/src/Jobs/InviteUser.php" />
         <option value="$PROJECT_DIR$/packages/citynexus/CityNexus/src/Http/CitynexusController.php" />
         <option value="$PROJECT_DIR$/src/Http/CitynexusController.php" />
@@ -188,6 +188,7 @@
         <option value="$PROJECT_DIR$/packages/citynexus/CityNexus/src/Http/TablerController.php" />
         <option value="$PROJECT_DIR$/database/migrations/2015_01_10_000000_create_properties_table.php" />
         <option value="$PROJECT_DIR$/config/citynexus.php" />
+        <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/packages/citynexus/CityNexus/src/views/reports/maps/heatmap.blade.php" />
       </list>
     </option>
@@ -697,7 +698,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21243942" sideWeight="0.35714287" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33764136" sideWeight="0.64285713" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23021002" sideWeight="0.64285713" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.13934426" sideWeight="0.49353796" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.52868855" sideWeight="0.509693" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.062197093" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -894,13 +895,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.655527">
           <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.env">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.39951575">
-          <caret line="11" column="17" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
         </state>
       </provider>
     </entry>
@@ -1455,18 +1449,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.env">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5368421">
+          <caret line="17" column="49" selection-start-line="17" selection-start-column="49" selection-end-line="17" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/config/citynexus.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.61538464">
-          <caret line="49" column="36" selection-start-line="49" selection-start-column="36" selection-end-line="49" selection-end-column="36" />
+        <state vertical-scroll-proportion="-0.72289157">
+          <caret line="45" column="0" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/packages/citynexus/CityNexus/src/views/reports/maps/heatmap.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5249042">
-          <caret line="45" column="42" selection-start-line="45" selection-start-column="42" selection-end-line="45" selection-end-column="42" />
+        <state vertical-scroll-proportion="0.7339246">
+          <caret line="100" column="53" selection-start-line="100" selection-start-column="53" selection-end-line="100" selection-end-column="68" />
           <folding />
         </state>
       </provider>

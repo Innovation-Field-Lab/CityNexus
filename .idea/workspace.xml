@@ -3,16 +3,9 @@
   <component name="ChangeListManager">
     <list id="f245d100-7fe6-4351-ad10-4ca55977e733" name="Default" comment="Create and process score" />
     <list default="true" id="43cbeb70-df19-4bd0-8d81-005af99ed574" name="Failed commit: Default" comment="Update settings model&#10;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.ids" afterPath="$PROJECT_DIR$/.idea/dataSources.ids" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.lock" afterPath="$PROJECT_DIR$/composer.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/mail.php" afterPath="$PROJECT_DIR$/config/mail.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/Http/CitynexusController.php" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/Http/CitynexusController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/Http/CitynexusSettingsController.php" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/Http/CitynexusSettingsController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/PackageServiceProvider.php" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/PackageServiceProvider.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/helpers/TableBuilder.php" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/helpers/TableBuilder.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/routes.php" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/routes.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/app.php" afterPath="$PROJECT_DIR$/config/app.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/views/email/activate.blade.php" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/views/email/activate.blade.php" />
     </list>
     <ignored path="citynexus.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -104,14 +97,14 @@
     <favorites_list name="citynexus" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="vertical" split-proportion="0.62923354">
+    <splitter split-orientation="vertical" split-proportion="0.7752212">
       <split-first>
         <leaf>
-          <file leaf-file-name="activate.blade.php" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/packages/citynexus/CityNexus/src/views/email/activate.blade.php">
+          <file leaf-file-name="app.php" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/config/app.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.059642147">
-                  <caret line="2" column="49" selection-start-line="2" selection-start-column="49" selection-end-line="2" selection-end-column="49" />
+                <state vertical-scroll-proportion="0.8373786">
+                  <caret line="28" column="45" selection-start-line="28" selection-start-column="45" selection-end-line="28" selection-end-column="45" />
                   <folding />
                 </state>
               </provider>
@@ -124,7 +117,7 @@
           <file leaf-file-name="create-password.blade.php" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/packages/citynexus/CityNexus/src/views/email/create-password.blade.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="1.0069686">
+                <state vertical-scroll-proportion="2.8333333">
                   <caret line="70" column="70" selection-start-line="70" selection-start-column="70" selection-end-line="70" selection-end-column="70" />
                   <folding />
                 </state>
@@ -176,7 +169,6 @@
         <option value="$PROJECT_DIR$/src/views/risk-score/index.blade.php" />
         <option value="$PROJECT_DIR$/packages/citynexus/CityNexus/src/Http/RiskScoreController.php" />
         <option value="$PROJECT_DIR$/packages/citynexus/CityNexus/src/Jobs/GeocodeAddress.php" />
-        <option value="$PROJECT_DIR$/config/app.php" />
         <option value="$PROJECT_DIR$/composer.json" />
         <option value="$PROJECT_DIR$/packages/citynexus/CityNexus/src/helpers/Geocode.php" />
         <option value="$PROJECT_DIR$/packages/citynexus/CityNexus/src/Jobs/Geocode.php" />
@@ -197,6 +189,7 @@
         <option value="$PROJECT_DIR$/packages/citynexus/CityNexus/src/views/email/create-password.blade.php" />
         <option value="$PROJECT_DIR$/packages/citynexus/CityNexus/src/routes.php" />
         <option value="$PROJECT_DIR$/packages/citynexus/CityNexus/src/views/email/activate.blade.php" />
+        <option value="$PROJECT_DIR$/config/app.php" />
       </list>
     </option>
   </component>
@@ -839,9 +832,9 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.13934426" sideWeight="0.49353796" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.52868855" sideWeight="0.509693" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12992546" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16897233" sideWeight="0.29925454" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4416996" sideWeight="0.29925454" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24920128" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16897233" sideWeight="0.70074546" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4416996" sideWeight="0.70074546" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.68379444" sideWeight="0.47550586" order="7" side_tool="false" content_ui="tabs" />
@@ -1050,13 +1043,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.38155803">
           <caret line="16" column="5" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/app.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.4554455">
-          <caret line="149" column="54" selection-start-line="149" selection-start-column="54" selection-end-line="149" selection-end-column="54" />
         </state>
       </provider>
     </entry>
@@ -1430,7 +1416,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/packages/citynexus/CityNexus/src/views/email/create-password.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.0069686">
+        <state vertical-scroll-proportion="2.8333333">
           <caret line="70" column="70" selection-start-line="70" selection-start-column="70" selection-end-line="70" selection-end-column="70" />
           <folding />
         </state>
@@ -1467,8 +1453,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/packages/citynexus/CityNexus/src/views/email/activate.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.059642147">
-          <caret line="2" column="49" selection-start-line="2" selection-start-column="49" selection-end-line="2" selection-end-column="49" />
+        <state vertical-scroll-proportion="0.1754386">
+          <caret line="2" column="34" selection-start-line="2" selection-start-column="34" selection-end-line="2" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/app.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8373786">
+          <caret line="28" column="45" selection-start-line="28" selection-start-column="45" selection-end-line="28" selection-end-column="45" />
           <folding />
         </state>
       </provider>

@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list id="f245d100-7fe6-4351-ad10-4ca55977e733" name="Default" comment="Create and process score" />
     <list default="true" id="43cbeb70-df19-4bd0-8d81-005af99ed574" name="Failed commit: Default" comment="Update settings model&#10;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/citynexus.php" afterPath="$PROJECT_DIR$/config/citynexus.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/views/reports/maps/heatmap.blade.php" afterPath="$PROJECT_DIR$/packages/citynexus/CityNexus/src/views/reports/maps/heatmap.blade.php" />
     </list>
     <ignored path="citynexus.iws" />
@@ -116,8 +116,8 @@
           <file leaf-file-name="heatmap.blade.php" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/packages/citynexus/CityNexus/src/views/reports/maps/heatmap.blade.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.7547893">
-                  <caret line="52" column="26" selection-start-line="52" selection-start-column="26" selection-end-line="52" selection-end-column="26" />
+                <state vertical-scroll-proportion="0.5249042">
+                  <caret line="45" column="42" selection-start-line="45" selection-start-column="42" selection-end-line="45" selection-end-column="42" />
                   <folding />
                 </state>
               </provider>
@@ -187,8 +187,8 @@
         <option value="$PROJECT_DIR$/packages/citynexus/CityNexus/src/views/tabler/index.blade.php" />
         <option value="$PROJECT_DIR$/packages/citynexus/CityNexus/src/Http/TablerController.php" />
         <option value="$PROJECT_DIR$/database/migrations/2015_01_10_000000_create_properties_table.php" />
-        <option value="$PROJECT_DIR$/packages/citynexus/CityNexus/src/views/reports/maps/heatmap.blade.php" />
         <option value="$PROJECT_DIR$/config/citynexus.php" />
+        <option value="$PROJECT_DIR$/packages/citynexus/CityNexus/src/views/reports/maps/heatmap.blade.php" />
       </list>
     </option>
   </component>
@@ -1465,8 +1465,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/packages/citynexus/CityNexus/src/views/reports/maps/heatmap.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7547893">
-          <caret line="52" column="26" selection-start-line="52" selection-start-column="26" selection-end-line="52" selection-end-column="26" />
+        <state vertical-scroll-proportion="0.5249042">
+          <caret line="45" column="42" selection-start-line="45" selection-start-column="42" selection-end-line="45" selection-end-column="42" />
           <folding />
         </state>
       </provider>

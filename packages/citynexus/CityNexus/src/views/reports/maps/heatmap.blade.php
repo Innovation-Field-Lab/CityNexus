@@ -43,7 +43,7 @@
 
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
-            zoom: {{config('citynexus.zoom')}},
+            zoom: {{config('citynexus.map_zoom')}},
             center: {lat: {{config('citynexus.map_lat')}}, lng: {{config('citynexus.map_long')}}},
             mapTypeId: google.maps.MapTypeId.MAP
         });

@@ -7,6 +7,8 @@ use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Queue;
+use Toin0u\Geocoder\Facade\Geocoder;
+
 
 class UploadData extends Job implements SelfHandling, ShouldQueue
 {
@@ -38,7 +40,17 @@ class UploadData extends Job implements SelfHandling, ShouldQueue
         {
             $id = $tabler->addRecord($i, $this->tableId);
 
-            $this->dispatch(new GeocodeJob($id));
+            // Get property record
+            $property = Property::find($id);
+            $geocode = Geocoder::geocode(   $property->full_address  . ', ' . config('citynexus.city_state'));
+
+            if($geocode)
+            {
+                $property->lat = $geocode->getLatitude();
+                $property->long = $geocode->getLongitude();
+            }
+
+            $property->save();
 
         }
 

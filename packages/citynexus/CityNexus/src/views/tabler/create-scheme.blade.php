@@ -19,7 +19,7 @@
                         </div>
                         <div class="col-sm-4">
                             <div class="alert alert-warning">
-                                If you choose to use a timestamp, <b>all</b> future uploads will need to have a time stamp or may cause an error.
+                                Only choose a field with an assigned type of Date Time. If you choose to use a timestamp, <b>all</b> future uploads will need to have a time stamp or may cause an error.
                             </div>
                             <div class="form-group">
                                 <label for="timestamp" class="control-label col-sm-4">Time Stamp</label>

@@ -122,7 +122,8 @@ class TablerController extends Controller
 
         if($request->get('note') != null)
         {
-            $upload->note = $request->get('note')->save();
+            $upload->note = $request->get('note');
+            $upload->save();
         }
 
         $this->processUpload( $table, json_decode($data, true)['parsed'], $upload->id);

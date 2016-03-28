@@ -12,12 +12,15 @@
                     {{csrf_field()}}
                     <div class="alert alert-info">
                         Please upload a csv file with the following titles in the first row.<br>
-
-                        @foreach(json_decode($table->scheme) as $i)
+                             @foreach(json_decode($table->scheme) as $i)
                             <div class="label label-default">{{$i->key}}</div>
                         @endforeach
                     </div>
+                    <label for="note">Description of Upload</label>
+                    <input type="text" name="note" id="note" class="form-control">
+                    <br>
                     <input type="file" name="file">
+                    <br>
                     <input type="submit" value="Upload" class="btn btn-primary">
                 </form>
             </div>

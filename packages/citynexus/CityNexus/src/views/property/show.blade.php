@@ -61,7 +61,7 @@
                                             <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#{{preg_replace('/\s+/', '_', $key)}}_detail" aria-expanded="false" aria-controls="collapseTwo">
                                                 {{$tables->find($key)->table_title}}
                                             </a>
-                                            <a class="glyphicon glyphicon-cog pull-right" href="/{{config('tabler.root_directory')}}/edit-table?table_id={{$key}}"></a>
+                                            <a class="glyphicon glyphicon-cog pull-right" href="/{{config('tabler.root_directory')}}/edit-table/{{$key}}"></a>
 
                                         </h4>
                                     </div>

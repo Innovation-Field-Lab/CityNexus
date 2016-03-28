@@ -298,6 +298,8 @@ class TableBuilder
 
         //add remaining elements to the array
         $record = $this->addElements( $record, $i, $scheme);
+        $record['upload_id'] = $upload_id;
+
 
         foreach($scheme as $field)
         {

@@ -15,6 +15,7 @@ class CreateUploadTable extends Migration
         Schema::create('citynexus_uploads', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('table_id');
+            $table->string('note')->nullable();
             $table->timestamps();
         });
     }

@@ -14,6 +14,7 @@
                         Please upload a csv file with field titles in the first row.
                     </div>
                     <input type="file" name="file">
+                    <br>
                     <input type="submit" value="Upload" class="btn btn-primary">
                 </form>
             </div>

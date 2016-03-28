@@ -3,6 +3,7 @@
 namespace CityNexus\CityNexus\Http;
 
 use CityNexus\CityNexus\Property;
+use CityNexus\CityNexus\Upload;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Session;
 use Mockery\CountValidator\Exception;
@@ -70,7 +71,9 @@ class TablerController extends Controller
         $table->table_description = $request->get('table_description');
         $table->save();
 
-        $this->processUpload( $table, json_decode($table->raw_upload, true)['parsed'] );
+        $upload = Upload::create(['table_id' => $table->id, 'note' => 'Initial Upload']);
+
+        $this->processUpload( $table, json_decode($table->raw_upload, true)['parsed'], $upload->id);
 
         $table->raw_upload = null;
         $table->save();
@@ -87,7 +90,13 @@ class TablerController extends Controller
 
     public function postNewUpload($id, Request $request)
     {
+
+        $this->validate($request, [
+           'note' => 'max:255'
+        ]);
+
         $table = Table::find($id);
+
 
         //get uploaded file
         $file = $request->file('file');
@@ -97,7 +106,16 @@ class TablerController extends Controller
 
         $data = json_encode($data);
 
-        $this->processUpload( $table, json_decode($data, true)['parsed']);
+        $upload = Upload::create([
+            'table_id' => $id,
+        ]);
+
+        if($request->get('note') != null)
+        {
+            $upload->note = $request->get('note')->save();
+        }
+
+        $this->processUpload( $table, json_decode($data, true)['parsed'], $upload->id);
 
         Session::flash('flash_success', 'Data successfully uploaded and is being processed!');
 
@@ -151,10 +169,11 @@ class TablerController extends Controller
      *
      * @param $table
      * @param $data
+     * @param $upload_id
      * @return bool
      */
 
-    public function processUpload($table, $data)
+    public function processUpload($table, $data, $upload_id)
     {
 
         $data = array_chunk($data, 5);
@@ -163,7 +182,7 @@ class TablerController extends Controller
         {
             foreach($data as $i)
             {
-                $this->dispatch(new UploadData($i, $table->id));
+                $this->dispatch(new UploadData($i, $table->id, $upload_id));
             }
         }
         catch(Exception $e)

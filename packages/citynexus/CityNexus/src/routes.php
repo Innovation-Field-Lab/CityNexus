@@ -35,6 +35,11 @@ Route::post('/activate-account', function()
     {
         if($password == $confirm)
         {
+            if(strlen($password) < 8)
+            {
+                \Illuminate\Support\Facades\Session::flash('flash_warning', "Password must be at least 8 characters");
+                return redirect()->back();
+            }
             $user->activation = null;
             $user->fill([
                 'password' => Hash::make($password)
@@ -49,15 +54,7 @@ Route::post('/activate-account', function()
             \Illuminate\Support\Facades\Session::flash('flash_warning', "Passwords didn't match");
             return redirect()->back();
         }
-
-
-
-
-
-
     }
-
-
 });
 
 

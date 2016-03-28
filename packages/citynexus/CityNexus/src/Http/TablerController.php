@@ -5,6 +5,7 @@ namespace CityNexus\CityNexus\Http;
 use CityNexus\CityNexus\Property;
 use CityNexus\CityNexus\Upload;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Mockery\CountValidator\Exception;
 use CityNexus\CityNexus\Typer;
@@ -238,5 +239,20 @@ class TablerController extends Controller
         $table->delete();
         Session::flash('flash_info', 'Table "' .  $table_title . '" successfully deleted');
         return redirect()->back();
+    }
+
+    public function getRollback($id)
+    {
+        $table = Table::find($id);
+        return view('citynexus::tabler.rollback', compact('table'));
+    }
+    public function getRemoveUpload($id)
+    {
+        $upload = Upload::find($id);
+        DB::table($upload->table->table_name)->where('upload_id', $upload->id)->delete();
+
+        $upload->delete();
+
+        return redirect(config('citynexus.tabler_root'));
     }
 }

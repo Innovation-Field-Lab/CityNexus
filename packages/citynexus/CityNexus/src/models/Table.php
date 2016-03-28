@@ -9,4 +9,8 @@ class Table extends Model {
     protected $table =  'tabler_tables';
     protected $fillable = ['table_name', 'table_title', 'table_description', 'scheme', 'raw_upload'];
 
+    public function uploads()
+    {
+        return $this->hasMany('CityNexus\CityNexus\Upload');
+    }
 }

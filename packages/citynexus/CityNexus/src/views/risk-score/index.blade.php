@@ -1,6 +1,6 @@
-@extends(config('tabler.template'))
+@extends(config('citynexus.template'))
 
-@section(config('tabler.section'))
+@section(config('citynexus.section'))
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div class="panel-title">

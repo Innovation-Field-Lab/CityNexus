@@ -26,7 +26,7 @@ return [
         'house_number' => 'House Number',
         'street_name' => 'Street Name',
         'unit' => 'Unit',
-        'full_address' => 'Full Address'
+        'full_address' => 'Full Address',
     ],
 
     // Push data point to master file

@@ -6,6 +6,7 @@ use CityNexus\CityNexus\Property;
 use CityNexus\CityNexus\Upload;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Session;
 use Mockery\CountValidator\Exception;
 use CityNexus\CityNexus\Typer;
@@ -233,12 +234,24 @@ class TablerController extends Controller
         return redirect(action('\CityNexus\CityNexus\Http\CitynexusController@getProperty', ['property_id' => $id]));
     }
 
-    public function getRemoveTable($id)
+    public function getRemoveTable($id, $hard = null)
     {
         $table = Table::find($id);
         $table_title = $table->table_title;
-        $table->delete();
-        Session::flash('flash_info', 'Table "' .  $table_title . '" successfully deleted');
+
+        if($hard == 'destroy')
+        {
+            Schema::dropIfExists($table->table_name);
+            $table->forceDelete();
+            Session::flash('flash_info', 'Table "' .  $table_title . '" successfully destroyed');
+
+        }
+        else
+        {
+            $table->delete();
+            Session::flash('flash_info', 'Table "' .  $table_title . '" successfully deleted');
+
+        }
         return redirect()->back();
     }
 

@@ -27,7 +27,7 @@ class TableBuilder
                 $table->integer('upload_id');
 
                 // Add another index field if one is set in the config file.
-                if (config('citynexus.index_id') != null && config('tabler.index_id') != 'id') {
+                if (config('citynexus.index_id') != null && config('citynexus.index_id') != 'id') {
                     $table->integer(config('citynexus.index_id'))->nullable();
                 }
 
@@ -288,29 +288,31 @@ class TableBuilder
 
         $scheme = json_decode($table->scheme);
 
-
-
         //if there is a sync value, identify the index id
         if( count( $syncValues ) > 0)
         {
-            $record[config('tabler.index_id')] = $this->findSyncId( config('tabler.index_table'), $i, $syncValues );
+            $record[config('citynexus.index_id')] = $this->findSyncId( config('citynexus.index_table'), $i, $syncValues );
         }
 
         //add remaining elements to the array
         $record = $this->addElements( $record, $i, $scheme);
         $record['upload_id'] = $upload_id;
 
-
         foreach($scheme as $field)
         {
             if($field->type == 'integer' or $field->type == 'float')
             {
-                if(array_key_exists($field->key, $record)) $record[$field->key] = floatval($record[$field->key]);
+                if(array_key_exists($field->key, $record)) $record[$field->key] = floatval(preg_replace("/[^0-9,.]/", "", $record[$field->key]));
             }
             elseif($field->type == 'datetime')
             {
-                if(array_key_exists($field->key, $record)) $record[$field->key] = strtotime($record[$field->key]);
+                if(array_key_exists($field->key, $record)) $record[$field->key] = Carbon::createFromTimestamp(strtotime($record[$field->key]));
             }
+        }
+
+        if($table->timestamp != null)
+        {
+            $record['created_at'] = $record[$table->timestamp];
         }
 
         DB::table($table->table_name)->insertGetId($record);

@@ -15,6 +15,7 @@ class UploadData extends Job implements SelfHandling, ShouldQueue
     use InteractsWithQueue, SerializesModels;
     private $data;
     private $tableId;
+    private $uploadId;
     /**
      * Create a new job instance.
      *
@@ -22,10 +23,11 @@ class UploadData extends Job implements SelfHandling, ShouldQueue
      * @param string $table
      * @param Property $property
      */
-    public function __construct($data, $table_id)
+    public function __construct($data, $table_id, $upload_id)
     {
         $this->data = $data;
         $this->tableId = $table_id;
+        $this->uploadId = $upload_id;
     }
     /**
      * Execute the job.
@@ -38,7 +40,7 @@ class UploadData extends Job implements SelfHandling, ShouldQueue
         //Process each individual record
         foreach($this->data as $i)
         {
-            $id = $tabler->addRecord($i, $this->tableId);
+            $id = $tabler->addRecord($i, $this->tableId, $this->uploadId);
 
             // Get property record
             $property = Property::find($id);

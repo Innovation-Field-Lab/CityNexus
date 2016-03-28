@@ -40,6 +40,7 @@ class PackageServiceProvider extends ServiceProvider
         include_once __DIR__ . '/models/Setting.php';
         include_once __DIR__ . '/models/Note.php';
         include_once __DIR__ . '/models/Table.php';
+        include_once __DIR__ . '/models/Upload.php';
         include_once __DIR__ . '/Jobs/UploadData.php';
         include_once __DIR__ . '/Jobs/Geocode.php';
         include_once __DIR__ . '/Jobs/InviteUser.php';

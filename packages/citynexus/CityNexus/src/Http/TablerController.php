@@ -106,14 +106,14 @@ class TablerController extends Controller
         return redirect('/tabler/');
     }
 
-    public function getEditTable(Request $request)
+    public function getEditTable($id)
     {
-        $table = Table::find($request->get('table_id'));
+        $table = Table::find($id);
         $scheme = json_decode($table->scheme);
         return view('citynexus::tabler.edit', compact('table', 'scheme'));
     }
 
-    public function postUpdateTable(Request $request)
+    public function postUpdateTable($id, Request $request)
     {
         $this->validate($request, [
             'table_title' => 'max:255|required',
@@ -122,7 +122,7 @@ class TablerController extends Controller
 
         try {
 
-            $table = Table::find($request->get('id'));
+            $table = Table::find($id);
 
             $table->table_title = $request->get('table_title');
             $table->table_description = $request->get('table_description');
@@ -132,9 +132,9 @@ class TablerController extends Controller
         }
         catch(Exception $e)
         {
-            Session::flash('flash_danger', '$e');
+            Session::flash('flash_warning', $e);
 
-            return back();
+            return $e;
         }
         finally
         {

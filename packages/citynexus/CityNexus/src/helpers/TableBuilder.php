@@ -24,6 +24,7 @@ class TableBuilder
             Schema::create($table_name, function (Blueprint $table) use ($fields) {
                 // Create table's index id file
                 $table->increments('id');
+                $table->integer('upload_id');
 
                 // Add another index field if one is set in the config file.
                 if (config('citynexus.index_id') != null && config('tabler.index_id') != 'id') {
@@ -270,7 +271,7 @@ class TableBuilder
 
     }
 
-    public function addRecord($i, $table_id)
+    public function addRecord($i, $table_id, $upload_id)
     {
         //Create a empty array of the record
         $record = [];

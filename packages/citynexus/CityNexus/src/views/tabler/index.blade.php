@@ -6,7 +6,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 All Data Sets
-                <a href="/{{config('citynexus.tabler_root')}}/new?type=form" class="btn btn-primary btn-xs pull-right"><i class="glyphicon glyphicon-plus"></i> New Data Set</a>
+                <a href="/{{config('citynexus.tabler_root')}}/uploader" class="btn btn-primary btn-xs pull-right"><i class="glyphicon glyphicon-plus"></i> New Data Set</a>
             </div>
             <div class="panel-body">
                 <table class="table" id="table">
@@ -34,6 +34,7 @@
                             </td>
                             <td>
                                 <a class="btn btn-sm btn-primary" href="/{{config('citynexus.tabler_root')}}/new-upload/{{$table->id}}">Upload</a>
+                                <a class="btn btn-sm btn-primary" href="/{{config('citynexus.tabler_root')}}/edit-table/{{$table->id}}">Edit</a>
                                 <a class="btn btn-sm btn-danger" href="/{{config('citynexus.tabler_root')}}/remove-table/{{$table->id}}"><i class="glyphicon glyphicon-trash"></i></a>
                             </td>
                         </tr>

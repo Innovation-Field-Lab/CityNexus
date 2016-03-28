@@ -30,6 +30,9 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="alert alert-warning">
+                                If you choose to use a timestamp, all future uploads will need to have a time stamp or it may cause an error.
+                            </div>
                         </div>
                     </div>
                     <br><br>

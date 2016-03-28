@@ -1,4 +1,4 @@
-<b>Mon. 28 March 2016 16:00 - Stable Beta Release</b></b><br>
+<b>v0.1.0 - Mon. 28 March 2016 11:00</b></b><br>
 - Authentication Layer<br>
 - Data Uploader<br>
 - Property Data Cleaner<br>

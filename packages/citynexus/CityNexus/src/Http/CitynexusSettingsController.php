@@ -19,6 +19,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Session;
 use League\Flysystem\Exception;
 use CityNexus\CityNexus\InviteUser;
+use Illuminate\Support\Facades\Hash;
 
 
 class CitynexusSettingsController extends Controller
@@ -27,9 +28,10 @@ class CitynexusSettingsController extends Controller
     {
         $app_s = Setting::all();
         $user_s = Setting::where('user_id', Auth::id());
+        $user = Auth::getUser();
         $users = User::all();
 
-        return view('citynexus::settings.edit', compact('app_s', 'user_s', 'users'));
+        return view('citynexus::settings.edit', compact('app_s', 'user_s', 'users', 'user'));
 
     }
 
@@ -90,5 +92,39 @@ class CitynexusSettingsController extends Controller
     private function testPref($request, $pref)
     {
         if(isset($request[$pref]) | isset($request['admin'])) return true; else return false;
+    }
+
+    public function postUpdateUser(Request $request)
+    {
+
+        $user = Auth::getUser();
+        $user->email = $request->get('email');
+        if($request->exists('password'))
+        {
+            if(Hash::check($request->get('password'), $user->password))
+            {
+                if($request->get('new_password') == $request->get('confirm_password'))
+                {
+                    $user->password = Hash::make($request->get('new_password'));
+                }
+                else
+                {
+                    Session::flash('flash_warning', "Sorry! Your new passwords didn't match, try again?");
+                    return redirect()->back();
+                }
+            }
+            else
+            {
+                Session::flash('flash_warning', "Uh oh. The current password you entered doesn't match what is on file.  Try again?");
+                return redirect()->back();
+            }
+        }
+
+        $user->save();
+
+        Session::flash('flash_success', "Your user settings have been updated!");
+
+        return redirect()->back();
+
     }
 }

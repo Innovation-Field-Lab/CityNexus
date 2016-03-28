@@ -7,7 +7,6 @@
             <div class="panel-heading">
                 Settings
             </div>
-            <form action="" class="form-horizontal">
             <div class="panel-body">
                     <div class="bs-example bs-example-tabs" data-example-id="togglable-tabs">
                         <ul id="myTabs" class="nav nav-tabs" role="tablist">
@@ -16,11 +15,11 @@
                                     User Settings
                                 </a>
                             </li>
-                            <li role="presentation" class="">
-                                <a href="#application" role="tab" id="application-tab" data-toggle="tab" aria-controls="application" aria-expanded="false">
-                                    Application Settings
-                                </a>
-                            </li>
+                            {{--<li role="presentation" class="">--}}
+                                {{--<a href="#application" role="tab" id="application-tab" data-toggle="tab" aria-controls="application" aria-expanded="false">--}}
+                                    {{--Application Settings--}}
+                                {{--</a>--}}
+                            {{--</li>--}}
                             <li role="presentation" class="">
                                 <a href="#users" role="tab" id="users-tab" data-toggle="tab" aria-controls="users" aria-expanded="false">
                                     User Accounts
@@ -29,29 +28,59 @@
                         </ul>
                         <div id="myTabContent" class="tab-content">
                             <div role="tabpanel" class="tab-pane fade active in" id="user" aria-labelledby="home-tab">
-                                <div class="row">
+                                <div class="panel-body">
+                                    <form action="/{{config('citynexus.root_directory')}}/settings/update-user" class="form form-horizontal" method="post">
+                                        {{csrf_field()}}
                                     <div class="form-group">
+                                        <label for="email" class="control-label col-sm-4">Email Address</label>
 
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="email" name="email"
+                                                   value="{{$user->email}}"/>
+                                        </div>
                                     </div>
+                                    <div class="form-group">
+                                        <label for="password" class="control-label col-sm-4">Current Password</label>
+
+                                        <div class="col-sm-8">
+                                            <input type="password" class="form-control" id="password" name="password"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="new_password" class="control-label col-sm-4">New Password</label>
+
+                                        <div class="col-sm-8">
+                                            <input type="password" class="form-control" id="new_password" name="new_password"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="confirm_password" class="control-label col-sm-4">Confirm Password</label>
+
+                                        <div class="col-sm-8">
+                                            <input type="password" class="form-control" id="confirm_password" name="confirm_password"/>
+                                        </div>
+                                    </div>
+                                        <input type="submit" class="btn btn-primary" value="Update User">
+                                </form>
                                 </div>
                             </div>
                             <div role="tabpanel" class="tab-pane fade" id="application" aria-labelledby="profile-tab">
                                 <div class="panel">
                                     <div class="panel-body">
-                                        <div class="form-group">
-                                            <label for="gmaps_key" class="control-label col-sm-4">Google Maps API Key</label>
-                                            <div class="col-sm-8">
-                                                <input type="text" class="form-control" id="gmaps_key" name="gmaps_key"
-                                                       value="@if(old('gmaps_key')){{old('gmaps_key')}}@elseif($app_s->where('key', 'gmaps_key')->count() > 0 ) {{$app_s->where(['key' => 'gmaps_key'])->first()}}@endif"/>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="gmaps_key" class="control-label col-sm-4">Google Maps API Key</label>
-                                            <div class="col-sm-8">
-                                                <input type="text" class="form-control" id="gmaps_key" name="gmaps_key"
-                                                       value="@if(old('gmaps_key')){{old('gmaps_key')}}@elseif($app_s->where('key', 'gmaps_key')->count() > 0 ) {{$app_s->where(['key' => 'gmaps_key'])->first()}}@endif"/>
-                                            </div>
-                                        </div>
+                                        {{--<div class="form-group">--}}
+                                            {{--<label for="gmaps_key" class="control-label col-sm-4">Google Maps API Key</label>--}}
+                                            {{--<div class="col-sm-8">--}}
+                                                {{--<input type="text" class="form-control" id="gmaps_key" name="gmaps_key"--}}
+                                                       {{--value="@if(old('gmaps_key')){{old('gmaps_key')}}@elseif($app_s->where('key', 'gmaps_key')->count() > 0 ) {{$app_s->where(['key' => 'gmaps_key'])->first()}}@endif"/>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="form-group">--}}
+                                            {{--<label for="gmaps_key" class="control-label col-sm-4">Google Maps API Key</label>--}}
+                                            {{--<div class="col-sm-8">--}}
+                                                {{--<input type="text" class="form-control" id="gmaps_key" name="gmaps_key"--}}
+                                                       {{--value="@if(old('gmaps_key')){{old('gmaps_key')}}@elseif($app_s->where('key', 'gmaps_key')->count() > 0 ) {{$app_s->where(['key' => 'gmaps_key'])->first()}}@endif"/>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
                                     </div>
                                 </div>
                             </div>
@@ -65,10 +94,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="panel-footer">
-                    <input type="submit" class="btn btn-primary" value="Update Settings">
-                </div>
-            </form>
         </div>
     </div>
 

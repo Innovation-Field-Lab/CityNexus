@@ -12,6 +12,7 @@ use CityNexus\CityNexus\Score;
 use CityNexus\CityNexus\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Schema;
 use CityNexus\CityNexus\Table;
 use CityNexus\CityNexus\ScoreBuilder;
@@ -70,6 +71,15 @@ class CitynexusController extends Controller
         }
 
         return $properties->count();
+    }
+
+    public function postSubmitTicket(Request $request)
+    {
+        Mail::send('citynexus::email.submit_ticket', ['request' => $request], function ($m) use ($request) {
+            $m->from('postmaster@citynexus.org', 'CityNexus');
+            $m->to("salaback@g.harvard.edu", "Sean Alaback")->subject('New CityNexus Ticket');
+            $m->cc($request->get('user_email'));
+        });
     }
 
     private function runScore($score, $elements)

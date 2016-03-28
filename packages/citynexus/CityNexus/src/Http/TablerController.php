@@ -22,7 +22,14 @@ class TablerController extends Controller
 
     public function getIndex()
     {
-        $tables = Table::all();
+        if(isset($_GET['trashed']))
+        {
+            $tables = Table::withTrashed()->get();
+        }
+        else{
+            $tables = Table::all();
+        }
+
         return view('citynexus::tabler.index', compact('tables'));
     }
     public function getUploader()

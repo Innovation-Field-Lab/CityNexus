@@ -70,6 +70,7 @@ class TablerController extends Controller
         $table->table_title = $request->get('table_name');
         $table->table_name = $tabler->create($table);
         $table->table_description = $request->get('table_description');
+        $table->timestamp = $request->get('timestamp');
         $table->save();
 
         $upload = Upload::create(['table_id' => $table->id, 'note' => 'Initial Upload']);

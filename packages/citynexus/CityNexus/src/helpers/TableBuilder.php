@@ -86,6 +86,9 @@ class TableBuilder
 
         $search = $this->processAddress($search);
 
+        if($search)
+        {
+
         //Get the ID of the first row matching the sync parameters
         $return = DB::table($table_name)
             ->where($search)
@@ -107,6 +110,9 @@ class TableBuilder
                 ->insertGetId($search);
         }
         return $return;
+        }
+        else
+            return false;
     }
 
     protected function checkAddress($search)
@@ -169,7 +175,8 @@ class TableBuilder
         }
 
         $unit = false;
-
+        if($parts != null)
+        {
         foreach($parts as $k => $i)
         {
             if(array_key_exists($i, $units) or is_integer($i))
@@ -209,7 +216,10 @@ class TableBuilder
         $return['full_address'] = trim($return['house_number'] . ' ' . $return['street_name'] . ' ' . $return['street_type'] . ' ' . $return['unit']);
 
         return $return;
+        }
+        else
 
+            return false;
 
     }
 
@@ -294,40 +304,37 @@ class TableBuilder
             $record[config('citynexus.index_id')] = $this->findSyncId( config('citynexus.index_table'), $i, $syncValues );
         }
 
-        //add remaining elements to the array
-        $record = $this->addElements( $record, $i, $scheme);
-        $record['upload_id'] = $upload_id;
+        if($record[config('citynexus.index_id')]) {
 
-        foreach($scheme as $field)
-        {
-            if($field->type == 'integer' or $field->type == 'float')
-            {
-                if(array_key_exists($field->key, $record)) $record[$field->key] = floatval(preg_replace("/[^0-9,.]/", "", $record[$field->key]));
+            //add remaining elements to the array
+            $record = $this->addElements($record, $i, $scheme);
+            $record['upload_id'] = $upload_id;
+
+            foreach ($scheme as $field) {
+                if ($field->type == 'integer' or $field->type == 'float') {
+                    if (array_key_exists($field->key, $record)) $record[$field->key] = floatval(preg_replace("/[^0-9,.]/", "", $record[$field->key]));
+                } elseif ($field->type == 'datetime') {
+                    if (array_key_exists($field->key, $record)) $record[$field->key] = Carbon::createFromTimestamp(strtotime($record[$field->key]));
+                }
             }
-            elseif($field->type == 'datetime')
-            {
-                if(array_key_exists($field->key, $record)) $record[$field->key] = Carbon::createFromTimestamp(strtotime($record[$field->key]));
+
+            if ($table->timestamp != null) {
+                $record['created_at'] = $record[$table->timestamp];
             }
-        }
 
-        if($table->timestamp != null)
-        {
-            $record['created_at'] = $record[$table->timestamp];
-        }
+            DB::table($table->table_name)->insertGetId($record);
 
-        DB::table($table->table_name)->insertGetId($record);
-
-        //If there are push values, update the primary property record
-        if(count( $pushValues) > 0)
-        {
-            $property = Property::find($record['property_id']);
-            foreach ($pushValues as $key => $value)
-            {
-                $property->$value = $i[$key];
+            //If there are push values, update the primary property record
+            if (count($pushValues) > 0) {
+                $property = Property::find($record['property_id']);
+                foreach ($pushValues as $key => $value) {
+                    $property->$value = $i[$key];
+                }
+                $property->save();
             }
-            $property->save();
-        }
 
-        return $record['property_id'];
+            return $record['property_id'];
+        }
+        else return false;
     }
 }

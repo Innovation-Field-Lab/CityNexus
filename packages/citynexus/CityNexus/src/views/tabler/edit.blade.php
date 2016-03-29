@@ -4,7 +4,7 @@
     <div class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Create New Scheme
+                Create New Schema
             </div>
             <div class="panel-body">
                 <form action="/{{config('citynexus.tabler_root')}}/update-table/{{$table->id}}" method="post">

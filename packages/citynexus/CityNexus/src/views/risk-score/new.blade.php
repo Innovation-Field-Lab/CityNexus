@@ -74,6 +74,11 @@
             $("#score-elements").append( data );
         })
     }
+
+    function removeFromScore(id)
+    {
+        $("#" + id).html(null);
+    }
 </script>
 
 @endpush

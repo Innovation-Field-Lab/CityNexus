@@ -55,10 +55,27 @@
                                 @endforeach
                         </tbody>
                     </table>
-                    <input type="submit" class="btn btn-primary" value="Save and Complete Upload">
+                    <div class="form-group alert alert-info" id="syncCheck">
+                        <label for="sync_field" class="control-label col-sm-4">Please verify your sync fields</label>
+                        <div class='btn btn-primary' onclick="enableSubmit()">I did!</div>
+                    </div>
+                    <input type="submit" class="btn btn-primary hidden" id="submit" value="Save and Complete Upload">
                 </form>
             </div>
         </div>
     </div>
+
+@stop
+
+@push('js_footer')
+
+<script>
+    function enableSubmit()
+    {
+        $('#syncCheck').addClass('hidden');
+        $('#submit').removeClass('hidden');
+
+    }
+</script>
 
 @stop

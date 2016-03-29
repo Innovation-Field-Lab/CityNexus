@@ -86,28 +86,115 @@ class TableBuilder
 
         $search = $this->processAddress($search);
 
-        //Get the ID of the first row matching the sync parameters
-        $return = DB::table($table_name)
+        $id = null;
+
+        foreach($search as $k => $i)
+            if($id == null)
+            {
+                //Get the ID of the first row matching the sync parameters
+                $id = $this->searchForProperties($i);
+
+                if($id != null)
+                {
+                    unset($search[$k]);
+                }
+            }
+
+        if($search != null)
+        {
+                foreach($search as $i)
+                {
+                    if($id == null)
+                    {
+                        // Check if should be flagged
+                        $property = $this->checkAddress($i);
+                        // Add timestamp fields
+                        $property['created_at'] = Carbon::now();
+                        $property['updated_at'] = Carbon::now();
+                        // Create a new record in the master table.
+                        $id = DB::table($table_name)
+                            ->insertGetId($property);
+                    }
+                    else
+                    {
+                        if(! $this->searchForProperties($i))
+                        {
+                            $i['alias_of'] = $id;
+                            $i['created_at'] = Carbon::now();
+                            $i['updated_at'] = Carbon::now();
+                            // Create a new record in the master table.
+                            DB::table($table_name)
+                                ->insert($i);
+                        }
+                    }
+                }
+        }
+
+        return $id;
+    }
+
+    /**
+     *
+     * Search an array of values for a matching property
+     *
+     * @param $search array
+     * @return int
+     */
+    private function searchForProperties($search)
+    {
+        return DB::table(config('citynexus.index_table'))
             ->where($search)
             ->pluck('id');
-
-        //Create new property record
-        if($return == null)
-        {
-
-            // Check if should be flagged
-            $search = $this->checkAddress($search);
-
-            // Add timestamp fields
-            $search['created_at'] = Carbon::now();
-            $search['updated_at'] = Carbon::now();
-
-            // Create a new record in the master table.
-            $return = DB::table($table_name)
-                ->insertGetId($search);
-        }
-        return $return;
     }
+
+//    public function findSyncID( $table_name, $property, $syncValues)
+//    {
+//        // Initialize variables
+//
+//        $search = array();
+//
+//        // Load syncValues
+//
+//        foreach($syncValues as $key => $field)
+//        {
+//            if($key != null) $search[$field] = $property[$key];
+//        }
+//
+//        // Break down address into its parts
+//
+//            // If using full address, break up into parts
+//
+//            if(isset($property['full_address']))
+//            {
+//                $new_property = $this->breakUpAddress($property['full_address']);
+//            }
+//
+//            // Check house number for hypen
+//
+//
+//
+//            // Test if address is hyphenated
+//
+//        // Search for a matching address
+//
+//        // If no matching address create property
+//
+//        // If a hyphenated address add an alias to second address
+//
+//        // Return Property ID
+//
+//    }
+
+
+
+
+
+
+
+
+
+
+
 
     protected function checkAddress($search)
     {
@@ -136,7 +223,7 @@ class TableBuilder
     /**
      * @param $input
      */
-    protected function processAddress($input)
+    public function processAddress($input)
     {
         $return = ['full_address' => null, 'house_number' => null, 'street_name' => null, 'street_type' => null, 'unit' => null];
 
@@ -148,7 +235,7 @@ class TableBuilder
 
         if(array_key_exists('house_number', $input) && array_key_exists('street_name', $input))
         {
-            $return['house_number'] = $input['house_number'];
+            $return['house_number'] = $this->checkHouseNumber($input['house_number']);
             $street_name = $input['street_name'];
             $street_name = preg_replace('/[^\p{L}\p{N}\s]/u', '', $street_name);
             $street_name = strtolower($street_name);
@@ -159,12 +246,11 @@ class TableBuilder
         if(array_key_exists('full_address', $input))
         {
             $full_address = $input['full_address'];
-            $full_address = preg_replace('/[^\p{L}\p{N}\s]/u', '', $full_address);
             $full_address = strtolower($full_address);
-            //break up into array
             $parts = explode(' ', $full_address);
+            $return['house_number'] = $this->checkHouseNumber($parts[0]);
+
             //Use first element as street number
-            $return['house_number'] = $parts[0];
             unset($parts[0]);
         }
 
@@ -175,13 +261,11 @@ class TableBuilder
             if(array_key_exists($i, $units) or is_integer($i))
             {
                 $unit = true;
-
                 $return['unit'] = $return['unit'] . ' ' . $units[$i];
             }
             elseif(array_key_exists($i, $streets))
             {
                 $return['street_type'] = trim($return['street_type'] . ' ' . $streets[$i]);
-
                 $unit = true;
             }
             else
@@ -206,9 +290,30 @@ class TableBuilder
         //Clear stray characters of unit variable.
         if($return['unit'] == null) $return['unit'] = null;
 
-        $return['full_address'] = trim($return['house_number'] . ' ' . $return['street_name'] . ' ' . $return['street_type'] . ' ' . $return['unit']);
+        if(is_array($return['house_number']))
+        {
+            foreach($return['house_number'] as $i)
+            {
+                $response[]= [
+                    'full_address' => trim($i . ' ' . $return['street_name'] . ' ' . $return['street_type'] . ' ' . $return['unit']),
+                    'house_number' => $i,
+                    'street_name' => $return['street_name'],
+                    'street_type' => $return['street_type'],
+                    'unit' => $return['unit']
+                ];
+            }
+        }
+        else{
+            $response[]= [
+                'full_address' => trim($return['house_number'] . ' ' . $return['street_name'] . ' ' . $return['street_type'] . ' ' . $return['unit']),
+                'house_number' => $return['house_number'],
+                'street_name' => $return['street_name'],
+                'street_type' => $return['street_type'],
+                'unit' => $return['unit']
+            ];
+        }
 
-        return $return;
+        return $response;
 
 
     }
@@ -329,5 +434,18 @@ class TableBuilder
         }
 
         return $record['property_id'];
+    }
+    private function checkHouseNumber($string)
+    {
+        $strings = explode('-', $string);
+        if(count($strings) > 1)
+        {
+            return $strings;
+        }
+        else
+        {
+            return $string;
+        }
+
     }
 }

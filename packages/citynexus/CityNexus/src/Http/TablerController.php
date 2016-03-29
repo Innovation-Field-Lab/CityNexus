@@ -107,7 +107,6 @@ class TablerController extends Controller
 
         $table = Table::find($id);
 
-
         //get uploaded file
         $file = $request->file('file');
 

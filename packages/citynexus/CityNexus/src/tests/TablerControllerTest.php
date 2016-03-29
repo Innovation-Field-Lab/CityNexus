@@ -89,4 +89,14 @@ class TablerControllerTest extends TestCase
             ->see('<b>Test Table</b> Upload');
     }
 
+
+    public function testBreakUpAddress()
+    {
+        $address = '123-23 Franklin Road, Apt 1s';
+        $expected = ['123-23', 'Franklin', 'Road', 'Apt', '1s'];
+
+        $output = \CityNexus\CityNexus\TableBuilder::breakUpAddress( $address );
+
+        assertSame($expected, $output);
+    }
 }

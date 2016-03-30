@@ -139,7 +139,7 @@ class TablerController extends Controller
         $table = Table::find($id);
         if($table->scheme == null)
         {
-            return redirect('/' . config('citynexus.root_directory') . '/create-scheme/' . $id);
+            return redirect('/' . config('citynexus.tabler_root') . '/create-scheme/' . $id);
         }
         $scheme = json_decode($table->scheme);
         return view('citynexus::tabler.edit', compact('table', 'scheme'));
@@ -279,5 +279,38 @@ class TablerController extends Controller
         $upload->delete();
 
         return redirect(config('citynexus.tabler_root'));
+    }
+
+    public function getShowTable($id = null)
+    {
+        if($_GET['table_name'] != null) $table_name = $_GET['table_name'];
+        if($id != null) $table_name = Table::find($id)->table_name;
+        if($table_name != null)
+        {
+            $table = DB::table($table_name)->get();
+
+        }
+        else
+        {
+            $table_name = null;
+        }
+
+        $tables = DB::table('information_schema.tables')
+            ->where('table_schema', 'public')
+            ->where('table_name', '!=', 'migrations')
+            ->where('table_name', '!=', 'users')
+            ->where('table_name', '!=', 'password_resets')
+            ->where('table_name', '!=', 'groups')
+            ->where('table_name', '!=', 'group_user')
+            ->where('table_name', '!=', 'api_keys')
+            ->where('table_name', '!=', 'jobs')
+            ->where('table_name', '!=', 'failed_jobs')
+            ->where('table_name', '!=', 'citynexus_scores')
+            ->where('table_name', '!=', 'citynexus_notes')
+            ->where('table_name', '!=', 'citynexus_reports')
+            ->where('table_name', '!=', 'citynexus_settings')
+            ->get();
+
+        return view('citynexus::admin.edit-table', compact('table', 'table_name', 'tables'));
     }
 }

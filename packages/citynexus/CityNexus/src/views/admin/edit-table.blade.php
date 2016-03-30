@@ -7,7 +7,7 @@
         <div class="panel-heading" style="height: 60px">
             <span class="panel-title">{{$table_name}}</span>
 
-            <form action="/{{config('citynexus.root_directory')}}/admin/edit-table" class="form-inline pull-right">
+            <form action="/{{config('citynexus.tabler_root')}}/show-table" class="form-inline pull-right">
                 {{csrf_field()}}
                 <select name="table_name" id="table_name" class="form-control">
                     <option value="">Select One</option>

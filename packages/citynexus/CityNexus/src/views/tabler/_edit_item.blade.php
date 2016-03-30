@@ -1,5 +1,5 @@
 <tr>
-    <td>{{$item->key}}</td>
+    <td>{{$key}}</td>
     <td>
         <input type="checkbox" name="map[{{$key}}][skip]" @if(isset($item->skip)) checked @endif>
     </td>

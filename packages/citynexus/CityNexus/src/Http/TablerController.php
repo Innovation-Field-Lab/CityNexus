@@ -137,6 +137,10 @@ class TablerController extends Controller
     public function getEditTable($id)
     {
         $table = Table::find($id);
+        if($table->scheme == null)
+        {
+            return redirect('/' . config('citynexus.root_directory') . '/create-scheme/' . $id);
+        }
         $scheme = json_decode($table->scheme);
         return view('citynexus::tabler.edit', compact('table', 'scheme'));
     }

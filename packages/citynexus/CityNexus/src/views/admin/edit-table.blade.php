@@ -5,9 +5,6 @@
 
     <div class="panel panel-default">
         <div class="panel-heading" style="height: 60px">
-            <span class="panel-title">{{$table_name}}</span>
-            <a class="btn btn-sm" href="/{{config('citynexus.tabler_root')}}/download-table/{{$table_name}}"><i class="glyphicon glyphicon-download"></i></a>
-
             <form action="/{{config('citynexus.tabler_root')}}/show-table" class="form-inline pull-right">
                 {{csrf_field()}}
                 <select name="table_name" id="table_name" class="form-control">
@@ -16,8 +13,11 @@
                         <option value="{{$i->table_name}}">{{$i->table_name}}</option>
                     @endforeach
                 </select>
-                <input type="submit" class="btn btn-primary" value="Submit">
+                <input type="submit" class="btn btn-primary" value="Refresh">
             </form>
+
+            <span class="panel-title">TABLE: {{$table_name}}</span> <br>
+            <a  href="/{{config('citynexus.tabler_root')}}/download-table/{{$table_name}}"><i class="glyphicon glyphicon-download"></i> Download CSV</a>
         </div>
         <div class="panel-body" style="overflow: scroll;">
             @if(count($table) > 0)

@@ -6,6 +6,7 @@
     <div class="panel panel-default">
         <div class="panel-heading" style="height: 60px">
             <span class="panel-title">{{$table_name}}</span>
+            <a class="btn btn-sm" href="/{{config('citynexus.tabler_root')}}/download-table/{{$table_name}}"><i class="glyphicon glyphicon-download"></i></a>
 
             <form action="/{{config('citynexus.tabler_root')}}/show-table" class="form-inline pull-right">
                 {{csrf_field()}}
@@ -16,6 +17,7 @@
                     @endforeach
                 </select>
                 <input type="submit" class="btn btn-primary" value="Submit">
+            </form>
         </div>
         <div class="panel-body" style="overflow: scroll;">
             @if(count($table) > 0)

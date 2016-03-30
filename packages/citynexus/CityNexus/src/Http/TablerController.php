@@ -283,7 +283,7 @@ class TablerController extends Controller
 
     public function getShowTable($id = null)
     {
-        if($_GET['table_name'] != null) $table_name = $_GET['table_name'];
+        if(isset($_GET['table_name'])) $table_name = $_GET['table_name'];
         if($id != null) $table_name = Table::find($id)->table_name;
         if($table_name != null)
         {
@@ -312,5 +312,28 @@ class TablerController extends Controller
             ->get();
 
         return view('citynexus::admin.edit-table', compact('table', 'table_name', 'tables'));
+    }
+
+    public function getDownloadTable($table_name)
+    {
+        try{
+
+
+        if($table_name != 'users' && $table_name != 'password_reset' && $table_name != 'api_keys')
+        DB::setFetchMode(\PDO::FETCH_ASSOC);
+        $table = DB::table($table_name)->select('*')->get();
+        $file = Excel::create($table_name, function($excel) use($table) {
+            $excel->sheet('Sheet 1', function($sheet) use($table) {
+                $sheet->fromArray($table);
+            });
+        })->export('xls');
+        }
+        catch(\Exception $e)
+        {
+            Session::flash('flash_danger', $e);
+            return redirect()->back();
+        }
+
+        return $file;
     }
 }

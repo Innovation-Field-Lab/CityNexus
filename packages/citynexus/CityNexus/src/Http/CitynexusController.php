@@ -43,7 +43,7 @@ class CitynexusController extends Controller
 
     public function getProperties()
     {
-        $properties = Property::all();
+        $properties = Property::where('alias_of', null)->get();
         return view('citynexus::property.index', compact('properties'));
     }
 

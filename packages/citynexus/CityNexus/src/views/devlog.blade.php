@@ -1,8 +1,7 @@
 <b>Next Sprint</b><br>
 - Granular permissions<br>
-- Data downloader<br>
+- Build mulit-dataset reports<br>
 - Add Scores to property record views<br>
-- Remove aliases from property lists<br>
 - Debug Score Builder with Date/Time objects<br>
 - Edit user accounts<br>
 <br>
@@ -21,3 +20,6 @@
 - Public Dashboards<br>
 - City Dashboards<br>
 - Click-2-Action Buttons<br>
+- Create option to upload and sync with p_id on any dataset<br>
+- Create dashboard dials<br>
+- Create score delete method<br>

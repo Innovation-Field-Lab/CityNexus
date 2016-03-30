@@ -8,18 +8,17 @@
     <input type="hidden" name="map[{{$key}}][key]" value="{{$key}}">
     <td>{{$item->type}}<input type="hidden" value="{{$item->type}}" name="map[{{$key}}]type"> </td>
     <td>
-
         <select name="map[{{$key}}][sync]" id="" class="form-control">
             <option value=""></option>
             @foreach(config('citynexus.sync') as $k => $i)
-                <option value="{{$k}}" @if(isset($item->sync) && $item->sync == $i) selected @endif>{{$i}}</option>
+                <option value="{{$k}}" @if(isset($item->sync) && $item->sync == $k) selected @endif>{{$i}}</option>
             @endforeach
         </select>
     </td>
     <td><select name="map[{{$key}}][push]" id="" class="form-control">
             <option value=""></option>
             @foreach(config('citynexus.push') as $k => $i)
-                <option value="{{$k}}" @if(isset($item->push) && $item->push == $i) selected @endif>{{$i}}</option>
+                <option value="{{$k}}" @if(isset($item->push) && $item->push == $k) selected @endif>{{$i}}</option>
             @endforeach
         </select>
     </td>

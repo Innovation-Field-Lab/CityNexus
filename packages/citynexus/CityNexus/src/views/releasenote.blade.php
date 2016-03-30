@@ -1,4 +1,4 @@
-<b>v0.1.2 - Wend. 20 March 2016 15:45</b><br>
+<b>v0.1.2 - Wen. 30 March 2016 15:45</b><br>
 - Created Admin view of all tables<br>
 - Fixed bug produced by stopping data set creation mid-process<br>
 - Removed alias properties from all properties list<br>

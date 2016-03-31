@@ -145,36 +145,36 @@ class TablerController extends Controller
         return view('citynexus::tabler.edit', compact('table', 'scheme'));
     }
 
-    public function postUpdateTable($id, Request $request)
-    {
-        $this->validate($request, [
-            'table_title' => 'max:255|required',
-            'map' => 'required'
-        ]);
-
-        try {
-
-            $table = Table::find($id);
-
-            $table->table_title = $request->get('table_title');
-            $table->table_description = $request->get('table_description');
-            $table->scheme = json_encode($request->get('map'));
-
-            $table->save();
-        }
-        catch(Exception $e)
-        {
-            Session::flash('flash_warning', $e);
-
-            return $e;
-        }
-        finally
-        {
-            Session::flash('flash_success', 'Dataset changes saved successfully.');
-        }
-
-        return redirect('/' . config('tabler.root_directory'));
-    }
+//    public function postUpdateTable($id, Request $request)
+//    {
+//        $this->validate($request, [
+//            'table_title' => 'max:255|required',
+//            'map' => 'required'
+//        ]);
+//
+//        try {
+//
+//            $table = Table::find($id);
+//
+//            $table->table_title = $request->get('table_title');
+//            $table->table_description = $request->get('table_description');
+//            $table->scheme = json_encode($request->get('map'));
+//
+//            $table->save();
+//        }
+//        catch(Exception $e)
+//        {
+//            Session::flash('flash_warning', $e);
+//
+//            return $e;
+//        }
+//        finally
+//        {
+//            Session::flash('flash_success', 'Dataset changes saved successfully.');
+//        }
+//
+//        return redirect('/' . config('tabler.root_directory'));
+//    }
 
 
     /**

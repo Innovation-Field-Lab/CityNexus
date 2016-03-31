@@ -1,3 +1,5 @@
+- Fix bug that drops type from scheme when saving table type<br>
+
 <b>v0.1.2 - Wen. 30 March 2016 15:45</b><br>
 - Created Admin view of all tables<br>
 - Fixed bug produced by stopping data set creation mid-process<br>

@@ -6,7 +6,10 @@
     <td><input type="checkbox" name="map[{{$key}}][show]" @if(isset($item->show)) checked @endif></td>
     <td><input type="text" name="map[{{$key}}][name]" class="form-control" value="{{ucwords($key)}}"></td>
     <input type="hidden" name="map[{{$key}}][key]" value="{{$key}}">
-    <td>{{$item->type}}<input type="hidden" value="{{$item->type}}" name="map[{{$key}}]type"> </td>
+    <td>
+        {{$item->type}}
+        <input type="hidden" value="{{$item->type}}" name="map[{{$key}}][type]">
+    </td>
     <td>
         <select name="map[{{$key}}][sync]" id="" class="form-control">
             <option value=""></option>

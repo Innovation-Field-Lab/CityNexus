@@ -58,18 +58,9 @@ Route::post('/activate-account', function()
 });
 
 
-Route::group(['middleware' => 'auth', 'prefix' => config('citynexus.root_directory') . '/risk-score' ], function() {
-
-    Route::controller('/', 'CityNexus\CityNexus\Http\RiskScoreController');
-});
-
-Route::group(['middleware' => 'auth', 'prefix' => config('citynexus.root_directory') . '/admin' ], function() {
-
-    Route::controller('/', 'CityNexus\CityNexus\Http\AdminController');
-});
-
 Route::group(['middleware' => 'auth', 'prefix' => config('citynexus.root_directory') ], function() {
-
+    Route::controller('/risk-score', 'CityNexus\CityNexus\Http\RiskScoreController');
+    Route::controller('/admin', 'CityNexus\CityNexus\Http\AdminController');
     Route::controller('/settings', 'CityNexus\CityNexus\Http\CitynexusSettingsController');
     Route::controller('/notes/', 'CityNexus\CityNexus\Http\NoteController');
     Route::controller('/', 'CityNexus\CityNexus\Http\CitynexusController');

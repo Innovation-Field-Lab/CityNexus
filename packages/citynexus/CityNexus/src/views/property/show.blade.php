@@ -118,7 +118,7 @@
                                 @forelse($property->tags as $tag)
                                     @include('citynexus::property._tag')
                                 @empty
-                                    <div class="alert alert-info" id="no-tags"> No tags currently associated with prooperty</div>
+                                    <div class="alert alert-info" id="no-tags"> No tags currently associated with property</div>
                                 @endforelse
                             </div>
                         </div>

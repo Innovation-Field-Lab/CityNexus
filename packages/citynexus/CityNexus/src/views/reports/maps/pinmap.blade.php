@@ -34,13 +34,15 @@
     var pruneCluster = new PruneClusterForLeaflet();
 
     @foreach($pins as $pin)
-    var marker = new PruneCluster.Marker({{$pin->lat}}, {{$pin->long}});
-    marker.data.name = '{{$pin->full_address}}';
-    @if($pin->score != null)
-    marker.category = {{$pin->score}};
-    @endif
-    marker.data.popup = '<a href="/{{config('citynexus.root_directory')}}/property/{{$pin->id}}" target="_blank"><i class="glyphicon glyphicon-new-window"></i> {{ucwords($pin->full_address)}}</a>@if(null != $pin->score) <br><b>Score: {{$pin->score}} </b> @endif';
-    pruneCluster.RegisterMarker(marker);
+        @if($pin->lat != null && $pin->long != null)
+            var marker = new PruneCluster.Marker({{$pin->lat}}, {{$pin->long}});
+            marker.data.name = '{{$pin->full_address}}';
+            @if($pin->score != null)
+            marker.category = {{$pin->score}};
+            @endif
+            marker.data.popup = '<a href="/{{config('citynexus.root_directory')}}/property/{{$pin->id}}" target="_blank"><i class="glyphicon glyphicon-new-window"></i> {{ucwords($pin->full_address)}}</a>@if(null != $pin->score) <br><b>Score: {{$pin->score}} </b> @endif';
+            pruneCluster.RegisterMarker(marker);
+        @endif
     @endforeach
 
     mymap.addLayer(pruneCluster);

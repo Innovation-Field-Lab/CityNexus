@@ -99,17 +99,38 @@
                         </div>
                     </div>
                 </div>
-                @if($property->lat != null && $property->long != null)
                 <div class="col-sm-4">
+
+                    @if($property->lat != null && $property->long != null)
+                        <div class="panel panel-default">
+                                <div id="pano" style="height: 250px"></div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div id="map" style="height: 250px"></div>
+                        </div>
+                    @endif
                     <div class="panel panel-default">
-                            <div id="pano" style="height: 250px"></div>
-                    </div>
-                    <div class="panel panel-default">
-                        <div id="map" style="height: 250px"></div>
+                        <div class="panel-heading">
+                            Property Tags
+                        </div>
+                        <div class="panel-body">
+                            <div class="list-group" id="property_tags">
+                                @forelse($property->tags as $tag)
+                                    @include('citynexus::property._tag')
+                                @empty
+                                    <div class="alert alert-info" id="no-tags"> No tags currently associated with prooperty</div>
+                                @endforelse
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+                            <div id="new-tag-input">
+                                <input class="form-control typeahead" type="text" id="new-tag" placeholder="Add new tag">
+                            </div>
+                        </div>
                     </div>
                 </div>
-                @endif
-            </div>
+
+        </div>
             <div class="panel-body">
                 <div class="col-sm-12">
 
@@ -133,10 +154,10 @@
 
 @push('js_footer')
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.jquery.js"></script>
+
 <script>
-
     function initialize() {
-
         var point = {lat: {{$property->lat}}, lng:{{$property->long}} };
         var map = new google.maps.Map(document.getElementById('map'), {
             center: point,
@@ -190,6 +211,168 @@
         $('[data-toggle="tooltip"]').tooltip()
     })
 </script>
+
+{{--add tags--}}
+
+<script>
+    var substringMatcher = function(strs) {
+        return function findMatches(q, cb) {
+            var matches, substringRegex;
+
+            // an array that will be populated with substring matches
+            matches = [];
+
+            // regex used to determine if a string contains the substring `q`
+            substrRegex = new RegExp(q, 'i');
+
+            // iterate through the pool of strings and for any string that
+            // contains the substring `q`, add it to the `matches` array
+            $.each(strs, function(i, str) {
+                if (substrRegex.test(str)) {
+                    matches.push(str);
+                }
+            });
+
+            cb(matches);
+        };
+    };
+
+    var tags = {!! json_encode($tags) !!};
+    $('#new-tag-input .typeahead').typeahead({
+                hint: true,
+                highlight: true,
+                minLength: 1
+            },
+            {
+                name: 'states',
+                source: substringMatcher(tags)
+            });
+
+    $("#new-tag").bind("keypress", {}, addTag);
+    function addTag(e) {
+        var code = (e.keyCode ? e.keyCode : e.which);
+        if (code == 13) { //Enter keycode
+            e.preventDefault();
+
+            var tag = $('#new-tag').val();
+            $.ajax({
+                url: "/{{config('citynexus.root_directory')}}/associate-tag",
+                type: 'post',
+                data: {
+                    _token: "{{csrf_token()}}",
+                    property_id: {{$property->id}},
+                    tag: tag
+                }
+            }).success( function( data ) {
+                $('#no-tags').addClass('hidden');
+                $('#new-tag').val('');
+                $('#property_tags').append(data);
+            }
+        );
+        }
+    };
+
+
+</script>
+
+{{--Delete Tag--}}
+
+<script>
+    function confirmDelete(id)
+    {
+        $('#delete-tag-' + id).addClass('btn-danger');
+        $('#delete-tag-' + id).attr('onclick', 'removeTag(' + id +')');
+    }
+
+    function removeTag(id)
+    {
+        $('#tag-' + id).addClass('hidden');
+        $.ajax({
+            url: "/{{config('citynexus.root_directory')}}/remove-tag",
+            type: "post",
+            data: {
+                _token: "{{csrf_token()}}",
+                property_id: {{$property->id}},
+                tag_id: id
+            }
+        })
+    }
+</script>
+
+@endpush
+
+@push('style')
+<style>
+    .typeahead,
+    .tt-query,
+    .tt-hint {
+        width: 100%;
+        padding: 8px 8px;
+        border: 2px solid #ccc;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 8px;
+        outline: none;
+    }
+
+    .typeahead {
+        background-color: #fff;
+    }
+
+    .typeahead:focus {
+        border: 2px solid #0097cf;
+    }
+
+    .tt-query {
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    }
+
+    .tt-hint {
+        color: #999
+    }
+
+    .tt-menu {
+        width: 100px;
+        margin: 12px 0;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 8px;
+        -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+        -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+        box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    }
+
+    .tt-suggestion {
+        padding: 3px 20px;
+
+    }
+
+    .tt-suggestion:hover {
+        cursor: pointer;
+        color: #fff;
+        background-color: #0097cf;
+    }
+
+    .tt-suggestion.tt-cursor {
+        color: #fff;
+        background-color: #0097cf;
+
+    }
+
+    .tt-suggestion p {
+        margin: 0;
+    }
+
+    .gist {
+        font-size: 14px;
+    }
+
+</style>
 
 @endpush
 

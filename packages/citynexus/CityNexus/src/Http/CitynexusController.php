@@ -10,6 +10,7 @@ use CityNexus\CityNexus\DatasetQuery;
 use CityNexus\CityNexus\GenerateScore;
 use CityNexus\CityNexus\Score;
 use CityNexus\CityNexus\Setting;
+use CityNexus\CityNexus\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -34,11 +35,12 @@ class CitynexusController extends Controller
         $property = Property::find($id);
         $datasets = DatasetQuery::relatedSets( $id );
         $tables = Table::all();
+        $tags = Tag::select('tag')->lists('tag');
 
         // Initiallizes the variable to disclose aliases in dataset
         $disclaimer = false;
 
-        return view('citynexus::property.show', compact('property', 'datasets', 'tables', 'disclaimer'));
+        return view('citynexus::property.show', compact('property', 'datasets', 'tables', 'disclaimer', 'tags'));
     }
 
     public function getProperties()
@@ -111,6 +113,27 @@ class CitynexusController extends Controller
         }
             $this->dispatch(new GenerateScore($elements, $score->id, FALSE));
     }
+
+    public function postAssociateTag(Request $request)
+    {
+        //Format Tag
+        $tag = ucwords(strtolower($request->get('tag')));
+
+        //Get Tag ID
+        $tag = Tag::firstOrCreate(['tag' => $tag]);
+
+        //Associate with property
+        Property::find($request->get('property_id'))->tags()->attach($tag);
+
+        //Return snipit
+        return view('citynexus::property._tag')->with('tag', $tag);
+    }
+
+    public function postRemoveTag(Request $request)
+    {
+        return Property::find($request->get('property_id'))->tags()->detach($request->get('tag_id'));
+    }
+
 
 
 }

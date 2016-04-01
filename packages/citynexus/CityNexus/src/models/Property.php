@@ -30,4 +30,14 @@ class Property extends Model
     {
         return $this->hasMany('\CityNexus\CityNexus\Note');
     }
+
+    public function tags()
+    {
+        return $this->belongsToMany('\CityNexus\CityNexus\Tag', 'property_tag');
+    }
+
+    public function allTags()
+    {
+        return $this->tags()->lists('tag');
+    }
 }

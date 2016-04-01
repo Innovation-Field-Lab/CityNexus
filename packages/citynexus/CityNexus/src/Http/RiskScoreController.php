@@ -104,13 +104,21 @@ class RiskScoreController extends Controller
 
         $table = 'citynexus_scores_' . $rs->id;
 
-        $data = DB::table($table)
+        $table = DB::table($table)
             ->where('score', '>', '0')
             ->andWhere('lat', '!=', null)
             ->andWhere('long', '!=', null)
             ->join('citynexus_properties', 'citynexus_properties.id', '=', 'property_id')
             ->select($table . '.property_id', $table . '.score', 'citynexus_properties.lat', 'citynexus_properties.long')
             ->get();
+        $data = null;
+        foreach($table as $i)
+        {
+            if($i->lat != null && $i->long != null && $i->score != null)
+            {
+                $data .= '[' . $i->lat . ', ' . $i->long . ', ' . $i->score . '],';
+            }
+        }
         return view('citynexus::reports.maps.leaflet', compact('rs', 'scores', 'data'));
 
     }

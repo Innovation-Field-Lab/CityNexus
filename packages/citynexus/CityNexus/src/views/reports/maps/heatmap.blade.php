@@ -68,11 +68,7 @@
         alphaRange: 0.4
     });
 
-    var dataPoints = [
-            @foreach($data as $score)
-                [{{$score->lat}}, {{$score->long}}, {{$score->score/6}}],
-        @endforeach
-];
+    var dataPoints = [{{$data}}];
 
     heatmap.setData( dataPoints );
     heatmap.multiply( 2 );

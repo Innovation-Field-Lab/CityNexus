@@ -22,9 +22,9 @@
                         <th>{{$tag->tag}}</th>
                         <th>{{$tag->properties->count()}}</th>
                         <td>
-                            <a class="btn btn-sm btn-primary" href="/{{config('citynexus.root_directory')}}/tags/heat-map/{{$tag->id}}">Heat Map</a>
+                            {{--<a class="btn btn-sm btn-primary" href="/{{config('citynexus.root_directory')}}/tags/heat-map/{{$tag->id}}">Heat Map</a>--}}
                             <a class="btn btn-sm btn-primary" href="/{{config('citynexus.root_directory')}}/tags/pin-map/{{$tag->id}}">Pin Map</a>
-                            <a class="btn btn-sm btn-primary" href="/{{config('citynexus.root_directory')}}/tags/ranking/{{$tag->id}}">Listing</a>
+                            {{--<a class="btn btn-sm btn-primary" href="/{{config('citynexus.root_directory')}}/tags/ranking/{{$tag->id}}">Listing</a>--}}
                         </td>
                     </tr>
                 @endforeach

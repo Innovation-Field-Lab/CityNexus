@@ -95,7 +95,11 @@ class RiskScoreController extends Controller
             ->select($table . '.property_id', $table . '.score', 'citynexus_properties.lat', 'citynexus_properties.long')
             ->get();
 
-        return view('citynexus::reports.maps.heatmap', compact('rs', 'scores', 'data'));
+        $max = DB::table($table)
+            ->max('score');
+
+
+        return view('citynexus::reports.maps.heatmap', compact('rs', 'scores', 'data', 'max'));
 
     }
 

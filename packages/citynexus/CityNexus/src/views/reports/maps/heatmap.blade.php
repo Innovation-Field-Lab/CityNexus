@@ -70,7 +70,7 @@
 
     var dataPoints = [
             @foreach($data as $score)
-                [{{$score->lat}}, {{$score->long}}, {{$score->score}}],
+                [{{$score->lat}}, {{$score->long}}, {{$score->score/$max}}],
         @endforeach
 ];
 

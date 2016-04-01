@@ -51,18 +51,16 @@ class UploadData extends Job implements SelfHandling, ShouldQueue
 
             try
             {
-                if($id != null) {
-                    // Get property record
-                    $property = Property::find($id);
+                // Get property record
+                $property = Property::find($id);
 
-                    if ($property->lat != null) {
-                        $geocode = Geocoder::geocode($property->full_address . ', ' . config('citynexus.city_state'));
-                        $property->lat = $geocode->getLatitude();
-                        $property->long = $geocode->getLongitude();
-                    }
-
-                    $property->save();
+                if ($property->lat != null) {
+                    $geocode = Geocoder::geocode($property->full_address . ', ' . config('citynexus.city_state'));
+                    $property->lat = $geocode->getLatitude();
+                    $property->long = $geocode->getLongitude();
                 }
+
+                $property->save();
             }
             catch(\Exception $e)
             {

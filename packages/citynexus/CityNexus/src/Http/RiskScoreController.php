@@ -97,6 +97,67 @@ class RiskScoreController extends Controller
 
     }
 
+    public function getPinMap(Request $request)
+    {
+        $rs = Score::find($request->get('score_id'));
+        $scores = Score::all();
+
+        $table = 'citynexus_scores_' . $rs->id;
+
+        $pins = DB::table($table)
+            ->where('score', '>', '0')
+            ->join('citynexus_properties', 'citynexus_properties.id', '=', 'property_id')
+            ->select('citynexus_properties.id', 'citynexus_properties.full_address', $table . '.score', 'citynexus_properties.lat', 'citynexus_properties.long')
+            ->get();
+
+        return view('citynexus::reports.maps.pinmap', compact('rs', 'scores', 'pins'));
+
+    }
+
+    public function getDistribution(Request $request)
+    {
+        $rs = Score::find($request->get('score_id'));
+        $table = 'citynexus_scores_' . $rs->id;
+
+        if($request->get('with_zeros'))
+        {
+            $data = DB::table($table)->lists('score');
+            $min = DB::table($table)->min('score');
+        }
+        else
+        {
+            $data = DB::table($table)->where('score', '>', '0')->lists('score');
+            $min = DB::table($table)->where('score', '>', '0')->min('score');
+        }
+        $max = DB::table($table)->max('score');
+        $zeros = DB::table($table)->where('score', '<=', '0')->count();
+        $count = count($data);
+        $sum = DB::table($table)->sum('score');
+
+        $middle = $count/2;
+        $firstQ = $count/4;
+        $thirdQ = $middle + $firstQ;
+        $bTen = $count/10;
+        $tTen = $count - $bTen;
+
+        $stats = [
+            'max' => $max,
+            'min' => $min,
+            'count' => $count,
+            'mean' => $sum/$count,
+            'bTen' => $bTen,
+            'firstQ' => $firstQ,
+            'median' => $middle,
+            'thirdQ' => $thirdQ,
+            'tTen' => $tTen,
+            'zeros' => $zeros,
+
+        ];
+
+        return view('citynexus::reports.charts.normal_distro', compact('data', 'stats', 'rs'));
+
+    }
+
     public function getAjaxScores(Request $request)
     {
         $score = Score::find($request->get('score_id'));

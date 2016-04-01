@@ -120,7 +120,7 @@
                                 @empty
                                     <div class="alert alert-info" id="no-tags"> No tags currently associated with property</div>
                                 @endforelse
-                                <div class="list-group-item hidden" id="pending"><i class="glyphicon glyphicon-refresh"></i></div>
+                                <div class="hidden" id="pending"><i class="glyphicon glyphicon-refresh"></i></div>
                             </div>
                         </div>
                         <div class="panel-footer">

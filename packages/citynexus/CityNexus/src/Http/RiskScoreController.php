@@ -89,8 +89,8 @@ class RiskScoreController extends Controller
 
         $data = DB::table($table)
             ->where('score', '>', '0')
-            ->where('lat', '!=', null)
-            ->where('long', '!=', null)
+            ->whereNotNull('lat')
+            ->whereNotNull('long')
             ->join('citynexus_properties', 'citynexus_properties.id', '=', 'property_id')
             ->select($table . '.property_id', $table . '.score', 'citynexus_properties.lat', 'citynexus_properties.long')
             ->get();
@@ -108,8 +108,8 @@ class RiskScoreController extends Controller
 
         $table = DB::table($table)
             ->where('score', '>', '0')
-            ->andWhere('lat', '!=', null)
-            ->andWhere('long', '!=', null)
+            ->whereNotNull('lat')
+            ->whereNotNull('long')
             ->join('citynexus_properties', 'citynexus_properties.id', '=', 'property_id')
             ->select($table . '.property_id', $table . '.score', 'citynexus_properties.lat', 'citynexus_properties.long')
             ->get();

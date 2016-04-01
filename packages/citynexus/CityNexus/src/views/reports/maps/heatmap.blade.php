@@ -75,7 +75,7 @@
 ];
 
     heatmap.setData( dataPoints );
-    heatmap.multiply(.5 );
+    heatmap.multiply(.1 );
 
     map.addLayer( heatmap );
 

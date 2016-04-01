@@ -13,7 +13,9 @@ return [
     "section" => "main",
 
     // City information
-    "city_state" => env('CITY_STATE', 'chelsea, ma'),
+    "city_state" => env('CITY_STATE', ''),
+    "city" => env('CITY', ''),
+    "state" => env('STATE', ''),
 
     // The route directory where the tabler routes will be hosted
 

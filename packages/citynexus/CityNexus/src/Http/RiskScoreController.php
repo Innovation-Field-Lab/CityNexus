@@ -97,6 +97,22 @@ class RiskScoreController extends Controller
 
     }
 
+    public function getLeafletMap(Request $request)
+    {
+        $rs = Score::find($request->get('score_id'));
+        $scores = Score::all();
+
+        $table = 'citynexus_scores_' . $rs->id;
+
+        $data = DB::table($table)
+            ->where('score', '>', '0')
+            ->join('citynexus_properties', 'citynexus_properties.id', '=', 'property_id')
+            ->select($table . '.property_id', $table . '.score', 'citynexus_properties.lat', 'citynexus_properties.long')
+            ->get();
+        return view('citynexus::reports.maps.leaflet', compact('rs', 'scores', 'data'));
+
+    }
+
     public function getAjaxScores(Request $request)
     {
         $score = Score::find($request->get('score_id'));

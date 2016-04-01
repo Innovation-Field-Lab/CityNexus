@@ -30,11 +30,11 @@ class AdminController extends Controller
 
     public function getRefreshGeocoding()
     {
-        $properties = Property::where('lat', null)->lists('id');
+        $properties = Property::all();
 
         foreach($properties as $i)
         {
-            $this->dispatch(new GeocodeJob($i));
+            $this->dispatch(new GeocodeJob($i->id));
         }
     }
 

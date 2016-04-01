@@ -70,12 +70,12 @@
 
     var dataPoints = [
             @foreach($data as $score)
-                [{{$score->lat}}, {{$score->long}}, {{$score->score/$max}}],
+                [{{$score->lat}}, {{$score->long}}, 1, {{$score->score/$max}}],
         @endforeach
 ];
 
     heatmap.setData( dataPoints );
-    heatmap.multiply( 2 );
+    heatmap.multiply(.5 );
 
     map.addLayer( heatmap );
 

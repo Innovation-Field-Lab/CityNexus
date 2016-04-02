@@ -118,6 +118,7 @@ class RiskScoreController extends Controller
     {
         $rs = Score::find($request->get('score_id'));
         $table = 'citynexus_scores_' . $rs->id;
+        $max = DB::table($table)->max('score');
 
         if($request->get('with_zeros'))
         {
@@ -150,11 +151,11 @@ class RiskScoreController extends Controller
 
             $data = DB::table($table)->where('score', '<', $cutoff)->where('score', '>', 0)->orderBy('score')->lists('score');
             $min = DB::table($table)->where('score', '<', $cutoff)->where('score', '>', 0)->min('score');
+            $max = $cutoff;
             $count = count($data);
         }
 
         $zeros = DB::table($table)->where('score', '<=', '0')->count();
-        $max = DB::table($table)->max('score');
         $sum = DB::table($table)->sum('score');
         $middle = $count/2;
         $firstQ = $count/4;

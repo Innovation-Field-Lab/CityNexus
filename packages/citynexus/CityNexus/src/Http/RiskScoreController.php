@@ -121,19 +121,32 @@ class RiskScoreController extends Controller
 
         if($request->get('with_zeros'))
         {
-            $data = DB::table($table)->lists('score');
+            $data = DB::table($table)->orderBy('score')->lists('score');
             $min = DB::table($table)->min('score');
         }
         else
         {
-            $data = DB::table($table)->where('score', '>', '0')->lists('score');
-            $min = DB::table($table)->where('score', '>', '0')->min('score');
+            $data = DB::table($table)->where('score', '>', 0)->orderBy('score')->lists('score');
+            $min = DB::table($table)->where('score', '>', 0)->min('score');
         }
-        $max = DB::table($table)->max('score');
-        $zeros = DB::table($table)->where('score', '<=', '0')->count();
+        // Bern view
         $count = count($data);
-        $sum = DB::table($table)->sum('score');
 
+        if($request->get('bern') == 'feel')
+        {
+            $bern = $count - ($count/100);
+
+            $bern = intval ($bern);
+            $bern = $data[$bern];
+
+            $data = DB::table($table)->where('score', '<', $bern)->where('score', '>', 0)->orderBy('score')->lists('score');
+            $min = DB::table($table)->where('score', '<', $bern)->where('score', '>', 0)->min('score');
+            $count = count($data);
+        }
+
+        $zeros = DB::table($table)->where('score', '<=', '0')->count();
+        $max = DB::table($table)->max('score');
+        $sum = DB::table($table)->sum('score');
         $middle = $count/2;
         $firstQ = $count/4;
         $thirdQ = $middle + $firstQ;

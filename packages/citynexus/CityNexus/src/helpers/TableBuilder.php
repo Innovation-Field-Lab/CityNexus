@@ -337,4 +337,9 @@ class TableBuilder
         }
         else return false;
     }
+
+     public function geocode($id)
+    {
+        return $this->dipatch(new GeocodeJob($id));
+    }
 }

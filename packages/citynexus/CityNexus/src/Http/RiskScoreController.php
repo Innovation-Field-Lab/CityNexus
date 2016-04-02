@@ -89,11 +89,46 @@ class RiskScoreController extends Controller
 
         $data = DB::table($table)
             ->where('score', '>', '0')
+            ->whereNotNull('lat')
+            ->whereNotNull('long')
             ->join('citynexus_properties', 'citynexus_properties.id', '=', 'property_id')
             ->select($table . '.property_id', $table . '.score', 'citynexus_properties.lat', 'citynexus_properties.long')
             ->get();
 
-        return view('citynexus::reports.maps.heatmap', compact('rs', 'scores', 'data'));
+        $max = DB::table($table)
+            ->max('score');
+
+
+        return view('citynexus::reports.maps.heatmap', compact('rs', 'scores', 'data', 'max'));
+
+    }
+
+    public function getLeafletMap(Request $request)
+    {
+        $rs = Score::find($request->get('score_id'));
+        $scores = Score::all();
+
+        $table = 'citynexus_scores_' . $rs->id;
+
+        $table = DB::table($table)
+            ->where('score', '>', '0')
+            ->whereNotNull('lat')
+            ->whereNotNull('long')
+            ->join('citynexus_properties', 'citynexus_properties.id', '=', 'property_id')
+            ->select($table . '.property_id', $table . '.score', 'citynexus_properties.lat', 'citynexus_properties.long')
+            ->get();
+        $data = null;
+
+
+        foreach($table as $i)
+        {
+            if($i->lat != null && $i->long != null && $i->score != null)
+            {
+                $data[] = $i->lat . ', ' . $i->long . ', ' . $i->score;
+            }
+        }
+        $data = json_encode($data);
+        return view('citynexus::reports.maps.leaflet', compact('rs', 'scores', 'data'));
 
     }
 

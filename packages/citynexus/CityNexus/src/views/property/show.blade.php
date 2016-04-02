@@ -118,8 +118,9 @@
                                 @forelse($property->tags as $tag)
                                     @include('citynexus::property._tag')
                                 @empty
-                                    <div class="alert alert-info" id="no-tags"> No tags currently associated with prooperty</div>
+                                    <div class="alert alert-info" id="no-tags"> No tags currently associated with property</div>
                                 @endforelse
+                                <div class="hidden" id="pending"><i class="glyphicon glyphicon-refresh"></i></div>
                             </div>
                         </div>
                         <div class="panel-footer">
@@ -255,6 +256,9 @@
             e.preventDefault();
 
             var tag = $('#new-tag').val();
+            $('#new-tag').val('');
+            $('#no-tags').addClass('hidden');
+            $('#pending').removeClass('hidden');
             $.ajax({
                 url: "/{{config('citynexus.root_directory')}}/associate-tag",
                 type: 'post',
@@ -264,8 +268,7 @@
                     tag: tag
                 }
             }).success( function( data ) {
-                $('#no-tags').addClass('hidden');
-                $('#new-tag').val('');
+                $("#pending").addClass('hidden');
                 $('#property_tags').append(data);
             }
         );

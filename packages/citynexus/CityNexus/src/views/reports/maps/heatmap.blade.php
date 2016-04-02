@@ -2,15 +2,22 @@
 @extends(config('citynexus.template'))
 
 @section(config('citynexus.section'))
+    <div class="panel panel-default" id="score-picker">
+        <div class="panel-heading">
+            Score
+        </div>
+        <div class="panel-body" >
+            <select name="scores" id="scores" class="form-control">
+                @foreach($scores as $i)
+                    <option value="{{$i->id}}" @if($i->id == $rs->id) selected @endif>{{$i->name}}</option>
+                @endforeach
+            </select>
+            </br>
+            <div class="btn btn-block btn-primary" onclick="refresh()"> Refresh </div>
+        </div>
+    </div>
 
-
-<div id="map"></div>
-
-
-
-
-</body>
-</html>
+    <div id="map"></div>
 
 @push('style')
 <link rel="stylesheet" href="//cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css"></link>
@@ -34,6 +41,16 @@
     .syntaxhighlighter {
         overflow-y:hidden !important;
         padding: 10px 0;
+    }
+
+    #score-picker
+    {
+        width: 250px;
+        position: fixed;
+        right: 50px;
+        height: 200px;
+        margin-top: 20px;
+        z-index: 50;
     }
 </style>
 
@@ -70,16 +87,23 @@
 
     var dataPoints = [
             @foreach($data as $score)
-                [{{$score->lat}}, {{$score->long}}, 1, {{$score->score/$max}}],
+                [{{$score->lat}}, {{$score->long}}, {{$score->score/$max}}],
         @endforeach
 ];
 
     heatmap.setData( dataPoints );
-    heatmap.multiply(.1 );
+    heatmap.multiply(.5);
 
     map.addLayer( heatmap );
 
     SyntaxHighlighter.all();
+
+    function refresh()
+    {
+        var score = $("#scores").val();
+        var url = "/{{config('citynexus.root_directory')}}/risk-score/heat-map?score_id=" + score;
+        window.location.replace(url);
+    }
 
 </script>
 @stop

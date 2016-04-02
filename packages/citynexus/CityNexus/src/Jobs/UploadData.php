@@ -19,9 +19,9 @@ class UploadData extends Job implements SelfHandling, ShouldQueue
     /**
      * Create a new job instance.
      *
-     * @param string $elements
-     * @param string $table
-     * @param Property $property
+     * @param string $data
+     * @param string $table_id
+     * @param Property $upload_id
      */
     public function __construct($data, $table_id, $upload_id)
     {
@@ -46,7 +46,7 @@ class UploadData extends Job implements SelfHandling, ShouldQueue
             }
             catch(\Exception $e)
             {
-                Error::create(['location' => 'UploadData Jobs at addRecord', 'data' => json_encode(['data' => $this->data, 'i' => $i, 'error' => $e, ])]);
+                Error::create(['location' => 'UploadData', 'data' => json_encode(['data' => $this->data, 'table_id' => $this->tableId, 'upload_id' => $this->uploadId, 'error' => $e, ])]);
             }
 
             $tabler = new TableBuilder();

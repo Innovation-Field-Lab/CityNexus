@@ -49,8 +49,26 @@ class UploadData extends Job implements SelfHandling, ShouldQueue
                 Error::create(['location' => 'UploadData', 'data' => json_encode(['data' => $this->data, 'table_id' => $this->tableId, 'upload_id' => $this->uploadId, 'error' => $e, ])]);
             }
 
-            $tabler = new TableBuilder();
-            $tabler->geocode($id);
+            try
+            {
+                // Get property record
+                $property = Property::find($id);
+                if($property->lat == null | $property->long == null) {
+                }
+                $geocode = Geocoder::geocode(   $property->full_address  . ', ' . config('citynexus.city_state'));
+
+                if($geocode)
+                {
+                    $property->lat = $geocode->getLatitude();
+                    $property->long = $geocode->getLongitude();
+                }
+
+                $property->save();
+            }
+            catch(\Exception $e)
+            {
+                Error::create(['location' => 'GeoCode on UploadData', 'data' => json_encode(['pid' => $id, 'e' => $e])]);
+            }
 
         }
 

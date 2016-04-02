@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use League\Flysystem\Exception;
+use CityNexus\CityNexus\GeocodeJob;
 
 class TableBuilder
 {
@@ -338,8 +339,4 @@ class TableBuilder
         else return false;
     }
 
-     public function geocode($id)
-    {
-        return $this->dipatch(new GeocodeJob($id));
-    }
 }

@@ -132,15 +132,24 @@ class RiskScoreController extends Controller
         // Bern view
         $count = count($data);
 
-        if($request->get('bern') == 'feel')
+        if($request->get('feel') != null)
         {
-            $bern = $count - ($count/100);
+            if($request->get('feel') == 'bern')
+            {
+                $bern = $count - ($count/100);
+                $bern = intval ($bern);
+                $cutoff = $data[$bern];
+            }
 
-            $bern = intval ($bern);
-            $bern = $data[$bern];
+            if($request->get('feel') == 'castro')
+            {
+                $castro = $count - ($count/10);
+                $castro = intval ($castro);
+                $cutoff = $data[$castro];
+            }
 
-            $data = DB::table($table)->where('score', '<', $bern)->where('score', '>', 0)->orderBy('score')->lists('score');
-            $min = DB::table($table)->where('score', '<', $bern)->where('score', '>', 0)->min('score');
+            $data = DB::table($table)->where('score', '<', $cutoff)->where('score', '>', 0)->orderBy('score')->lists('score');
+            $min = DB::table($table)->where('score', '<', $cutoff)->where('score', '>', 0)->min('score');
             $count = count($data);
         }
 

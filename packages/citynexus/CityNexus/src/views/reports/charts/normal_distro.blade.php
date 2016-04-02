@@ -12,6 +12,20 @@
                 <div id="chart"></div>
             </div>
             <div class="col-sm-3">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <span class="panel-title">Data Set Options</span>
+                    </div>
+                    <div class="panel-body">
+                        <div class="list-group">
+                            <a href="/{{config('citynexus.root_directory')}}/risk-score/distribution?score_id={{$rs->id}}&default=true" class="list-group-item @if(isset($_GET['default']) && $_GET['default'] == true)active @endif">Exclude &#8804; Zero</a>
+                            <a href="/{{config('citynexus.root_directory')}}/risk-score/distribution?score_id={{$rs->id}}&feel=bern" class="list-group-item @if(isset($_GET['feel']) && $_GET['feel'] == 'burn')active @endif">Exclude Top 1%</a>
+                            <a href="/{{config('citynexus.root_directory')}}/risk-score/distribution?score_id={{$rs->id}}&feel=malthus" class="list-group-item">Exclude Top 5%</a>
+                            <a href="/{{config('citynexus.root_directory')}}/risk-score/distribution?score_id={{$rs->id}}&feel=castro" class="list-group-item">Exclude Top 10%</a>
+                            <a href="/{{config('citynexus.root_directory')}}/risk-score/distribution?score_id={{$rs->id}}&with_zeros=true" class="list-group-item">Including &#8804; Zeros</a>
+                        </div>
+                    </div>
+                </div>
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <span class="panel-title">Score Range Stats</span>
@@ -49,14 +63,6 @@
                             </div>
 
                         </div>
-                        @if(isset($_GET['with_zeros']))
-                            <small>* All stats including zero values and negative, there were {{$stats['zeros']}} properties with a score of zero or less in this dataset. To exclude these scores,
-                                <a href="/{{config('citynexus.root_directory')}}/risk-score/distribution?score_id={{$rs->id}}">click here.</a></small>
-
-                        @else
-                            <small>* All stats exclude zero and negative values, there were {{$stats['zeros']}} properties with a score of zero or less in this dataset. To rerun with all scores,
-                                <a href="/{{config('citynexus.root_directory')}}/risk-score/distribution?score_id={{$rs->id}}&with_zeros=true">click here.</a></small>
-                                        @endif
                     </div>
                 </div>
             </div>

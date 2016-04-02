@@ -142,6 +142,13 @@ class RiskScoreController extends Controller
                 $cutoff = $data[$bern];
             }
 
+            if($request->get('feel') == 'malthus')
+            {
+                $malthus = $count - ($count/20);
+                $malthus = intval ($malthus);
+                $cutoff = $data[$malthus];
+            }
+
             if($request->get('feel') == 'castro')
             {
                 $castro = $count - ($count/10);

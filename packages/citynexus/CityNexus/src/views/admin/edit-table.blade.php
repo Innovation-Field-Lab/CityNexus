@@ -23,6 +23,7 @@
             @if(count($table) > 0)
             <table class="table table-bordered table-striped">
                 <tr>
+                    <th></th>
                     @foreach($table[0] as $k => $i)
                         <th>
                             {{$k}}
@@ -32,11 +33,15 @@
                 <tbody>
                 @foreach($table as $row)
                     <tr>
+                        <td>
+                            <a href="/{{config('citynexus.root_directory')}}/admin/remove-data?table_name={{$table_name}}&row_id={{$row->id}}&_token={{csrf_token()}}" class="btn btn-primary btn-sm">Delete</a>
+                        </td>
                         @foreach($row as $item)
                             <td>
                                 {{$item}}
                             </td>
                         @endforeach
+
                     </tr>
                 @endforeach
                 </tbody>

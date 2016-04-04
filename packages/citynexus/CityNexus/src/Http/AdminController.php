@@ -50,4 +50,13 @@ class AdminController extends Controller
         return view('citynexus::admin.edit-table', compact('table', 'table_name', 'tables'));
     }
 
+    public function getRemoveData(Request $request)
+    {
+        DB::table($request->get('table_name'))->where('id', $request->get('row_id'))->delete();
+
+        Session::flash('flash_info', "Row successfully remove");
+
+        return redirect()->back();
+
+    }
 }

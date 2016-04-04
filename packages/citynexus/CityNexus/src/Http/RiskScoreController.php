@@ -348,7 +348,7 @@ class RiskScoreController extends Controller
 
     private function runScore($score, $elements)
     {
-        $properties = Property::all()->chunk(250);
+        $properties = Property::all()->chunk(25);
 
         $table = 'citynexus_scores_' . $score->id;
 

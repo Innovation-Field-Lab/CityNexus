@@ -3,7 +3,7 @@
 
 @section(config('citynexus.section'))
 
-    <div id="mapid" style="width: 100%; height: 800px"></div>
+    <div id="mapid" style="width: 100%; height: 700px"></div>
 
 @stop
 

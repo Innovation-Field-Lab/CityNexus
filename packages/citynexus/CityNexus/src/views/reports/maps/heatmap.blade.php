@@ -30,7 +30,7 @@
     #map {
         width:100%;
         height:100%;
-        margin:0 auto 40px;
+        margin:0 auto 0px;
     }
     #map a {
         color:initial;

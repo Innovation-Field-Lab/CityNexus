@@ -1,5 +1,10 @@
+<b>v0.2.0 - Mon 4 April 2016 18:45</b><br>
+- Created Property Tags<br>
+- Create Pin Maps Working with tags and scores<br>
+- Changed heat maps to be powered by leaflet<br>
 - Fix bug that drops type from scheme when saving table type<br>
 - Created property Tags<br>
+- Created distribution analysis<br>
 
 <b>v0.1.2 - Wen. 30 March 2016 15:45</b><br>
 - Created Admin view of all tables<br>

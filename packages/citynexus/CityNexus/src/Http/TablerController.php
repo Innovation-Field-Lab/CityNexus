@@ -287,7 +287,7 @@ class TablerController extends Controller
         if($id != null) $table_name = Table::find($id)->table_name;
         if($table_name != null)
         {
-            $table = DB::table($table_name)->get();
+            $table = DB::table($table_name)->paginate(250);
 
         }
         else
@@ -304,6 +304,7 @@ class TablerController extends Controller
             ->where('table_name', '!=', 'group_user')
             ->where('table_name', '!=', 'api_keys')
             ->where('table_name', '!=', 'jobs')
+            ->where('table_name', '!=', 'errors')
             ->where('table_name', '!=', 'failed_jobs')
             ->where('table_name', '!=', 'citynexus_scores')
             ->where('table_name', '!=', 'citynexus_notes')

@@ -305,7 +305,8 @@ class TableBuilder
             $record[config('citynexus.index_id')] = $this->findSyncId( config('citynexus.index_table'), $i, $syncValues );
         }
 
-        if($record[config('citynexus.index_id')]) {
+        if(isset($record[config('citynexus.index_id')]))
+        {
 
             //add remaining elements to the array
             $record = $this->addElements($record, $i, $scheme);
@@ -335,8 +336,12 @@ class TableBuilder
             }
 
             return $record['property_id'];
+        } else
+        {
+            Error::create(['location' => 'addRecord -> no ID Found', json_encode(['i' => $i, 'table_id' => $table_id, 'upload_id' => $upload_id])]);
+            return false;
         }
-        else return false;
+
     }
 
 }

@@ -40,7 +40,7 @@ class UploadData extends Job implements SelfHandling, ShouldQueue
         //Process each individual record
             try
             {
-                $id = $tabler->addRecord($i, $this->tableId, $this->uploadId);
+                $id = $tabler->addRecord($this->data, $this->tableId, $this->uploadId);
             }
             catch(\Exception $e)
             {

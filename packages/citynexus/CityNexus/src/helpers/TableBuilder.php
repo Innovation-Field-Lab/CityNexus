@@ -338,8 +338,7 @@ class TableBuilder
             return $record['property_id'];
         } else
         {
-            Error::create(['location' => 'addRecord -> no ID Found', json_encode(['i' => $i, 'table_id' => $table_id, 'upload_id' => $upload_id])]);
-            return false;
+            throw new \Exception('No property ID was found or created');
         }
 
     }

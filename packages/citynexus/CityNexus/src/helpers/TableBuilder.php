@@ -321,9 +321,14 @@ class TableBuilder
             $record['upload_id'] = $upload_id;
 
             foreach ($scheme as $field) {
-                if ($field->type == 'integer' or $field->type == 'float') {
+                if ($field->type == 'float') {
                     if (array_key_exists($field->key, $record)) $record[$field->key] = floatval(preg_replace("/[^0-9,.]/", "", $record[$field->key]));
-                } elseif ($field->type == 'datetime') {
+                }
+                elseif($field->type == 'integer')
+                {
+                    if (array_key_exists($field->key, $record)) $record[$field->key] = intval(preg_replace("/[^0-9,.]/", "", $record[$field->key]));
+                }
+                elseif ($field->type == 'datetime') {
 
                     if (array_key_exists($field->key, $record))
                     {
@@ -344,8 +349,16 @@ class TableBuilder
                 $record['created_at'] = $record[$table->timestamp];
             }
 
-            DB::table($table->table_name)->insertGetId($record);
 
+            try{
+
+                DB::table($table->table_name)->insertGetId($record);
+
+            }
+            catch(\Exception $e)
+            {
+                Error::create(['addRecord - Insert Record'], json_encode(['record' => $record]));
+            }
             //If there are push values, update the primary property record
             if (count($pushValues) > 0) {
                 $property = Property::find($record['property_id']);
@@ -355,10 +368,12 @@ class TableBuilder
                 $property->save();
             }
 
+            dd($record);
+
             return $record['property_id'];
         } else
         {
-            throw new \Exception('No property ID was found or created');
+            return false;
         }
 
     }

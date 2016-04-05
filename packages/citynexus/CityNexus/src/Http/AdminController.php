@@ -59,4 +59,20 @@ class AdminController extends Controller
         return redirect()->back();
 
     }
+
+    public function getClearTable($table_name, $remove = false)
+    {
+        if($remove)
+        {
+            DB::table($table_name)->drop();
+            Session::flash('flash_info', "Table Removed");
+        }
+        else
+        {
+            DB::table($table_name)->truncate();
+            Session::flash('flash_info', "Table Cleared");
+        }
+
+        return redirect()->back();
+    }
 }

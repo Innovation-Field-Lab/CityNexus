@@ -37,11 +37,13 @@ class UploadData extends Job implements SelfHandling, ShouldQueue
     public function handle()
     {
         $tabler = new TableBuilder();
-        DB::reconnect();
         //Process each individual record
+        $id = $tabler->addRecord($this->data, $this->tableId, $this->uploadId);
+
             try
             {
                 $id = $tabler->addRecord($this->data, $this->tableId, $this->uploadId);
+
             }
             catch(\Exception $e)
             {
@@ -66,7 +68,13 @@ class UploadData extends Job implements SelfHandling, ShouldQueue
             }
             catch(\Exception $e)
             {
-                Error::create(['location' => 'GeoCode on UploadData', 'data' => json_encode(['pid' => $id, 'e' => $e])]);
+                $data['e'] = $e;
+                if(isset($id)) $data['id'] = $id; else $data['id'] = null;
+                $data['data'] = $this->data;
+                $data['table_id'] = $this->tableId;
+                $data['uploadId'] = $this->uploadId;
+
+                Error::create(['location' => 'GeoCode on UploadData', 'data' => json_encode($data)]);
             }
 
     }

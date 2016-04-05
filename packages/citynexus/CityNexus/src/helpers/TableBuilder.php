@@ -10,7 +10,6 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
-use League\Flysystem\Exception;
 use CityNexus\CityNexus\GeocodeJob;
 
 class TableBuilder
@@ -110,7 +109,10 @@ class TableBuilder
             $return = DB::table($table_name)
                 ->insertGetId($search);
         }
+
         return $return;
+
+
         }
         else
             return false;
@@ -122,7 +124,7 @@ class TableBuilder
         // Check if there are more than three addresses on the street
         if(Property::where('street_name', $search['street_name'])
                 ->where('street_type', $search['street_type'])
-                ->count() < 3)
+                ->count() < 1)
         {
             $search['review'] = true;
         }
@@ -136,6 +138,11 @@ class TableBuilder
         {
             $search['review'] = true;
         }
+
+//        if($search['street_name'] == null && $search['house_number'] == null)
+//        {
+//            throw new \Exception('No meaningful address');
+//        }
 
         return $search;
     }
@@ -284,6 +291,7 @@ class TableBuilder
 
     public function addRecord($i, $table_id, $upload_id)
     {
+
         //Create a empty array of the record
         $record = [];
 
@@ -316,7 +324,19 @@ class TableBuilder
                 if ($field->type == 'integer' or $field->type == 'float') {
                     if (array_key_exists($field->key, $record)) $record[$field->key] = floatval(preg_replace("/[^0-9,.]/", "", $record[$field->key]));
                 } elseif ($field->type == 'datetime') {
-                    if (array_key_exists($field->key, $record)) $record[$field->key] = Carbon::createFromTimestamp(strtotime($record[$field->key]));
+
+                    if (array_key_exists($field->key, $record))
+                    {
+                        if(is_array($record[$field->key]))
+                        {
+                            $record[$field->key] = Carbon::createFromTimestamp(strtotime($record[$field->key]['date']));
+
+                        }
+                        else
+                        {
+                            $record[$field->key] = Carbon::createFromTimestamp(strtotime($record[$field->key]['date']));
+                        }
+                    }
                 }
             }
 

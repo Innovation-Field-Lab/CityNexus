@@ -73,6 +73,6 @@ class AdminController extends Controller
             Session::flash('flash_info', "Table Cleared");
         }
 
-        return redirect()->back();
+        return redirect('/');
     }
 }

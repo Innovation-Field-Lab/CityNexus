@@ -334,7 +334,7 @@ class TableBuilder
                         }
                         else
                         {
-                            $record[$field->key] = Carbon::createFromTimestamp(strtotime($record[$field->key]['date']));
+                            $record[$field->key] = Carbon::createFromTimestamp(strtotime($record[$field->key]));
                         }
                     }
                 }

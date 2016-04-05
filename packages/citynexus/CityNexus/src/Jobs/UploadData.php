@@ -38,8 +38,6 @@ class UploadData extends Job implements SelfHandling, ShouldQueue
     {
         $tabler = new TableBuilder();
         //Process each individual record
-        foreach($this->data as $i)
-        {
             try
             {
                 $id = $tabler->addRecord($i, $this->tableId, $this->uploadId);
@@ -69,8 +67,6 @@ class UploadData extends Job implements SelfHandling, ShouldQueue
             {
                 Error::create(['location' => 'GeoCode on UploadData', 'data' => json_encode(['pid' => $id, 'e' => $e])]);
             }
-
-        }
 
     }
 }

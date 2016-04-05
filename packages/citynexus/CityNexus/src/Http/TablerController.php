@@ -190,8 +190,6 @@ class TablerController extends Controller
     public function processUpload($table, $data, $upload_id)
     {
 
-        $data = array_chunk($data, 5);
-
         try
         {
             foreach($data as $i)

@@ -64,7 +64,7 @@ class AdminController extends Controller
     {
         if($remove)
         {
-            DB::table($table_name)->drop();
+            Schema::table($table_name)->drop();
             Session::flash('flash_info', "Table Removed");
         }
         else

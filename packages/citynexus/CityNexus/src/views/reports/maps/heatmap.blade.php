@@ -69,10 +69,12 @@
 <script type="text/javascript" src="/js/webgl-heatmap-leaflet.js"></script>
 <script type="text/javascript" src="/js/bootstrap-slider.js"></script>
 <script type="text/javascript">
-    $('.slider').slider({
+    $('.slider').slider(
+    { min: 1,
+    max: 100}
+    );
 
-    });
-
+    $('#intensity').slider('setValue', 50);
 
     var map = L.map('map', {
         center : [{{config('citynexus.map_lat')}}, {{config('citynexus.map_long')}}],
@@ -118,7 +120,7 @@
     $('#intensity').slider()
             .on('slide', function(ev){
                 var value = $('#intensity').val();
-                heatmap.multiply( value/10);
+                heatmap.multiply( value/100);
             });
 
 </script>

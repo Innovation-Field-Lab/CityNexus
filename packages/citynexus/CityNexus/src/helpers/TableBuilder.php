@@ -33,7 +33,7 @@ class TableBuilder
 
                 foreach ($fields as $field) {
                     $type = $field->type;
-
+                    if($field->key == 'id') {$field->key = $field->key . '-original';}
                     $table->$type($field->key)->nullable();
                 }
                 $table->timestamps();
@@ -367,7 +367,7 @@ class TableBuilder
                 }
                 $property->save();
             }
-            
+
             return $record['property_id'];
         } else
         {

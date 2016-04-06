@@ -19,6 +19,7 @@
                     </thead>
                     <tbody>
                     @foreach($tables as $table)
+                        @if($table->table_title != null)
                         <tr>
                             <td>
                                 {{$table->table_title}}
@@ -41,6 +42,7 @@
 
                             </td>
                         </tr>
+                        @endif
                     @endforeach
                     </tbody>
                 </table>

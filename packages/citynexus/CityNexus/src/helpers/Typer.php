@@ -34,7 +34,7 @@ class Typer
                 return 'string';
             }
             else {
-                return 'textarea';
+                return 'text';
             }
         }
         else {

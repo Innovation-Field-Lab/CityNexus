@@ -367,9 +367,7 @@ class TableBuilder
                 }
                 $property->save();
             }
-
-            dd($record);
-
+            
             return $record['property_id'];
         } else
         {

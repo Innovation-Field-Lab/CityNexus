@@ -357,7 +357,7 @@ class TableBuilder
             }
             catch(\Exception $e)
             {
-                Error::create(['addRecord - Insert Record'], json_encode(['record' => $record]));
+                Error::create(['location' => 'addRecord - Insert Record', 'data' => json_encode(['e' => $e, 'record' => $record])]);
             }
             //If there are push values, update the primary property record
             if (count($pushValues) > 0) {

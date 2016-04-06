@@ -1,3 +1,9 @@
+<b>v0.2.1 - Wen 6 April 2016 17:30</b>
+- Fixed upload bugs <br>
+- Added intensity slider to heat maps <br>
+- Added long string support (text area)<br>
+<br>
+
 <b>v0.2.0 - Mon 4 April 2016 18:45</b><br>
 - Created Property Tags<br>
 - Create Pin Maps Working with tags and scores<br>

@@ -14,6 +14,9 @@
             </select>
             </br>
             <div class="btn btn-block btn-primary" onclick="refresh()"> Refresh </div>
+            <br>
+            <label for="intensity">Intensity</label>
+            <input class="slider" id="intensity"> </input>
         </div>
     </div>
 
@@ -21,6 +24,7 @@
 
 @push('style')
 <link rel="stylesheet" href="//cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css"></link>
+    <link rel="stylesheet" href="/css/slider.css"></link>
 <link href='http://fonts.googleapis.com/css?family=Open+Sans|Fjalla+One' rel='stylesheet' type='text/css'>
 <link type="text/css" rel="stylesheet" href="/css/shCoreEclipse.css"/>
 <!--[if lte IE 8]>
@@ -63,7 +67,13 @@
 
 <script type="text/javascript" src="/js/webgl-heatmap.js"></script>
 <script type="text/javascript" src="/js/webgl-heatmap-leaflet.js"></script>
+<script type="text/javascript" src="/js/bootstrap-slider.js"></script>
 <script type="text/javascript">
+    $('.slider').slider({
+
+    });
+
+
     var map = L.map('map', {
         center : [{{config('citynexus.map_lat')}}, {{config('citynexus.map_long')}}],
         zoom: {{config('citynexus.map_zoom')}}
@@ -92,7 +102,7 @@
 ];
 
     heatmap.setData( dataPoints );
-    heatmap.multiply(.8);
+    heatmap.multiply( .5 );
 
     map.addLayer( heatmap );
 
@@ -104,6 +114,12 @@
         var url = "/{{config('citynexus.root_directory')}}/risk-score/heat-map?score_id=" + score;
         window.location.replace(url);
     }
+
+    $('#intensity').slider()
+            .on('slide', function(ev){
+                var value = $('#intensity').val();
+                heatmap.multiply( value/10);
+            });
 
 </script>
 @stop

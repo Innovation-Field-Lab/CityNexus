@@ -279,6 +279,13 @@ class TablerController extends Controller
         return redirect(config('citynexus.tabler_root'));
     }
 
+    public function getViewTable(Request $request)
+    {
+        $table_name = $request->table_name;
+
+        return redirect('/tabler/show-table/' . $table_name);
+    }
+
     public function getShowTable($table_name)
     {
         if($table_name != null)

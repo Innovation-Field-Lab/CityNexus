@@ -349,6 +349,11 @@ class TableBuilder
                 $record['created_at'] = $record[$table->timestamp];
             }
 
+            if(isset($record['id']))
+            {
+                $record['id-original'] = $record['id'];
+            }
+
 
             try{
 

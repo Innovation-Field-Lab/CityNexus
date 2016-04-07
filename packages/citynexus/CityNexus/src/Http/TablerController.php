@@ -283,8 +283,7 @@ class TablerController extends Controller
     {
         if($table_name != null)
         {
-            $table = DB::table($table_name)->get();
-
+            $table = DB::table($table_name)->paginate(250);
         }
         else
         {

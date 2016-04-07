@@ -41,11 +41,8 @@ class AdminController extends Controller
     public function getEditTable(Request $request)
     {
         $table_name = $request->get('table_name');
-        $table = DB::table($request->get('table_name'))->get();
+        $table = DB::table($request->get('table_name'))->paginate(250);
         $tables = DB::table('information_schema.tables')->where('table_schema', 'public')->get();
-
-
-        $table = $table;
 
         return view('citynexus::admin.edit-table', compact('table', 'table_name', 'tables'));
     }

@@ -104,7 +104,6 @@
 ];
 
     heatmap.setData( dataPoints );
-    heatmap.multiply( .5 );
 
     map.addLayer( heatmap );
 
@@ -120,7 +119,7 @@
     $('#intensity').slider()
             .on('slide', function(ev){
                 var value = $('#intensity').val();
-                heatmap.multiply( value/100);
+                heatmap.multiply( value/50);
             });
 
 </script>

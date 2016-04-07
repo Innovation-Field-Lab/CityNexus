@@ -30,7 +30,7 @@ class AdminController extends Controller
 
     public function getRefreshGeocoding()
     {
-        $properties = Property::where('lat' == null or 'long' == null );
+        $properties = Property::whereNull('lat')->get();
 
         foreach($properties as $i)
         {

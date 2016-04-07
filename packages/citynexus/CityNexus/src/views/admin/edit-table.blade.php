@@ -20,6 +20,7 @@
             <a  href="/{{config('citynexus.tabler_root')}}/download-table/{{$table_name}}"><i class="glyphicon glyphicon-download"></i> Download CSV</a>
         </div>
         <div class="panel-body" style="overflow: scroll;">
+            {!! $table->render() !!}
             @if(count($table) > 0)
             <table class="table table-bordered table-striped">
                 <tr>
@@ -51,6 +52,7 @@
                 Table currently holds no records.
             </div>
                 @endif
+            {!! $table->render() !!}
         </div>
     </div>
 

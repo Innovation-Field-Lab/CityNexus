@@ -5,6 +5,7 @@ namespace CityNexus\CityNexus\Http;
 use CityNexus\CityNexus\GeocodeJob;
 use CityNexus\CityNexus\Property;
 use CityNexus\CityNexus\Upload;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -69,5 +70,15 @@ class AdminController extends Controller
         }
 
         return redirect('/');
+    }
+
+    public function getRemoveChelsea()
+    {
+        Schema::table('citynexus_properties', function (Blueprint $table)
+        {
+           $table->string('city')->default(env('CITY'))->change();
+        });
+
+        DB::table('citynexus_properties')->where('city', 'chelsea')->update(['city' => env('CITY')]);
     }
 }

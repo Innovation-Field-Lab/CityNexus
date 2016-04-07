@@ -279,10 +279,15 @@ class TablerController extends Controller
         return redirect(config('citynexus.tabler_root'));
     }
 
-    public function getShowTable($id = null)
+    public function getViewTable(Request $request)
     {
-        if(isset($_GET['table_name'])) $table_name = $_GET['table_name'];
-        if($id != null) $table_name = Table::find($id)->table_name;
+        $table_name = $request->table_name;
+
+        return redirect('/tabler/show-table/' . $table_name);
+    }
+
+    public function getShowTable($table_name)
+    {
         if($table_name != null)
         {
             $table = DB::table($table_name)->paginate(250);

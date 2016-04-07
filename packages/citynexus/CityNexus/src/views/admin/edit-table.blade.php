@@ -5,7 +5,7 @@
 
     <div class="panel panel-default">
         <div class="panel-heading" style="height: 60px">
-            <form action="/{{config('citynexus.tabler_root')}}/show-table" class="form-inline pull-right">
+            <form action="/{{config('citynexus.tabler_root')}}/view-table" class="form-inline pull-right">
                 {{csrf_field()}}
                 <select name="table_name" id="table_name" class="form-control">
                     <option value="">Select One</option>

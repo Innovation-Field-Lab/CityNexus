@@ -74,10 +74,6 @@ class AdminController extends Controller
 
     public function getRemoveChelsea()
     {
-        Schema::table('citynexus_properties', function (Blueprint $table)
-        {
-           $table->string('city')->default(env('CITY'))->change();
-        });
 
         DB::table('citynexus_properties')->where('city', 'chelsea')->update(['city' => env('CITY')]);
     }

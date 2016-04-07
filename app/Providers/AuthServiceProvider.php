@@ -26,6 +26,19 @@ class AuthServiceProvider extends ServiceProvider
     {
         parent::registerPolicies($gate);
 
-        //
+
+        $gate->before(function ($user, $ability) {
+            if ($user->admin) {
+                return true;
+            }
+        });
+
+
+        // Upload Permission
+        $gate->define('upload', function ($user) {
+            $permissions = \GuzzleHttp\json_decode($user->permissions);
+
+            return $permissions->upload;
+        });
     }
 }

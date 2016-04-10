@@ -96,6 +96,7 @@ class ScoreBuilder
 
     public function calcElement($value, $score)
     {
+
         $return = null;
 
         if($score->function == 'func') $return = $this->runFunc($value, $score);
@@ -123,6 +124,7 @@ class ScoreBuilder
     {
         if($score->range == '>' && $value > $score->test) return $score->result;
         elseif($score->range == '<' && $value < $score->test) return $score->result;
+        elseif($score->range == '=' && $value == $score->test) return $score->result;
 
         else return null;
 

@@ -39,44 +39,42 @@ class UploadData extends Job implements SelfHandling, ShouldQueue
         $tabler = new TableBuilder();
         //Process each individual record
 
-        $id = $tabler->addRecord($this->data, $this->tableId, $this->uploadId);
+            try
+            {
+                $id = $tabler->addRecord($this->data, $this->tableId, $this->uploadId);
 
-//            try
-//            {
-//
-//
-//            }
-//            catch(\Exception $e)
-//            {
-//                Error::create(['location' => 'UploadData - HERE', 'data' => json_encode(['data' => $this->data, 'table_id' => $this->tableId, 'upload_id' => $this->uploadId, 'error' => $e])]);
-//            }
-//
-//            try
-//            {
-//                // Get property record
-//                $property = Property::find($id);
-//                if($property->lat == null) {
-//                }
-//                $geocode = Geocoder::geocode(   $property->full_address  . ', ' . config('citynexus.city_state'));
-//
-//                if($geocode && env('APP_ENV') != 'local')
-//                {
-//                    $property->lat = $geocode->getLatitude();
-//                    $property->long = $geocode->getLongitude();
-//                }
-//
-//                $property->save();
-//            }
-//            catch(\Exception $e)
-//            {
-//                $data['e'] = $e;
-//                if(isset($id)) $data['id'] = $id; else $data['id'] = null;
-//                $data['data'] = $this->data;
-//                $data['table_id'] = $this->tableId;
-//                $data['uploadId'] = $this->uploadId;
-//
-//                Error::create(['location' => 'GeoCode on UploadData', 'data' => json_encode($data)]);
-//            }
+            }
+            catch(\Exception $e)
+            {
+                Error::create(['location' => 'UploadData - HERE', 'data' => json_encode(['data' => $this->data, 'table_id' => $this->tableId, 'upload_id' => $this->uploadId, 'error' => $e])]);
+            }
+
+            try
+            {
+                // Get property record
+                $property = Property::find($id);
+                if($property->lat == null) {
+                }
+                $geocode = Geocoder::geocode(   $property->full_address  . ', ' . config('citynexus.city_state'));
+
+                if($geocode && env('APP_ENV') != 'local')
+                {
+                    $property->lat = $geocode->getLatitude();
+                    $property->long = $geocode->getLongitude();
+                }
+
+                $property->save();
+            }
+            catch(\Exception $e)
+            {
+                $data['e'] = $e;
+                if(isset($id)) $data['id'] = $id; else $data['id'] = null;
+                $data['data'] = $this->data;
+                $data['table_id'] = $this->tableId;
+                $data['uploadId'] = $this->uploadId;
+
+                Error::create(['location' => 'GeoCode on UploadData', 'data' => json_encode($data)]);
+            }
 
     }
 }

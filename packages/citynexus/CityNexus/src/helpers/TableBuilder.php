@@ -308,7 +308,7 @@ class TableBuilder
         $tabler = new TableBuilder();
 
         //get the table
-        $table = \CityNexus\CityNexus\Table::find($table_id);
+        $table = Table::find($table_id);
 
         //create an array of sync values
         $syncValues = $tabler->findValues( $table->scheme, 'sync' );

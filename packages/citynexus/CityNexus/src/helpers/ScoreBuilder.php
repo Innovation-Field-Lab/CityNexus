@@ -45,11 +45,13 @@ class ScoreBuilder
                 if ($i->period != null) {
                     $value = DB::table($i->table_name)
                         ->where(config('citynexus.index_id'), $record->id)
+                        ->orWhere('citynexus_properties.alias_of', $record->id)
                         ->where('updated_at', '>', $today->subDays($i->period))
                         ->value($i->key);
                 } else {
                     $value = DB::table($i->table_name)
                         ->where(config('citynexus.index_id'), $record->id)
+                        ->orWhere('citynexus_properties.alias_of', $record->id)
                         ->value($i->key);
                 }
 

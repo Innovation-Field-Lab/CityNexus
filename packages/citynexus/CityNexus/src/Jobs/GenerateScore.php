@@ -30,6 +30,7 @@ class GenerateScore extends Job implements SelfHandling, ShouldQueue
 
         $this->elements = $elements;
         $this->table = $table;
+        // TODO: This should be converted to an array of property ids, not the full models
         $this->properties = $properties;
 
     }
@@ -53,18 +54,21 @@ class GenerateScore extends Job implements SelfHandling, ShouldQueue
 
         else {
             foreach ($this->properties as $property) {
-                //Generate score
-                $scoreBuilder = new ScoreBuilder();
 
-                $p_score = $scoreBuilder->genScore($property, $this->elements);
+                if($property->alias_of == null) {
+                    //Generate score
+                    $scoreBuilder = new ScoreBuilder();
 
-                //Create Score record
-                $records[] = [
-                    'property_id' => $property->id,
-                    'score' => $p_score,
-                    'updated_at' => Carbon::now(),
-                    'created_at' => Carbon::now()
-                ];
+                    $p_score = $scoreBuilder->genScore($property, $this->elements);
+
+                    //Create Score record
+                    $records[] = [
+                        'property_id' => $property->id,
+                        'score' => $p_score,
+                        'updated_at' => Carbon::now(),
+                        'created_at' => Carbon::now()
+                    ];
+                }
 
 
             }

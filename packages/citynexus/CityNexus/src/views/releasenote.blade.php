@@ -1,3 +1,10 @@
+v0.2.2 Sunday 10 April 22:00<br>
+- Fixed range equation bug in scoring<br>
+- Included DB backup services<br>
+- Improved integration testing<br>
+- Added pagination to raw db view<br>
+<br>
+
 <b>v0.2.1 - Wen 6 April 2016 17:30</b>
 - Fixed upload bugs <br>
 - Added intensity slider to heat maps <br>

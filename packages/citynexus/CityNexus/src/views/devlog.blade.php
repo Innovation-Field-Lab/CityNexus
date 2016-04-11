@@ -4,7 +4,6 @@
 - Add Scores to property record views<br>
 - Edit user accounts<br>
 - Hard delete of datasets<br>
-
 <br>
 
 <b>Stretch Goals</b><br>

@@ -192,7 +192,7 @@
 
         $('#testtype').change(function(){
             var test = $('#testtype').val();
-            if (test == 'equals' | test == 'contains') {
+            if (test == 'equals' | test == 'contains' | test == 'doesntequal' | test == 'doesntcontain') {
                 $('#test_field').removeClass('hidden');
             }
             else {

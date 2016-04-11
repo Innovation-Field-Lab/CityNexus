@@ -31,24 +31,27 @@ class GeocodeJob extends Job implements SelfHandling, ShouldQueue
      */
     public function handle()
     {
-        try
-        {
-            // Get property record
-            $property = Property::find($this->p_id);
-            $geocode = Geocoder::geocode(   $property->full_address  . ', ' . config('citynexus.city_state'));
+        // Get property record
+        $property = Property::find($this->p_id);
+        $geocode = Geocoder::geocode(   $property->full_address  . ', ' . config('citynexus.city_state'));
 
-            if($geocode)
-            {
-                $property->lat = $geocode->getLatitude();
-                $property->long = $geocode->getLongitude();
-            }
-
-            $property->save();
-        }
-        catch(\Exception $e)
-        {
-            Error::create(['location' => 'GeoCode Job', 'data' => json_encode(['pid' => $this->p_id, 'e' => $e])]);
-        }
+        dd($geocode);
+//        try
+//        {
+//
+//
+//            if($geocode)
+//            {
+//                $property->lat = $geocode->getLatitude();
+//                $property->long = $geocode->getLongitude();
+//            }
+//
+//            $property->save();
+//        }
+//        catch(\Exception $e)
+//        {
+//            Error::create(['location' => 'GeoCode Job', 'data' => json_encode(['pid' => $this->p_id, 'e' => $e])]);
+//        }
 
     }
 }

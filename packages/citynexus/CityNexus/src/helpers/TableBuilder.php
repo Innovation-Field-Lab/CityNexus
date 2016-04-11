@@ -391,4 +391,9 @@ class TableBuilder
 
     }
 
+    public function geocode()
+    {
+
+    }
+
 }

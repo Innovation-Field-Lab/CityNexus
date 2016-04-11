@@ -9,7 +9,7 @@
 
 @push('style')
 
-<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css" />
 <link rel="stylesheet" href="/css/prunecluster.css" />
 
 <style>
@@ -20,7 +20,7 @@
 
 @push('js_footer')
 
-<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>
 <script src="/js/PruneCluster.js"></script>
 <script>
     var mymap = L.map('mapid').setView([{{env('MAP_LAT')}}, {{env('MAP_LONG')}}], {{env('MAP_ZOOM')}});

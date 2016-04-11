@@ -25,7 +25,6 @@ class ScoreBuilder
         foreach($elements as $i)
         {
             $value = null;
-
             if($i->scope == 'score')
             {
                 if(DB::table('citynexus_scores_' . $i->table_id)->exists())
@@ -44,12 +43,14 @@ class ScoreBuilder
             elseif($i->scope == 'last') {
                 if ($i->period != null) {
                     $value = DB::table($i->table_name)
+                        ->join('citynexus_properties', $i->table_name . '.' . config('citynexus.index_id'), '=', 'citynexus_properties.id')
                         ->where(config('citynexus.index_id'), $record->id)
                         ->orWhere('citynexus_properties.alias_of', $record->id)
                         ->where('updated_at', '>', $today->subDays($i->period))
                         ->value($i->key);
                 } else {
                     $value = DB::table($i->table_name)
+                        ->join('citynexus_properties', $i->table_name . '.' . config('citynexus.index_id'), '=', 'citynexus_properties.id')
                         ->where(config('citynexus.index_id'), $record->id)
                         ->orWhere('citynexus_properties.alias_of', $record->id)
                         ->value($i->key);
@@ -104,7 +105,6 @@ class ScoreBuilder
         if($score->function == 'func') $return = $this->runFunc($value, $score);
         elseif($score->function == 'float') $return = $this->runFunc($value, $score);
         elseif($score->function == 'range') $return = $this->runRange($value, $score);
-        elseif($score->function == 'empty') $return = $this->runRange($value, $score);
         else $return = $this->runText($value, $score);
 
         return $return;

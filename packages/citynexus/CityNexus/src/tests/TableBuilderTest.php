@@ -18,7 +18,7 @@ class TablerControllerTest extends TestCase
     public function testFindSyncID()
     {
         $tableBulider = new TableBuilder();
-        
+
         $syncValues = [
             'house_number' => 'house_number',
             'street_name' => 'street_name',

@@ -23,4 +23,13 @@ class ScoreBuilderTest extends TestCase
         $this->assertEquals(2, $result);
     }
 
+    public function testAliasProperties()
+    {
+        $property = \CityNexus\CityNexus\Property::create();
+        \CityNexus\CityNexus\Property::create(['alias_of' => $property->id]);
+
+
+        dd($property);
+    }
+
 }

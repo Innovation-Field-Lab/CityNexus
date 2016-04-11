@@ -23,7 +23,7 @@
     <div id="map"></div>
 
 @push('style')
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css"></link>
+<link rel="stylesheet" href="/css/leaflet.css"></link>
     <link rel="stylesheet" href="/css/slider.css"></link>
 <link href='http://fonts.googleapis.com/css?family=Open+Sans|Fjalla+One' rel='stylesheet' type='text/css'>
 <link type="text/css" rel="stylesheet" href="/css/shCoreEclipse.css"/>
@@ -61,7 +61,7 @@
 @stop
 
 @push('js_footer')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>
+<script src="/js/leaflet.js"></script>
 <script type="text/javascript" src="/js/shCore.js"></script>
 <script type="text/javascript" src="/js/shBrushJScript.js"></script>
 

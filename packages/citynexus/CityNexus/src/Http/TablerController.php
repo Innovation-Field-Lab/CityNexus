@@ -243,6 +243,16 @@ class TablerController extends Controller
         return redirect(action('\CityNexus\CityNexus\Http\CitynexusController@getProperty', ['property_id' => $id]));
     }
 
+    public function getDemergeProperty($id)
+    {
+        //Find Property
+        $property = Property::find($id);
+        $property->alias_of = null;
+        $property->save();
+        if(env('APP_ENV') == 'testing') return response(200);
+        return redirect()->back();
+    }
+
     public function getRemoveTable($id, $hard = null)
     {
         $table = Table::find($id);

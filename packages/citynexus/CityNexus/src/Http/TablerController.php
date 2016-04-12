@@ -250,6 +250,8 @@ class TablerController extends Controller
         $property->alias_of = null;
         $property->save();
         if(env('APP_ENV') == 'testing') return response(200);
+
+        Session::flash('flash_success', $property->full_address . " has been demerged.  It is recommended you rerun any scores where this property was included.");
         return redirect()->back();
     }
 

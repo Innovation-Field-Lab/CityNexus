@@ -1,4 +1,8 @@
-v0.2.2 Sunday 10 April 22:00<br>
+<b>v0.2.3 Tuesday 12 April 16:30</b><br>
+- Fixed score building bug and completed unit testing of score builder<br>
+- Implemented demerger function on property aliases<br>
+<br>
+<b>v0.2.2 Sunday 10 April 22:00</b><br>
 - Fixed range equation bug in scoring<br>
 - Included DB backup services<br>
 - Improved integration testing<br>

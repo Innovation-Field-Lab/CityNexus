@@ -24,7 +24,7 @@
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                         <li><a href="#">Aliases:</a></li>
                         @foreach($property->aliases as $alias)
-                        <li><a href="{{action('\CityNexus\CityNexus\Http\CitynexusController@getProperty', ['property_id' => $alias->id])}}">
+                        <li><a href="{{action('\CityNexus\CityNexus\Http\CitynexusController@getProperty', ['property_id' => $alias->id])}}" id="demerge-alias">
                                 {{ucwords($alias->full_address)}}
                             </a>
                         </li>
@@ -36,8 +36,11 @@
                 @if($property->aliasOf != null)
                     <small>(Alias of
                         <a href="{{action('\CityNexus\CityNexus\Http\CitynexusController@getProperty', ['property_id' => $property->aliasOf->id])}}">
-                            {{ucwords($property->full_address)}})
+                            {{ucwords($property->full_address)}}
                         </a>
+                        <a href="{{action('\CityNexus\CityNexus\Http\TablerController@getDemergeProperty', ['property_id' => $property->id])}}">
+                            <i class="glyphicon glyphicon-trash" style="color:red"></i>
+                        </a>)
                     </small>
                 @endif
             </div>

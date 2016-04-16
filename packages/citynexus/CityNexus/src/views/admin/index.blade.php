@@ -15,4 +15,8 @@
         <input type="submit" class="btn btn-primary" value="Submit">
     </form>
 
-    @stop
+
+    <a href="/{{config('citynexus.root_directory')}}/admin/merge-properties" class="btn btn-primary">Merge Properties</a>
+
+
+@stop

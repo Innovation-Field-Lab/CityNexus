@@ -3,6 +3,7 @@
 namespace CityNexus\CityNexus\Http;
 
 use CityNexus\CityNexus\GeocodeJob;
+use CityNexus\CityNexus\MergeProps;
 use CityNexus\CityNexus\Property;
 use CityNexus\CityNexus\Upload;
 use Illuminate\Database\Schema\Blueprint;
@@ -76,5 +77,18 @@ class AdminController extends Controller
     {
 
         DB::table('citynexus_properties')->where('city', 'chelsea')->update(['city' => env('CITY')]);
+    }
+
+    public function getMergeProperties()
+    {
+        $properties = Property::whereNull('alias_of')->lists('id')->chunk(200);
+        $i = 0;
+        foreach($properties as $group)
+        {
+            $i++;
+            $this->dispatch(new MergeProps($group));
+        }
+
+        return $i;
     }
 }

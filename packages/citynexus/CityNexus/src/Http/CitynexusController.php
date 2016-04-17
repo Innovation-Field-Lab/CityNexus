@@ -39,6 +39,7 @@ class CitynexusController extends Controller
         $apts = Property::where('house_number', $property->house_number)
             ->where('street_name', $property->street_name)
             ->where('street_type', $property->street_type)
+            ->where('id', '!=', $property->id)
             ->get();
 
         // Initiallizes the variable to disclose aliases in dataset

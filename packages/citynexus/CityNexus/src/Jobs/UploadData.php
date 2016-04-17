@@ -36,6 +36,8 @@ class UploadData extends Job implements SelfHandling, ShouldQueue
      */
     public function handle()
     {
+        DB::reconnect();
+
         $tabler = new TableBuilder();
         //Process each individual record
 

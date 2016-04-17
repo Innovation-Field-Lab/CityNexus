@@ -42,6 +42,8 @@ class GenerateScore extends Job implements SelfHandling, ShouldQueue
      */
     public function handle()
     {
+        DB::reconnect();
+
         $records = null;
         if($this->properties == false)
         {

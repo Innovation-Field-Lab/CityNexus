@@ -57,7 +57,7 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div class="panel-group " id="accordion" role="tablist" aria-multiselectable="true">
-                                @if($apts != null)
+                                @if($apts->count() > 0)
                                 <div class="panel panel-default ">
                                     <div class="panel-heading " role="tab" id="apartments_heading">
                                         <h4 class="panel-title">

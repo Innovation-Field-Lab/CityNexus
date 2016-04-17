@@ -14,25 +14,23 @@ class GenerateScore extends Job implements SelfHandling, ShouldQueue
 {
     use InteractsWithQueue, SerializesModels;
 
-    private $elements;
-    private $table;
-    private $properties;
+    private $element;
+    private $score_id;
+
 
     /**
      * Create a new job instance.
      *
-     * @param string $elements
-     * @param string $table
-     * @param string $property
+     * @param $element
+     * @param $score_id
+     * @internal param string $table
+     * @internal param string $property
      */
-    public function __construct($elements, $table, $properties)
+    public function __construct($element, $score_id)
     {
+        $this->element = $element;
 
-        $this->elements = $elements;
-        $this->table = $table;
-        // TODO: This should be converted to an array of property ids, not the full models
-        $this->properties = $properties;
-
+        $this->score_id = $score_id;
     }
 
     /**
@@ -42,42 +40,33 @@ class GenerateScore extends Job implements SelfHandling, ShouldQueue
      */
     public function handle()
     {
-        DB::reconnect();
+        $key = $this->element->key;
+        $scorebuilder = new ScoreBuilder();
+        $values = DB::table($this->element->table_name)->whereNotNull($key)->select('property_id', $key)->get();
+        $oldscores = DB::table('citynexus_scores_' . $this->score_id)->select('property_id', 'score', 'id')->get();
 
-        $records = null;
-        if($this->properties == false)
+        $scores = array();
+
+        foreach($oldscores as $i)
         {
-            $score = Score::find($this->table);
-            $score->status = 'complete';{}
-            $score->save();
-
-            return null;
+            $scores[$i->property_id] = [
+                'property_id' => $i->property_id,
+                'score' => $i->score
+            ];
         }
 
-        else {
-            foreach ($this->properties as $property) {
-
-                if($property->alias_of == null) {
-                    //Generate score
-                    $scoreBuilder = new ScoreBuilder();
-
-                    $p_score = $scoreBuilder->genScore($property, $this->elements);
-
-                    //Create Score record
-                    $records[] = [
-                        'property_id' => $property->id,
-                        'score' => $p_score,
-                        'updated_at' => Carbon::now(),
-                        'created_at' => Carbon::now()
-                    ];
-                }
-
-
-            }
-            DB::table($this->table)->insert($records);
-
+        foreach($values as $value)
+        {
+            $new_score = $scores[$value->property_id]['score'] + $scorebuilder->calcElement($value->$key, $this->element);
+            $scores[$value->property_id] = [
+                'property_id' => $value->property_id,
+                'score' => $new_score,
+            ];
 
         }
+
+        DB::table('citynexus_scores_' . $this->score_id)->truncate();
+        DB::table('citynexus_scores_' . $this->score_id)->insert($scores);
 
     }
 }

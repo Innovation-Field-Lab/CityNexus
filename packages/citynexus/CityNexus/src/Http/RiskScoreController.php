@@ -3,6 +3,7 @@
 namespace CityNexus\CityNexus\Http;
 
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use CityNexus\CityNexus\Property;
 use CityNexus\CityNexus\DatasetQuery;
 use CityNexus\CityNexus\GenerateScore;
@@ -276,26 +277,12 @@ class RiskScoreController extends Controller
 
         $score->name = $request->get('name');
         $score->elements = json_encode($elements);
-        $score->status = 'pending';
+        $score->status = 'complete';
         $score->save();
 
         $this->runScore($score, $elements);
 
         return redirect( config('citynexus.root_directory') . '/risk-score/scores' );
-    }
-
-    public function getGenerateScore(Request $request)
-    {
-        $builder = new ScoreBuilder();
-        $score = Score::find($request->get('score_id'));
-        $elements = json_decode($score->elements);
-
-        $record = Property::find($request->get('id'));
-
-        $result = $builder->genScore($record, $elements);
-
-
-        return view('citynexus::risk-score.generate', compact('score', 'record', 'elements', 'result'));
     }
 
     public function getEditScore(Request $request)
@@ -316,7 +303,7 @@ class RiskScoreController extends Controller
         $elements = json_decode($score->elements);
 
         // Put score as pending
-        $score->status = 'pending';
+        $score->status = 'complete';
         $score->save();
 
         // Queue up to run the score
@@ -348,7 +335,9 @@ class RiskScoreController extends Controller
 
     private function runScore($score, $elements)
     {
-        $properties = Property::all()->chunk(25);
+
+        // Find tables in Score
+        $elements = \GuzzleHttp\json_decode($score->elements);
 
         $table = 'citynexus_scores_' . $score->id;
 
@@ -361,15 +350,136 @@ class RiskScoreController extends Controller
             $table->increments('id');
             $table->integer('property_id');
             $table->float('score')->nullable();
-            $table->timestamps();
         });
 
-        $jobs = array();
+        $properties = array();
 
-        foreach ($properties as $property) {
-            $this->dispatch(new GenerateScore($elements, $table, $property));
+        foreach($elements as $element)
+        {
+            $properties = array_merge( $properties, DB::table($element->table_name)->whereNotNull($element->key)->lists('property_id'));
         }
-        $this->dispatch(new GenerateScore($elements, $score->id, FALSE));
 
+        $properties = array_unique($properties);
+
+        $insert = array();
+
+        foreach($properties as $i)
+        {
+            $insert[] = ['property_id' => $i];
+        }
+
+        DB::table($table)->insert($insert);
+
+        foreach ($elements as $element)
+        {
+            if($element->scope == 'last') $this->genByLastElement($element,  $score->id);
+            if($element->scope == 'all') $this->genByAllElement($element,  $score->id);
+        }
+    }
+
+    private function genByLastElement($element, $score_id)
+    {
+        $key = $element->key;
+        $scorebuilder = new ScoreBuilder();
+
+        if($element->period != null)
+        {
+            $today = Carbon::today();
+
+            $values = DB::table($element->table_name)
+                ->where('updated_at', '>', $today->subDays($element->period))
+                ->whereNotNull($key)
+                ->orderBy('created_at')
+                ->select('property_id', $key)->get();
+        }
+        else
+        {
+            $values = DB::table($element->table_name)
+                ->whereNotNull($key)
+                ->orderBy('created_at')
+                ->select('property_id', $key)->get();
+        }
+
+        $oldscores = DB::table('citynexus_scores_' . $score_id)->select('property_id', 'score', 'id')->get();
+
+        $scores = array();
+
+        foreach($oldscores as $i)
+        {
+            $scores[$i->property_id] = [
+                'property_id' => $i->property_id,
+                'score' => $i->score
+            ];
+        }
+
+        foreach($values as $value)
+        {
+            $new_score = $scores[$value->property_id]['score'] + $scorebuilder->calcElement($value->$key, $element);
+            $scores[$value->property_id] = [
+                'property_id' => $value->property_id,
+                'score' => $new_score,
+            ];
+
+        }
+
+        DB::table('citynexus_scores_' . $score_id)->truncate();
+        DB::table('citynexus_scores_' . $score_id)->insert($scores);
+
+    }
+
+    private function genByAllElement($element, $score_id)
+    {
+        $key = $element->key;
+        $scorebuilder = new ScoreBuilder();
+
+        if($element->period != null)
+        {
+            $today = Carbon::today();
+
+            $values = DB::table($element->table_name)
+                ->where('updated_at', '>', $today->subDays($element->period))
+                ->whereNotNull($key)
+                ->orderBy('created_at')
+                ->select('property_id', $key)->get();
+        }
+        else
+        {
+            $values = DB::table($element->table_name)
+                ->whereNotNull($key)
+                ->orderBy('created_at')
+                ->select('property_id', $key)->get();
+        }
+        $oldscores = DB::table('citynexus_scores_' . $score_id)->select('property_id', 'score', 'id')->get();
+
+        $scores = array();
+
+        foreach($oldscores as $i)
+        {
+            $scores[$i->property_id] = [
+                'property_id' => $i->property_id,
+                'score' => $i->score
+            ];
+        }
+
+        $sortedvalues = array();
+
+        foreach($values as $i)
+        {
+            $sortedvalues[$i->property_id][] = $i->$key;
+        }
+
+        foreach($sortedvalues as $pid => $values)
+        {
+            foreach($values as $value)
+            {
+                $new_score = $scores[$pid]['score'] + $scorebuilder->calcElement($value, $element);
+                $scores[$pid] = [
+                    'property_id' => $pid,
+                    'score' => $new_score,
+                ];
+            }
+        }
+        DB::table('citynexus_scores_' . $score_id)->truncate();
+        DB::table('citynexus_scores_' . $score_id)->insert($scores);
     }
 }

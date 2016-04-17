@@ -35,6 +35,8 @@
                                     <a class="btn btn-sm btn-primary update-{{$score->id}}" href="/{{config('citynexus.root_directory')}}/risk-score/edit-score?score_id={{$score->id}}">Edit</a>
                                     <a class="btn btn-sm btn-primary update-{{$score->id}}" href="/{{config('citynexus.root_directory')}}/risk-score/ranking/{{$score->id}}">Ranking</a>
                                     <a class="btn btn-sm btn-primary update-{{$score->id}}" href="/{{config('citynexus.root_directory')}}/risk-score/duplicate-score?score_id={{$score->id}}">Duplicate</a>
+                                    <a class="btn btn-sm btn-danger update-{{$score->id}}" href="/{{config('citynexus.root_directory')}}/risk-score/remove-score?score_id={{$score->id}}">Delete Score</a>
+
                                 </td>
                             </tr>
                     @endforeach

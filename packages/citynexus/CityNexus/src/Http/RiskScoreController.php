@@ -440,6 +440,10 @@ class RiskScoreController extends Controller
             if(isset($alias[$value->property_id]))
             {
                 $pid = $alias[$value->property_id];
+                if(!isset($scores[$pid]))
+                {
+                    $scores[$pid] = ['score' => null];
+                }
             }
             else
             {
@@ -505,6 +509,11 @@ class RiskScoreController extends Controller
             if(isset($alias[$pid]))
             {
                 $pid = $alias[$pid];
+                if(!isset($scores[$pid]))
+                {
+                    $scores[$pid] = ['score' => null];
+                }
+
             }
 
             foreach($values as $value)

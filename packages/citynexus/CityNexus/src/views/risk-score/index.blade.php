@@ -1,12 +1,18 @@
 @extends(config('citynexus.template'))
 
 @section(config('citynexus.section'))
+
+    <div class="alert alert-warning">
+        Hey there you innovator you!  So scores are working a LOT faster now. They will update either when you save changes or click on the refresh score button. The score building action will happen in the background but if you navigate away it make cause some issues so if you would, just hold tight for a minute and you should see when the score has finished.
+    </div>
+
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div class="panel-title">
                     All Risk Scores
                 </div>
             </div>
+
             <div class="panel-body">
                 <table class="table">
                     <thead>
@@ -53,7 +59,6 @@
             var update = $('#update-' + id)
             update.removeClass('btn-primary');
             update.addClass('btn-default');
-            update.addClass('hidden');
             update.html('<span class="glyphicon glyphicon-hourglass"></span> Refreshing Score');
 
             $.ajax({
@@ -63,9 +68,14 @@
                     _token: "{{csrf_token()}}",
                     score_id: id
                 }
-            }).success(function( data ){
-
-            })
+            }).success(function(data)
+            {
+                update.html('Refresh Score');
+                update.addClass('btn-primary');
+                update.removeClass('btn-default');
+            }).error(function(data){
+                alert('Uh oh. Something has gone wrong with this score. Please harass Sean about it. His personal cell phone number is (646) 373-1438.' + data);
+            });
         }
     }
 

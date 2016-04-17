@@ -17,6 +17,7 @@ use CityNexus\CityNexus\Table;
 use CityNexus\CityNexus\ScoreBuilder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Session;
 
 
 class RiskScoreController extends Controller
@@ -312,6 +313,24 @@ class RiskScoreController extends Controller
         return "Success";
     }
 
+    public function getRemoveScore(Request $request)
+    {
+        $score = Score::find($request->get('score_id'));
+        try {
+            Schema::drop('citynexus_scores_' . $score->id);
+        }
+        catch(\Exception $e)
+        {
+            Session::flash('flash_warning', "Something went wrong. " . $e);
+            return redirect()->back();
+        }
+            $score->delete();
+            Session::flash('flash_success', "Score has been successfully removed");
+
+        return redirect()->back();
+
+    }
+
     public function getDuplicateScore(Request $request)
     {
         $score = Score::find($request->get('score_id'))->replicate();
@@ -368,14 +387,20 @@ class RiskScoreController extends Controller
 
         DB::table($table)->insert($insert);
 
+        $aliases = DB::table('citynexus_properties')->whereNotNull('alias_of')->select('id', 'alias_of')->get();
+        foreach($aliases as $i)
+        {
+            $alias[$i->id] = $i->alias_of;
+        }
+
         foreach ($elements as $element)
         {
-            if($element->scope == 'last') $this->genByLastElement($element,  $score->id);
-            if($element->scope == 'all') $this->genByAllElement($element,  $score->id);
+            if($element->scope == 'last') $this->genByLastElement($element,  $score->id, $alias);
+            if($element->scope == 'all') $this->genByAllElement($element,  $score->id, $alias);
         }
     }
 
-    private function genByLastElement($element, $score_id)
+    private function genByLastElement($element, $score_id, $alias)
     {
         $key = $element->key;
         $scorebuilder = new ScoreBuilder();
@@ -412,9 +437,18 @@ class RiskScoreController extends Controller
 
         foreach($values as $value)
         {
-            $new_score = $scores[$value->property_id]['score'] + $scorebuilder->calcElement($value->$key, $element);
-            $scores[$value->property_id] = [
-                'property_id' => $value->property_id,
+            if(isset($alias[$value->property_id]))
+            {
+                $pid = $alias[$value->property_id];
+            }
+            else
+            {
+                $pid = $value->property_id;
+            }
+
+            $new_score = $scores[$pid]['score'] + $scorebuilder->calcElement($value->$key, $element);
+            $scores[$pid] = [
+                'property_id' => $pid,
                 'score' => $new_score,
             ];
 
@@ -425,7 +459,7 @@ class RiskScoreController extends Controller
 
     }
 
-    private function genByAllElement($element, $score_id)
+    private function genByAllElement($element, $score_id, $alias)
     {
         $key = $element->key;
         $scorebuilder = new ScoreBuilder();
@@ -468,8 +502,14 @@ class RiskScoreController extends Controller
 
         foreach($sortedvalues as $pid => $values)
         {
+            if(isset($alias[$pid]))
+            {
+                $pid = $alias[$pid];
+            }
+
             foreach($values as $value)
             {
+
                 $new_score = $scores[$pid]['score'] + $scorebuilder->calcElement($value, $element);
                 $scores[$pid] = [
                     'property_id' => $pid,

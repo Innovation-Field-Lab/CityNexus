@@ -35,6 +35,8 @@ class MergeProps extends Job implements SelfHandling, ShouldQueue
      */
     public function handle()
     {
+        DB::reconnect();
+
         foreach($this->prop_ids as $i)
         {
             if($i != null) {

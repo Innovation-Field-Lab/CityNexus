@@ -35,6 +35,8 @@ class InviteUser extends Job implements SelfHandling, ShouldQueue
      */
     public function handle()
     {
+        DB::reconnect();
+
         $user = User::find($this->user_id);
         $token = str_random(36);
         $user->activation = $token;

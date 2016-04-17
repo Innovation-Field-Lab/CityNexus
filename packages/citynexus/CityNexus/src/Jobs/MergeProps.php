@@ -39,22 +39,11 @@ class MergeProps extends Job implements SelfHandling, ShouldQueue
 
         foreach($this->prop_ids as $i)
         {
-            if($i != null) {
+            $property = Property::find($i);
 
-                $property = Property::find($i);
-
-                $alias_of = Property::where('full_address', $property->full_address)
-                    ->whereNotNull('alias_of')
-                    ->pluck('alias_of');
-
-                if ($alias_of != null) {
-                    $i = $alias_of;
-                }
-
-                Property::where('id', '!=', $property->id)
-                    ->where('full_address', $property->full_address)
-                    ->update(['alias_of' => $i]);
-            }
+            Property::where('id', '!=', $property->id)
+                ->where('full_address', $property->full_address)
+                ->update(['alias_of' => $i]);
         }
     }
 }

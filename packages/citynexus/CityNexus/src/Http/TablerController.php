@@ -302,11 +302,18 @@ class TablerController extends Controller
     {
         if($table_name != null)
         {
-            $table = DB::table($table_name)->paginate(250);
+            if(isset($_GET['sort_by']))
+            {
+                $table = DB::table($table_name)->orderBy($_GET['sort_by'])->paginate(250);
+            }
+            else{
+                $table = DB::table($table_name)->paginate(250);
+            }
         }
         else
         {
-            $table_name = null;
+
+                $table_name = null;
         }
 
         $tables = DB::table('information_schema.tables')

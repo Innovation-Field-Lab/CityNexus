@@ -1,3 +1,11 @@
+<b>v0.2.4 Tuesday 17 April 16:00</b><br>
+- Refactored score builder to work synchronously<br>
+- Added delete method to scores <br>
+- Added "other units at address" to profiles view <br>
+- Created admin method of merging properties with same full address <br>
+- Add sort by method to raw table views <br>
+<br>
+
 <b>v0.2.3 Tuesday 12 April 16:30</b><br>
 - Fixed score building bug and completed unit testing of score builder<br>
 - Implemented demerger function on property aliases<br>

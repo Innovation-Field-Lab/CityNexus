@@ -47,8 +47,6 @@
         ],
         "post-update-cmd": [
             "php artisan optimize",
-            "php artisan queue:restart"
-
         ],
         "post-root-package-install": [
             "php -r \"copy('.env.example', '.env');\""

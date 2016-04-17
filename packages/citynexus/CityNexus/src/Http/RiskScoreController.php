@@ -302,14 +302,12 @@ class RiskScoreController extends Controller
         $score = Score::find($request->get('score_id'));
         $elements = json_decode($score->elements);
 
-        // Put score as pending
-        $score->status = 'complete';
-        $score->save();
-
-        // Queue up to run the score
+        // Run the score
         $this->runScore($score, $elements);
 
-        // TODO: Queue up a notification for the users that their score is done and touch the score model.
+        $score->status = 'complete';
+        $score->touch();
+        $score->save();
 
         return "Success";
     }

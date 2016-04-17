@@ -3,7 +3,7 @@
 @section(config('citynexus.section'))
 
     <div class="alert alert-warning">
-        Hey there you innovator you!  So scores are working a LOT faster now. They will update either when you save changes or click on the refresh score button. The score building action will happen in the background but if you navigate away it make cause some issues so if you would, just hold tight for a minute and you should see when the score has finished.
+        Hey there you innovator you!  So scores are working a LOT faster now. They will update either when you save changes or click on the refresh score button.
     </div>
 
         <div class="panel panel-default">
@@ -26,19 +26,14 @@
                     @foreach($scores as $score)
                             <tr>
                                 <th>{{$score->name}}</th>
-                                <td>{{$score->updated_at->diffForHumans()}}</td>
+                                <td id="age-{{$score->id}}">{{$score->updated_at->diffForHumans()}}</td>
                                 <td>
-                                    @if($score->status == 'pending')
-                                    <span class="btn btn-sm btn-default" id="update-{{$score->id}}"><span class="glyphicon glyphicon-hourglass"></span> Refreshing Score</span>
-
-                                    @else
                                     <span class="btn btn-sm btn-primary" onclick="updateScore({{$score->id}})" id="update-{{$score->id}}">Refresh Score</span>
                                     <a class="btn btn-sm btn-primary update-{{$score->id}}" href="/{{config('citynexus.root_directory')}}/risk-score/heat-map?score_id={{$score->id}}">Heat Map</a>
                                     <a class="btn btn-sm btn-primary update-{{$score->id}}" href="/{{config('citynexus.root_directory')}}/risk-score/pin-map?score_id={{$score->id}}">Pin Map</a>
                                     <a class="btn btn-sm btn-primary update-{{$score->id}}" href="/{{config('citynexus.root_directory')}}/risk-score/distribution?score_id={{$score->id}}">Distribution</a>
                                     <a class="btn btn-sm btn-primary update-{{$score->id}}" href="/{{config('citynexus.root_directory')}}/risk-score/edit-score?score_id={{$score->id}}">Edit</a>
                                     <a class="btn btn-sm btn-primary update-{{$score->id}}" href="/{{config('citynexus.root_directory')}}/risk-score/ranking/{{$score->id}}">Ranking</a>
-                                    @endif
                                     <a class="btn btn-sm btn-primary update-{{$score->id}}" href="/{{config('citynexus.root_directory')}}/risk-score/duplicate-score?score_id={{$score->id}}">Duplicate</a>
                                 </td>
                             </tr>
@@ -71,6 +66,7 @@
             }).success(function(data)
             {
                 update.html('Refresh Score');
+                $('#age-' + id).html('Just now!')
                 update.addClass('btn-primary');
                 update.removeClass('btn-default');
             }).error(function(data){

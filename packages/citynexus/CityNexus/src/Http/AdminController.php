@@ -81,14 +81,36 @@ class AdminController extends Controller
 
     public function getMergeProperties()
     {
-        $properties = Property::whereNull('alias_of')->lists('id')->chunk(200);
-        $i = 0;
-        foreach($properties as $group)
+        $properties = Property::whereNull('alias_of')->orderBy('full_address')->lists('id', 'full_address');
+
+        $sorted = array();
+
+        foreach($properties as $k => $i)
         {
-            $i++;
-            $this->dispatch(new MergeProps($group));
+            $sorted[$k][] = $i;
         }
 
-        return $i;
+        dd($sorted);
+
+        $counter = 0;
+        foreach($sorted as $i)
+        {
+            if(count($i) > 1)
+            {
+                $p_id = $i[0];
+                unset($i[0]);
+                foreach($i as $a)
+                {
+                    Property::find($a->id)->update('alias_of', $p_id);
+                    $counter++;
+                }
+            }
+
+        }
+
+        Session::flash('flash_success', $counter . " Properties updated!");
+
+        return redirect()->back();
+
     }
 }

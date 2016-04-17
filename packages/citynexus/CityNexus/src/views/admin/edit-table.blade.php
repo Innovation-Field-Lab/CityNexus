@@ -27,7 +27,7 @@
                     <th></th>
                     @foreach($table[0] as $k => $i)
                         <th>
-                            {{$k}}
+                            <a href="{{Request::url()}}?sort_by={{$k}}">{{$k}}s</a>
                         </th>
                     @endforeach
                 </tr>

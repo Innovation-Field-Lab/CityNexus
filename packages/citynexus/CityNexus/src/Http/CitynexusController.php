@@ -36,11 +36,15 @@ class CitynexusController extends Controller
         $datasets = DatasetQuery::relatedSets( $id );
         $tables = Table::all();
         $tags = Tag::select('tag')->lists('tag');
+        $apts = Property::where('house_number', $property->house_number)
+            ->where('street_name', $property->street_name)
+            ->where('street_type', $property->street_type)
+            ->get();
 
         // Initiallizes the variable to disclose aliases in dataset
         $disclaimer = false;
 
-        return view('citynexus::property.show', compact('property', 'datasets', 'tables', 'disclaimer', 'tags'));
+        return view('citynexus::property.show', compact('property', 'datasets', 'tables', 'disclaimer', 'tags', 'apts'));
     }
 
     public function getProperties()

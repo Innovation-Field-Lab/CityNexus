@@ -90,8 +90,6 @@ class AdminController extends Controller
             $sorted[$k][] = $i;
         }
 
-        dd($sorted);
-
         $counter = 0;
         foreach($sorted as $i)
         {

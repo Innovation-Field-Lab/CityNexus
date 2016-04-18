@@ -373,7 +373,20 @@ class RiskScoreController extends Controller
 
         foreach($elements as $element)
         {
-            $properties = array_merge( $properties, DB::table($element->table_name)->whereNotNull($element->key)->lists('property_id'));
+            if(null != $element->scope && $element->scope == 'score')
+            {
+                $table_name = 'citynexus_scores_' . $element->table_id;
+
+                $key = 'score';
+
+            }
+            else
+            {
+                $table_name = $element->table_name;
+                $key = $element->key;
+            }
+
+            $properties = array_merge( $properties, DB::table($table_name)->whereNotNull($key)->lists('property_id'));
         }
 
         $properties = array_unique($properties);
@@ -405,11 +418,21 @@ class RiskScoreController extends Controller
         $key = $element->key;
         $scorebuilder = new ScoreBuilder();
 
+        if(null != $element->scope && $element->scope == 'score')
+        {
+            $table_name = 'citynexus_score_' . $element->table_id;
+        }
+        else
+        {
+            $table_name = $element->table_name;
+        }
+
+
         if($element->period != null)
         {
             $today = Carbon::today();
 
-            $values = DB::table($element->table_name)
+            $values = DB::table($table_name)
                 ->where('updated_at', '>', $today->subDays($element->period))
                 ->whereNotNull($key)
                 ->orderBy('created_at')
@@ -417,7 +440,7 @@ class RiskScoreController extends Controller
         }
         else
         {
-            $values = DB::table($element->table_name)
+            $values = DB::table($table_name)
                 ->whereNotNull($key)
                 ->orderBy('created_at')
                 ->select('property_id', $key)->get();
@@ -468,11 +491,20 @@ class RiskScoreController extends Controller
         $key = $element->key;
         $scorebuilder = new ScoreBuilder();
 
+        if(null != $element->scope && $element->scope == 'score')
+        {
+            $table_name = 'citynexus_score_' . $element->table_id;
+        }
+        else
+        {
+            $table_name = $element->table_name;
+        }
+
         if($element->period != null)
         {
             $today = Carbon::today();
 
-            $values = DB::table($element->table_name)
+            $values = DB::table($table_name)
                 ->where('updated_at', '>', $today->subDays($element->period))
                 ->whereNotNull($key)
                 ->orderBy('created_at')
@@ -480,7 +512,7 @@ class RiskScoreController extends Controller
         }
         else
         {
-            $values = DB::table($element->table_name)
+            $values = DB::table($table_name)
                 ->whereNotNull($key)
                 ->orderBy('created_at')
                 ->select('property_id', $key)->get();

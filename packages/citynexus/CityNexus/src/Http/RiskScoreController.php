@@ -533,7 +533,15 @@ class RiskScoreController extends Controller
 
         foreach($values as $i)
         {
-            $sortedvalues[$i->property_id][] = $i->$key;
+            $pid = $i->property_id;
+
+            if(isset($alias[$i->property_id]))
+            {
+                $pid = $alias[$i->property_id];
+
+            }
+
+            $sortedvalues[$pid] = $i->$key;
         }
 
         foreach($sortedvalues as $pid => $values)
@@ -558,6 +566,7 @@ class RiskScoreController extends Controller
                 ];
             }
         }
+
         DB::table('citynexus_scores_' . $score_id)->truncate();
         DB::table('citynexus_scores_' . $score_id)->insert($scores);
     }

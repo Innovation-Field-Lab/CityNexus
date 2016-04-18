@@ -458,31 +458,46 @@ class RiskScoreController extends Controller
             ];
         }
 
+        $new_score = array();
         foreach($values as $value)
         {
             if(isset($alias[$value->property_id]))
             {
                 $pid = $alias[$value->property_id];
-                if(!isset($scores[$pid]))
-                {
-                    $scores[$pid] = ['score' => null];
-                }
             }
             else
             {
                 $pid = $value->property_id;
             }
 
-            $new_score = $scores[$pid]['score'] + $scorebuilder->calcElement($value->$key, $element);
-            $scores[$pid] = [
-                'property_id' => $pid,
-                'score' => $new_score,
-            ];
+            $new_score[$pid] = $scorebuilder->calcElement($value->$key, $element);
 
         }
 
+        foreach($scores as $i)
+        {
+
+            if(!isset($i['property_id']))
+            {
+                dd($i);
+            }
+            if(isset($new_score[$i['property_id']]))
+            {
+                $updated_score = $i['score'] + $new_score[$i['property_id']];
+            }
+            else
+            {
+                $updated_score = $i['score'];
+            }
+
+            $upload[] = [
+                'property_id' => $i['property_id'],
+                'score' => $updated_score,
+            ];
+        }
+        
         DB::table('citynexus_scores_' . $score_id)->truncate();
-        DB::table('citynexus_scores_' . $score_id)->insert($scores);
+        DB::table('citynexus_scores_' . $score_id)->insert($upload);
 
     }
 

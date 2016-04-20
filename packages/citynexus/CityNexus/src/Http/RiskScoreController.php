@@ -495,7 +495,7 @@ class RiskScoreController extends Controller
                 'score' => $updated_score,
             ];
         }
-        
+
         DB::table('citynexus_scores_' . $score_id)->truncate();
         DB::table('citynexus_scores_' . $score_id)->insert($upload);
 
@@ -556,7 +556,7 @@ class RiskScoreController extends Controller
 
             }
 
-            $sortedvalues[$pid] = $i->$key;
+            $sortedvalues[$pid][] = $i->$key;
         }
 
         foreach($sortedvalues as $pid => $values)
@@ -564,11 +564,11 @@ class RiskScoreController extends Controller
             if(isset($alias[$pid]))
             {
                 $pid = $alias[$pid];
-                if(!isset($scores[$pid]))
-                {
-                    $scores[$pid] = ['score' => null];
-                }
+            }
 
+            if(!isset($scores[$pid]))
+            {
+                $scores[$pid] = ['score' => null];
             }
 
             foreach($values as $value)

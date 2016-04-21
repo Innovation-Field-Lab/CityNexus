@@ -446,7 +446,7 @@ class RiskScoreController extends Controller
                 ->select('property_id', $key)->get();
         }
 
-        $oldscores = DB::table('citynexus_scores_' . $score_id)->select('property_id', 'score', 'id')->get();
+        $oldscores = DB::table('citynexus_scores_' . $score_id)->select('property_id', 'score')->get();
 
         $scores = array();
 
@@ -469,6 +469,10 @@ class RiskScoreController extends Controller
             {
                 $pid = $value->property_id;
             }
+            if(!isset($scores[$pid]))
+            {
+                $scores[$pid] = ['score' => null, 'property_id' => $pid];
+            }
 
             $new_score[$pid] = $scorebuilder->calcElement($value->$key, $element);
 
@@ -477,10 +481,6 @@ class RiskScoreController extends Controller
         foreach($scores as $i)
         {
 
-            if(!isset($i['property_id']))
-            {
-                dd($i);
-            }
             if(isset($new_score[$i['property_id']]))
             {
                 $updated_score = $i['score'] + $new_score[$i['property_id']];
@@ -490,10 +490,15 @@ class RiskScoreController extends Controller
                 $updated_score = $i['score'];
             }
 
-            $upload[] = [
-                'property_id' => $i['property_id'],
-                'score' => $updated_score,
-            ];
+
+            if($updated_score === 0 | $updated_score > 0)
+            {
+                $upload[] = [
+                    'property_id' => $i['property_id'],
+                    'score' => $updated_score,
+                ];
+            }
+
         }
 
         DB::table('citynexus_scores_' . $score_id)->truncate();
@@ -561,6 +566,7 @@ class RiskScoreController extends Controller
 
         foreach($sortedvalues as $pid => $values)
         {
+
             if(isset($alias[$pid]))
             {
                 $pid = $alias[$pid];
@@ -571,14 +577,25 @@ class RiskScoreController extends Controller
                 $scores[$pid] = ['score' => null];
             }
 
+
             foreach($values as $value)
             {
+                if(!isset($scores[$pid]))
+                {
+                    $scores[$pid] = ['score' => null];
+                }
 
                 $new_score = $scores[$pid]['score'] + $scorebuilder->calcElement($value, $element);
-                $scores[$pid] = [
-                    'property_id' => $pid,
-                    'score' => $new_score,
-                ];
+
+                if($new_score === 0 | $new_score > 0)
+                {
+                    $scores[$pid] = [
+                        'property_id' => $pid,
+                        'score' => $new_score,
+                    ];
+
+                }
+
             }
         }
 

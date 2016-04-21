@@ -24,7 +24,7 @@
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                         <li><a href="#">Aliases:</a></li>
                         @foreach($property->aliases as $alias)
-                        <li><a href="{{action('\CityNexus\CityNexus\Http\CitynexusController@getProperty', ['property_id' => $alias->id])}}">
+                        <li><a href="{{action('\CityNexus\CityNexus\Http\CitynexusController@getProperty', ['property_id' => $alias->id])}}" id="demerge-alias">
                                 {{ucwords($alias->full_address)}}
                             </a>
                         </li>
@@ -36,8 +36,11 @@
                 @if($property->aliasOf != null)
                     <small>(Alias of
                         <a href="{{action('\CityNexus\CityNexus\Http\CitynexusController@getProperty', ['property_id' => $property->aliasOf->id])}}">
-                            {{ucwords($property->full_address)}})
+                            {{ucwords($property->full_address)}}
                         </a>
+                        <a href="{{action('\CityNexus\CityNexus\Http\TablerController@getDemergeProperty', ['property_id' => $property->id])}}">
+                            <i class="glyphicon glyphicon-trash" style="color:red"></i>
+                        </a>)
                     </small>
                 @endif
             </div>
@@ -54,6 +57,44 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div class="panel-group " id="accordion" role="tablist" aria-multiselectable="true">
+                                @if($apts->count() > 0)
+                                <div class="panel panel-default ">
+                                    <div class="panel-heading " role="tab" id="apartments_heading">
+                                        <h4 class="panel-title">
+                                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#apartments_detail" aria-expanded="false" aria-controls="collapseTwo">
+                                                Other Units at this Address
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="apartments_detail" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                        <div class="panel-body">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <td>
+                                                            Unit
+                                                        </td>
+                                                        <td>
+                                                            Profile
+                                                        </td>
+                                                    </tr>
+                                                </thead>
+                                                @foreach($apts as $apt)
+                                                    <tr>
+                                                        <td>
+                                                            {{$apt->unit}}
+                                                        </td>
+                                                        <td>
+                                                            <a class="btn btn-sm btn-primary" href="/{{config('citynexus.root_directory')}}/property/{{$apt->id}}">Details</a>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endif
                                 @foreach($datasets as $key => $dataset)
                                 <div class="panel panel-default ">
                                     <div class="panel-heading " role="tab" id="{{preg_replace('/\s+/', '_', $key)}}_heading">

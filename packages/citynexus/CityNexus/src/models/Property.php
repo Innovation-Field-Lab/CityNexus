@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Property extends Model
 {
-    protected $fillable = ['full_address', 'house_number', 'street', 'unit', 'city', 'state', 'zip', 'lat', 'long',
+    protected $fillable = ['full_address', 'house_number', 'alias_of', 'street_name', 'street_type', 'unit', 'city', 'state', 'zip', 'lat', 'long',
         'map', 'lot', 'type', 'tiger_line_id', 'side'];
 
     protected $table = 'citynexus_properties';

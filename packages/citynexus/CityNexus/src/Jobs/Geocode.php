@@ -31,6 +31,8 @@ class GeocodeJob extends Job implements SelfHandling, ShouldQueue
      */
     public function handle()
     {
+        DB::reconnect();
+
         try
         {
             // Get property record

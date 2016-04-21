@@ -160,9 +160,20 @@ class TableBuilder
 
         $parts = null;
 
+
+        // Find house numbers with apt number embedded
+        if(array_key_exists('house_number', $input) && strpos($input['house_number'], '#') != null)
+        {
+            $elements = explode('#', $input['house_number']);
+            $return['house_number'] = trim($elements[0]);
+            $return['unit'] = '#' . $elements[1];
+        }
+
         if(array_key_exists('house_number', $input) && array_key_exists('street_name', $input))
         {
-            $return['house_number'] = $input['house_number'];
+            if($return['house_number'] == null){
+                $return['house_number'] = $input['house_number'];
+            }
             $street_name = $input['street_name'];
             $street_name = preg_replace('/[^\p{L}\p{N}\s]/u', '', $street_name);
             $street_name = strtolower($street_name);
@@ -187,7 +198,7 @@ class TableBuilder
         {
         foreach($parts as $k => $i)
         {
-            if(array_key_exists($i, $units) or is_integer($i))
+            if(array_key_exists($i, $units) or is_integer($i) && $return['unit'] == null)
             {
                 $unit = true;
 
@@ -215,15 +226,14 @@ class TableBuilder
         }
 
         if(array_key_exists('unit', $input)) $return['unit'] = trim($input['unit']);
-        if(array_key_exists('street_type', $input)) $return['unit'] = trim($input['street_type']);
-
+        if(array_key_exists('street_type', $input)) $return['street_type'] = trim($input['street_type']);
 
         //Clear stray characters of unit variable.
         if($return['unit'] == null) $return['unit'] = null;
 
-        $return['full_address'] = trim($return['house_number'] . ' ' . $return['street_name'] . ' ' . $return['street_type'] . ' ' . $return['unit']);
+        $return['full_address'] = trim(trim($return['house_number']) . ' ' . trim($return['street_name']) . ' ' . trim($return['street_type']) . ' ' . $return['unit']);
 
-        return $return;
+            return $return;
         }
         else
 
@@ -298,7 +308,7 @@ class TableBuilder
         $tabler = new TableBuilder();
 
         //get the table
-        $table = \CityNexus\CityNexus\Table::find($table_id);
+        $table = Table::find($table_id);
 
         //create an array of sync values
         $syncValues = $tabler->findValues( $table->scheme, 'sync' );
@@ -349,6 +359,11 @@ class TableBuilder
                 $record['created_at'] = $record[$table->timestamp];
             }
 
+            if(isset($record['id']))
+            {
+                $record['id-original'] = $record['id'];
+            }
+
 
             try{
 
@@ -373,6 +388,11 @@ class TableBuilder
         {
             return false;
         }
+
+    }
+
+    public function geocode()
+    {
 
     }
 

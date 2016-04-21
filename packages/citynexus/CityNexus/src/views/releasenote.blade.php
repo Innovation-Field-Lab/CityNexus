@@ -1,3 +1,22 @@
+<b>v0.2.4 Tuesday 17 April 16:00</b><br>
+- Refactored score builder to work synchronously<br>
+- Added delete method to scores <br>
+- Added "other units at address" to profiles view <br>
+- Created admin method of merging properties with same full address <br>
+- Add sort by method to raw table views <br>
+<br>
+
+<b>v0.2.3 Tuesday 12 April 16:30</b><br>
+- Fixed score building bug and completed unit testing of score builder<br>
+- Implemented demerger function on property aliases<br>
+<br>
+<b>v0.2.2 Sunday 10 April 22:00</b><br>
+- Fixed range equation bug in scoring<br>
+- Included DB backup services<br>
+- Improved integration testing<br>
+- Added pagination to raw db view<br>
+<br>
+
 <b>v0.2.1 - Wen 6 April 2016 17:30</b>
 - Fixed upload bugs <br>
 - Added intensity slider to heat maps <br>

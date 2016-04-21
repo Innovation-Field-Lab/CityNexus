@@ -15,7 +15,6 @@
         "toin0u/geocoder-laravel": "@stable",
         "backup-manager/laravel": "^1.1",
         "league/flysystem-aws-s3-v3": "^1.0"
-
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -48,6 +47,7 @@
         ],
         "post-update-cmd": [
             "php artisan optimize"
+
         ],
         "post-root-package-install": [
             "php -r \"copy('.env.example', '.env');\""

@@ -5,7 +5,7 @@
 
     <div class="panel panel-default">
         <div class="panel-heading" style="height: 60px">
-            <form action="/{{config('citynexus.tabler_root')}}/show-table" class="form-inline pull-right">
+            <form action="/{{config('citynexus.tabler_root')}}/view-table" class="form-inline pull-right">
                 {{csrf_field()}}
                 <select name="table_name" id="table_name" class="form-control">
                     <option value="">Select One</option>
@@ -20,13 +20,14 @@
             <a  href="/{{config('citynexus.tabler_root')}}/download-table/{{$table_name}}"><i class="glyphicon glyphicon-download"></i> Download CSV</a>
         </div>
         <div class="panel-body" style="overflow: scroll;">
+            {!! $table->render() !!}
             @if(count($table) > 0)
             <table class="table table-bordered table-striped">
                 <tr>
                     <th></th>
                     @foreach($table[0] as $k => $i)
                         <th>
-                            {{$k}}
+                            <a href="{{Request::url()}}?sort_by={{$k}}">{{$k}}s</a>
                         </th>
                     @endforeach
                 </tr>
@@ -51,6 +52,7 @@
                 Table currently holds no records.
             </div>
                 @endif
+            {!! $table->render() !!}
         </div>
     </div>
 

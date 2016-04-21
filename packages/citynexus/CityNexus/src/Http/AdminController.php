@@ -3,8 +3,10 @@
 namespace CityNexus\CityNexus\Http;
 
 use CityNexus\CityNexus\GeocodeJob;
+use CityNexus\CityNexus\MergeProps;
 use CityNexus\CityNexus\Property;
 use CityNexus\CityNexus\Upload;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -30,7 +32,7 @@ class AdminController extends Controller
 
     public function getRefreshGeocoding()
     {
-        $properties = Property::all();
+        $properties = Property::whereNull('lat')->get();
 
         foreach($properties as $i)
         {
@@ -41,13 +43,8 @@ class AdminController extends Controller
     public function getEditTable(Request $request)
     {
         $table_name = $request->get('table_name');
-        $table = DB::table($request->get('table_name'))->get();
-        $tables = DB::table('information_schema.tables')->where('table_schema', 'public')->get();
 
-
-        $table = $table;
-
-        return view('citynexus::admin.edit-table', compact('table', 'table_name', 'tables'));
+        return redirect('/tabler/show-table/' . $table_name);
     }
 
     public function getRemoveData(Request $request)
@@ -74,5 +71,36 @@ class AdminController extends Controller
         }
 
         return redirect('/');
+    }
+
+    public function getRemoveChelsea()
+    {
+
+        DB::table('citynexus_properties')->where('city', 'chelsea')->update(['city' => env('CITY')]);
+    }
+
+    public function getMergeProperties()
+    {
+        $properties = Property::all();
+
+        $sorted = array();
+        $counter = 0;
+        foreach($properties as $i)
+        {
+            if(isset($sorted[trim($i->full_address)]))
+            {
+                Property::find($i->id)->update(['alias_of' => $sorted[trim($i->full_address)]]);
+                $counter++;
+            }
+            else
+            {
+                $sorted[trim($i->full_address)] = $i->id;
+            }
+        }
+
+        Session::flash('flash_success', $counter . " Properties updated!");
+
+        return redirect()->back();
+
     }
 }

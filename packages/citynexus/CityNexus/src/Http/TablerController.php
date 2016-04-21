@@ -243,6 +243,18 @@ class TablerController extends Controller
         return redirect(action('\CityNexus\CityNexus\Http\CitynexusController@getProperty', ['property_id' => $id]));
     }
 
+    public function getDemergeProperty($id)
+    {
+        //Find Property
+        $property = Property::find($id);
+        $property->alias_of = null;
+        $property->save();
+        if(env('APP_ENV') == 'testing') return response(200);
+
+        Session::flash('flash_success', $property->full_address . " has been demerged.  It is recommended you rerun any scores where this property was included.");
+        return redirect()->back();
+    }
+
     public function getRemoveTable($id, $hard = null)
     {
         $table = Table::find($id);
@@ -279,18 +291,29 @@ class TablerController extends Controller
         return redirect(config('citynexus.tabler_root'));
     }
 
-    public function getShowTable($id = null)
+    public function getViewTable(Request $request)
     {
-        if(isset($_GET['table_name'])) $table_name = $_GET['table_name'];
-        if($id != null) $table_name = Table::find($id)->table_name;
+        $table_name = $request->table_name;
+
+        return redirect('/tabler/show-table/' . $table_name);
+    }
+
+    public function getShowTable($table_name)
+    {
         if($table_name != null)
         {
-            $table = DB::table($table_name)->get();
-
+            if(isset($_GET['sort_by']))
+            {
+                $table = DB::table($table_name)->orderBy($_GET['sort_by'])->paginate(250);
+            }
+            else{
+                $table = DB::table($table_name)->paginate(250);
+            }
         }
         else
         {
-            $table_name = null;
+
+                $table_name = null;
         }
 
         $tables = DB::table('information_schema.tables')

@@ -165,9 +165,9 @@
                     <option value="empty">If field is empty</option>
                     <option value="notempty">If field is not empty</option>
                     <option value="equals">If field is equal to:</option>
-                    <option value="doesntequal">If field is equal to:</option>
+                    <option value="doesntequal">If field isn't equal to:</option>
                     <option value="contains">If field contains:</option>
-                    <option value="doesntcontain">If field contains:</option>
+                    <option value="doesntcontain">If field doesn'tcontains:</option>
                 </select>
                 <br>
                 <div id="test_field" class="hidden">
@@ -192,7 +192,7 @@
 
         $('#testtype').change(function(){
             var test = $('#testtype').val();
-            if (test == 'equals' | test == 'contains') {
+            if (test == 'equals' | test == 'contains' | test == 'doesntequal' | test == 'doesntcontain') {
                 $('#test_field').removeClass('hidden');
             }
             else {

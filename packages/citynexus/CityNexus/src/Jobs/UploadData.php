@@ -36,6 +36,8 @@ class UploadData extends Job implements SelfHandling, ShouldQueue
      */
     public function handle()
     {
+        DB::reconnect();
+
         $tabler = new TableBuilder();
         //Process each individual record
 
@@ -46,18 +48,18 @@ class UploadData extends Job implements SelfHandling, ShouldQueue
             }
             catch(\Exception $e)
             {
-                Error::create(['location' => 'UploadData', 'data' => json_encode(['data' => $this->data, 'table_id' => $this->tableId, 'upload_id' => $this->uploadId, 'error' => $e, ])]);
+                Error::create(['location' => 'UploadData - HERE', 'data' => json_encode(['data' => $this->data, 'table_id' => $this->tableId, 'upload_id' => $this->uploadId, 'error' => $e])]);
             }
 
             try
             {
                 // Get property record
                 $property = Property::find($id);
-                if($property->lat == null | $property->long == null) {
+                if($property->lat == null) {
                 }
                 $geocode = Geocoder::geocode(   $property->full_address  . ', ' . config('citynexus.city_state'));
 
-                if($geocode)
+                if($geocode && env('APP_ENV') != 'local')
                 {
                     $property->lat = $geocode->getLatitude();
                     $property->long = $geocode->getLongitude();

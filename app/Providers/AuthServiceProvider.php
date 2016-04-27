@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Auth;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -13,13 +14,13 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\Model' => 'App\Policies\ModelPolicy',
+        'App\Model' => 'App\Policies\DatasetPolicy',
     ];
 
     /**
      * Register any application authentication / authorization services.
      *
-     * @param  \Illuminate\Contracts\Auth\Access\Gate  $gate
+     * @param  \Illuminate\Contracts\Auth\Access\Gate $gate
      * @return void
      */
     public function boot(GateContract $gate)
@@ -27,18 +28,21 @@ class AuthServiceProvider extends ServiceProvider
         parent::registerPolicies($gate);
 
 
-        $gate->before(function ($user, $ability) {
+        $gate->before(function ($user) {
             if ($user->admin) {
                 return true;
             }
         });
 
-
-        // Upload Permission
-        $gate->define('upload', function ($user) {
-            $permissions = \GuzzleHttp\json_decode($user->permissions);
-
-            return $permissions->upload;
+        // Dataset Permissions
+        $gate->define('datasets', function($user, $method){
+            return $user->allowed('datasets', $method);
         });
+
+        // Scores Permissions
+        $gate->define('scores', function($user, $method){
+            return $user->allowed('scores', $method);
+        });
+
     }
 }

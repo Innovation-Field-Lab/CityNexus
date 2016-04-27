@@ -41,4 +41,18 @@ class User extends Model implements AuthenticatableContract,
     {
         return $this->first_name . ' ' . $this->last_name;
     }
+
+    public function allowed($set, $permission)
+    {
+        $permissions = \GuzzleHttp\json_decode($this->permissions);
+        if(isset($permissions->$set->$permission) && $permissions->$set->$permission == true) return true;
+        else return false;
+    }
+    public function disallowed($set, $permission)
+    {
+        $permissions = \GuzzleHttp\json_decode($this->permissions);
+        if(!isset($permissions->$set->$permission) or !$permissions->$set->$permission) return true;
+        else return false;
+
+    }
 }

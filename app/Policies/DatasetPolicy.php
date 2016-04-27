@@ -5,7 +5,7 @@ namespace CityNexus\CityNexus\Policies;
 use CityNexus\CityNexus\Property;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class PropertyPolicy
+class DatasetPolicy
 {
     use HandlesAuthorization;
 
@@ -15,7 +15,7 @@ class PropertyPolicy
      * @var array
      */
     protected $policies = [
-        Property::class => PropertyPolicy::class,
+        Property::class => DatasetPolicy::class,
     ];
 
 
@@ -37,5 +37,8 @@ class PropertyPolicy
     public function boot(GateContract $gate)
     {
         $this->registerPolicies($gate);
+
+
+
     }
 }

@@ -35,13 +35,9 @@
                             </td>
                             <td>
                                 @if(\Illuminate\Support\Facades\Gate::allows('upload'))
-                                <a class="btn btn-sm btn-primary" href="/{{config('citynexus.tabler_root')}}/new-upload/{{$table->id}}">Upload</a>
-<<<<<<< HEAD
-                                @endif
+                                <a class="btn btn-sm btn-primary" href="/{{config('citynexus.tabler_root')}}/new-upload/{{$table->id}}">Upload</a>@endif
                                 <a class="btn btn-sm btn-primary" href="/{{config('citynexus.tabler_root')}}/show-table/{{$table->id}}">View</a>
-=======
                                 <a class="btn btn-sm btn-primary" href="/{{config('citynexus.tabler_root')}}/show-table/{{$table->table_name}}">View</a>
->>>>>>> master
                                 <a class="btn btn-sm btn-primary" href="/{{config('citynexus.tabler_root')}}/edit-table/{{$table->id}}">Edit</a>
                                 <a class="btn btn-sm btn-danger" href="/{{config('citynexus.tabler_root')}}/remove-table/{{$table->id}}"><i class="glyphicon glyphicon-trash"></i></a>
                                 <a class="btn btn-sm btn-warning" href="/{{config('citynexus.tabler_root')}}/rollback/{{$table->id}}">Rollback</a>

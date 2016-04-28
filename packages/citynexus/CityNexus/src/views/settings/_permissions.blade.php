@@ -116,7 +116,7 @@
 
         @if($i['key'] == 'admin')
             @can('admin', 'view')
-            
+
             @else
             <?php continue; ?>
             @endcan

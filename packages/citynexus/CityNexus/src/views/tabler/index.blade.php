@@ -6,7 +6,9 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 All Data Sets
+                @can('datasets', 'create')
                 <a href="/{{config('citynexus.tabler_root')}}/uploader" class="btn btn-primary btn-xs pull-right"><i class="glyphicon glyphicon-plus"></i> New Data Set</a>
+                @endcan
             </div>
             <div class="panel-body">
                 <table class="table" id="table">
@@ -34,14 +36,21 @@
                                 {{$table->updated_at->diffForHumans()}}
                             </td>
                             <td>
-                                @if(\Illuminate\Support\Facades\Gate::allows('upload'))
-                                <a class="btn btn-sm btn-primary" href="/{{config('citynexus.tabler_root')}}/new-upload/{{$table->id}}">Upload</a>@endif
-                                <a class="btn btn-sm btn-primary" href="/{{config('citynexus.tabler_root')}}/show-table/{{$table->id}}">View</a>
+                                @can('datasets', 'upload')
+                                <a class="btn btn-sm btn-primary" href="/{{config('citynexus.tabler_root')}}/new-upload/{{$table->id}}">Upload</a>
+                                @endcan
+                                @can('datasets', 'view')
                                 <a class="btn btn-sm btn-primary" href="/{{config('citynexus.tabler_root')}}/show-table/{{$table->table_name}}">View</a>
+                                @endcan
+                                @can('datasets', 'edit')
                                 <a class="btn btn-sm btn-primary" href="/{{config('citynexus.tabler_root')}}/edit-table/{{$table->id}}">Edit</a>
+                                @endcan
+                                @can('datasets', 'delete')
                                 <a class="btn btn-sm btn-danger" href="/{{config('citynexus.tabler_root')}}/remove-table/{{$table->id}}"><i class="glyphicon glyphicon-trash"></i></a>
+                                @endcan
+                                @can('datasets', 'rollback')
                                 <a class="btn btn-sm btn-warning" href="/{{config('citynexus.tabler_root')}}/rollback/{{$table->id}}">Rollback</a>
-
+                                @endcan
                             </td>
                         </tr>
                         @endif

@@ -28,11 +28,11 @@ class AuthServiceProvider extends ServiceProvider
         parent::registerPolicies($gate);
 
 
-        $gate->before(function ($user) {
-            if ($user->admin) {
-                return true;
-            }
-        });
+//        $gate->before(function ($user) {
+//            if ($user->admin) {
+//                return true;
+//            }
+//        });
 
         // Dataset Permissions
         $gate->define('datasets', function($user, $method){

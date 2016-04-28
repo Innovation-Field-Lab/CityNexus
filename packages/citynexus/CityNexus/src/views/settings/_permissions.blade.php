@@ -32,7 +32,12 @@
                     [
                             'permission' => "Export Dataset",
                             'key' => 'export'
+                    ],
+                    [
+                            'permission' => "Rollback Upload",
+                            'key' => 'rollback'
                     ]
+
             ]
         ],
             [

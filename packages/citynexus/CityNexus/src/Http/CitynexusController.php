@@ -32,6 +32,7 @@ class CitynexusController extends Controller
 
     public function getProperty($id)
     {
+
         $property = Property::find($id);
         $datasets = DatasetQuery::relatedSets( $id );
         $tables = Table::all();

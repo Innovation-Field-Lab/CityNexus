@@ -76,7 +76,7 @@
             ],
             [
                     'title' => 'Users',
-                    'key' => 'users-admin',
+                    'key' => 'usersAdmin',
                     'permissions' => [
                             [
                                     'permission' => "Create User",
@@ -101,7 +101,7 @@
                                     'key' => 'view'
                             ]
                     ]
-            ],
+            ]
     ]
 
 ?>
@@ -113,15 +113,7 @@
     {{--Data sets--}}
 
     @foreach($permission_sets as $i)
-
-        @if($i['key'] == 'admin')
-            @can('admin', 'view')
-
-            @else
-            <?php continue; ?>
-            @endcan
-        @endif
-
+        <?php $group = $i['key']; ?>
     <div class="panel panel-default">
         <div class="panel-heading" role="tab" id="headingOne">
             <h4 class="panel-title">
@@ -134,12 +126,12 @@
             <div class="panel-body">
                 <div class="list-group">
                         @foreach($i['permissions'] as $p)
+                        <?php $method = $p['key']; ?>
                         <div class="list-group-item">
                             <input type="checkbox" name="permissions[{{$i['key']}}][{{$p['key']}}]" value="true" class="{{$i['key']}}"
-                                   @if(isset($permissions->$i['key']->$p['key']) && $permissions->$i['key']->$p['key']) checked @endif
-                            > <label for="">{{$p['permission']}}</label>
+                                   @if(isset($permissions->$group->$method)) checked @endif
+                            > <label for="">{{ $p['permission'] }}</label>
                         </div>
-
                     @endforeach
                     <br><br>
                     <button class="btn btn-sm" onclick="select('{{$i['key']}}')" id="{{$i['key']}}SelectAll"> Check All </button>
@@ -149,5 +141,4 @@
         </div>
     </div>
 
-
-@endforeach
+    @endforeach

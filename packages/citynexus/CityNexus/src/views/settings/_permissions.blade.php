@@ -127,7 +127,7 @@
                         @foreach($i['permissions'] as $p)
                         <div class="list-group-item">
                             <input type="checkbox" name="permissions[{{$i['key']}}][{{$p['key']}}]" value="true" class="{{$i['key']}}"
-                                   @if(isset($permissions->$i['key']->$p['key']) && $permissions->$i['key']->$p['key']) checked @endif
+                                   {{--@if(isset($permissions->$i['key']->$p['key']) && $permissions->$i['key']->$p['key']) checked @endif--}}
                             > <label for="">{{ var_dump($p['permission']) }}</label>
                         </div>
                     @endforeach

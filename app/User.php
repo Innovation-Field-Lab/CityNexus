@@ -45,7 +45,7 @@ class User extends Model implements AuthenticatableContract,
     public function allowed($set, $permission)
     {
         $permissions = \GuzzleHttp\json_decode($this->permissions);
-        if(isset($permissions->$set->$permission) && $permissions->$set->$permission == true) return true;
+        if(isset($permissions->$set->$permission) && $permissions->$set->$permission) return true;
         else return false;
     }
     public function disallowed($set, $permission)

@@ -9,11 +9,14 @@
             </tr>
         </thead>
         @foreach($users as $user)
-        <tr>
+        <tr id="user-{{$user->id}}">
             <td>{{$user->first_name}} {{$user->last_name}}</td>
             <td>{{$user->email}}</td>
             <td>@if($user->admin) Admin @endif</td>
-            <td><button class="btn btn-xs btn-primary" onclick="editPermissions({{$user->id}})">Permissions</button></td>
+            <td>
+                <button class="btn btn-xs btn-primary" onclick="editPermissions({{$user->id}})">Permissions</button>
+                <button class="btn btn-xs btn-danger" onclick="removeUser({{$user->id}})">Delete</button>
+            </td>
         </tr>
         @endforeach
     </table>
@@ -24,7 +27,6 @@
 </div>
 
 <!-- Modal -->
-
 <div class="modal fade" id="permissions" tabindex="-1" role="dialog" aria-labelledby="permissions">
     <form id="permissions" action="/{{config('citynexus.root_directory')}}/settings/permissions" method="post">
 
@@ -38,8 +40,12 @@
 
             </div>
             <div class="modal-footer">
+                @can('user-admin', 'assign')
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                @endcan
+                @can('user-admin', 'delete')
                 <input type="submit" class="btn btn-primary" value="Save Permissions" />
+                @endcan
             </div>
         </div>
     </div>
@@ -74,24 +80,18 @@
         $('#' + type + 'UnselectAll').addClass('hidden');
     }
 
-    function savePermissions()
+    function removeUser( id )
     {
-        var form =  $('#permissions');
-
-        console.log( form );
-
         $.ajax({
-            url: "/{{config('citynexus.root_directory')}}/settings/permissions",
-            type: 'post',
+            url: '/{{config('citynexus.root_directory')}}/settings/remove-user',
+            method: 'post',
             data: {
                 _token: '{{csrf_token()}}',
-                form: form.serializeArray()
+                user_id: id
             }
-        }).success(function()
-        {
-//            $('#permissions').modal('hide');
-        })
-
+        }).success(function(){
+           $('#user-' + id).addClass('hidden');
+        });
     }
 </script>
 

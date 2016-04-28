@@ -40,12 +40,8 @@
 
             </div>
             <div class="modal-footer">
-                @can('user-admin', 'assign')
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                @endcan
-                @can('user-admin', 'delete')
                 <input type="submit" class="btn btn-primary" value="Save Permissions" />
-                @endcan
             </div>
         </div>
     </div>

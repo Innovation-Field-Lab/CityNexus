@@ -58,9 +58,6 @@ class CitynexusSettingsController extends Controller
             $user->password = str_random();
             $user->admin = $this->testPref($request->all(), 'admin');
 
-            //Create the permissions object
-            $user->permissions = $this->createPermissionObject($request->all());
-
             //Save the user Model
             $user->save();
 
@@ -79,14 +76,21 @@ class CitynexusSettingsController extends Controller
         return redirect(action('\CityNexus\CityNexus\Http\CitynexusSettingsController@getIndex'));
     }
 
-    private function createPermissionObject($request)
+    public function getPermissions( $id)
     {
-        $return = array();
-        $return['upload'] = $this->testPref($request, 'upload');
-        $return['scores'] = $this->testPref($request, 'scores');
-        $return['dataset'] = $this->testPref($request, 'dataset');
+        $user = User::find($id);
+        $permissions = json_decode($user->permissions);
 
-        return json_encode($return);
+        return view('citynexus::settings._permissions', compact('permissions', 'user'));
+    }
+
+    public function postPermissions(Request $request)
+    {
+         $user = User::find($request->get('user_id'));
+         $user->permissions = json_encode($request->get('permissions'));
+         $user->save();
+         Session::flash('flash_success', "User permissions updated.");
+         return redirect()->back();
     }
 
     private function testPref($request, $pref)

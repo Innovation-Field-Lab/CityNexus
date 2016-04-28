@@ -18,22 +18,33 @@
                         <li><a href="/citynexus/properties">All Properties</a></li>
                     </ul>
                 </li>
+                @can('datasets', 'view')
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Data Sets <span class="caret"></span></a>
                     <ul class="dropdown-menu">
+
                         <li><a href="/tabler">All Data Sets</a></li>
+
+                        @can('datasets', 'create')
                         <li role="separator" class="divider"></li>
                         <li><a href="/tabler/uploader">New From Upload</a></li>
+                        @endcan
                     </ul>
                 </li>
+                @endcan
+                @can('scores', 'view')
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Property Scores <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="/citynexus/risk-score/scores">All Scores</a></li>
+                        @can('scores', 'create')
                         <li role="separator" class="divider"></li>
                         <li><a href="/citynexus/risk-score/create">Create New Score</a></li>
+                        @endcan
                     </ul>
                 </li>
+                @endcan
+
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tags <span class="caret"></span></a>
                     <ul class="dropdown-menu">

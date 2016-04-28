@@ -76,7 +76,7 @@
             ],
             [
                     'title' => 'Users',
-                    'key' => 'users-admin',
+                    'key' => 'usersAdmin',
                     'permissions' => [
                             [
                                     'permission' => "Create User",

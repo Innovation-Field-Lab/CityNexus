@@ -44,5 +44,15 @@ class AuthServiceProvider extends ServiceProvider
             return $user->allowed('scores', $method);
         });
 
+        // Scores Permissions
+        $gate->define('users-admin', function($user, $method){
+            return $user->allowed('users-admin', $method);
+        });
+
+        // Scores Permissions
+        $gate->define('admin', function($user, $method){
+            return $user->allowed('admin', $method);
+        });
+
     }
 }

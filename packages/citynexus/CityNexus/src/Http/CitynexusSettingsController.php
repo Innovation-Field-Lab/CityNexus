@@ -93,6 +93,15 @@ class CitynexusSettingsController extends Controller
          return redirect()->back();
     }
 
+    public function postRemoveUser(Request $request)
+    {
+        $this->authorize('user-admin', 'delete');
+
+        $user = User::find($request->get('user_id'));
+        $user->delete();
+        return response('User Removed');
+    }
+
     private function testPref($request, $pref)
     {
         if(isset($request[$pref]) | isset($request['admin'])) return true; else return false;

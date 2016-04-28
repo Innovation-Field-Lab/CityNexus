@@ -20,11 +20,13 @@
                                     {{--Application Settings--}}
                                 {{--</a>--}}
                             {{--</li>--}}
+                            @can('users-admin', 'create')
                             <li role="presentation" class="">
                                 <a href="#users" role="tab" id="users-tab" data-toggle="tab" aria-controls="users" aria-expanded="false">
                                     User Accounts
                                 </a>
                             </li>
+                            @endcan
                         </ul>
                         <div id="myTabContent" class="tab-content">
                             <div role="tabpanel" class="tab-pane fade active in" id="user" aria-labelledby="home-tab">
@@ -84,6 +86,7 @@
                                     </div>
                                 </div>
                             </div>
+                            @can('users-admin', 'create')
                             <div role="tabpanel" class="tab-pane fade" id="users" aria-labelledby="users-tab">
                                 <div class="panel">
                                     <div class="panel-body">
@@ -91,6 +94,7 @@
                                     </div>
                                 </div>
                             </div>
+                            @endcan
                         </div>
                     </div>
                 </div>

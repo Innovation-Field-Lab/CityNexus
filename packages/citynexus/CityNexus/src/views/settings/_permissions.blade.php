@@ -113,6 +113,15 @@
     {{--Data sets--}}
 
     @foreach($permission_sets as $i)
+
+        @if($i['key'] == 'admin')
+            @can('admin', 'view')
+            
+            @else
+            <?php continue; ?>
+            @endcan
+        @endif
+
     <div class="panel panel-default">
         <div class="panel-heading" role="tab" id="headingOne">
             <h4 class="panel-title">
@@ -140,4 +149,5 @@
         </div>
     </div>
 
-    @endforeach
+
+@endforeach

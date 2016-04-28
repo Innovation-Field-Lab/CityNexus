@@ -113,6 +113,7 @@
     {{--Data sets--}}
 
     @foreach($permission_sets as $i)
+        <?php $group = $i['key']; ?>
     <div class="panel panel-default">
         <div class="panel-heading" role="tab" id="headingOne">
             <h4 class="panel-title">
@@ -125,9 +126,10 @@
             <div class="panel-body">
                 <div class="list-group">
                         @foreach($i['permissions'] as $p)
+                        <?php $method = $p['key']; ?>
                         <div class="list-group-item">
                             <input type="checkbox" name="permissions[{{$i['key']}}][{{$p['key']}}]" value="true" class="{{$i['key']}}"
-                                   @if(isset($permissions->$i['key']->$p['key'])) checked @endif
+                                   @if(isset($permissions->$group->$method)) checked @endif
                             > <label for="">{{ $p['permission'] }}</label>
                         </div>
                     @endforeach

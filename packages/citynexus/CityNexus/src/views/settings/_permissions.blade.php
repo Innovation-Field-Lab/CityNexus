@@ -101,7 +101,7 @@
                                     'key' => 'view'
                             ]
                     ]
-            ],
+            ]
     ]
 
 ?>
@@ -128,9 +128,8 @@
                         <div class="list-group-item">
                             <input type="checkbox" name="permissions[{{$i['key']}}][{{$p['key']}}]" value="true" class="{{$i['key']}}"
                                    @if(isset($permissions->$i['key']->$p['key']) && $permissions->$i['key']->$p['key']) checked @endif
-                            > <label for="">{{$p['permission']}}</label>
+                            > <label for="">{{ var_dump($p['permission']) }}</label>
                         </div>
-
                     @endforeach
                     <br><br>
                     <button class="btn btn-sm" onclick="select('{{$i['key']}}')" id="{{$i['key']}}SelectAll"> Check All </button>

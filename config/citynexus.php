@@ -9,7 +9,7 @@ return [
     'slogan' => env('CITYNEXUS_SLOGAN', 'Municipal Data Centralization'),
 
     // Layout variables
-    "template" => 'layout.master',
+    "template" => 'master.main',
     "section" => "main",
 
     // City information

@@ -1,12 +1,28 @@
+<?php
+$pagename = 'Assign Alias Records';
+$section = 'properties';
+?>
+
+
 @extends(config('citynexus.template'))
 
 @section(config('citynexus.section'))
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <span class="panel-title">Create Record Alias(es)</span>
-        </div>
-        <div class="panel-body">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card-box">
+                {{--<div class="dropdown pull-right">--}}
+                {{--<a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">--}}
+                {{--<i class="zmdi zmdi-more-vert"></i>--}}
+                {{--</a>--}}
+                {{--<ul class="dropdown-menu" role="menu">--}}
+                {{--<li><a href="#">Action</a></li>--}}
+                {{--<li><a href="#">Another action</a></li>--}}
+                {{--<li><a href="#">Something else here</a></li>--}}
+                {{--<li class="divider"></li>--}}
+                {{--<li><a href="#">Separated link</a></li>--}}
+                {{--</ul>--}}
+                {{--</div>--}}
             <h3>Parent Record: {{ucwords($property->full_address)}}</h3>
 
             <div class="panel panel-default">

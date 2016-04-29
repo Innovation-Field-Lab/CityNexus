@@ -1,14 +1,24 @@
+<?php
+$pagename = 'All Property Tags';
+$section = 'properties';
+?>
+
+
 @extends(config('citynexus.template'))
 
 @section(config('citynexus.section'))
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <div class="panel-title">
-                All Property Tags
-            </div>
-        </div>
-        <div class="panel-body">
-            <table class="table">
+    <div class="portlet">
+        {{--<div class="portlet-heading portlet-default">--}}
+            {{--<div class="portlet-widgets">--}}
+                {{--<a href="javascript:;" data-toggle="reload"><i class="zmdi zmdi-refresh"></i></a>--}}
+                {{--<a data-toggle="collapse" data-parent="#accordion1" href="#bg-primary"><i class="zmdi zmdi-minus"></i></a>--}}
+                {{--<a href="#" data-toggle="remove"><i class="zmdi zmdi-close"></i></a>--}}
+            {{--</div>--}}
+            {{--<div class="clearfix"></div>--}}
+        {{--</div>--}}
+
+        <div class="portlet-body">
+            <table class="table table-hover">
                 <thead>
                 <tr>
                     <th>Tag Name</th>

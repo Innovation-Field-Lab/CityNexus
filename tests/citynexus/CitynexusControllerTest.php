@@ -13,11 +13,11 @@ class CitynexusControllerTest extends TestCase
         $access = factory(App\User::class)->create();
 
         $this->actingAs($access)->visit(action('\CityNexus\CityNexus\Http\CitynexusController@getIndex'))
-            ->dontSee('<li><a href="/citynexus/properties">All Properties</a></li>')
-            ->dontSee('<li><a href="/tabler">All Data Sets</a></li>')
-            ->dontSee('<li><a href="/citynexus/risk-score/scores">All Scores</a></li>')
-            ->dontSee('<li><a href="/citynexus/risk-score/create">Create New Score</a></li>')
-            ->dontSee('<li><a href="/tabler/uploader">New From Upload</a></li>');
+            ->dontSee(action('\CityNexus\CityNexus\Http\CitynexusController@getProperties'))
+            ->dontSee(action('\CityNexus\CityNexus\Http\TablerController@getIndex'))
+            ->dontSee(action('\CityNexus\CityNexus\Http\RiskScoreController@getIndex'))
+            ->dontSee(action('\CityNexus\CityNexus\Http\RiskScoreController@getCreate'))
+            ->dontSee(action('\CityNexus\CityNexus\Http\TablerController@getUploader'));
     }
 
     public function testNavigationWithPermissions()
@@ -27,11 +27,11 @@ class CitynexusControllerTest extends TestCase
         ]);
 
         $this->actingAs($access)->visit(action('\CityNexus\CityNexus\Http\CitynexusController@getIndex'))
-            ->see('<li><a href="/citynexus/properties">All Properties</a></li>')
-            ->see('<li><a href="/tabler">All Data Sets</a></li>')
-            ->see('<li><a href="/citynexus/risk-score/scores">All Scores</a></li>')
-            ->see('<li><a href="/citynexus/risk-score/create">Create New Score</a></li>')
-            ->see('<li><a href="/tabler/uploader">New From Upload</a></li>');
+            ->see(action('\CityNexus\CityNexus\Http\CitynexusController@getProperties'))
+            ->see(action('\CityNexus\CityNexus\Http\TablerController@getIndex'))
+            ->see(action('\CityNexus\CityNexus\Http\RiskScoreController@getIndex'))
+            ->see(action('\CityNexus\CityNexus\Http\RiskScoreController@getCreate'))
+            ->see(action('\CityNexus\CityNexus\Http\TablerController@getUploader'));
     }
 
     public function testGetProperty()

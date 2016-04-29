@@ -1,1 +1,1 @@
-@include('includes.alerts._alert', ['class' => "alert-info"])
+@include('includes.alerts._alert', ['class' => "info"])

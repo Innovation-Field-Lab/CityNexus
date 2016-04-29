@@ -109,7 +109,6 @@ class CitynexusSettingsController extends Controller
 
     public function postUpdateUserSettings( $id, Request $request)
     {
-        $this->authorize('userAdmin', 'assign');
 
         User::find($id)->update($request->get('user'));
         return response('Success');

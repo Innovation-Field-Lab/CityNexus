@@ -55,6 +55,11 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         // Admin Permissions
+        $gate->define('reports', function($user, $method){
+            return $user->allowed('reports', $method);
+        });
+
+        // Admin Permissions
         $gate->define('admin', function($user, $method){
             return $user->allowed('admin', $method);
         });

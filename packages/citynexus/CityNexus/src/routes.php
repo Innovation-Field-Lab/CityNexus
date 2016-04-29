@@ -64,6 +64,7 @@ Route::group(['middleware' => 'auth', 'prefix' => config('citynexus.root_directo
     Route::controller('/settings', 'CityNexus\CityNexus\Http\CitynexusSettingsController');
     Route::controller('/notes', 'CityNexus\CityNexus\Http\NoteController');
     Route::controller('/tags', 'CityNexus\CityNexus\Http\TagController');
+    Route::controller('/reports', 'CityNexus\CityNexus\Http\ReportsController');
     Route::controller('/', 'CityNexus\CityNexus\Http\CitynexusController');
 
 });

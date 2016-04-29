@@ -377,4 +377,32 @@ class TablerController extends Controller
 
         return $file;
     }
+
+    // AJAX Requests
+
+    public function getDataFields($id)
+    {
+        if($id == '_scores')
+        {
+            $scores = Score::orderBy('name')->get();
+            return view('citynexus::risk-score.scores', compact('scores'));
+        }
+        else
+        {
+            $dataset = Table::find($id);
+            $scheme = json_decode($dataset->scheme);
+
+            return view('citynexus::tabler.snipits._datafields', compact('dataset', 'scheme'));
+        }
+    }
+
+    public function getDataField(Request $request)
+    {
+        $dataset = Table::find($request->get('table_id'));
+        $scheme = json_decode($dataset->scheme, false);
+        $key = $request->get('key');
+        $field = $scheme->$key;
+        unset($dataset['_token']);
+        return view('citynexus::tabler.snipits._field_settings', compact('dataset', 'scheme', 'field'));
+    }
 }

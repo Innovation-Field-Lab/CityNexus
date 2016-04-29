@@ -93,12 +93,38 @@
                     ]
             ],
             [
+                    'title' => 'Properties',
+                    'key' => 'properties',
+                    'permissions' => [
+                            [
+                                    'permission' => "View Properties List",
+                                    'key' => 'view',
+                            ],
+                            [
+                                    'permission' => "View Properties Details",
+                                    'key' => 'show',
+                            ],
+                            [
+                                    'permission' => "Merge Properties",
+                                    'key' => 'merge',
+                            ],
+                            [
+                                    'permission' => "Edit Properties Record",
+                                    'key' => 'edit',
+                            ]
+                    ]
+            ],
+            [
                     'title' => 'Administrator',
                     'key' => 'admin',
                     'permissions' => [
                             [
                                     'permission' => "View Admin Panel",
                                     'key' => 'view'
+                            ],
+                            [
+                                    'permission' => "Hard Delete Data",
+                                    'key' => 'delete'
                             ]
                     ]
             ]

@@ -12,12 +12,14 @@
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="/">Home</a></li>
+                @can('properties', 'view')
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Properties <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="/citynexus/properties">All Properties</a></li>
                     </ul>
                 </li>
+                @endcan
                 @can('datasets', 'view')
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Data Sets <span class="caret"></span></a>

@@ -5,7 +5,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use CityNexus\CityNexus\TableBuilder;
 
-class TablerControllerTest extends TestCase
+class TableBuilderControllerTest extends TestCase
 {
     use WithoutMiddleware;
     use DatabaseTransactions;

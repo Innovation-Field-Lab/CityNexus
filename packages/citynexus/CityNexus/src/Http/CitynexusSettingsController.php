@@ -29,7 +29,7 @@ class CitynexusSettingsController extends Controller
         $app_s = Setting::all();
         $user_s = Setting::where('user_id', Auth::id());
         $user = Auth::getUser();
-        $users = User::all();
+        $users = User::all()->sortBy('last_name');
 
         return view('citynexus::settings.edit', compact('app_s', 'user_s', 'users', 'user'));
 
@@ -95,7 +95,7 @@ class CitynexusSettingsController extends Controller
 
     public function postRemoveUser(Request $request)
     {
-        $this->authorize('user-admin', 'delete');
+        $this->authorize('userAdmin', 'delete');
 
         $user = User::find($request->get('user_id'));
         $user->delete();
@@ -105,6 +105,15 @@ class CitynexusSettingsController extends Controller
     private function testPref($request, $pref)
     {
         if(isset($request[$pref]) | isset($request['admin'])) return true; else return false;
+    }
+
+    public function postUpdateUserSettings( $id, Request $request)
+    {
+        $this->authorize('userAdmin', 'assign');
+
+        User::find($id)->update($request->get('user'));
+        return response('Success');
+
     }
 
     public function postUpdateUser(Request $request)

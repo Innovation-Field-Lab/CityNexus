@@ -13,9 +13,29 @@
 
 $factory->define(App\User::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->name,
+        'first_name' => $faker->firstName,
+        'last_name' => $faker->lastName,
         'email' => $faker->email,
         'password' => bcrypt(str_random(10)),
         'remember_token' => str_random(10),
+        'admin' => false
     ];
 });
+
+$factory->define(CityNexus\CityNexus\Property::class, function (Faker\Generator $faker) {
+    $house_number = rand(100, 1000);
+    $street = $faker->streetName;
+    $street_type = $faker->streetSuffix;
+    $unit = rand(1, 20);
+
+    return [
+        'full_address' => $house_number . ' ' . $street . ' ' . $street_type . ' ' . $unit,
+        'house_number' => $house_number,
+        'street_name' => $street,
+        'street_type' => $street_type,
+        'unit' => $unit,
+        'city' => $faker->city,
+        'state' => 'MA',
+    ];
+});
+

@@ -25,9 +25,14 @@
                 <tr>
                     <td>{{$item->id}}</td>
                     <td>{{ucwords($item->full_address)}}</td>
-                    <td><a class="btn btn-sm btn-primary" href="/{{config('citynexus.root_directory')}}/property/{{$item->id}}">Details</a> <a class="btn btn-sm btn-primary" href="{{action('\CityNexus\CityNexus\Http\TablerController@getMergeRecords')}}/{{$item->id}}">Merge Property</a>
+                    <td>
+                        @can('properties', 'show')
+                        <a class="btn btn-sm btn-primary" href="/{{config('citynexus.root_directory')}}/property/{{$item->id}}">Details</a>
+                        @endcan
+                        @can('properties', 'merge')
+                        <a class="btn btn-sm btn-primary" href="{{action('\CityNexus\CityNexus\Http\TablerController@getMergeRecords')}}/{{$item->id}}">Merge Property</a>
+                        @endcan
                     </td>
-
                 </tr>
                 @endforeach
                 </tbody>

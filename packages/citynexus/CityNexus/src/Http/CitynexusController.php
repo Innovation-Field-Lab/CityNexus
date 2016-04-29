@@ -25,6 +25,7 @@ use CityNexus\CityNexus\Geocode;
 
 class CitynexusController extends Controller
 {
+
     public function getIndex()
     {
         return view('citynexus::index');
@@ -32,6 +33,8 @@ class CitynexusController extends Controller
 
     public function getProperty($id)
     {
+
+        $this->authorize('properties', 'show');
 
         $property = Property::find($id);
         $datasets = DatasetQuery::relatedSets( $id );
@@ -51,34 +54,10 @@ class CitynexusController extends Controller
 
     public function getProperties()
     {
+        $this->authorize('properties', 'view');
+
         $properties = Property::where('alias_of', null)->get();
         return view('citynexus::property.index', compact('properties'));
-    }
-
-    public function getRiskscoreCreate()
-    {
-        $datasets = Table::all();
-        return view('citynexus::risk-score.new', compact('datasets'));
-    }
-
-    public function getScores()
-    {
-        return view('citynexus::risk-score.index')
-            ->with('scores', Score::all());
-    }
-
-    public function getRunGeocoding()
-    {
-        $properties = Property::where('lat', null)->orWhere('long', null)->get();
-
-        foreach($properties as $i)
-        {
-            $id = $i->id;
-
-            $this->dispatch(new GeocodeJob($id));
-        }
-
-        return $properties->count();
     }
 
     public function postSubmitTicket(Request $request)
@@ -90,38 +69,9 @@ class CitynexusController extends Controller
         });
     }
 
-    private function runScore($score, $elements)
-    {
-        $properties = Property::all()->chunk(1000);
-
-        $table = 'citynexus_scores_' . $score->id;
-
-        if( !Schema::hasTable($table) )
-        {
-            $table = Schema::create($table, function (Blueprint $table) {
-                $table->increments('id');
-                $table->integer('property_id');
-                $table->float('score')->nullable();
-                $table->timestamps();
-            });
-        }
-
-
-//        if(DB::table($table)->count() != 0)  { DB::table($table)->delete(); }
-
-        $jobs = array();
-
-
-
-        foreach($properties as $property)
-        {
-            $this->dispatch(new GenerateScore($elements, $table, $property));
-        }
-            $this->dispatch(new GenerateScore($elements, $score->id, FALSE));
-    }
-
     public function postAssociateTag(Request $request)
     {
+        $this->authorize('properties', 'show');
         //Format Tag
         $tag = ucwords(strtolower($request->get('tag')));
 
@@ -137,6 +87,8 @@ class CitynexusController extends Controller
 
     public function postRemoveTag(Request $request)
     {
+        $this->authorize('properties', 'show');
+
         return Property::find($request->get('property_id'))->tags()->detach($request->get('tag_id'));
     }
 

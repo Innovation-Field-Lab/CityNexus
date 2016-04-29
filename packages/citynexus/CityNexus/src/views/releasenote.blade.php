@@ -1,3 +1,8 @@
+<b>v0.2.5 Thursday 28 April 20:00</b><br>
+- Granular permissions<br>
+- Unit testing added throughout views and logic</br>
+<br>
+
 <b>v0.2.4 Tuesday 17 April 16:00</b><br>
 - Refactored score builder to work synchronously<br>
 - Added delete method to scores <br>

@@ -1,3 +1,5 @@
+https://travis-ci.org/Innovation-Field-Lab/CityNexus.svg?branch=master
+
 ## CityNexus -- Municipal Data Warehouse
 
 ### Installation

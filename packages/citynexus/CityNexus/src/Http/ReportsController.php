@@ -26,12 +26,105 @@ use CityNexus\CityNexus\Tag;
 class ReportsController extends Controller
 {
 
-    public function getScatterChart()
+    public function getScatterChart(Request $request)
     {
         $this->authorize('reports', 'create');
+        $datasets = Table::where('table_title', "!=", 'null')->orderBy('table_name')->get(['table_name', 'table_title', 'id']);
+        if($request->get('data') == false)
+        {
+            return view('citynexus::reports.charts.scatter_chart', compact('datasets'));
+        }
 
-        $datasets = Table::all()->sortBy('name');
+        else
+        {
+            $h_data = $request->get('h_data');
+            $v_data = $request->get('v_data');
+            $data = json_encode($this->getScatterDataSet("tabler_assessor's_department", 'parcelvalue', "tabler_assessor's_department", 'landvalue'));
+            return view('citynexus::reports.charts.scatter_chart', compact('datasets', 'data'));
 
-        return view('citynexus::reports.charts.scatter_chart', compact('datasets'));
+        }
+
+    }
+
+    // Ajax Calls
+
+    public function getDataFields($id, $axis)
+    {
+        if($id == '_scores')
+        {
+            $scores = Score::orderBy('name')->get();
+            return view('citynexus::reports.charts.scatter._datafields', compact('scores', 'axis'));
+        }
+        $dataset = Table::find($id);
+
+        $scheme = json_decode($dataset->scheme);
+
+        return view('citynexus::reports.charts.scatter._datafields', compact('dataset', 'scheme', 'axis'));
+    }
+
+    public function getScatterDataSet($h_tablename, $h_key, $v_tablename, $v_key )
+    {
+        $return = null;
+
+        // Build Horizontal Axis
+        $horizontal = array_filter($this->getDataSet($h_tablename, $h_key));
+
+        // Build Vertical Axis
+
+        $vertical = array_filter($this->getDataSet($v_tablename, $v_key));
+
+
+        // Build Combined Data
+
+        $properties = Property::all()->lists('full_address', 'id');
+
+        foreach($horizontal as $k => $i)
+        {
+            if(isset($vertical[$k])) {
+
+                $return[] = [
+                    'address' => $properties[$k],
+                    'property_id' => $k,
+                    'x' => $i,
+                    'y' => $vertical[$k]];
+            }
+        }
+
+        return $return;
+
+    }
+
+    private function getDataSet( $table_name, $key )
+    {
+        $return = null;
+
+        $query_results = DB::table($table_name)->orderBy('created_at', 'desc')->lists($key, 'property_id');
+
+        $return = $this->byPropertyId($query_results);
+
+        return $return;
+    }
+
+    /**
+     * @param $data array
+     */
+    private function byPropertyId($data)
+    {
+        $aliases = Property::whereNotNull('alias_of')->lists('id', 'alias_of');
+
+
+        foreach($data as $k => $i)
+        {
+            if(isset($aliases->$k))
+            {
+                $return[$aliases->$k] = $i;
+            }
+            else
+            {
+                $return[$k] = $i;
+            }
+        }
+
+        return $return;
     }
 }

@@ -59,13 +59,24 @@
 
                 @can('scores', 'view')
                 <li class="has_sub">
-                    <a href="javascript:void(0);" class="waves-effect @if(isset($section) && $section == 'scores') active @endif "><i class="fa fa-area-chart"></i> <span> Scores </span> <span class="menu-arrow"></span></a>
+                    <a href="javascript:void(0);" class="waves-effect @if(isset($section) && $section == 'scores') active @endif "><i class="fa fa-tachometer"></i> <span> Scores </span> <span class="menu-arrow"></span></a>
                     <ul class="list-unstyled">
                         <li><a href="{{action('\CityNexus\CityNexus\Http\RiskScoreController@getIndex')}}">All Scores</a></li>
                         @can('datasets', 'create')
                         <li role="separator" class="divider"></li>
                         <li><a href="{{action('\CityNexus\CityNexus\Http\RiskScoreController@getCreate')}}">Create New Score</a></li>
                         @endcan
+                    </ul>
+                </li>
+                @endcan
+
+                @can('reports', 'view')
+                <li class="has_sub">
+                    <a href="javascript:void(0);" class="waves-effect @if(isset($section) && $section == 'reports') active @endif "><i class="fa fa-area-chart"></i> <span> Reports </span> <span class="menu-arrow"></span></a>
+                    <ul class="list-unstyled">
+                        <li><a href="{{action('\CityNexus\CityNexus\Http\RiskScoreController@getIndex')}}">Saved Reports</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li class="@if(isset($pagename) &&  $pagename == 'Scatter Chart') active @endif"><a href="{{action('\CityNexus\CityNexus\Http\ReportsController@getScatterChart')}}">Scatter Data Chart Builder</a></li>
                     </ul>
                 </li>
                 @endcan

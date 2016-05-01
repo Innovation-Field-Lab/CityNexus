@@ -54,11 +54,13 @@
 <script src="/js/waves.js"></script>
 <script src="/js/jquery.nicescroll.js"></script>
 <script src="/js/jquery.scrollTo.min.js"></script>
+<script src="/plugins/jquery-knob/jquery.knob.js"></script>
 
 <!-- App js -->
 <script src="/js/jquery.core.js"></script>
 <script src="/js/jquery.app.js"></script>
 <script src="/plugins/toastr/toastr.min.js"></script>
+
 
     <script type="text/javascript">
             $(function () {

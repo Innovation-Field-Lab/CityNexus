@@ -4,7 +4,7 @@
 
     <!-- LOGO -->
     <div class="topbar-left">
-        <a href="index.html" class="logo"><span>{{config('citynexus.app_name')}}</span><i class="zmdi zmdi-layers"></i></a>
+        <a href="/" class="logo"><span>{{config('citynexus.app_name')}}</span><i class="zmdi zmdi-layers"></i></a>
     </div>
 
     <!-- Button mobile view to collapse sidebar menu -->

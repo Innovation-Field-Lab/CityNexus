@@ -14,7 +14,7 @@
     <input type="hidden" id="{{$axis}}_table_name" value="{{$dataset->table_name}}">
     <br>
     <b>Select Data Field</b>
-    <select name="{{$axis}}_data[datafield]" class="form-control" id="{{$axis}}_datafield">
+    <select name="{{$axis}}_datafield" class="form-control" id="{{$axis}}_datafield">
         <option value="">[Select Data Field]</option>
         @foreach($scheme as $i)
             @if($i->type == 'integer' or $i->type == 'float')

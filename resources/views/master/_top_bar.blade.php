@@ -20,7 +20,7 @@
                 </li>
                 @if(isset($pagename))
                 <li>
-                    <h4 class="page-title">{{$pagename}}</h4>
+                    <h4 class="page-title">{!! $pagename !!}</h4>
                 </li>
                 @endif
             </ul>

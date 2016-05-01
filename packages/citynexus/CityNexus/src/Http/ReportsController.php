@@ -26,38 +26,116 @@ use CityNexus\CityNexus\Tag;
 class ReportsController extends Controller
 {
 
-    public function getScatterChart(Request $request)
+    public function getScatterChart()
     {
         $this->authorize('reports', 'create');
         $datasets = Table::where('table_title', "!=", 'null')->orderBy('table_name')->get(['table_name', 'table_title', 'id']);
-        if($request->get('data') == false)
+        return view('citynexus::reports.charts.scatter_chart', compact('datasets'));
+
+    }
+
+    public function getDistributionCurve($table = null, $key = null, Request $request = null)
+    {
+        $datasets = Table::where('table_title', "!=", 'null')->orderBy('table_name')->get(['table_name', 'table_title', 'id']);
+
+        if ($table != null && $key != null)
         {
-            return view('citynexus::reports.charts.scatter_chart', compact('datasets'));
+
+            $max = DB::table($table)->max($key);
+
+        if ($request->get('with_zeros')) {
+            $data = DB::table($table)->orderBy($key)->lists($key);
+            $min = DB::table($table)->min($key);
+        } else {
+            $data = DB::table($table)->where($key, '>', 0)->orderBy($key)->lists($key);
+            $min = DB::table($table)->where($key, '>', 0)->min($key);
+        }
+        // Bern view
+        $count = count($data);
+
+        if ($request->get('feel') != null) {
+            if ($request->get('feel') == 'bern') {
+                $bern = $count - ($count / 100);
+                $bern = intval($bern);
+                $cutoff = $data[$bern];
+            }
+
+            if ($request->get('feel') == 'malthus') {
+                $malthus = $count - ($count / 20);
+                $malthus = intval($malthus);
+                $cutoff = $data[$malthus];
+            }
+
+            if ($request->get('feel') == 'castro') {
+                $castro = $count - ($count / 10);
+                $castro = intval($castro);
+                $cutoff = $data[$castro];
+            }
+
+            $data = DB::table($table)->where($key, '<', $cutoff)->where($key, '>', 0)->orderBy($key)->lists($key);
+            $min = DB::table($table)->where($key, '<', $cutoff)->where($key, '>', 0)->min($key);
+            $max = $cutoff;
+            $count = count($data);
         }
 
-        else
-        {
-            $h_data = $request->get('h_data');
-            $v_data = $request->get('v_data');
-            $data = json_encode($this->getScatterDataSet("tabler_assessor's_department", 'parcelvalue', "tabler_assessor's_department", 'landvalue'));
-            return view('citynexus::reports.charts.scatter_chart', compact('datasets', 'data'));
+        $zeros = DB::table($table)->where($key, '<=', '0')->count();
+        $sum = DB::table($table)->sum($key);
+        $middle = $count / 2;
+        $firstQ = $count / 4;
+        $thirdQ = $middle + $firstQ;
+        $bTen = $count / 10;
+        $tTen = $count - $bTen;
 
+        $stats = [
+            'max' => $max,
+            'min' => $min,
+            'count' => $count,
+            'mean' => $sum / $count,
+            'bTen' => $bTen,
+            'firstQ' => $firstQ,
+            'median' => $middle,
+            'thirdQ' => $thirdQ,
+            'tTen' => $tTen,
+            'zeros' => $zeros,
+
+        ];
+
+            return view('citynexus::reports.charts.distribution_curve', compact('data', 'stats'));
         }
 
+        else{
+            $distribution = true;
+            return view('citynexus::reports.charts.distribution_curve', compact('datasets', $distribution));
+
+        }
     }
 
     // Ajax Calls
 
-    public function getDataFields($id, $axis)
+    public function getDataFields($id, $axis = null, $type = null)
     {
         if($id == '_scores')
         {
             $scores = Score::orderBy('name')->get();
+
+            if($type == 'distribution')
+            {
+                return view('citynexus::reports.charts.distribution._datafields', compact('scores', 'scheme'));
+
+            }
+
             return view('citynexus::reports.charts.scatter._datafields', compact('scores', 'axis'));
+
         }
         $dataset = Table::find($id);
 
         $scheme = json_decode($dataset->scheme);
+
+        if($type == 'distribution')
+        {
+            return view('citynexus::reports.charts.distribution._datafields', compact('dataset', 'scheme'));
+
+        }
 
         return view('citynexus::reports.charts.scatter._datafields', compact('dataset', 'scheme', 'axis'));
     }

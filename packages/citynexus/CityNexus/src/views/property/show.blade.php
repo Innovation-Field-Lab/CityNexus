@@ -1,3 +1,41 @@
+<?php
+$pagename = ucwords($property->address());
+if($property->aliases->count() > 0)
+    { $pagename .=
+    '<span class="dropdown">
+                    <span class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="cursor: pointer">
+                        <i class="glyphicon glyphicon-duplicate"></i>
+                    </span>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><a href="#">Aliases:</a></li>';
+                        foreach($property->aliases as $alias)
+                            {
+                            $pagename .=
+                            '<li><a href="' . action('\CityNexus\CityNexus\Http\CitynexusController@getProperty', ['property_id' => $alias->id]) . '" id="demerge-alias">
+                                    ' . ucwords($alias->full_address) . '
+                                </a>
+                            </li>'; }
+
+                    $pagename .= '</ul>
+                </span>';
+}
+
+if($property->aliasOf != null)
+    {
+
+    $pagename .=
+    '<small>(Alias of
+        <a href="' . action('\CityNexus\CityNexus\Http\CitynexusController@getProperty', ['property_id' => $property->aliasOf->id]) . '">'
+            . ucwords($property->full_address) . '
+        </a>
+        <a href="'  . action('\CityNexus\CityNexus\Http\TablerController@getDemergeProperty', ['property_id' => $property->id]) . '">
+            <i class="glyphicon glyphicon-trash" style="color:red"></i>
+        </a>)
+    </small>';
+}
+$section = 'properties';
+?>
+
 @extends(config('citynexus.template'))
 
 @section(config('citynexus.section'))
@@ -15,34 +53,7 @@
                 </ul>
             </div>
             <div class="panel-title">
-                {{ucwords($property->address())}}
-                @if($property->aliases->count() > 0)
-                <span class="dropdown">
-                    <span class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="cursor: pointer">
-                        <i class="glyphicon glyphicon-duplicate"></i>
-                    </span>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li><a href="#">Aliases:</a></li>
-                        @foreach($property->aliases as $alias)
-                        <li><a href="{{action('\CityNexus\CityNexus\Http\CitynexusController@getProperty', ['property_id' => $alias->id])}}" id="demerge-alias">
-                                {{ucwords($alias->full_address)}}
-                            </a>
-                        </li>
-                        @endforeach
-                    </ul>
-                </span>
-                @endif
 
-                @if($property->aliasOf != null)
-                    <small>(Alias of
-                        <a href="{{action('\CityNexus\CityNexus\Http\CitynexusController@getProperty', ['property_id' => $property->aliasOf->id])}}">
-                            {{ucwords($property->full_address)}}
-                        </a>
-                        <a href="{{action('\CityNexus\CityNexus\Http\TablerController@getDemergeProperty', ['property_id' => $property->id])}}">
-                            <i class="glyphicon glyphicon-trash" style="color:red"></i>
-                        </a>)
-                    </small>
-                @endif
             </div>
         </div>
         <div class="panel-body">
@@ -140,7 +151,7 @@
                 </div>
                 <div class="col-sm-4">
 
-                    @if($property->lat != null && $property->long != null)
+                    @if($property->lat != null && $property->long != null && 'local' != env('APP_ENV'))
                         <div class="panel panel-default">
                                 <div id="pano" style="height: 250px"></div>
                         </div>

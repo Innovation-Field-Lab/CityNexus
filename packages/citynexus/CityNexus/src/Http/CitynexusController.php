@@ -4,7 +4,9 @@ namespace CityNexus\CityNexus\Http;
 
 use App\Http\Controllers\Controller;
 use App\User;
+use Carbon\Carbon;
 use CityNexus\CityNexus\GeocodeJob;
+use CityNexus\CityNexus\Note;
 use CityNexus\CityNexus\Property;
 use CityNexus\CityNexus\DatasetQuery;
 use CityNexus\CityNexus\GenerateScore;
@@ -28,7 +30,13 @@ class CitynexusController extends Controller
 
     public function getIndex()
     {
-        return view('citynexus::index');
+        $today = new Carbon();
+        $notes = Note::orderBy('created_at')->take(20)->get();
+        $pcount = Property::whereNull('alias_of')->count();
+        $npcount = Property::whereNull('alias_of')->where('created_at', '<', $today->subMonth(1))->count();
+        $tcount = Table::all()->count();
+
+        return view('citynexus::dashboards.citymanager', compact('notes', 'pcount', 'tcount', 'npcount'));
     }
 
     public function getProperty($id)

@@ -16,8 +16,14 @@ $section = 'scores';
         {{--</div>--}}
 
             <div class="col-sm-9 ">
-                <div class="card-box">
-                    <div id="chart"></div>
+                <div class="card-box" id="chart-wrapper">
+                    @if(isset($data))
+                        <div id="chart"></div>
+                    @else
+                        <div class="alert alert-info">
+                            No data selected!  To build a scatter chart select a horizontal and vertical variable.
+                        </div>
+                    @endif
                 </div>
             </div>
             <div class="col-sm-3">
@@ -29,11 +35,11 @@ $section = 'scores';
                     </div>
                     <div class="panel-body">
                         <div class="list-group">
-                            {{--<a href="/{{config('citynexus.root_directory')}}/risk-score/distribution/{{$rs->id}}?default=true" class="list-group-item @if(isset($_GET['default']) && $_GET['default'] == true)active @endif">Exclude &#8804; Zero</a>--}}
-                            {{--<a href="/{{config('citynexus.root_directory')}}/risk-score/distribution/{{$rs->id}}?feel=bern" class="list-group-item @if(isset($_GET['feel']) && $_GET['feel'] == 'burn')active @endif">Exclude Top 1%</a>--}}
-                            {{--<a href="/{{config('citynexus.root_directory')}}/risk-score/distribution/{{$rs->id}}?feel=malthus" class="list-group-item">Exclude Top 5%</a>--}}
-                            {{--<a href="/{{config('citynexus.root_directory')}}/risk-score/distribution/{{$rs->id}}?feel=castro" class="list-group-item">Exclude Top 10%</a>--}}
-                            {{--<a href="/{{config('citynexus.root_directory')}}/risk-score/distribution/{{$rs->id}}?with_zeros=true" class="list-group-item">Including &#8804; Zeros</a>--}}
+                            <a href="{{Request::url()}}?default=true" class="list-group-item @if(!isset($_GET['with_zeros']) && !isset($_GET['feel']))active @endif">Exclude &#8804; Zero</a>
+                            <a href="{{Request::url()}}?feel=bern" class="list-group-item @if(isset($_GET['feel']) && $_GET['feel'] == 'bern')active @endif">Exclude Top 1%</a>
+                            <a href="{{Request::url()}}?feel=malthus" class="list-group-item @if(isset($_GET['feel']) && $_GET['feel'] == 'malthus')active @endif">Exclude Top 5%</a>
+                            <a href="{{Request::url()}}?feel=castro" class="list-group-item @if(isset($_GET['feel']) && $_GET['feel'] == 'castro')active @endif">Exclude Top 10%</a>
+                            <a href="{{Request::url()}}?with_zeros=true" class="list-group-item @if(isset($_GET['with_zeros']) && $_GET['with_zeros'] == 'true')active @endif">Including &#8804; Zeros</a>
                         </div>
                     </div>
                 </div>
@@ -139,10 +145,12 @@ $section = 'scores';
 
     // A formatter for counts.
     var formatCount = d3.format(",.0f");
+    var chartWrapper = $('#chart-wrapper');
 
+    console.log(chartWrapper.width());
     var margin = {top: 10, right: 30, bottom: 30, left: 30},
-            width = 800 - margin.left - margin.right,
-            height = 500 - margin.top - margin.bottom;
+            width = chartWrapper.width() - margin.left - margin.right,
+            height = 600 - margin.top - margin.bottom;
 
     var x = d3.scale.linear()
             .domain([0, {{$stats['max']}}])

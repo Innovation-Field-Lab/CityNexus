@@ -34,8 +34,7 @@
     <!-- ============================================================== -->
     <!-- End Right content here -->
     <!-- ============================================================== -->
-
-    @include('master._right_sidebar')
+    @stack('sidebar')
 
 </div>
 <!-- END wrapper -->
@@ -56,16 +55,6 @@
 <script src="/js/jquery.nicescroll.js"></script>
 <script src="/js/jquery.scrollTo.min.js"></script>
 
-<!-- KNOB JS -->
-<!--[if IE]>
-<script type="text/javascript" src="/plugins/jquery-knob/excanvas.js"></script>
-<![endif]-->
-<script src="/plugins/jquery-knob/jquery.knob.js"></script>
-
-<!--Morris Chart-->
-<script src="/plugins/morris/morris.min.js"></script>
-<script src="/plugins/raphael/raphael-min.js"></script>
-
 <!-- App js -->
 <script src="/js/jquery.core.js"></script>
 <script src="/js/jquery.app.js"></script>
@@ -76,21 +65,6 @@
                 var i = -1;
                 var toastCount = 0;
                 var $toastlast;
-
-                var getMessage = function () {
-                    var msgs = ['My name is Inigo Montoya. You killed my father. Prepare to die!',
-                        'Are you the six fingered man?',
-                        'Inconceivable!',
-                        'I do not think that means what you think it means.',
-                        'Have fun storming the castle!'
-                    ];
-                    i++;
-                    if (i === msgs.length) {
-                        i = 0;
-                    }
-
-                    return msgs[i];
-                };
 
                 var getMessageWithClearButton = function (msg) {
                     msg = msg ? msg : 'Clear itself?';
@@ -215,6 +189,7 @@
                 });
             })
 </script>
+
 @include('includes._alerts')
 
 @stack('js_footer')

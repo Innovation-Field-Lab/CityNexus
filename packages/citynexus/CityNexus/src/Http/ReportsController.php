@@ -36,6 +36,8 @@ class ReportsController extends Controller
 
     public function getDistributionCurve($table = null, $key = null, Request $request = null)
     {
+        $this->authorize('reports', 'create');
+
         $datasets = Table::where('table_title', "!=", 'null')->orderBy('table_name')->get(['table_name', 'table_title', 'id']);
 
         if ($table != null && $key != null)
@@ -110,6 +112,20 @@ class ReportsController extends Controller
         }
     }
 
+    public function getHeatMap(Request $request)
+    {
+        $datasets = Table::whereNotNull('table_title')->orderBy('table_title')->get();
+        if($request->get('table') && $request->get('key'))
+        {
+            return view('citynexus::reports.maps.heatmap', compact('datasets'))
+                ->with('table', $request->get('table'))
+                ->with('key', $request->get('key'));
+        }
+        else{
+            return view('citynexus::reports.maps.heatmap', compact('datasets'));
+        }
+    }
+
     // Ajax Calls
 
     public function getDataFields($id, $axis = null, $type = null)
@@ -118,26 +134,47 @@ class ReportsController extends Controller
         {
             $scores = Score::orderBy('name')->get();
 
-            if($type == 'distribution')
+            if($type != null)
             {
-                return view('citynexus::reports.charts.distribution._datafields', compact('scores', 'scheme'));
+                return view('citynexus::reports.includes.' .  $type . '._datafields', compact('scores', 'scheme'));
 
             }
 
-            return view('citynexus::reports.charts.scatter._datafields', compact('scores', 'axis'));
+            return view('citynexus::reports.includes.scatter._datafields', compact('scores', 'axis'));
 
         }
         $dataset = Table::find($id);
 
         $scheme = json_decode($dataset->scheme);
 
-        if($type == 'distribution')
+        if($type != null)
         {
-            return view('citynexus::reports.charts.distribution._datafields', compact('dataset', 'scheme'));
+            return view('citynexus::reports.includes.' . $type . '._datafields', compact('dataset', 'scheme'));
 
         }
 
-        return view('citynexus::reports.charts.scatter._datafields', compact('dataset', 'scheme', 'axis'));
+        return view('citynexus::reports.includes.scatter._datafields', compact('dataset', 'scheme', 'axis'));
+    }
+
+    public function getHeatMapData($table, $key)
+    {
+        $raw_data = DB::table($table)
+            ->where( $key, '>', '0')
+            ->join('citynexus_properties', 'citynexus_properties.id', '=', 'property_id')
+            ->whereNotNull('citynexus_properties.lat')
+            ->whereNotNull('citynexus_properties.long')
+            ->select('citynexus_properties.lat', 'citynexus_properties.long', $table . '.' . $key)
+            ->get();
+
+        $max = DB::table($table)
+            ->max($key);
+
+        foreach($raw_data as $i)
+        {
+            $data[] =[$i->lat, $i->long, $i->$key/$max];
+        }
+
+        return $data;
     }
 
     public function getScatterDataSet($h_tablename, $h_key, $v_tablename, $v_key )

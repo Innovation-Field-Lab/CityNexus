@@ -98,7 +98,7 @@ class RiskScoreController extends Controller
 
         $table = 'citynexus_scores_' . $rs->id;
 
-        $data = DB::table($table)
+        $raw_data = DB::table($table)
             ->where('score', '>', '0')
             ->whereNotNull('lat')
             ->whereNotNull('long')

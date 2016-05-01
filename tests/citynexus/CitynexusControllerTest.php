@@ -65,9 +65,17 @@ class CitynexusControllerTest extends TestCase
                 'permissions' => '{"properties":{"view":"true"}}'
             ]
         );
-        $this->actingAs($access)->visit('/' . config('citynexus.root_directory') . '/properties')
+
+        $property = factory(\CityNexus\CityNexus\Property::class)->create();
+
+        $this->actingAs($access)->post(action('CityNexus\CityNexus\Http\City'))
             ->dontSee('Merge Property')
             ->dontSee('Details');
+
+    }
+
+    public function testPostAssociateTag()
+    {
 
     }
 

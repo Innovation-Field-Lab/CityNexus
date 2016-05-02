@@ -11,6 +11,9 @@
 |
 */
 
+Route::controller("api-query", '\CityNexus\CityNexus\Http\APIController');
+
+
 Route::get('/activate-account/', function()
 {
     $token = $_GET['key'];

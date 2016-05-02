@@ -15,9 +15,6 @@ Route::get('/home', function () {
     return redirect('/');
 });
 
-Route::controller("api-query", 'APIController');
-
-
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');

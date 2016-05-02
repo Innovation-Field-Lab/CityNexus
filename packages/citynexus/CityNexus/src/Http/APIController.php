@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace CityNexus\CityNexus\Http;
 
 use App\ApiKey;
 use App\User;

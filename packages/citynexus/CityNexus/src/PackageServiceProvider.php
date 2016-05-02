@@ -34,8 +34,9 @@ class PackageServiceProvider extends ServiceProvider
         include_once __DIR__ . '/helpers/ScoreBuilder.php';
         include_once __DIR__ . '/helpers/Typer.php';
         include_once __DIR__ . '/helpers/TableBuilder.php';
-        include_once __DIR__ . '/Jobs/GenerateScore.php';
-        include_once __DIR__ . '/Jobs/MergeProps.php';
+
+
+        // Include Models
         include_once __DIR__ . '/models/Property.php';
         include_once __DIR__ . '/models/Score.php';
         include_once __DIR__ . '/models/Tag.php';
@@ -44,9 +45,15 @@ class PackageServiceProvider extends ServiceProvider
         include_once __DIR__ . '/models/Note.php';
         include_once __DIR__ . '/models/Table.php';
         include_once __DIR__ . '/models/Upload.php';
+
+        // Include jobs
         include_once __DIR__ . '/Jobs/UploadData.php';
         include_once __DIR__ . '/Jobs/Geocode.php';
         include_once __DIR__ . '/Jobs/InviteUser.php';
+        include_once __DIR__ . '/Jobs/MergeProps.php';
+
+        // Inluded Policies
+        include_once __DIR__ . '/Policies/CityNexusPolicy.php';
 
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Policies;
+namespace CityNexus\CityNexus\Policies;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
 

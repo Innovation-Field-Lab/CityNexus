@@ -34,7 +34,7 @@
                     <a href="/" class="waves-effect @if(isset($section) && $section == 'dashboard') active @endif"><i class="zmdi zmdi-view-dashboard"></i> <span> Dashboard </span> </a>
                 </li>
 
-                @can('citynexus', 'properties', 'view')
+                @can('citynexus', ['group' => 'properties', 'method' => 'view'])
                 <li class="has_sub">
                     <a href="javascript:void(0);" class="waves-effect @if(isset($section) && $section == 'properties') active @endif"><i class="fa fa-home"></i> <span> Properties</span> <span class="menu-arrow"></span></a>
                     <ul class="list-unstyled">
@@ -44,12 +44,12 @@
                 </li>
                 @endcan
 
-                @can('citynexus', 'datasets', 'view')
+                @can('citynexus', ['group' => 'datasets', 'method' => 'view'])
                 <li class="has_sub">
                     <a href="javascript:void(0);" class="waves-effect @if(isset($section) && $section == 'datasets') active @endif "><i class="fa fa-database"></i> <span> Data Sets </span> <span class="menu-arrow"></span></a>
                     <ul class="list-unstyled">
                         <li><a href="{{action('\CityNexus\CityNexus\Http\TablerController@getIndex')}}">All Data Sets</a></li>
-                        @can('citynexus', 'datasets', 'create')
+                        @can('citynexus', ['group' => 'datasets', 'method' => 'create'])
                         <li role="separator" class="divider"></li>
                         <li><a href="{{action('\CityNexus\CityNexus\Http\TablerController@getUploader')}}">New From Upload</a></li>
                         @endcan
@@ -57,12 +57,12 @@
                 </li>
                 @endcan
 
-                @can('citynexus', 'scores', 'view')
+                @can('citynexus', ['group' => 'scores', 'method' => 'view'])
                 <li class="has_sub">
                     <a href="javascript:void(0);" class="waves-effect @if(isset($section) && $section == 'scores') active @endif "><i class="fa fa-tachometer"></i> <span> Scores </span> <span class="menu-arrow"></span></a>
                     <ul class="list-unstyled">
                         <li><a href="{{action('\CityNexus\CityNexus\Http\RiskScoreController@getIndex')}}">All Scores</a></li>
-                        @can('citynexus', 'datasets', 'create')
+                        @can('citynexus', ['group' => 'datasets', 'method' => 'create'])
                         <li role="separator" class="divider"></li>
                         <li><a href="{{action('\CityNexus\CityNexus\Http\RiskScoreController@getCreate')}}">Create New Score</a></li>
                         @endcan
@@ -70,7 +70,7 @@
                 </li>
                 @endcan
 
-                @can('citynexus', 'reports', 'view')
+                @can('citynexus', ['group' => 'reports', 'method' => 'view'])
                 <li class="has_sub">
                     <a href="javascript:void(0);" class="waves-effect @if(isset($section) && $section == 'reports') active @endif "><i class="fa fa-area-chart"></i> <span> Reports </span> <span class="menu-arrow"></span></a>
                     <ul class="list-unstyled">

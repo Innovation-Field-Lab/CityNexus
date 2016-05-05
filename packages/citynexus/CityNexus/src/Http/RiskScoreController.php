@@ -25,7 +25,7 @@ class RiskScoreController extends Controller
 
     public function getIndex()
     {
-        $this->authorize('citynexus', 'datasets', 'view');
+        $this->authorize('citynexus', ['group' => 'datasets', 'method' => 'view']);
 
         return view('citynexus::risk-score.index')
             ->with('scores', Score::all());
@@ -33,7 +33,7 @@ class RiskScoreController extends Controller
 
     public function getCreate()
     {
-        $this->authorize('citynexus', 'datasets', 'view');
+        $this->authorize('citynexus', ['group' => 'datasets', 'method' => 'view']);
 
         $datasets = Table::all();
         return view('citynexus::risk-score.new', compact('datasets'));
@@ -70,7 +70,7 @@ class RiskScoreController extends Controller
     public function getRanking($id)
     {
 
-        $this->authorize('citynexus', 'scores', 'view');
+        $this->authorize('citynexus', ['group' => 'scores', 'method' => 'view']);
 
         // Get Score Model
 
@@ -91,7 +91,7 @@ class RiskScoreController extends Controller
 
     public function getHeatMap($id)
     {
-        $this->authorize('citynexus', 'scores', 'view');
+        $this->authorize('citynexus', ['group' => 'scores', 'method' => 'view']);
 
         $rs = Score::find($id);
         $scores = Score::all();

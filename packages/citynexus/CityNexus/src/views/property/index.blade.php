@@ -41,10 +41,10 @@
                             <td>{{$item->id}}</td>
                             <td>{{ucwords($item->full_address)}}</td>
                             <td>
-                                @can('properties', 'show')
+                                @can('citynexus', ['group' => 'properties', 'method' => 'show'])
                                 <a class="btn btn-sm btn-primary" href="/{{config('citynexus.root_directory')}}/property/{{$item->id}}">Details</a>
                                 @endcan
-                                @can('properties', 'merge')
+                                @can('citynexus', ['group' => 'properties', 'method' => 'merge'])
                                 <a class="btn btn-sm btn-primary" href="{{action('\CityNexus\CityNexus\Http\TablerController@getMergeRecords')}}/{{$item->id}}">Merge Property</a>
                                 @endcan
                             </td>

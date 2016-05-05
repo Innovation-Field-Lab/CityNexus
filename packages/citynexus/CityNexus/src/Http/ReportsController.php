@@ -28,7 +28,7 @@ class ReportsController extends Controller
 
     public function getScatterChart()
     {
-        $this->authorize('citynexus', 'reports', 'create');
+        $this->authorize('citynexus', ['group' => 'reports', 'method' => 'create']);
         $datasets = Table::where('table_title', "!=", 'null')->orderBy('table_name')->get(['table_name', 'table_title', 'id']);
         return view('citynexus::reports.charts.scatter_chart', compact('datasets'));
 
@@ -36,7 +36,7 @@ class ReportsController extends Controller
 
     public function getDistributionCurve($table = null, $key = null, Request $request = null)
     {
-        $this->authorize('citynexus', 'reports', 'create');
+        $this->authorize('citynexus', ['group' => 'reports', 'method' => 'create']);
 
         $datasets = Table::where('table_title', "!=", 'null')->orderBy('table_name')->get(['table_name', 'table_title', 'id']);
 

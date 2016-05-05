@@ -38,7 +38,5 @@ class DatasetPolicy
     {
         $this->registerPolicies($gate);
 
-
-
     }
 }

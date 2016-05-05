@@ -412,20 +412,20 @@ $section = 'dashboard';
 
 @push('javascript')
 
-<script src="/plugins/jquery-knob/jquery.knob.js"></script>
+<script src="/vendor/citynexus/plugins/jquery-knob/jquery.knob.js"></script>
 
 <!--Morris Chart-->
-<script src="/plugins/morris/morris.min.js"></script>
-<script src="/plugins/raphael/raphael-min.js"></script>
+<script src="/vendor/citynexus/plugins/morris/morris.min.js"></script>
+<script src="/vendor/citynexus/plugins/raphael/raphael-min.js"></script>
 
 <!-- Dashboard init -->
-<script src="/pages/jquery.dashboard.js"></script>
+<script src="/vendor/citynexus/pages/jquery.dashboard.js"></script>
 
 
 @endpush
 
 @push('style')
 
-<link rel="stylesheet" href="/plugins/morris/morris.css">
+<link rel="stylesheet" href="/vendor/citynexus/plugins/morris/morris.css">
 
 @endpush

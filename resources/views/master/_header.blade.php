@@ -11,17 +11,17 @@
     <title>{{config('citynexus.app_name')}}</title>
 
     <!--Morris Chart CSS -->
-    <link rel="stylesheet" href="/plugins/morris/morris.css">
+    <link rel="stylesheet" href="/vendor/citynexus/plugins/morris/morris.css">
 
     <!-- App css -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="/css/core.css" rel="stylesheet" type="text/css" />
-    <link href="/css/components.css" rel="stylesheet" type="text/css" />
-    <link href="/css/icons.css" rel="stylesheet" type="text/css" />
-    <link href="/css/pages.css" rel="stylesheet" type="text/css" />
-    <link href="/css/menu.css" rel="stylesheet" type="text/css" />
-    <link href="/css/responsive.css" rel="stylesheet" type="text/css" />
-    <link href="/plugins/toastr/toastr.min.css" rel="stylesheet" type="text/css" />
+    <link href="/vendor/citynexus/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/vendor/citynexus/css/core.css" rel="stylesheet" type="text/css" />
+    <link href="/vendor/citynexus/css/components.css" rel="stylesheet" type="text/css" />
+    <link href="/vendor/citynexus/css/icons.css" rel="stylesheet" type="text/css" />
+    <link href="/vendor/citynexus/css/pages.css" rel="stylesheet" type="text/css" />
+    <link href="/vendor/citynexus/css/menu.css" rel="stylesheet" type="text/css" />
+    <link href="/vendor/citynexus/css/responsive.css" rel="stylesheet" type="text/css" />
+    <link href="/vendor/citynexus/plugins/toastr/toastr.min.css" rel="stylesheet" type="text/css" />
 
     @stack('style')
 
@@ -33,6 +33,6 @@
 
     <![endif]-->
     @stack('js_header')
-    <script src="/js/modernizr.min.js"></script>
+    <script src="/vendor/citynexus/js/modernizr.min.js"></script>
 
 </head>

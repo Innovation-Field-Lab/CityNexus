@@ -9,8 +9,8 @@
 
 @push('style')
 
-<link rel="stylesheet" href="/css/leaflet.css" />
-<link rel="stylesheet" href="/css/prunecluster.css" />
+<link rel="stylesheet" href="/vendor/citynexus/css/leaflet.css" />
+<link rel="stylesheet" href="/vendor/citynexus/css/prunecluster.css" />
 
 <style>
 
@@ -20,8 +20,8 @@
 
 @push('js_footer')
 
-<script src="/js/leaflet.js"></script>
-<script src="/js/PruneCluster.js"></script>
+<script src="/vendor/citynexus/js/leaflet.js"></script>
+<script src="/vendor/citynexus/js/PruneCluster.js"></script>
 <script>
     var mymap = L.map('mapid').setView([{{env('MAP_LAT')}}, {{env('MAP_LONG')}}], {{env('MAP_ZOOM')}});
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {

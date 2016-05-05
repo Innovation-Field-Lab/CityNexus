@@ -46,20 +46,20 @@
 </script>
 
 <!-- jQuery  -->
-<script src="/js/jquery.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/detect.js"></script>
-<script src="/js/fastclick.js"></script>
-<script src="/js/jquery.blockUI.js"></script>
-<script src="/js/waves.js"></script>
-<script src="/js/jquery.nicescroll.js"></script>
-<script src="/js/jquery.scrollTo.min.js"></script>
-<script src="/plugins/jquery-knob/jquery.knob.js"></script>
+<script src="/vendor/citynexus/js/jquery.min.js"></script>
+<script src="/vendor/citynexus/js/bootstrap.min.js"></script>
+<script src="/vendor/citynexus/js/detect.js"></script>
+<script src="/vendor/citynexus/js/fastclick.js"></script>
+<script src="/vendor/citynexus/js/jquery.blockUI.js"></script>
+<script src="/vendor/citynexus/js/waves.js"></script>
+<script src="/vendor/citynexus/js/jquery.nicescroll.js"></script>
+<script src="/vendor/citynexus/js/jquery.scrollTo.min.js"></script>
+<script src="/vendor/citynexus/plugins/jquery-knob/jquery.knob.js"></script>
 
 <!-- App js -->
-<script src="/js/jquery.core.js"></script>
-<script src="/js/jquery.app.js"></script>
-<script src="/plugins/toastr/toastr.min.js"></script>
+<script src="/vendor/citynexus/js/jquery.core.js"></script>
+<script src="/vendor/citynexus/js/jquery.app.js"></script>
+<script src="/vendor/citynexus/plugins/toastr/toastr.min.js"></script>
 
 
     <script type="text/javascript">

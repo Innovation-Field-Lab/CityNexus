@@ -31,7 +31,7 @@
                             <td>
                                 {{$property->fireScore()}}
                             </td>
-                            <td><a class="btn btn-xs btn-primary" href="/property/show/{{$property->id}}">View</a></td>
+                            <td><a class="btn btn-xs btn-primary" href="{{action('\CityNexus\CityNexus\Http\CitynexusController@getProperty')}}/{{$property->id}}">View</a></td>
                         </tr>
                         @endforeach
                     </tbody>

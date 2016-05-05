@@ -13,13 +13,13 @@
     <title>{{config('citynexus.app_name')}}</title>
 
     <!-- App CSS -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="/css/core.css" rel="stylesheet" type="text/css" />
-    <link href="/css/components.css" rel="stylesheet" type="text/css" />
-    <link href="/css/icons.css" rel="stylesheet" type="text/css" />
-    <link href="/css/pages.css" rel="stylesheet" type="text/css" />
-    <link href="/css/menu.css" rel="stylesheet" type="text/css" />
-    <link href="/css/responsive.css" rel="stylesheet" type="text/css" />
+    <link href="/vendor/citynexus/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/vendor/citynexus/css/core.css" rel="stylesheet" type="text/css" />
+    <link href="/vendor/citynexus/css/components.css" rel="stylesheet" type="text/css" />
+    <link href="/vendor/citynexus/css/icons.css" rel="stylesheet" type="text/css" />
+    <link href="/vendor/citynexus/css/pages.css" rel="stylesheet" type="text/css" />
+    <link href="/vendor/citynexus/css/menu.css" rel="stylesheet" type="text/css" />
+    <link href="/vendor/citynexus/css/responsive.css" rel="stylesheet" type="text/css" />
 
     <!-- HTML5 Shiv and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -28,7 +28,7 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
 
-    <script src="/js/modernizr.min.js"></script>
+    <script src="/vendor/citynexus/js/modernizr.min.js"></script>
 
 </head>
 <body>
@@ -117,20 +117,20 @@
 </script>
 
 <!-- jQuery  -->
-<script src="/js/jquery.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/detect.js"></script>
-<script src="/js/fastclick.js"></script>
-<script src="/js/jquery.slimscroll.js"></script>
-<script src="/js/jquery.blockUI.js"></script>
-<script src="/js/waves.js"></script>
-<script src="/js/wow.min.js"></script>
-<script src="/js/jquery.nicescroll.js"></script>
-<script src="/js/jquery.scrollTo.min.js"></script>
+<script src="/vendor/citynexus/js/jquery.min.js"></script>
+<script src="/vendor/citynexus/js/bootstrap.min.js"></script>
+<script src="/vendor/citynexus/js/detect.js"></script>
+<script src="/vendor/citynexus/js/fastclick.js"></script>
+<script src="/vendor/citynexus/js/jquery.slimscroll.js"></script>
+<script src="/vendor/citynexus/js/jquery.blockUI.js"></script>
+<script src="/vendor/citynexus/js/waves.js"></script>
+<script src="/vendor/citynexus/js/wow.min.js"></script>
+<script src="/vendor/citynexus/js/jquery.nicescroll.js"></script>
+<script src="/vendor/citynexus/js/jquery.scrollTo.min.js"></script>
 
 <!-- App js -->
-<script src="/js/jquery.core.js"></script>
-<script src="/js/jquery.app.js"></script>
+<script src="/vendor/citynexus/js/jquery.core.js"></script>
+<script src="/vendor/citynexus/js/jquery.app.js"></script>
 
 </body>
 </html>

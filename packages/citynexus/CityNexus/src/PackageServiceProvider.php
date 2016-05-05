@@ -30,11 +30,11 @@ class PackageServiceProvider extends ServiceProvider
             __DIR__ . '/migrations/' => database_path('migrations')
         ], 'migrations');
 
+        // Include Helpers
         include_once __DIR__ . '/helpers/DatasetQuery.php';
         include_once __DIR__ . '/helpers/ScoreBuilder.php';
         include_once __DIR__ . '/helpers/Typer.php';
         include_once __DIR__ . '/helpers/TableBuilder.php';
-
 
         // Include Models
         include_once __DIR__ . '/models/Property.php';
@@ -66,6 +66,13 @@ class PackageServiceProvider extends ServiceProvider
     public function register()
     {
         $this->loadViewsFrom(__DIR__.'/views', 'citynexus');
+
+
+        $this->publishes([
+            __DIR__.'/Public' => public_path('vendor/citynexus'),
+        ], 'public');
+
+
     }
 
     /**

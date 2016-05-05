@@ -26,7 +26,7 @@
             }
         }
     </style>
-    <img src="/img/background.png" class="bg hidden-xs">
+    <img src="/vendor/citynexus/img/background.png" class="bg hidden-xs">
 
     <div class="container-fluid">
         <div class="row">

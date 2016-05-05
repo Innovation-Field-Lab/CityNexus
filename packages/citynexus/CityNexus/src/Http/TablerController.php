@@ -23,7 +23,7 @@ class TablerController extends Controller
     public function getIndex()
     {
 
-        $this->authorize('datasets', 'view');
+        $this->authorize('citynexus', 'datasets', 'view');
 
         if(isset($_GET['trashed']))
         {
@@ -37,7 +37,7 @@ class TablerController extends Controller
     }
     public function getUploader()
     {
-        $this->authorize('datasets', 'upload');
+        $this->authorize('citynexus', 'datasets', 'upload');
 
         return view('citynexus::tabler.uploader');
     }
@@ -45,7 +45,7 @@ class TablerController extends Controller
     public function postUploader(Request $request)
     {
 
-        $this->authorize('datasets', 'create');
+        $this->authorize('citynexus', 'datasets', 'create');
 
         $this->validate($request, [
                 'file' => 'required'
@@ -60,7 +60,7 @@ class TablerController extends Controller
 
     public function getCreateScheme($id)
     {
-        $this->authorize('datasets', 'create');
+        $this->authorize('citynexus', 'datasets', 'create');
 
         $table = json_decode(Table::find($id)->raw_upload)->parsed;
         $typer = new Typer();
@@ -76,7 +76,7 @@ class TablerController extends Controller
      */
     public function postCreateScheme($id, Request $request)
     {
-        $this->authorize('datasets', 'create');
+        $this->authorize('citynexus', 'datasets', 'create');
 
         $this->validate($request, [
            'table_name' => 'max:255|required'
@@ -104,7 +104,7 @@ class TablerController extends Controller
 
     public function getNewUpload($id)
     {
-        $this->authorize('datasets', 'upload');
+        $this->authorize('citynexus', 'datasets', 'upload');
 
         $table = Table::find($id);
         return view('citynexus::tabler.new-upload', compact('table'));
@@ -114,7 +114,7 @@ class TablerController extends Controller
     public function postNewUpload($id, Request $request)
     {
 
-        $this->authorize('datasets', 'upload');
+        $this->authorize('citynexus', 'datasets', 'upload');
 
         $this->validate($request, [
            'note' => 'max:255'
@@ -151,7 +151,7 @@ class TablerController extends Controller
 
     public function getEditTable($id)
     {
-        $this->authorize('datasets', 'edit');
+        $this->authorize('citynexus', 'datasets', 'edit');
 
         $table = Table::find($id);
         if($table->scheme == null)
@@ -164,7 +164,7 @@ class TablerController extends Controller
 
     public function postUpdateTable($id, Request $request)
     {
-        $this->authorize('datasets', 'edit');
+        $this->authorize('citynexus', 'datasets', 'edit');
 
         $this->validate($request, [
             'table_title' => 'max:255|required',

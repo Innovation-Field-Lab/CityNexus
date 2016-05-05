@@ -25,7 +25,7 @@ class AdminController extends Controller
 
     public function getIndex()
     {
-        $this->authorize('admin', 'view');
+        $this->authorize('citynexus', 'admin', 'view');
         $tables = DB::table('information_schema.tables')->where('table_schema', 'public')->get();
         return view('citynexus::admin.index', compact('tables'));
 
@@ -33,7 +33,7 @@ class AdminController extends Controller
 
     public function getRefreshGeocoding()
     {
-        $this->authorize('admin', 'view');
+        $this->authorize('citynexus', 'admin', 'view');
 
         $properties = Property::whereNull('lat')->get();
 
@@ -45,7 +45,7 @@ class AdminController extends Controller
 
     public function getEditTable(Request $request)
     {
-        $this->authorize('admin', 'view');
+        $this->authorize('citynexus', 'admin', 'view');
 
         $table_name = $request->get('table_name');
 
@@ -54,7 +54,7 @@ class AdminController extends Controller
 
     public function getRemoveData(Request $request)
     {
-        $this->authorize('admin', 'delete');
+        $this->authorize('citynexus', 'admin', 'delete');
 
         DB::table($request->get('table_name'))->where('id', $request->get('row_id'))->delete();
 
@@ -66,7 +66,7 @@ class AdminController extends Controller
 
     public function getClearTable($table_name, $remove = false)
     {
-        $this->authorize('admin', 'delete');
+        $this->authorize('citynexus', 'admin', 'delete');
 
         if($remove)
         {
@@ -84,7 +84,7 @@ class AdminController extends Controller
 
     public function getMergeProperties()
     {
-        $this->authorize('admin', 'view');
+        $this->authorize('citynexus', 'admin', 'view');
 
         $properties = Property::all();
 

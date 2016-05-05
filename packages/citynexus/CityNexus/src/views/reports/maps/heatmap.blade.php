@@ -64,19 +64,19 @@
     }
 </style>
 
-    <link href="/plugins/ion-rangeslider/ion.rangeSlider.css" rel="stylesheet" type="text/css"/>
-    <link href="/plugins/ion-rangeslider/ion.rangeSlider.skinFlat.css" rel="stylesheet" type="text/css"/>
+    <link href="/vendor/citynexus/plugins/ion-rangeslider/ion.rangeSlider.css" rel="stylesheet" type="text/css"/>
+    <link href="/vendor/citynexus/plugins/ion-rangeslider/ion.rangeSlider.skinFlat.css" rel="stylesheet" type="text/css"/>
 
 @endpush
 
 @push('js_footer')
-<script src="/js/leaflet.js"></script>
+<script src="/vendor/citynexus/js/leaflet.js"></script>
 <script type="text/javascript" src="/js/shCore.js"></script>
 <script type="text/javascript" src="/js/shBrushJScript.js"></script>
 
 <script type="text/javascript" src="/js/webgl-heatmap.js"></script>
 <script type="text/javascript" src="/js/webgl-heatmap-leaflet.js"></script>
-<script src="/plugins/ion-rangeslider/ion.rangeSlider.min.js"></script>
+<script src="/vendor/citynexus/plugins/ion-rangeslider/ion.rangeSlider.min.js"></script>
 <script type="text/javascript">
 
     // right side-bar toggle

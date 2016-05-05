@@ -60,14 +60,14 @@
 
 @push('style')
         <!-- DataTables -->
-    <link href="/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+    <link href="/vendor/citynexus/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
 @endpush
 
 @push('js_footer')
-<script src="/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="/plugins/datatables/dataTables.bootstrap.js"></script>
+<script src="/vendor/citynexus/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/vendor/citynexus/plugins/datatables/dataTables.bootstrap.js"></script>
 
-<script src="/pages/datatables.init.js"></script>
+<script src="/vendor/citynexus/pages/datatables.init.js"></script>
 
 <script type="text/javascript">
     $(document).ready(function() {

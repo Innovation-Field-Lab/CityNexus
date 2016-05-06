@@ -164,7 +164,7 @@ class TablerController extends Controller
 
     public function postUpdateTable($id, Request $request)
     {
-        $this->authorize('citynexus', ['group' => 'datasets', 'method' => 'edit']);
+        $this->authorize('citynexus', ['datasets', 'edit']);
 
         $this->validate($request, [
             'table_title' => 'max:255|required',

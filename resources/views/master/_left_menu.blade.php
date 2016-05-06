@@ -34,7 +34,7 @@
                     <a href="/" class="waves-effect @if(isset($section) && $section == 'dashboard') active @endif"><i class="zmdi zmdi-view-dashboard"></i> <span> Dashboard </span> </a>
                 </li>
 
-                @can('citynexus', ['group' => 'properties', 'method' => 'view'])
+                @can('citynexus', ['properties', 'view'])
                 <li class="has_sub">
                     <a href="javascript:void(0);" class="waves-effect @if(isset($section) && $section == 'properties') active @endif"><i class="fa fa-home"></i> <span> Properties</span> <span class="menu-arrow"></span></a>
                     <ul class="list-unstyled">
@@ -44,7 +44,7 @@
                 </li>
                 @endcan
 
-                @can('citynexus', ['group' => 'datasets', 'method' => 'view'])
+                @can('citynexus', ['datasets', 'view'])
                 <li class="has_sub">
                     <a href="javascript:void(0);" class="waves-effect @if(isset($section) && $section == 'datasets') active @endif "><i class="fa fa-database"></i> <span> Data Sets </span> <span class="menu-arrow"></span></a>
                     <ul class="list-unstyled">
@@ -57,7 +57,7 @@
                 </li>
                 @endcan
 
-                @can('citynexus', ['group' => 'scores', 'method' => 'view'])
+                @can('citynexus', ['scores', 'view'])
                 <li class="has_sub">
                     <a href="javascript:void(0);" class="waves-effect @if(isset($section) && $section == 'scores') active @endif "><i class="fa fa-tachometer"></i> <span> Scores </span> <span class="menu-arrow"></span></a>
                     <ul class="list-unstyled">
@@ -70,7 +70,7 @@
                 </li>
                 @endcan
 
-                @can('citynexus', ['group' => 'reports', 'method' => 'view'])
+                @can('citynexus', ['reports', 'view'])
                 <li class="has_sub">
                     <a href="javascript:void(0);" class="waves-effect @if(isset($section) && $section == 'reports') active @endif "><i class="fa fa-area-chart"></i> <span> Reports </span> <span class="menu-arrow"></span></a>
                     <ul class="list-unstyled">

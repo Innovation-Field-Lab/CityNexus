@@ -36,7 +36,7 @@ class ReportsController extends Controller
 
     public function getDistributionCurve($table = null, $key = null, Request $request = null)
     {
-        $this->authorize('citynexus', ['group' => 'reports', 'method' => 'create']);
+        $this->authorize('citynexus', ['reports', 'create']);
 
         $datasets = Table::where('table_title', "!=", 'null')->orderBy('table_name')->get(['table_name', 'table_title', 'id']);
 

@@ -31,6 +31,7 @@ class PackageServiceProvider extends ServiceProvider
         ], 'migrations');
 
         // Include Helpers
+        include_once __DIR__ . '/helpers/Helper.php';
         include_once __DIR__ . '/helpers/DatasetQuery.php';
         include_once __DIR__ . '/helpers/ScoreBuilder.php';
         include_once __DIR__ . '/helpers/Typer.php';

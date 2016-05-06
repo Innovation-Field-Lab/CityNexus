@@ -42,7 +42,7 @@ class CitynexusController extends Controller
     public function getProperty($id)
     {
 
-        $this->authorize('citynexus', ['group' => 'properties', 'method' => 'show']);
+        $this->authorize('citynexus', [ 'properties',  'show']);
 
         $property = Property::find($id);
         $datasets = DatasetQuery::relatedSets( $id );
@@ -62,7 +62,7 @@ class CitynexusController extends Controller
 
     public function getProperties()
     {
-        $this->authorize('citynexus', ['group' => 'properties', 'method' => 'view']);
+        $this->authorize('citynexus', ['properties', 'view']);
 
         $properties = Property::where('alias_of', null)->get();
         return view('citynexus::property.index', compact('properties'));
@@ -79,7 +79,7 @@ class CitynexusController extends Controller
 
     public function postAssociateTag(Request $request)
     {
-        $this->authorize('citynexus', ['group' => 'properties', 'method' => 'show']);
+        $this->authorize('citynexus', [ 'properties', 'show']);
         //Format Tag
         $tag = ucwords(strtolower($request->get('tag')));
 
@@ -95,7 +95,7 @@ class CitynexusController extends Controller
 
     public function postRemoveTag(Request $request)
     {
-        $this->authorize('citynexus', ['group' => 'properties', 'method' => 'show']);
+        $this->authorize('citynexus', ['properties', 'show']);
 
         return Property::find($request->get('property_id'))->tags()->detach($request->get('tag_id'));
     }

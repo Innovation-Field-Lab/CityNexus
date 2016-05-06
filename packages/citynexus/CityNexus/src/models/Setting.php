@@ -8,6 +8,8 @@ class Setting extends Model
 {
     protected $table = 'citynexus_settings';
 
-    protected $fillable = ['id', 'value'];
+    protected $id = 'key';
+
+    protected $fillable = ['key', 'value'];
 
 }

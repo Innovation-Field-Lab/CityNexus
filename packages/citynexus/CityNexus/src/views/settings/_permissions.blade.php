@@ -75,6 +75,28 @@
                     ]
             ],
             [
+                    'title' => 'Reports',
+                    'key' => 'reports',
+                    'permissions' => [
+                            [
+                                    'permission' => "View Reports",
+                                    'key' => 'view'
+                            ],
+                            [
+                                    'permission' => "Create Reports",
+                                    'key' => 'create'
+                            ],
+                            [
+                                    'permission' => "Save Reports",
+                                    'key' => 'save'
+                            ],
+                            [
+                                    'permission' => "Delete Score",
+                                    'key' => 'score'
+                            ],
+                    ]
+            ],
+            [
                     'title' => 'Users',
                     'key' => 'usersAdmin',
                     'permissions' => [

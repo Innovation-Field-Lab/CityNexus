@@ -23,20 +23,20 @@ use Illuminate\Support\Facades\Session;
 class RiskScoreController extends Controller
 {
 
-    public function getCreate()
+    public function getIndex()
     {
-        $this->authorize('datasets', 'view');
-
-        $datasets = Table::all();
-        return view('citynexus::risk-score.new', compact('datasets'));
-    }
-
-    public function getScores()
-    {
-        $this->authorize('datasets', 'view');
+        $this->authorize('citynexus', ['group' => 'scores', 'method' => 'view']);
 
         return view('citynexus::risk-score.index')
             ->with('scores', Score::all());
+    }
+
+    public function getCreate()
+    {
+        $this->authorize('citynexus', ['scores', 'create']);
+
+        $datasets = Table::all();
+        return view('citynexus::risk-score.new', compact('datasets'));
     }
 
     public function getDataFields(Request $request)
@@ -70,7 +70,7 @@ class RiskScoreController extends Controller
     public function getRanking($id)
     {
 
-        $this->authorize('scores', 'view');
+        $this->authorize('citynexus', ['scores', 'view']);
 
         // Get Score Model
 
@@ -89,34 +89,34 @@ class RiskScoreController extends Controller
         return view('citynexus::reports.ranking', compact('score', 'properties'));
     }
 
-    public function getHeatMap(Request $request)
+//    public function getHeatMap($id)
+//    {
+//        $this->authorize('citynexus', ['scores', 'view']);
+//
+//        $rs = Score::find($id);
+//        $scores = Score::all();
+//
+//        $table = 'citynexus_scores_' . $rs->id;
+//
+//        $raw_data = DB::table($table)
+//            ->where('score', '>', '0')
+//            ->whereNotNull('lat')
+//            ->whereNotNull('long')
+//            ->join('citynexus_properties', 'citynexus_properties.id', '=', 'property_id')
+//            ->select($table . '.property_id', $table . '.score', 'citynexus_properties.lat', 'citynexus_properties.long')
+//            ->get();
+//
+//        $max = DB::table($table)
+//            ->max('score');
+//
+//
+//        return view('citynexus::reports.maps.heatmap', compact('rs', 'scores', 'data', 'max'));
+//
+//    }
+
+    public function getPinMap($id)
     {
-        $this->authorize('scores', 'view');
-
-        $rs = Score::find($request->get('score_id'));
-        $scores = Score::all();
-
-        $table = 'citynexus_scores_' . $rs->id;
-
-        $data = DB::table($table)
-            ->where('score', '>', '0')
-            ->whereNotNull('lat')
-            ->whereNotNull('long')
-            ->join('citynexus_properties', 'citynexus_properties.id', '=', 'property_id')
-            ->select($table . '.property_id', $table . '.score', 'citynexus_properties.lat', 'citynexus_properties.long')
-            ->get();
-
-        $max = DB::table($table)
-            ->max('score');
-
-
-        return view('citynexus::reports.maps.heatmap', compact('rs', 'scores', 'data', 'max'));
-
-    }
-
-    public function getPinMap(Request $request)
-    {
-        $rs = Score::find($request->get('score_id'));
+        $rs = Score::find($id);
         $scores = Score::all();
 
         $table = 'citynexus_scores_' . $rs->id;
@@ -131,9 +131,9 @@ class RiskScoreController extends Controller
 
     }
 
-    public function getDistribution(Request $request)
+    public function getDistribution($id, Request $request)
     {
-        $rs = Score::find($request->get('score_id'));
+        $rs = Score::find($id);
         $table = 'citynexus_scores_' . $rs->id;
         $max = DB::table($table)->max('score');
 
@@ -266,9 +266,9 @@ class RiskScoreController extends Controller
         return redirect( config('citynexus.root_directory') . '/risk-score/scores' );
     }
 
-    public function getEditScore(Request $request)
+    public function getEditScore($id)
     {
-        $score = Score::find($request->get('score_id'));
+        $score = Score::find($id);
         $datasets = Table::all();
 
         return view('citynexus::risk-score.edit', compact('score', 'datasets'));
@@ -293,9 +293,9 @@ class RiskScoreController extends Controller
         return "Success";
     }
 
-    public function getRemoveScore(Request $request)
+    public function getRemoveScore($id)
     {
-        $score = Score::find($request->get('score_id'));
+        $score = Score::find($id);
         try {
             Schema::drop('citynexus_scores_' . $score->id);
         }
@@ -311,13 +311,13 @@ class RiskScoreController extends Controller
 
     }
 
-    public function getDuplicateScore(Request $request)
+    public function getDuplicateScore($id)
     {
-        $score = Score::find($request->get('score_id'))->replicate();
+        $score = Score::find($id)->replicate();
         $score->name = $score->name . ' Copy';
         $score->save();
 
-        return redirect('/' . config('citynexus.root_directory') . '/risk-score/edit-score?score_id=' . $score->id );
+        return $this->getEditScore( $score->id );
     }
 
     public function getSettings()

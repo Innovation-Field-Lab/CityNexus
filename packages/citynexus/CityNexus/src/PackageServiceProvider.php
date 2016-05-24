@@ -23,19 +23,29 @@ class PackageServiceProvider extends ServiceProvider
         ]);
 
         $this->publishes([
-            __DIR__ . '/assets' => public_path('vendor/citynexus'),
+            __DIR__ . '/Public' => public_path('vendor/citynexus'),
         ], 'public');
+
+        $this->publishes([
+            __DIR__ . '/views/master' => base_path('resources/views/vendor/citynexus/master'),
+        ], 'master');
+
+        $this->publishes([
+            __DIR__ . '/views/auth' => base_path('resources/views/vendor/citynexus/auth'),
+        ], 'auth');
 
         $this->publishes([
             __DIR__ . '/migrations/' => database_path('migrations')
         ], 'migrations');
 
+        // Include Helpers
+        include_once __DIR__ . '/helpers/Helper.php';
         include_once __DIR__ . '/helpers/DatasetQuery.php';
         include_once __DIR__ . '/helpers/ScoreBuilder.php';
         include_once __DIR__ . '/helpers/Typer.php';
         include_once __DIR__ . '/helpers/TableBuilder.php';
-        include_once __DIR__ . '/Jobs/GenerateScore.php';
-        include_once __DIR__ . '/Jobs/MergeProps.php';
+
+        // Include Models
         include_once __DIR__ . '/models/Property.php';
         include_once __DIR__ . '/models/Score.php';
         include_once __DIR__ . '/models/Tag.php';
@@ -44,9 +54,19 @@ class PackageServiceProvider extends ServiceProvider
         include_once __DIR__ . '/models/Note.php';
         include_once __DIR__ . '/models/Table.php';
         include_once __DIR__ . '/models/Upload.php';
+        include_once __DIR__ . '/models/Location.php';
+        include_once __DIR__ . '/models/View.php';
+
+
+        // Include jobs
         include_once __DIR__ . '/Jobs/UploadData.php';
         include_once __DIR__ . '/Jobs/Geocode.php';
         include_once __DIR__ . '/Jobs/InviteUser.php';
+        include_once __DIR__ . '/Jobs/MergeProps.php';
+        include_once __DIR__ . '/Jobs/ProcessData.php';
+
+        // Inluded Policies
+        include_once __DIR__ . '/Policies/CityNexusPolicy.php';
 
     }
 
@@ -59,6 +79,12 @@ class PackageServiceProvider extends ServiceProvider
     public function register()
     {
         $this->loadViewsFrom(__DIR__.'/views', 'citynexus');
+
+
+        $this->publishes([
+            __DIR__.'/Public' => public_path('vendor/citynexus'),
+        ], 'public');
+
     }
 
     /**
@@ -68,6 +94,7 @@ class PackageServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return [];
+        return [
+        ];
     }
 }

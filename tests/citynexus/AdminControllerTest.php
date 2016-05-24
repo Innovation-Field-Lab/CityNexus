@@ -12,7 +12,7 @@ class AdminControllerTest extends TestCase
     {
         $access = factory(App\User::class)->create(
             [
-                'permissions' => '{"admin":{"view":"true", "delete":"true"}}'
+                'permissions' => '{"admin":{"view":"true"}}'
             ]
         );
         $this->actingAs($access)->visit('/' . config('citynexus.root_directory') . '/admin/')->assertResponseOk();

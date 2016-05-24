@@ -19,11 +19,33 @@
                     <label for="note">Description of Upload</label>
                     <input type="text" name="note" id="note" class="form-control">
                     <br>
-                    <input type="file" name="file">
+                    <input type="file" name="file" id="file">
                     <br>
-                    <input type="submit" value="Upload" class="btn btn-primary">
+                    <input type="submit" value="Upload" id="upload" class="btn btn-primary">
                 </form>
             </div>
         </div>
     </div>
 @stop
+@push('style')
+<link href="/vendor/citynexus/plugins/bootstrap-sweetalert/sweet-alert.css" rel="stylesheet" type="text/css" />
+@endpush
+@if(!isset($settings->unique_id))
+    @push('js_footer')
+    <script src="/vendor/citynexus/plugins/bootstrap-sweetalert/sweet-alert.min.js"></script>
+    <script>
+        //Info
+        $('#file').change(function () {
+            swal({
+                title: "No unique ID set for table",
+                text: "There is no unique ID set for this table. If you add duplicate data without a unique ID set it will create multiple records within the system. Please consider setting through the table's edit menu.",
+                type: "info",
+                showCancelButton: false,
+                confirmButtonClass: 'btn-info waves-effect waves-light',
+                confirmButtonText: 'Okay'
+            });
+        });
+    </script>
+
+    @endpush
+@endif

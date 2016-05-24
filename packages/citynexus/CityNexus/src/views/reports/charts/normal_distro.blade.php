@@ -1,34 +1,43 @@
-
+<?php
+$pagename = 'Score Distribution: ' . $rs->name;
+$section = 'scores';
+?>
 @extends(config('citynexus.template'))
 
 @section(config('citynexus.section'))
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <span class="panel-title">Score Distribution: {{$rs->name}}</span>
-        </div>
-        <div class="panel-body">
-            <div class="col-sm-9">
-                <div id="chart"></div>
+        {{--<div class="portlet-heading portlet-default">--}}
+        {{--<div class="portlet-widgets">--}}
+        {{--<a href="javascript:;" data-toggle="reload"><i class="zmdi zmdi-refresh"></i></a>--}}
+        {{--<a data-toggle="collapse" data-parent="#accordion1" href="#bg-primary"><i class="zmdi zmdi-minus"></i></a>--}}
+        {{--<a href="#" data-toggle="remove"><i class="zmdi zmdi-close"></i></a>--}}
+        {{--</div>--}}
+        {{--<div class="clearfix"></div>--}}
+        {{--</div>--}}
+
+            <div class="col-sm-9 ">
+                <div class="card-box">
+                    <div id="chart"></div>
+                </div>
             </div>
             <div class="col-sm-3">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <span class="panel-title">Data Set Options</span>
+                <div class="portlet">
+                    <div class="portlet-heading portlet-default">
+                        <h3 class="portlet-title">Data Set Options</h3>
                     </div>
                     <div class="panel-body">
                         <div class="list-group">
-                            <a href="/{{config('citynexus.root_directory')}}/risk-score/distribution?score_id={{$rs->id}}&default=true" class="list-group-item @if(isset($_GET['default']) && $_GET['default'] == true)active @endif">Exclude &#8804; Zero</a>
-                            <a href="/{{config('citynexus.root_directory')}}/risk-score/distribution?score_id={{$rs->id}}&feel=bern" class="list-group-item @if(isset($_GET['feel']) && $_GET['feel'] == 'burn')active @endif">Exclude Top 1%</a>
-                            <a href="/{{config('citynexus.root_directory')}}/risk-score/distribution?score_id={{$rs->id}}&feel=malthus" class="list-group-item">Exclude Top 5%</a>
-                            <a href="/{{config('citynexus.root_directory')}}/risk-score/distribution?score_id={{$rs->id}}&feel=castro" class="list-group-item">Exclude Top 10%</a>
-                            <a href="/{{config('citynexus.root_directory')}}/risk-score/distribution?score_id={{$rs->id}}&with_zeros=true" class="list-group-item">Including &#8804; Zeros</a>
+                            <a href="/{{action('\CityNexus\CityNexus\Http\ViewController@getDistribution', $rs->id)}}?default=true" class="list-group-item @if(isset($_GET['default']) && $_GET['default'] == true)active @endif">Exclude &#8804; Zero</a>
+                            <a href="/{{action('\CityNexus\CityNexus\Http\ViewController@getDistribution', $rs->id)}}?feel=bern" class="list-group-item @if(isset($_GET['feel']) && $_GET['feel'] == 'burn')active @endif">Exclude Top 1%</a>
+                            <a href="/{{action('\CityNexus\CityNexus\Http\ViewController@getDistribution', $rs->id)}}?feel=malthus" class="list-group-item">Exclude Top 5%</a>
+                            <a href="/{{action('\CityNexus\CityNexus\Http\ViewController@getDistribution', $rs->id)}}?feel=castro" class="list-group-item">Exclude Top 10%</a>
+                            <a href="/{{action('\CityNexus\CityNexus\Http\ViewController@getDistribution', $rs->id)}}?with_zeros=true" class="list-group-item">Including &#8804; Zeros</a>
                         </div>
                     </div>
                 </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <span class="panel-title">Score Range Stats</span>
+                <div class="portlet">
+                    <div class="portlet-heading portlet-default">
+                        <h3 class="portlet-title">Score Range Stats</h3>
                     </div>
                     <div class="panel-body">
                         <div class="list-group">

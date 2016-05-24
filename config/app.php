@@ -149,7 +149,6 @@ return [
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         Toin0u\Geocoder\GeocoderServiceProvider::class
-
     ],
 
     /*

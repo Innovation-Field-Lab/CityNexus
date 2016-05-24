@@ -95,7 +95,7 @@ class CitynexusSettingsController extends Controller
 
     public function postRemoveUser(Request $request)
     {
-        $this->authorize('userAdmin', 'delete');
+        $this->authorize('citynexus', 'userAdmin', 'delete');
 
         $user = User::find($request->get('user_id'));
         $user->delete();

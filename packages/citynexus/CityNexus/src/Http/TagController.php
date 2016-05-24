@@ -28,7 +28,7 @@ class TagController extends Controller
 
     public function getIndex()
     {
-        $tags = Tag::all();
+        $tags = Tag::with('properties')->get();
         return view('citynexus::tags.index', compact('tags'));
     }
 
@@ -37,6 +37,12 @@ class TagController extends Controller
         $pins = Tag::find($id)->properties()->select('lat', 'long', 'id', 'full_address')->get();
 
         return view('citynexus::reports.maps.pinmap', compact('pins'));
+    }
+
+    public function getList($id)
+    {
+        $tag = Tag::find($id);
+        return view('citynexus::tags.list', compact('tag'));
     }
 
 }

@@ -1,3 +1,41 @@
+<?php
+$pagename = ucwords($property->address());
+if($property->aliases->count() > 0)
+    { $pagename .=
+    '<span class="dropdown">
+                    <span class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="cursor: pointer">
+                        <i class="glyphicon glyphicon-duplicate"></i>
+                    </span>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><a href="#">Aliases:</a></li>';
+                        foreach($property->aliases as $alias)
+                            {
+                            $pagename .=
+                            '<li><a href="' . action('\CityNexus\CityNexus\Http\PropertyController@getShow', ['property_id' => $alias->id]) . '" id="demerge-alias">
+                                    ' . ucwords($alias->full_address) . '
+                                </a>
+                            </li>'; }
+
+                    $pagename .= '</ul>
+                </span>';
+}
+
+if($property->aliasOf != null)
+    {
+
+    $pagename .=
+    '<small>(Alias of
+        <a href="' . action('\CityNexus\CityNexus\Http\PropertyController@getShow', ['property_id' => $property->aliasOf->id]) . '">'
+            . ucwords($property->full_address) . '
+        </a>
+        <a href="'  . action('\CityNexus\CityNexus\Http\TablerController@getDemergeProperty', ['property_id' => $property->id]) . '">
+            <i class="glyphicon glyphicon-trash" style="color:red"></i>
+        </a>)
+    </small>';
+}
+$section = 'properties';
+?>
+
 @extends(config('citynexus.template'))
 
 @section(config('citynexus.section'))
@@ -15,34 +53,7 @@
                 </ul>
             </div>
             <div class="panel-title">
-                {{ucwords($property->address())}}
-                @if($property->aliases->count() > 0)
-                <span class="dropdown">
-                    <span class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="cursor: pointer">
-                        <i class="glyphicon glyphicon-duplicate"></i>
-                    </span>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li><a href="#">Aliases:</a></li>
-                        @foreach($property->aliases as $alias)
-                        <li><a href="{{action('\CityNexus\CityNexus\Http\CitynexusController@getProperty', ['property_id' => $alias->id])}}" id="demerge-alias">
-                                {{ucwords($alias->full_address)}}
-                            </a>
-                        </li>
-                        @endforeach
-                    </ul>
-                </span>
-                @endif
 
-                @if($property->aliasOf != null)
-                    <small>(Alias of
-                        <a href="{{action('\CityNexus\CityNexus\Http\CitynexusController@getProperty', ['property_id' => $property->aliasOf->id])}}">
-                            {{ucwords($property->full_address)}}
-                        </a>
-                        <a href="{{action('\CityNexus\CityNexus\Http\TablerController@getDemergeProperty', ['property_id' => $property->id])}}">
-                            <i class="glyphicon glyphicon-trash" style="color:red"></i>
-                        </a>)
-                    </small>
-                @endif
             </div>
         </div>
         <div class="panel-body">
@@ -102,8 +113,6 @@
                                             <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#{{preg_replace('/\s+/', '_', $key)}}_detail" aria-expanded="false" aria-controls="collapseTwo">
                                                 {{$tables->find($key)->table_title}}
                                             </a>
-                                            <a class="glyphicon glyphicon-cog pull-right" href="/{{config('citynexus.tabler_root')}}/edit-table/{{$key}}"></a>
-
                                         </h4>
                                     </div>
                                     <div id="{{preg_replace('/\s+/', '_', $key)}}_detail" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
@@ -142,7 +151,7 @@
                 </div>
                 <div class="col-sm-4">
 
-                    @if($property->lat != null && $property->long != null)
+                    @if($property->location_id != null && 'local' != env('APP_ENV'))
                         <div class="panel panel-default">
                                 <div id="pano" style="height: 250px"></div>
                         </div>
@@ -198,21 +207,26 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.jquery.js"></script>
 
-<script>
-    function initialize() {
-        var point = {lat: {{$property->lat}}, lng:{{$property->long}} };
-        var map = new google.maps.Map(document.getElementById('map'), {
-            center: point,
-            zoom: 16
-        });
-        var panorama = new google.maps.StreetViewPanorama(
-                document.getElementById('pano'), {
-                    position: point,
-                });
-        map.setStreetView(panorama);
-    }
 
-</script>
+@if($property->location_id != null)
+    <script>
+        function initialize() {
+            var point = {lat: {{$property->location->lat}}, lng:{{$property->location->long}} };
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: point,
+                zoom: 16
+            });
+            var panorama = new google.maps.StreetViewPanorama(
+                    document.getElementById('pano'), {
+                        position: point,
+                    });
+            map.setStreetView(panorama);
+        }
+
+    </script>
+@endif
+
+
 <script async defer
         src="{{'https://maps.googleapis.com/maps/api/js?key=' . env('GMAPI_KEY') . '&signed_in=true&callback=initialize'}}">
 </script>
@@ -301,7 +315,7 @@
             $('#no-tags').addClass('hidden');
             $('#pending').removeClass('hidden');
             $.ajax({
-                url: "/{{config('citynexus.root_directory')}}/associate-tag",
+                url: "{{action('\CityNexus\CityNexus\Http\PropertyController@postAssociateTag')}}",
                 type: 'post',
                 data: {
                     _token: "{{csrf_token()}}",
@@ -310,6 +324,7 @@
                 }
             }).success( function( data ) {
                 $("#pending").addClass('hidden');
+                $('#new-tag-input').val(null);
                 $('#property_tags').append(data);
             }
         );
@@ -332,7 +347,7 @@
     {
         $('#tag-' + id).addClass('hidden');
         $.ajax({
-            url: "/{{config('citynexus.root_directory')}}/remove-tag",
+            url: "{{action('\CityNexus\CityNexus\Http\PropertyController@postRemoveTag')}}",
             type: "post",
             data: {
                 _token: "{{csrf_token()}}",

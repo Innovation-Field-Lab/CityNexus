@@ -27,7 +27,7 @@
                         <td>{{$item->score}}</td>
                         <td>{{ucwords($item->full_address)}}</td>
                         <td>{{$item->property_id}}</td>
-                        <td><a class="btn btn-sm btn-primary" href="/{{config('citynexus.root_directory')}}/property/{{$item->property_id}}">Property Details</a></td>
+                        <td><a class="btn btn-sm btn-primary" href="/{{action('\CityNexus\CityNexus\Http\PropertyController@getShow', ['id' => $item->property_id])}}">Property Details</a></td>
                     </tr>
                 @endforeach
                 </tbody>

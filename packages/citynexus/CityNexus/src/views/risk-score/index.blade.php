@@ -1,20 +1,24 @@
+<?php
+$pagename = 'All Scores';
+$section = 'scores';
+?>
+
 @extends(config('citynexus.template'))
 
 @section(config('citynexus.section'))
 
-    <div class="alert alert-warning">
-        Hey there you innovator you!  So scores are working a LOT faster now. They will update either when you save changes or click on the refresh score button.
-    </div>
+    <div class="portlet">
+        {{--<div class="portlet-heading portlet-default">--}}
+            {{--<div class="portlet-widgets">--}}
+                {{--<a href="javascript:;" data-toggle="reload"><i class="zmdi zmdi-refresh"></i></a>--}}
+                {{--<a data-toggle="collapse" data-parent="#accordion1" href="#bg-primary"><i class="zmdi zmdi-minus"></i></a>--}}
+                {{--<a href="#" data-toggle="remove"><i class="zmdi zmdi-close"></i></a>--}}
+            {{--</div>--}}
+            {{--<div class="clearfix"></div>--}}
+        {{--</div>--}}
 
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <div class="panel-title">
-                    All Risk Scores
-                </div>
-            </div>
-
-            <div class="panel-body">
-                <table class="table">
+        <div class="portlet-body">
+            <table class="table table-hover">
                     <thead>
                     <tr>
                         <th>Score Name</th>
@@ -29,14 +33,25 @@
                                 <td id="age-{{$score->id}}">{{$score->updated_at->diffForHumans()}}</td>
                                 <td>
                                     <span class="btn btn-sm btn-primary" onclick="updateScore({{$score->id}})" id="update-{{$score->id}}">Refresh Score</span>
-                                    <a class="btn btn-sm btn-primary update-{{$score->id}}" href="/{{config('citynexus.root_directory')}}/risk-score/heat-map?score_id={{$score->id}}">Heat Map</a>
-                                    <a class="btn btn-sm btn-primary update-{{$score->id}}" href="/{{config('citynexus.root_directory')}}/risk-score/pin-map?score_id={{$score->id}}">Pin Map</a>
-                                    <a class="btn btn-sm btn-primary update-{{$score->id}}" href="/{{config('citynexus.root_directory')}}/risk-score/distribution?score_id={{$score->id}}">Distribution</a>
-                                    <a class="btn btn-sm btn-primary update-{{$score->id}}" href="/{{config('citynexus.root_directory')}}/risk-score/edit-score?score_id={{$score->id}}">Edit</a>
-                                    <a class="btn btn-sm btn-primary update-{{$score->id}}" href="/{{config('citynexus.root_directory')}}/risk-score/ranking/{{$score->id}}">Ranking</a>
-                                    <a class="btn btn-sm btn-primary update-{{$score->id}}" href="/{{config('citynexus.root_directory')}}/risk-score/duplicate-score?score_id={{$score->id}}">Duplicate</a>
-                                    <a class="btn btn-sm btn-danger update-{{$score->id}}" href="/{{config('citynexus.root_directory')}}/risk-score/remove-score?score_id={{$score->id}}">Delete Score</a>
 
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-default dropdown-toggle waves-effect" data-toggle="dropdown" aria-expanded="false"> Analysis <span class="caret"></span> </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="{{action('\CityNexus\CityNexus\Http\ViewController@getHeatMap')}}?table=citynexus_scores_{{$score->id}}&key=score">Heat Map</a></li>
+                                            <li><a href="{{action('\CityNexus\CityNexus\Http\RiskScoreController@getPinMap', ['score_id' => $score->id])}}">Pin Map</a></li>
+                                            <li><a href="{{action('\CityNexus\CityNexus\Http\ViewController@getDistribution', ['citynexus_scores_' . $score->id, 'score'])}}">Distribution Chart</a></li>
+                                            <li><a href="{{action('\CityNexus\CityNexus\Http\RiskScoreController@getRanking', ['score_id' => $score->id])}}">Rankings</a></li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-default dropdown-toggle waves-effect" data-toggle="dropdown" aria-expanded="false"> Actions <span class="caret"></span> </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="{{action('\CityNexus\CityNexus\Http\RiskScoreController@getEditScore', ['score_id' => $score->id])}}">Edit Score</a></li>
+                                            <li><a href="{{action('\CityNexus\CityNexus\Http\RiskScoreController@getDuplicateScore', ['score_id' => $score->id])}}">Duplicate Score</a></li>
+                                            <li><a href="{{action('\CityNexus\CityNexus\Http\RiskScoreController@getRemoveScore', ['score_id' => $score->id])}}">Remove Score</a></li>
+                                        </ul>
+                                    </div>
                                 </td>
                             </tr>
                     @endforeach
@@ -56,7 +71,7 @@
             var update = $('#update-' + id)
             update.removeClass('btn-primary');
             update.addClass('btn-default');
-            update.html('<span class="glyphicon glyphicon-hourglass"></span> Refreshing Score');
+            update.html('<span class="fa fa-spinner fa-spin"></span> Refreshing Score');
 
             $.ajax({
                 url: "/{{config('citynexus.root_directory')}}/risk-score/update-score",

@@ -13,7 +13,7 @@ function printTitle ($title) {
     <meta name="viewport" content="width=820" />
     <link rel="stylesheet" href="//cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css"></link>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans|Fjalla+One' rel='stylesheet' type='text/css'>
-    <link type="text/css" rel="stylesheet" href="/css/shCoreEclipse.css"/>
+    <link type="text/css" rel="stylesheet" href="/vendor/citynexus/css/shCoreEclipse.css"/>
     <style>
         html {
             background:#F0F0F0;
@@ -168,11 +168,11 @@ function printTitle ($title) {
 <body>
 <div id="map"></div>
 <script src="//cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
-<script type="text/javascript" src="/js/shCore.js"></script>
-<script type="text/javascript" src="/js/shBrushJScript.js"></script>
+<script type="text/javascript" src="/vendor/citynexus/js/shCore.js"></script>
+<script type="text/javascript" src="/vendor/citynexus/js/shBrushJScript.js"></script>
 
-<script type="text/javascript" src="/js/webgl-heatmap.js"></script>
-<script type="text/javascript" src="/js/webgl-heatmap-leaflet.js"></script>
+<script type="text/javascript" src="/vendor/citynexus/js/webgl-heatmap.js"></script>
+<script type="text/javascript" src="/vendor/citynexus/js/webgl-heatmap-leaflet.js"></script>
 
 <script type="text/javascript">
     var map = L.map('map', {

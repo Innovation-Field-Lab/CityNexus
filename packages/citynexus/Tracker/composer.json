@@ -1,0 +1,20 @@
+{
+  "name": "citynexus/tracker",
+  "description": "A citywide performance management analytics platform",
+  "require": {
+    "citynexus/citynexus": "dev-master",
+  },
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "CityNexus\\Tracker\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Sean Alaback",
+      "email": "sean.alaback@gmail.com"
+    }
+  ],
+  "minimum-stability": "dev"
+}

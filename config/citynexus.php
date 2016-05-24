@@ -1,5 +1,7 @@
 <?php
 
+
+
 return [
 
     // root directory
@@ -9,7 +11,7 @@ return [
     'slogan' => env('CITYNEXUS_SLOGAN', 'Municipal Data Centralization'),
 
     // Layout variables
-    "template" => 'layout.master',
+    "template" => 'citynexus::master.main',
     "section" => "main",
 
     // City information

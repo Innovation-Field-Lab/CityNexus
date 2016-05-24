@@ -1,3 +1,8 @@
+<?php
+$pagename = 'Dashboard';
+$section = 'dashboard';
+?>
+
 @extends(config('citynexus.template'))
 
 @section(config('citynexus.section'))

@@ -36,6 +36,8 @@ class TableBuilder
                     if($field->key == 'id') {$field->key = $field->key . '-original';}
                     $table->$type($field->key)->nullable();
                 }
+                $table->json('raw')->nullable();
+                $table->dateTime('processed_at')->nullable();
                 $table->timestamps();
             });
         }
@@ -45,7 +47,7 @@ class TableBuilder
 
     public function cleanName($name)
     {
-        return strtolower(str_replace(' ', '_', (preg_replace('/[^a-zA-Z0-9_ -%][().][\/]/s', '', $name))));
+        return strtolower(str_replace(' ', '_', (preg_replace('/[^a-zA-Z0-9_ -%][().\'][\/]/s', '', $name))));
     }
 
 
@@ -81,7 +83,7 @@ class TableBuilder
 
         foreach($syncValues as $key => $field)
         {
-            if($key != null) $search[$field] = $i[$key];
+            if($key != null && isset($i->$key)) $search[$field] = $i->$key;
         }
 
         $search = $this->processAddress($search);
@@ -262,8 +264,8 @@ class TableBuilder
     {
         foreach($map as $key => $i)
         {
-           if(isset($data[$key])) {
-               $record[$i->key] = $data[$key];
+           if(isset($data->$key)) {
+               $record[$i->key] = $data->$key;
            }
             $record['created_at'] = Carbon::today();
             $record['updated_at'] = Carbon::today();
@@ -299,86 +301,60 @@ class TableBuilder
 
     }
 
-    public function addRecord($i, $table_id, $upload_id)
+    public function processRecord($id, $table)
     {
 
         //Create a empty array of the record
         $record = [];
 
-        $tabler = new TableBuilder();
+        $data = json_decode($data = DB::table($table->table_name)->where('id', $id)->pluck('raw'));
+        $settings = \GuzzleHttp\json_decode($table->settings);
 
-        //get the table
-        $table = Table::find($table_id);
+        $tabler = new TableBuilder();
 
         //create an array of sync values
         $syncValues = $tabler->findValues( $table->scheme, 'sync' );
-
         $pushValues = $tabler->findValues( $table->scheme, 'push' );
 
         $scheme = json_decode($table->scheme);
 
         //if there is a sync value, identify the index id
-        if( count( $syncValues ) > 0)
+        if(isset($settings->property_id) && $settings->property_id)
         {
-            $record[config('citynexus.index_id')] = $this->findSyncId( config('citynexus.index_table'), $i, $syncValues );
+            dd("hellow");
+            $record[config('citynexus.index_id')] = $data->$settings->property_id;
+        }
+        elseif( count( $syncValues ) > 0)
+        {
+            $record[config('citynexus.index_id')] = $this->findSyncId( config('citynexus.index_table'), $data, $syncValues );
         }
 
         if(isset($record[config('citynexus.index_id')]))
         {
 
             //add remaining elements to the array
-            $record = $this->addElements($record, $i, $scheme);
-            $record['upload_id'] = $upload_id;
+            $record = $this->addElements($record, $data, $scheme);
+            $record = $this->processElements($scheme, $record);
+            $record = $this->checkForUsedKeys($record, $table);
 
-            foreach ($scheme as $field) {
-                if ($field->type == 'float') {
-                    if (array_key_exists($field->key, $record)) $record[$field->key] = floatval(preg_replace("/[^0-9,.]/", "", $record[$field->key]));
-                }
-                elseif($field->type == 'integer')
-                {
-                    if (array_key_exists($field->key, $record)) $record[$field->key] = intval(preg_replace("/[^0-9,.]/", "", $record[$field->key]));
-                }
-                elseif ($field->type == 'datetime') {
-
-                    if (array_key_exists($field->key, $record))
-                    {
-                        if(is_array($record[$field->key]))
-                        {
-                            $record[$field->key] = Carbon::createFromTimestamp(strtotime($record[$field->key]['date']));
-
-                        }
-                        else
-                        {
-                            $record[$field->key] = Carbon::createFromTimestamp(strtotime($record[$field->key]));
-                        }
-                    }
-                }
+            if (isset($settings->timestamp) && $settings->timestamp != null) {
+                $record['created_at'] = $record[$settings->timestamp];
             }
-
-            if ($table->timestamp != null) {
-                $record['created_at'] = $record[$table->timestamp];
-            }
-
-            if(isset($record['id']))
-            {
-                $record['id-original'] = $record['id'];
-            }
-
 
             try{
 
-                DB::table($table->table_name)->insertGetId($record);
+                DB::table($table->table_name)->where('id', $id)->update($record);
 
             }
             catch(\Exception $e)
             {
-                Error::create(['location' => 'addRecord - Insert Record', 'data' => json_encode(['e' => $e, 'record' => $record])]);
+                Error::create(['location' => 'processRecord - Insert Record', 'data' => json_encode(['e' => $e, 'id' => $id, 'table' => $table, 'record' => $record])]);
             }
             //If there are push values, update the primary property record
             if (count($pushValues) > 0) {
                 $property = Property::find($record['property_id']);
                 foreach ($pushValues as $key => $value) {
-                    $property->$value = $i[$key];
+                    $property->$value = $data[$key];
                 }
                 $property->save();
             }
@@ -389,6 +365,60 @@ class TableBuilder
             return false;
         }
 
+    }
+
+    /**
+     *
+     * Check that the array doesn't contain any
+     * of the same keys as CityNexus uses
+     *
+     * @param $records array
+     * @return array
+     */
+    private function checkForUsedKeys($records, $table)
+    {
+        $settings = \GuzzleHttp\json_decode($table->settings);
+
+        $keys = ['id', 'property_id', 'upload_id', 'updated_at', 'raw', 'created_at'];
+        foreach($keys as $i) {
+            if(isset($settings->$i) && $settings->$i == null | isset($settings->$i) && $settings->$i != $i)
+                if(isset($record[$i])) {
+                $record[$i . '-original'] = $record[$i];
+                unset($record[$i]);
+            }
+        }
+
+        return $records;
+    }
+
+    private function processElements($scheme, $record)
+    {
+        foreach ($scheme as $field) {
+            if ($field->type == 'float') {
+                if (array_key_exists($field->key, $record)) $record[$field->key] = floatval(preg_replace("/[^0-9,.]/", "", $record[$field->key]));
+            }
+            elseif($field->type == 'integer')
+            {
+                if (array_key_exists($field->key, $record)) $record[$field->key] = intval(preg_replace("/[^0-9,.]/", "", $record[$field->key]));
+            }
+            elseif ($field->type == 'datetime') {
+
+                if (array_key_exists($field->key, $record))
+                {
+                    if(is_array($record[$field->key]))
+                    {
+                        $record[$field->key] = Carbon::createFromTimestamp(strtotime($record[$field->key]['date']));
+
+                    }
+                    else
+                    {
+                        $record[$field->key] = Carbon::createFromTimestamp(strtotime($record[$field->key]));
+                    }
+                }
+            }
+        }
+
+        return $record;
     }
 
     public function geocode()

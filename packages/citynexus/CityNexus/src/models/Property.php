@@ -40,4 +40,9 @@ class Property extends Model
     {
         return $this->tags()->lists('tag');
     }
+
+    public function location()
+    {
+        return $this->belongsTo('\CityNexus\CityNexus\Location');
+    }
 }

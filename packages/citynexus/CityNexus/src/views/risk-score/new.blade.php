@@ -1,13 +1,14 @@
+<?php
+$pagename = 'Create New Score';
+$section = 'scores';
+?>
+
+
 @extends(config('citynexus.template'))
 
 @section(config('citynexus.section'))
 
     <div class="panel panel-default">
-        <div class="panel-heading">
-            <div class="panel-title">
-                Create New Risk Score
-            </div>
-        </div>
         <div class="panel-body">
             <div class="col-sm-6">
                 <form id="new-risk-score" method="post" action="/{{config('citynexus.root_directory')}}/risk-score/save-score">

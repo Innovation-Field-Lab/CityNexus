@@ -40,7 +40,7 @@
             @if($pin->score != null)
             marker.category = {{$pin->score}};
             @endif
-            marker.data.popup = '<a href="/{{config('citynexus.root_directory')}}/property/{{$pin->id}}" target="_blank"><i class="glyphicon glyphicon-new-window"></i> {{ucwords($pin->full_address)}}</a>@if(null != $pin->score) <br><b>Score: {{$pin->score}} </b> @endif';
+            marker.data.popup = '<a href="{{action('\CityNexus\CityNexus\Http\PropertyController@getShow', ['id' => $pin->id])}}" target="_blank"><i class="glyphicon glyphicon-new-window"></i> {{ucwords($pin->full_address)}}</a>@if(null != $pin->score) <br><b>Score: {{$pin->score}} </b> @endif';
             pruneCluster.RegisterMarker(marker);
         @endif
     @endforeach

@@ -11,7 +11,7 @@
     <td>
         {{$item}}
     </td>
-    <td><select name="map[{{$key}}][type]" class="form-control">
+    <td><select name="map[{{$key}}][type]" class="form-control" id="type-{{$key}}">
             <option value="string">String</option>
             <option value="text" @if($typer->type($item) == 'text') selected @endif>Text Area</option>
             <option value="integer" @if($typer->type($item) == 'integer') selected @endif>Integer</option>

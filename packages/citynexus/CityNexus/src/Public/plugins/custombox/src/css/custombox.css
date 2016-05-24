@@ -43,7 +43,7 @@
     outline: 0 none;
     overflow: auto;
     position: fixed;
-    text-align: center;
+    text-align: left;
 }
 .custombox-modal-container {
     margin: 0 auto;

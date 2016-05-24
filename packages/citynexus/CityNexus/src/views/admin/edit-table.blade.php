@@ -24,19 +24,23 @@
             @if(count($table) > 0)
             <table class="table table-bordered table-striped">
                 <tr>
-                    <th></th>
+                    @can('citynexus', ['dataset', 'delete'])
+                        <th></th>
+                    @endcan
                     @foreach($table[0] as $k => $i)
                         <th>
-                            <a href="{{Request::url()}}?sort_by={{$k}}">{{$k}}s</a>
+                            <a href="{{Request::url()}}?sort_by={{$k}}">{{$k}}</a>
                         </th>
                     @endforeach
                 </tr>
                 <tbody>
                 @foreach($table as $row)
                     <tr>
-                        <td>
-                            <a href="/{{config('citynexus.root_directory')}}/admin/remove-data?table_name={{$table_name}}&row_id={{$row->id}}&_token={{csrf_token()}}" class="btn btn-primary btn-sm">Delete</a>
-                        </td>
+                        @can('citynexus', ['dataset', 'delete'])
+                            <td>
+                                <a href="/{{config('citynexus.root_directory')}}/admin/remove-data?table_name={{$table_name}}&row_id={{$row->id}}&_token={{csrf_token()}}" class="btn btn-primary btn-sm">Delete</a>
+                            </td>
+                        @endcan
                         @foreach($row as $item)
                             <td>
                                 {{$item}}

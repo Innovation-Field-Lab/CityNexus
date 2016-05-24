@@ -18,15 +18,38 @@
                             <textarea name="description" id="description" cols="30" rows="3" class="form-control"></textarea>
                         </div>
                         <div class="col-sm-4">
-                            <div class="alert alert-warning">
-                                Only choose a field with an assigned type of Date Time. If you choose to use a timestamp, <b>all</b> future uploads will need to have a time stamp or may cause an error.
-                            </div>
                             <div class="form-group">
                                 <label for="timestamp" class="control-label col-sm-4">Time Stamp</label>
 
                                 <div class="col-sm-8">
-                                    <select name="timestamp" class="form-control" id="timestamp">
+                                    <select name="settings[timestamp]" class="form-control" id="timestamp">
                                         <option value="">Use Today's Date</option>
+                                        @foreach($table as $key => $item)
+                                            <option value="{{$key}}">{{$key}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <br><br>
+                            <div class="form-group">
+                                <label for="timestamp" class="control-label col-sm-4">Unique ID</label>
+
+                                <div class="col-sm-8">
+                                    <select name="settings[unique_id]" class="form-control" id="unique_id">
+                                        <option value="">None</option>
+                                        @foreach($table as $key => $item)
+                                            <option value="{{$key}}">{{$key}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <br><br>
+                            <div class="form-group">
+                                <label for="timestamp" class="control-label col-sm-4">Property ID</label>
+
+                                <div class="col-sm-8">
+                                    <select name="settings[property_id]" class="form-control" id="property_id">
+                                        <option value="">None</option>
                                         @foreach($table as $key => $item)
                                             <option value="{{$key}}">{{$key}}</option>
                                         @endforeach
@@ -42,11 +65,13 @@
                         <thead>
                         <td>Ignore</td>
                         <td>Visible</td>
-                        <td>Field Name</td>
-                        <td>Key</td>
-                        <td>First Value</td>
+                        <td>Field Name
+                            <i class="ti-help" style="cursor: pointer" onclick="getHelp('tabler.uploader.fieldname')" ></i>
+                        </td>
                         <td>Field Type</td>
-                        <td>Sync</td>
+                        <td>Sync
+                            <i class="ti-help" style="cursor: pointer" onclick="getHelp('tabler.uploader.sync')" ></i>
+                        </td>
                         <td>Push</td>
                         </thead>
                         <tbody>
@@ -76,6 +101,12 @@
         $('#submit').removeClass('hidden');
 
     }
+
+    $('#timestamp').change( function() {
+        var id = $('#timestamp').val();
+        $('#type-' + id).val('datetime').addClass('disable');
+
+    });
 </script>
 
 @stop

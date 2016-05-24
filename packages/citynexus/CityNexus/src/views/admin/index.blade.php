@@ -18,5 +18,22 @@
 
     <a href="/{{config('citynexus.root_directory')}}/admin/merge-properties" class="btn btn-primary">Merge Properties</a>
 
+    <br>
+    <br>
+    <a href="{{action('\CityNexus\CityNexus\Http\AdminController@getMigratePropertiesToLocations')}}" class="btn btn-primary">Migrate Properties to Locations</a>
+    <br>
+    <br>
+    <a href="{{action('\CityNexus\CityNexus\Http\AdminController@getMigrateTimeStamps')}}" class="btn btn-primary">Migrate Timestamps</a>
+    <br>
+    <br>
+
+    <div class="list-group">
+        @foreach(\CityNexus\CityNexus\Table::whereNull('raw_upload')->get() as $i)
+        <a href="{{action('\CityNexus\CityNexus\Http\AdminController@getCreateRawRows')}}/{{$i->table_name}}" class="list-group-item">{{$i->table_title}} @if(isset(json_decode($i->settings)->raw_migrated)) <i class="glyphicon glyphicon-check"></i> @endif </a>
+        @endforeach
+    </div>
+
+
+
 
 @stop

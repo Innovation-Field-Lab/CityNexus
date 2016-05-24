@@ -11,7 +11,7 @@ if($property->aliases->count() > 0)
                         foreach($property->aliases as $alias)
                             {
                             $pagename .=
-                            '<li><a href="' . action('\CityNexus\CityNexus\Http\CitynexusController@getProperty', ['property_id' => $alias->id]) . '" id="demerge-alias">
+                            '<li><a href="' . action('\CityNexus\CityNexus\Http\PropertyController@getShow', ['property_id' => $alias->id]) . '" id="demerge-alias">
                                     ' . ucwords($alias->full_address) . '
                                 </a>
                             </li>'; }
@@ -25,7 +25,7 @@ if($property->aliasOf != null)
 
     $pagename .=
     '<small>(Alias of
-        <a href="' . action('\CityNexus\CityNexus\Http\CitynexusController@getProperty', ['property_id' => $property->aliasOf->id]) . '">'
+        <a href="' . action('\CityNexus\CityNexus\Http\PropertyController@getShow', ['property_id' => $property->aliasOf->id]) . '">'
             . ucwords($property->full_address) . '
         </a>
         <a href="'  . action('\CityNexus\CityNexus\Http\TablerController@getDemergeProperty', ['property_id' => $property->id]) . '">
@@ -151,7 +151,7 @@ $section = 'properties';
                 </div>
                 <div class="col-sm-4">
 
-                    @if($property->lat != null && $property->long != null && 'local' != env('APP_ENV'))
+                    @if($property->location_id != null && 'local' != env('APP_ENV'))
                         <div class="panel panel-default">
                                 <div id="pano" style="height: 250px"></div>
                         </div>
@@ -207,21 +207,26 @@ $section = 'properties';
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.jquery.js"></script>
 
-<script>
-    function initialize() {
-        var point = {lat: {{$property->lat}}, lng:{{$property->long}} };
-        var map = new google.maps.Map(document.getElementById('map'), {
-            center: point,
-            zoom: 16
-        });
-        var panorama = new google.maps.StreetViewPanorama(
-                document.getElementById('pano'), {
-                    position: point,
-                });
-        map.setStreetView(panorama);
-    }
 
-</script>
+@if($property->location_id != null)
+    <script>
+        function initialize() {
+            var point = {lat: {{$property->location->lat}}, lng:{{$property->location->long}} };
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: point,
+                zoom: 16
+            });
+            var panorama = new google.maps.StreetViewPanorama(
+                    document.getElementById('pano'), {
+                        position: point,
+                    });
+            map.setStreetView(panorama);
+        }
+
+    </script>
+@endif
+
+
 <script async defer
         src="{{'https://maps.googleapis.com/maps/api/js?key=' . env('GMAPI_KEY') . '&signed_in=true&callback=initialize'}}">
 </script>
@@ -310,7 +315,7 @@ $section = 'properties';
             $('#no-tags').addClass('hidden');
             $('#pending').removeClass('hidden');
             $.ajax({
-                url: "/{{config('citynexus.root_directory')}}/associate-tag",
+                url: "{{action('\CityNexus\CityNexus\Http\PropertyController@postAssociateTag')}}",
                 type: 'post',
                 data: {
                     _token: "{{csrf_token()}}",
@@ -319,6 +324,7 @@ $section = 'properties';
                 }
             }).success( function( data ) {
                 $("#pending").addClass('hidden');
+                $('#new-tag-input').val(null);
                 $('#property_tags').append(data);
             }
         );
@@ -341,7 +347,7 @@ $section = 'properties';
     {
         $('#tag-' + id).addClass('hidden');
         $.ajax({
-            url: "/{{config('citynexus.root_directory')}}/remove-tag",
+            url: "{{action('\CityNexus\CityNexus\Http\PropertyController@postRemoveTag')}}",
             type: "post",
             data: {
                 _token: "{{csrf_token()}}",

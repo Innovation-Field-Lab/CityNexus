@@ -1,5 +1,5 @@
 <?php
-$pagename = 'City Manager Dashboard';
+$pagename = 'City Dashboard';
 $section = 'dashboard';
 ?>
 
@@ -9,38 +9,38 @@ $section = 'dashboard';
 
     <div class="row">
 
-        <div class="col-lg-3 col-md-6">
-            <div class="card-box">
-                <div class="dropdown pull-right">
-                    <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
-                        <i class="zmdi zmdi-more-vert"></i>
-                    </a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                    </ul>
-                </div>
+        {{--<div class="col-lg-3 col-md-6">--}}
+            {{--<div class="card-box">--}}
+                {{--<div class="dropdown pull-right">--}}
+                    {{--<a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">--}}
+                        {{--<i class="zmdi zmdi-more-vert"></i>--}}
+                    {{--</a>--}}
+                    {{--<ul class="dropdown-menu" role="menu">--}}
+                        {{--<li><a href="#">Action</a></li>--}}
+                        {{--<li><a href="#">Another action</a></li>--}}
+                        {{--<li><a href="#">Something else here</a></li>--}}
+                        {{--<li class="divider"></li>--}}
+                        {{--<li><a href="#">Separated link</a></li>--}}
+                    {{--</ul>--}}
+                {{--</div>--}}
 
-                <h4 class="header-title m-t-0 m-b-30">Total Property Count</h4>
+                {{--<h4 class="header-title m-t-0 m-b-30">Total Property Count</h4>--}}
 
-                <div class="widget-chart-1">
-                    <div class="widget-chart-box-1">
-                        <input data-plugin="knob" data-width="80" data-height="80" data-fgColor="#f05050 "
-                               data-bgColor="#F9B9B9" value="{{intval($npcount / $pcount * 100)}}"
-                               data-skin="tron" data-angleOffset="180" data-readOnly=true
-                               data-thickness=".15"/>
-                    </div>
+                {{--<div class="widget-chart-1">--}}
+                    {{--<div class="widget-chart-box-1">--}}
+                        {{--<input data-plugin="knob" data-width="80" data-height="80" data-fgColor="#f05050 "--}}
+                               {{--data-bgColor="#F9B9B9" value="@if($pcount > 0){{intval($npcount / $pcount * 100)}}@else 0 @endif"--}}
+                               {{--data-skin="tron" data-angleOffset="180" data-readOnly=true--}}
+                               {{--data-thickness=".15"/>--}}
+                    {{--</div>--}}
 
-                    <div class="widget-detail-1">
-                        <h2 class="p-t-10 m-b-0"> {{$npcount}} </h2>
-                        <p class="text-muted">New Properties<br>Added This Month</p>
-                    </div>
-                </div>
-            </div>
-        </div><!-- end col -->
+                    {{--<div class="widget-detail-1">--}}
+                        {{--<h2 class="p-t-10 m-b-0"> {{$npcount}} </h2>--}}
+                        {{--<p class="text-muted">New Properties<br>Added This Month</p>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--</div><!-- end col -->--}}
 
         {{--<div class="col-lg-3 col-md-6">--}}
             {{--<div class="card-box">--}}
@@ -278,24 +278,24 @@ $section = 'dashboard';
     <div class="row">
         <div class="col-lg-4">
             <div class="card-box">
-                <div class="dropdown pull-right">
-                    <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
-                        <i class="zmdi zmdi-more-vert"></i>
-                    </a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                    </ul>
-                </div>
+                {{--<div class="dropdown pull-right">--}}
+                    {{--<a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">--}}
+                        {{--<i class="zmdi zmdi-more-vert"></i>--}}
+                    {{--</a>--}}
+                    {{--<ul class="dropdown-menu" role="menu">--}}
+                        {{--<li><a href="#">Action</a></li>--}}
+                        {{--<li><a href="#">Another action</a></li>--}}
+                        {{--<li><a href="#">Something else here</a></li>--}}
+                        {{--<li class="divider"></li>--}}
+                        {{--<li><a href="#">Separated link</a></li>--}}
+                    {{--</ul>--}}
+                {{--</div>--}}
 
                 <h4 class="header-title m-t-0 m-b-30">Recent Comments</h4>
 
                 <div class="inbox-widget nicescroll" style="height: 315px;">
                     @foreach($notes as $i)
-                    <a href="{{action('\CityNexus\CityNexus\Http\CitynexusController@getProperty', [$i->property_id])}}#note-{{$i->id}}">
+                    <a href="{{action('\CityNexus\CityNexus\Http\PropertyController@getShow', [$i->property_id])}}#note-{{$i->id}}">
                         <div class="inbox-item">
                             {{--<div class="inbox-item-img"><img src="/images/users/avatar-1.jpg" class="img-circle" alt=""></div>--}}
                             <p class="inbox-item-author">By {{ucwords($i->property->full_address)}}</p>
@@ -410,7 +410,7 @@ $section = 'dashboard';
 
 @stop
 
-@push('javascript')
+@push('js_footer')
 
 <script src="/vendor/citynexus/plugins/jquery-knob/jquery.knob.js"></script>
 

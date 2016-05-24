@@ -27,11 +27,11 @@ $section = 'scores';
                     </div>
                     <div class="panel-body">
                         <div class="list-group">
-                            <a href="/{{config('citynexus.root_directory')}}/risk-score/distribution/{{$rs->id}}?default=true" class="list-group-item @if(isset($_GET['default']) && $_GET['default'] == true)active @endif">Exclude &#8804; Zero</a>
-                            <a href="/{{config('citynexus.root_directory')}}/risk-score/distribution/{{$rs->id}}?feel=bern" class="list-group-item @if(isset($_GET['feel']) && $_GET['feel'] == 'burn')active @endif">Exclude Top 1%</a>
-                            <a href="/{{config('citynexus.root_directory')}}/risk-score/distribution/{{$rs->id}}?feel=malthus" class="list-group-item">Exclude Top 5%</a>
-                            <a href="/{{config('citynexus.root_directory')}}/risk-score/distribution/{{$rs->id}}?feel=castro" class="list-group-item">Exclude Top 10%</a>
-                            <a href="/{{config('citynexus.root_directory')}}/risk-score/distribution/{{$rs->id}}?with_zeros=true" class="list-group-item">Including &#8804; Zeros</a>
+                            <a href="/{{action('\CityNexus\CityNexus\Http\ViewController@getDistribution', $rs->id)}}?default=true" class="list-group-item @if(isset($_GET['default']) && $_GET['default'] == true)active @endif">Exclude &#8804; Zero</a>
+                            <a href="/{{action('\CityNexus\CityNexus\Http\ViewController@getDistribution', $rs->id)}}?feel=bern" class="list-group-item @if(isset($_GET['feel']) && $_GET['feel'] == 'burn')active @endif">Exclude Top 1%</a>
+                            <a href="/{{action('\CityNexus\CityNexus\Http\ViewController@getDistribution', $rs->id)}}?feel=malthus" class="list-group-item">Exclude Top 5%</a>
+                            <a href="/{{action('\CityNexus\CityNexus\Http\ViewController@getDistribution', $rs->id)}}?feel=castro" class="list-group-item">Exclude Top 10%</a>
+                            <a href="/{{action('\CityNexus\CityNexus\Http\ViewController@getDistribution', $rs->id)}}?with_zeros=true" class="list-group-item">Including &#8804; Zeros</a>
                         </div>
                     </div>
                 </div>

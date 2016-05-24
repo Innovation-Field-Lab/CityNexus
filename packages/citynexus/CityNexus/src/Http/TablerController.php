@@ -2,8 +2,11 @@
 
 namespace CityNexus\CityNexus\Http;
 
+use Carbon\Carbon;
+use CityNexus\CityNexus\ProcessData;
 use CityNexus\CityNexus\Property;
 use CityNexus\CityNexus\Upload;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -27,17 +30,17 @@ class TablerController extends Controller
 
         if(isset($_GET['trashed']))
         {
-            $tables = Table::withTrashed()->get();
+            $tables = Table::withTrashed()->sortBy('table_name')->get();
         }
         else{
-            $tables = Table::all();
+            $tables = Table::all()->sortBy('table_name');
         }
 
         return view('citynexus::tabler.index', compact('tables'));
     }
     public function getUploader()
     {
-        $this->authorize('citynexus', ['group' => 'datasets', 'method' => 'uploads']);
+        $this->authorize('citynexus', ['datasets', 'upload']);
 
         return view('citynexus::tabler.uploader');
     }
@@ -89,7 +92,7 @@ class TablerController extends Controller
         $table->table_title = $request->get('table_name');
         $table->table_name = $tabler->create($table);
         $table->table_description = $request->get('table_description');
-        $table->timestamp = $request->get('timestamp');
+        $table->settings = json_encode($request->get('settings'));
         $table->save();
 
         $upload = Upload::create(['table_id' => $table->id, 'note' => 'Initial Upload']);
@@ -158,8 +161,11 @@ class TablerController extends Controller
         {
             return redirect('/' . config('citynexus.tabler_root') . '/create-scheme/' . $id);
         }
+
         $scheme = json_decode($table->scheme);
-        return view('citynexus::tabler.edit', compact('table', 'scheme'));
+        $settings = json_decode($table->settings);
+
+        return view('citynexus::tabler.edit', compact('table', 'scheme', 'settings'));
     }
 
     public function postUpdateTable($id, Request $request)
@@ -178,6 +184,7 @@ class TablerController extends Controller
             $table->table_title = $request->get('table_title');
             $table->table_description = $request->get('table_description');
             $table->scheme = json_encode($request->get('map'));
+            $table->settings = json_encode($request->get('settings'));
 
             $table->save();
         }
@@ -208,13 +215,48 @@ class TablerController extends Controller
 
     public function processUpload($table, $data, $upload_id)
     {
+        $now = Carbon::now();
+
+        $settings = \GuzzleHttp\json_decode($table->settings);
+
+
+        if(!Schema::hasColumn($table->table_name, 'raw'))
+        {
+            Schema::table($table->table_name, function (Blueprint $table) {
+                $table->json('raw');
+            });
+        }
 
         try
         {
+            $upload = null;
+            $existing = DB::table($table->table_name)->lists('id');
             foreach($data as $i)
             {
-                $this->dispatch(new UploadData($i, $table->id, $upload_id));
+                if(isset($settings->unique_id) && $settings->unique_id != null)
+                {
+                    if(!isset($existing[$i->id]))
+                    {
+
+                        $upload[] = ['raw' => json_encode($i), 'processed_at' => $now, 'upload_id' => $upload_id, 'created_at' => $now, 'updated_at' => $now];
+                        $existing[$i->id] = $i->id;
+                    }
+                }
+                else{
+                    $upload[] = ['raw' => json_encode($i), 'processed_at' => $now, 'upload_id' => $upload_id, 'created_at' => $now, 'updated_at' => $now];
+                }
             }
+
+            DB::table($table->table_name)->insert($upload);
+            $new_ids = DB::table($table->table_name)->where('upload_id', $upload_id)->lists('id');
+
+            foreach($new_ids as $record)
+            {
+
+                $this->dispatch(new ProcessData($record, $table));
+
+            }
+
         }
         catch(Exception $e)
         {

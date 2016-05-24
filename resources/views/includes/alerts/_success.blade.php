@@ -1,1 +1,0 @@
-@include('includes.alerts._alert', ['class' => "success"])

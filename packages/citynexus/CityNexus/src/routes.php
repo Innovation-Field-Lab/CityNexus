@@ -13,6 +13,7 @@
 
 Route::controller("api-query", '\CityNexus\CityNexus\Http\APIController');
 
+Route::controller("/citynexus/help", '\CityNexus\CityNexus\Http\HelpController');
 
 Route::get('/activate-account/', function()
 {
@@ -29,36 +30,36 @@ Route::get('/activate-account/', function()
     }
 });
 
-Route::post('/activate-account', function()
-{
-    $password = $_POST['password'];
-    $confirm = $_POST['confirm-password'];
-    $token = $_POST['token'];
-    if($user = \App\User::where('activation', $token)->first())
-    {
-        if($password == $confirm)
-        {
-            if(strlen($password) < 8)
-            {
-                \Illuminate\Support\Facades\Session::flash('flash_warning', "Password must be at least 8 characters");
-                return redirect()->back();
-            }
-            $user->activation = null;
-            $user->fill([
-                'password' => Hash::make($password)
-            ])->save();
-
-            \Illuminate\Support\Facades\Auth::loginUsingId( $user->id );
-
-            return redirect('/');
-        }
-        else
-        {
-            \Illuminate\Support\Facades\Session::flash('flash_warning', "Passwords didn't match");
-            return redirect()->back();
-        }
-    }
-});
+//Route::post('/activate-account', function()
+//{
+//    $password = $_POST['password'];
+//    $confirm = $_POST['confirm-password'];
+//    $token = $_POST['token'];
+//    if($user = \App\User::where('activation', $token)->first())
+//    {
+//        if($password == $confirm)
+//        {
+//            if(strlen($password) < 8)
+//            {
+//                \Illuminate\Support\Facades\Session::flash('flash_warning', "Password must be at least 8 characters");
+//                return redirect()->back();
+//            }
+//            $user->activation = null;
+//            $user->fill([
+//                'password' => Hash::make($password)
+//            ])->save();
+//
+//            \Illuminate\Support\Facades\Auth::loginUsingId( $user->id );
+//
+//            return redirect('/');
+//        }
+//        else
+//        {
+//            \Illuminate\Support\Facades\Session::flash('flash_warning', "Passwords didn't match");
+//            return redirect()->back();
+//        }
+//    }
+//});
 
 
 Route::group(['middleware' => 'auth', 'prefix' => config('citynexus.root_directory') ], function() {
@@ -67,7 +68,9 @@ Route::group(['middleware' => 'auth', 'prefix' => config('citynexus.root_directo
     Route::controller('/settings', 'CityNexus\CityNexus\Http\CitynexusSettingsController');
     Route::controller('/notes', 'CityNexus\CityNexus\Http\NoteController');
     Route::controller('/tags', 'CityNexus\CityNexus\Http\TagController');
-    Route::controller('/reports', 'CityNexus\CityNexus\Http\ReportsController');
+    Route::controller('/reports/views', 'CityNexus\CityNexus\Http\ViewController');
+    Route::controller('/reports', 'CityNexus\CityNexus\Http\ReportController');
+    Route::controller('/properties', 'CityNexus\CityNexus\Http\PropertyController');
     Route::controller('/', 'CityNexus\CityNexus\Http\CitynexusController');
 
 });

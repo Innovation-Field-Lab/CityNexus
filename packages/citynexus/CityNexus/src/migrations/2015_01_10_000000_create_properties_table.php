@@ -20,9 +20,9 @@ class CreatePropertiesTable extends Migration {
             $table->string('street_name')->nullable();
             $table->string('street_type')->nullable();
             $table->string('unit')->nullable();
-            $table->string('city')->default('chelsea');
-            $table->string('state')->default('ma');
-            $table->string('zip')->default('02150');
+            $table->string('city')->nullable();
+            $table->string('state')->nullable();
+            $table->string('zip')->nullable();
             $table->string('lat')->nullable();
             $table->string('long')->nullable();
             $table->integer('map')->nullable();
@@ -31,7 +31,7 @@ class CreatePropertiesTable extends Migration {
             $table->string('tiger_line_id')->nullable();
             $table->string('side')->nullable();
             $table->integer('alias_of')->nullable();
-            $table->boolean('review')->default('false');
+            $table->boolean('review')->default(false);
             $table->timestamps();
         });
     }

@@ -4,7 +4,7 @@
     <select id="table_name" class="form-control" id="datafield">
         <option value="">[Select Score]</option>
         @foreach($scores as $i)
-            <option value="citynexus_scores_{{$i->id}}">{{$i->name}}</option>
+            <option value="citynexus_scores_{{$i->id}}" @if(isset($table) && 'citynexus_scores_' . $i->id == $table) selected @endif>{{$i->name}}</option>
         @endforeach
     </select>
     <input type='hidden' id="datafield" value="score">
@@ -18,7 +18,7 @@
         <option value="">[Select Data Field]</option>
         @foreach($scheme as $i)
             @if($i->type == 'integer' or $i->type == 'float')
-                <option value="{{$i->key}}">{{$i->name}}</option>
+                <option value="{{$i->key}}" @if(isset($key) && $key == $i->key) selected @endif>{{$i->name}}</option>
             @endif
         @endforeach
     </select>

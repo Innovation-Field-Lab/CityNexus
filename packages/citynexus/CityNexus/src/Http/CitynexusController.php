@@ -20,7 +20,7 @@ class CitynexusController extends Controller
 
     public function getIndex()
     {
-        $notes = Note::orderBy('created_at', "DEC")->take(20)->get();
+        $notes = Note::orderBy('created_at', "DEC")->take(20)->with('creator')->with('property')->get();
         return view('citynexus::dashboards.citymanager', compact('notes'));
     }
 

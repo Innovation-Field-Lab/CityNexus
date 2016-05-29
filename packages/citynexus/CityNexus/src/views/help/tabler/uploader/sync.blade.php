@@ -13,7 +13,7 @@
         with each other through related properties. Any data being
         uploaded needs to be connected with an address.
     </p>
-    <h3>How should address be formatted?</h3>
+    <h3>How should addresses be formatted?</h3>
     <p>
         As consistently as possible is the short answer. If there
         are a variety of ways to export addresses the preference

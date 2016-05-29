@@ -39,12 +39,12 @@
 </div>
 <!-- END wrapper -->
 <!-- Modal -->
-<div id="help-modal" class="modal-demo">
+<div id="modal" class="modal-demo">
     <button type="button" class="close" onclick="Custombox.close();">
         <span>&times;</span><span class="sr-only">Close</span>
     </button>
-    <h4 class="custom-modal-title">Modal title</h4>
-    <div id="help-modal-text" class="custom-modal-text">
+    <h4 class="custom-modal-title" id="modal-title">Modal title</h4>
+    <div id="modal-text" class="custom-modal-text">
     </div>
 </div>
 
@@ -73,6 +73,16 @@
 
 
     <script type="text/javascript">
+
+            function triggerModal(newTitle, newBody)
+            {
+                $("#modal-title").html(newTitle);
+                $("#modal-text").html(newBody);
+                Custombox.open({
+                    target: '#modal',
+                    effect: 'fadein'
+                });
+            }
             $(function () {
                 var i = -1;
                 var toastCount = 0;
@@ -208,9 +218,9 @@
         $.ajax({
             url: "{{action("\CityNexus\CityNexus\Http\HelpController@getItem")}}/" + help
         }).success(function (data){
-            $("#help-modal").html(data);
+            $("#modal").html(data);
             Custombox.open({
-                target: '#help-modal',
+                target: '#modal',
                 effect: 'fadein'
             });
         })

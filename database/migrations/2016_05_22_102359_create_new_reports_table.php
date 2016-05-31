@@ -12,13 +12,16 @@ class CreateNewReportsTable extends Migration
      */
     public function up()
     {
-        Schema::create('citynexus_reports', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->string('type');
-            $table->json('settings_json');
-            $table->timestamps();
-        });
+        if(!Schema::hasttable('citynexus_reports')) {
+
+            Schema::create('citynexus_reports', function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('name');
+                $table->string('type');
+                $table->json('settings_json');
+                $table->timestamps();
+            });
+        }
     }
 
     /**
@@ -28,6 +31,6 @@ class CreateNewReportsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('citynexus_reports');
+        return true;
     }
 }

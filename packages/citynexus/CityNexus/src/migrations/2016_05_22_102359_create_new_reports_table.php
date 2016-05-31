@@ -12,7 +12,7 @@ class CreateNewReportsTable extends Migration
      */
     public function up()
     {
-        if(!Schema::hasttable('citynexus_reports')) {
+        if(!Schema::hastable('citynexus_reports')) {
 
             Schema::create('citynexus_reports', function (Blueprint $table) {
                 $table->increments('id');

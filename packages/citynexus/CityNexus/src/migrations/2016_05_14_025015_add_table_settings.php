@@ -16,6 +16,7 @@ class AddTableSettings extends Migration
         {
             Schema::table('tabler_tables', function (Blueprint $table) {
                 $table->json('settings')->nullable();
+                $table->dropColumn('timestamp');
             });
         }
     }

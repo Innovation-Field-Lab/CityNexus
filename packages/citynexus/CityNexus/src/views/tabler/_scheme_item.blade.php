@@ -3,7 +3,7 @@
         <input type="checkbox" name="map[{{$key}}][skip]" >
     </td>
     <td><input type="checkbox" name="map[{{$key}}][show]" checked></td>
-    <td><input type="text" id="name-{{$key}}" name="map[{{$key}}][name]" class="form-control" value="{{ucwords($key)}}"></td>
+    <td><input type="text" name="map[{{$key}}][name]" class="form-control" value="{{ucwords($key)}}"></td>
     <td>
         {{$builder->cleanName($key)}}
         <input type="hidden" name="map[{{$key}}][key]" value="{{$key}}">
@@ -34,8 +34,4 @@
                 <option value="{{$k}}">{{$i}}</option>
             @endforeach
         </select></td>
-    <td>
-        <input type="hidden" name="map[{{$key}}][meta]" id="metadata-{{$key}}">
-        <div class="btn btn-primary btn-sm" onclick="addMeta('{{$key}}')">Add</div>
-    </td>
 </tr>

@@ -12,7 +12,7 @@ class CreateNewReportTable extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('citynexus_reports');
+        Schema::drop('citynexus_reports');
         Schema::create('citynexus_reports', function (Blueprint $table) {
             $table->increments('id');
             $table->json('settings');

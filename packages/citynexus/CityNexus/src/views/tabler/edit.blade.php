@@ -74,7 +74,6 @@
                             <i class="ti-help" style="cursor: pointer" onclick="getHelp('tabler.uploader.sync')" ></i>
                         </td>
                         <td>Push</td>
-                        <td>Meta</td>
                         </thead>
                         <tbody>
                             @foreach($scheme as $key => $item)
@@ -88,45 +87,4 @@
         </div>
     </div>
 
-    <div id="meta-modal" class="modal-demo">
-        <button type="button" class="close" onclick="Custombox.close();">
-            <span>&times;</span><span class="sr-only">Close</span>
-        </button>
-        <h4 class="custom-modal-title" id="meta-model-title">Add Meta Data for </h4>
-        <div id="meta-modal-text" class="custom-modal-text">
-        </div>
-    </div>
-
 @stop
-
-@push('js_footer')
-
-<script>
-    function addMeta( id )
-    {
-        var field = $("#name-" + id).val();
-        $("#modal-title").html('Add meta data for ' + field);
-
-        var meta = $("#metadata-" + id).val();
-        var modalBody = $("#modal-text");
-
-        var newText = "<textarea id='metadata' class='form-control'>" +
-        meta +
-        '</textarea><br><div class="btn btn-primary" onClick="Custombox.close(); saveMeta(\'' + id + '\')">Save</div>';
-
-        modalBody.html(newText);
-
-        Custombox.open({
-            target: '#modal',
-            effect: 'fadein'
-        });
-    }
-
-    function saveMeta( key )
-    {
-        var entry = $("#metadata").val();
-        $('#metadata-' + key).val( entry );
-    }
-</script>
-
-@endpush

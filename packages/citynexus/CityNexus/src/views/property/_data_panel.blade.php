@@ -7,7 +7,7 @@
 
                 @foreach($table as $column)
                 @if(isset($column->show) && $column->show == true)
-                    <th>@if(isset($column->meta) && $column->meta != null) <i onclick="viewMeta('{{$column->meta}}', '{{$column->name}}')" class="fa  fa-info-circle center" style="cursor: pointer"></i>@endif<br>{{$column->name}} </th>
+                    <th>{{$column->name}}</th>
                 @endif
             @endforeach
             </tr>

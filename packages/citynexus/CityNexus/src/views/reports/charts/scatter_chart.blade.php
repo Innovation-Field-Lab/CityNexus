@@ -6,6 +6,7 @@ $section = 'reports';
 
 @section(config('citynexus.section'))
 
+
     <div class="col-sm-9 ">
         <div class="card-box">
             <div class="dropdown pull-right">

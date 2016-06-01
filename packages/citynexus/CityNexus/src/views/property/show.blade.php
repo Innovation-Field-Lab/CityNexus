@@ -40,17 +40,22 @@ $section = 'properties';
 
 @section(config('citynexus.section'))
 
-    <div class="card-box">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+
             <div class="dropdown pull-right">
                 <div class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="cursor: pointer">
-                    <i class="zmdi zmdi-more-vert"></i>
+                    <i class="glyphicon glyphicon-chevron-down"></i>
                 </div>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                     <li><a href="{{action('\CityNexus\CityNexus\Http\TablerController@getMergeRecords')}}/{{$property->id}}">Merge Property</a></li>
                     <li><a href="#">Add Record</a></li>
                 </ul>
             </div>
+            <div class="panel-title">
 
+            </div>
+        </div>
         <div class="panel-body">
                 <div class="col-sm-8">
                     <div class="panel panel-default">
@@ -427,14 +432,6 @@ $section = 'properties';
     }
 
 </style>
-
-<script>
-    function viewMeta( message , name)
-    {
-        var newTitle = 'Metadata for ' + name;
-        triggerModal(newTitle, message);
-    }
-</script>
 
 @endpush
 

@@ -70,7 +70,7 @@ Route::group(['middleware' => 'auth', 'prefix' => config('citynexus.root_directo
     Route::controller('/tags', 'CityNexus\CityNexus\Http\TagController');
     Route::controller('/reports/views', 'CityNexus\CityNexus\Http\ViewController');
     Route::controller('/reports', 'CityNexus\CityNexus\Http\ReportController');
-    Route::controller('/properties', 'CityNexus\CityNexus\Http\PropertyController');
+    Route::controller('/property', 'CityNexus\CityNexus\Http\PropertyController');
     Route::controller('/', 'CityNexus\CityNexus\Http\CitynexusController');
 
 });

@@ -73,6 +73,7 @@
                             <i class="ti-help" style="cursor: pointer" onclick="getHelp('tabler.uploader.sync')" ></i>
                         </td>
                         <td>Push</td>
+                        <td>Meta</td>
                         </thead>
                         <tbody>
                             @foreach($table as $key => $item)
@@ -107,6 +108,32 @@
         $('#type-' + id).val('datetime').addClass('disable');
 
     });
+
+    function addMeta( id )
+    {
+        var field = $("#name-" + id).val();
+        $("#modal-title").html('Add meta data for ' + field);
+
+        var meta = $("#metadata-" + id).val();
+        var modalBody = $("#modal-text");
+
+        var newText = "<textarea id='metadata' class='form-control'>" +
+                meta +
+                '</textarea><br><div class="btn btn-primary" onClick="Custombox.close(); saveMeta(\'' + id + '\')">Save</div>';
+
+        modalBody.html(newText);
+
+        Custombox.open({
+            target: '#modal',
+            effect: 'fadein'
+        });
+    }
+
+    function saveMeta( key )
+    {
+        var entry = $("#metadata").val();
+        $('#metadata-' + key).val( entry );
+    }
 </script>
 
 @stop

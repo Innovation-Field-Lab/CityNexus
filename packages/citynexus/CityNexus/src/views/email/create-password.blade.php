@@ -1,4 +1,4 @@
-@extends('citynexus::master.login)
+@extends('citynexus::master.login')
 
 @section('main')
 

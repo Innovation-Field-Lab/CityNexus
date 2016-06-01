@@ -1,9 +1,7 @@
 @extends('citynexus::master.login')
 
 @section('main')
-
-<h3>Create Your Password</h3>
-<div class="alert alert-info">
+    <div class="alert alert-info">
     To activate your account, please create a password.
 </div>
 @if (count($errors) > 0)

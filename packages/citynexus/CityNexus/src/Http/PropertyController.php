@@ -4,6 +4,7 @@ namespace CityNexus\CityNexus\Http;
 
 use App\Http\Controllers\Controller;
 use App\User;
+use CityNexus\CityNexus\GeocodeJob;
 use CityNexus\CityNexus\Property;
 use CityNexus\CityNexus\DatasetQuery;
 use CityNexus\CityNexus\Score;
@@ -62,7 +63,7 @@ class PropertyController extends Controller
         $tag = Tag::firstOrCreate(['tag' => $tag]);
 
         //Associate with property
-        Property::find($request->get('property_id'))->tags()->attach($tag);
+        Property::find($request->get('property_id'))->tags()->attach($tag, ['created_by' => Auth::getUser()->id]);
 
         //Return snipit
         return view('citynexus::property._tag')->with('tag', $tag);
@@ -72,6 +73,43 @@ class PropertyController extends Controller
     {
         $this->authorize('citynexus', ['properties', 'show']);
 
-        return Property::find($request->get('property_id'))->tags()->detach($request->get('tag_id'));
+        DB::table('property_tag')
+            ->where('property_id', $request->get('property_id'))
+            ->where('tag_id', $request->get('tag_id'))
+            ->whereNull('deleted_at')
+            ->update(['deleted_at' => DB::raw('NOW()'), 'deleted_by' => Auth::getUser()->id]);
     }
+
+    public function getCreate()
+    {
+        $this->authorize('citynexus', [ 'properties', 'create']);
+
+        return view('citynexus::property.create');
+    }
+
+    public function postCreate(Request $request)
+    {
+        $this->validate($request, [
+            'house_number' => 'integer|required',
+            'street_name' => 'max:150|required',
+            'street_type' => 'required',
+            'unit' => 'max:50',
+            'full_address' => 'max:255'
+        ]);
+
+        $property = $request->all();
+        $property['street_name'] = strtolower($property['street_name']);
+        $property['unit'] = strtolower($property['unit']);
+
+        $property = Property::create($property);
+
+        if('local' != env('APP_ENV') or 'testing' != env('APP_ENV'))
+        {
+            $this->dispatch(new GeocodeJob($property->id));
+        }
+
+        return redirect(action('\CityNexus\CityNexus\Http\PropertyController@getShow', ['id' => $property->id]));
+    }
+
+
 }

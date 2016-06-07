@@ -32,6 +32,7 @@ $section = 'properties';
                         <tr>
                             <th>Id</th>
                             <th>Address</th>
+                            {{--<th>Added By</th>--}}
                             <th></th>
                         </tr>
                         </thead>
@@ -40,6 +41,7 @@ $section = 'properties';
                             <tr>
                                 <td>{{$item->id}}</td>
                                 <td>{{ucwords($item->full_address)}}</td>
+                                {{--<td>@if(isset($item->pivot->created_by)){{\App\User::find($item->pivot->created_by)->full_name}}@endif</td>--}}
                                 <td>
                                     @can('citynexus', ['group' => 'properties', 'method' => 'show'])
                                     <a class="btn btn-sm btn-primary" href="{{action('\CityNexus\CityNexus\Http\PropertyController@getShow', ['id' => $item->id])}}">Details</a>

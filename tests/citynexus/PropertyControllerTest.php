@@ -51,10 +51,23 @@ class PropertyControllerTest extends TestCase
 
     }
 
-    public function testPostAssociateTag()
-    {
 
-    }
+//    public function testCreateProperty()
+//    {
+//
+//        $access = factory(App\User::class)->create(
+//            [
+//                'permissions' => '{"properties":{"create":"true"}}'
+//            ]
+//        );
+//
+//        $this->actingAs($access)->visit(action('\CityNexus\CityNexus\Http\PropertyController@getCreate'))
+//            ->type('123', 'house_number')
+//            ->type('Main', 'street_name')
+//            ->select('street', 'street_type')
+//            ->type('#1', 'unit')
+//            ->press('Create Property');
+//    }
 
 
 }

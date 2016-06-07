@@ -154,6 +154,7 @@ $section = 'properties';
                             <div id="map" style="height: 250px"></div>
                         </div>
                     @endif
+
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             Property Tags

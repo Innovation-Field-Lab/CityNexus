@@ -41,8 +41,11 @@ class GeocodeJob extends Job implements SelfHandling, ShouldQueue
 
             if($geocode)
             {
-                $property->lat = $geocode->getLatitude();
-                $property->long = $geocode->getLongitude();
+                $location = Location::create([
+                    'lat' => $geocode->getLatitude(),
+                    'long' => $geocode->getLongitude(),
+                    'full_address' => $property->full_address,
+                ]);
             }
 
             $property->save();

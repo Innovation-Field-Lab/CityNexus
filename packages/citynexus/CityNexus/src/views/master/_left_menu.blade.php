@@ -40,6 +40,7 @@
                     <ul class="list-unstyled">
                         <li><a href="{{action('\CityNexus\CityNexus\Http\PropertyController@getIndex')}}">All Properties</a></li>
                         <li><a href="{{action('\CityNexus\CityNexus\Http\TagController@getIndex')}}"> All Tags</a></li>
+                        <li><a href="{{action('\CityNexus\CityNexus\Http\PropertyController@getCreate')}}">Create New Property</a></li>
                     </ul>
                 </li>
                 @endcan

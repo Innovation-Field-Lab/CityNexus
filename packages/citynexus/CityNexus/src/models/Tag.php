@@ -12,6 +12,6 @@ class Tag extends Model
 
     public function properties()
     {
-        return $this->belongsToMany('\CityNexus\CityNexus\Property', 'property_tag');
+        return $this->belongsToMany('\CityNexus\CityNexus\Property', 'property_tag')->whereNull('property_tag.deleted_at');
     }
 }

@@ -27,6 +27,6 @@
 <script>
     $("#datafield").change(function()
     {
-        window.location = "{{action('\CityNexus\CityNexus\Http\ReportsController@getDistributionCurve')}}/" + $('#table_name').val() + '/' + $('#datafield').val();
+        window.location = "{{action('\CityNexus\CityNexus\Http\ViewController@getDistribution')}}/" + $('#table_name').val() + '/' + $('#datafield').val();
     });
 </script>

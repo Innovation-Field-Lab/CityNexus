@@ -239,11 +239,11 @@ $section = 'reports';
                     }
                     $(window).resize(function(){
                         showScatterPlot(dataSet);
-                    }).error(fucntion(data)
+                    }).error(function(data)
                     {
                         $('#chart').html('<div class="fa fa-alert"></div>');
                         Command: toastr["warning"](name, "Uh oh. Something went wrong.");
-                    };
+                    });
                 });
             }
             function saveView() {

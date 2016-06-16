@@ -133,6 +133,10 @@
                             [
                                     'permission' => "Edit Properties Record",
                                     'key' => 'edit',
+                            ],
+                            [
+                                    'permission' => "Edit Properties Record",
+                                    'key' => 'create',
                             ]
                     ]
             ],

@@ -298,8 +298,8 @@ $section = 'dashboard';
                     <a href="{{action('\CityNexus\CityNexus\Http\PropertyController@getShow', [$i->property_id])}}#note-{{$i->id}}">
                         <div class="inbox-item">
                             {{--<div class="inbox-item-img"><img src="/images/users/avatar-1.jpg" class="img-circle" alt=""></div>--}}
-                            <p class="inbox-item-author">By {{ucwords($i->property->full_address)}}</p>
-                            <p class="inbox-item-text">{{$i->creator->fullname()}}</p>
+                            <p class="inbox-item-author">{{ucwords($i->property->full_address)}}</p>
+                            <p class="inbox-item-text">By {{$i->creator->fullname()}}</p>
                             <p class="inbox-item-text">{{substr($i->note, 0, 65)}} ...</p>
                             <p class="inbox-item-date">{{$i->created_at->diffForHumans()}}</p>
                         </div>

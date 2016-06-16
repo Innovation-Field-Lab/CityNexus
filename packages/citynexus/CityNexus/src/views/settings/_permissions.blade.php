@@ -135,7 +135,7 @@
                                     'key' => 'edit',
                             ],
                             [
-                                    'permission' => "Edit Properties Record",
+                                    'permission' => "Create Properties Record",
                                     'key' => 'create',
                             ]
                     ]

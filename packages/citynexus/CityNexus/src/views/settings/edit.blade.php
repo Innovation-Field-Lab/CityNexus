@@ -20,10 +20,17 @@
                                     {{--Application Settings--}}
                                 {{--</a>--}}
                             {{--</li>--}}
-                            @can('usersAdmin', 'create')
+                            @can('citynexus', ['users', 'create'])
                             <li role="presentation" class="">
                                 <a href="#users" role="tab" id="users-tab" data-toggle="tab" aria-controls="users" aria-expanded="false">
                                     User Accounts
+                                </a>
+                            </li>
+                            @endcan
+                            @can('citynexus', ['admin', 'edit'])
+                            <li role="presentation" class="">
+                                <a href="#app_settings" role="tab" id="app_settings-tab" data-toggle="tab" aria-controls="users" aria-expanded="false">
+                                    CityNexus Settings
                                 </a>
                             </li>
                             @endcan
@@ -86,11 +93,21 @@
                                     </div>
                                 </div>
                             </div>
-                            @can('usersAdmin', 'create')
+                            @can('citynexus', ['users', 'create'])
                             <div role="tabpanel" class="tab-pane fade" id="users" aria-labelledby="users-tab">
                                 <div class="panel">
                                     <div class="panel-body">
                                         @include('citynexus::settings._users')
+                                    </div>
+                                </div>
+                            </div>
+                            @endcan
+
+                            @can('citynexus', ['admin', 'edit'])
+                            <div role="tabpanel" class="tab-pane fade" id="app_settings" aria-labelledby="app_settings-tab">
+                                <div class="panel">
+                                    <div class="panel-body">
+                                        @include('citynexus::settings._app_settings')
                                     </div>
                                 </div>
                             </div>

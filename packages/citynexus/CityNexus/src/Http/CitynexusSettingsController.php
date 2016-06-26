@@ -148,4 +148,12 @@ class CitynexusSettingsController extends Controller
         return redirect()->back();
 
     }
+
+    public function postSaveSetting(Request $request)
+    {
+        $setting = Setting::firstOrCreate(['key' => $request->get('key')]);
+        $setting->value = $request->get('value');
+        $setting->save();
+        return response('Success');
+    }
 }

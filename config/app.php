@@ -147,8 +147,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         CityNexus\CityNexus\PackageServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
-        Barryvdh\Debugbar\ServiceProvider::class,
-        Toin0u\Geocoder\GeocoderServiceProvider::class
+        Barryvdh\Debugbar\ServiceProvider::class
     ],
 
     /*
@@ -197,8 +196,7 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
-        'Excel'     => Maatwebsite\Excel\Facades\Excel::class,
-        'Geocoder' => Toin0u\Geocoder\Facade\Geocoder::class,
+        'Excel'     => Maatwebsite\Excel\Facades\Excel::class
     ],
 
 ];

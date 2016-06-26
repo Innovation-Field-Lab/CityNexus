@@ -276,7 +276,7 @@ $section = 'dashboard';
 
 
     <div class="row">
-        <div class="col-lg-4">
+        <div class="col-sm-4">
             <div class="card-box">
                 {{--<div class="dropdown pull-right">--}}
                     {{--<a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">--}}

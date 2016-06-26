@@ -119,7 +119,7 @@ $section = 'reports';
 
 
         @push('js_footer')
-        <script type="text/javascript" src="https://mbostock.github.com/d3/d3.v2.js"></script>
+        <script type="text/javascript" src="/vendor/citynexus/plugins/d3/d3.js"></script>
         <script>
             $('.dataset').change(function( event ){
                 var selectId = event.currentTarget.id;

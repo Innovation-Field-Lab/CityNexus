@@ -91,7 +91,7 @@ $section = 'properties';
                                                             {{$apt->unit}}
                                                         </td>
                                                         <td>
-                                                            <a class="btn btn-sm btn-primary" href="/{{config('citynexus.root_directory')}}/property/{{$apt->id}}">Details</a>
+                                                            <a class="btn btn-sm btn-primary" href="{{action('\CityNexus\CityNexus\Http\PropertyController@getShow', ['id' => $apt->id])}}">Details</a>
                                                         </td>
                                                     </tr>
                                                 @endforeach

@@ -151,6 +151,10 @@
                             [
                                     'permission' => "Hard Delete Data",
                                     'key' => 'delete'
+                            ],
+                            [
+                                    'permission' => "Edit App Settings",
+                                    'key' => 'edit'
                             ]
                     ]
             ]

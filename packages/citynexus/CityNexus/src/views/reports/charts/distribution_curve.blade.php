@@ -157,7 +157,7 @@ $section = 'reports';
     console.log(chartWrapper.width());
     var margin = {top: 10, right: 30, bottom: 30, left: 30},
             width = chartWrapper.width() - margin.left - margin.right,
-            height = 600 - margin.top - margin.bottom;
+            height = 500 - margin.top - margin.bottom;
 
     var x = d3.scale.linear()
             .domain([0, {{$stats['max']}}])

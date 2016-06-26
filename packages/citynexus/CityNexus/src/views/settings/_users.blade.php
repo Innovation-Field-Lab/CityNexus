@@ -12,11 +12,13 @@
             <td>{{$user->first_name}} {{$user->last_name}}</td>
             <td>{{$user->email}}</td>
             <td>
-                <button class="btn btn-xs btn-primary" onclick="editPermissions({{$user->id}})">Permissions</button>
-                <button class="btn btn-xs btn-danger" onclick="removeUser({{$user->id}})">Delete</button>
-                <button class="btn btn-xs btn-caution @if($user->admin) hidden @endif" id="super-{{$user->id}}" onclick="superUser(true, {{$user->id}})">Make Super User</button>
-                @if(\Illuminate\Support\Facades\Auth::getUser()->admin && \Illuminate\Support\Facades\Auth::getUser()->id != $user->id)
-                    <button class="btn btn-xs btn-caution @if(!$user->admin) hidden @endif" id="desuper-{{$user->id}}" onclick="superUser(false, {{$user->id}})">Remove Super User</button>
+                @if(\Illuminate\Support\Facades\Auth::getUser()->id != $user->id)
+                    <button class="btn btn-xs btn-primary" onclick="editPermissions({{$user->id}})">Permissions</button>
+                    <button class="btn btn-xs btn-danger" onclick="removeUser({{$user->id}})">Delete</button>
+                    <button class="btn btn-xs btn-caution @if($user->admin) hidden @endif" id="super-{{$user->id}}" onclick="superUser(true, {{$user->id}})">Make Super User</button>
+                    @if(\Illuminate\Support\Facades\Auth::getUser()->admin)
+                        <button class="btn btn-xs btn-caution @if(!$user->admin) hidden @endif" id="desuper-{{$user->id}}" onclick="superUser(false, {{$user->id}})">Remove Super User</button>
+                    @endif
                 @endif
             </td>
         </tr>

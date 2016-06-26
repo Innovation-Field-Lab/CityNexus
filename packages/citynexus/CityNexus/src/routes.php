@@ -63,6 +63,7 @@ Route::post('/activate-account', function()
 
 
 Route::group(['middleware' => 'auth', 'prefix' => config('citynexus.root_directory') ], function() {
+    Route::controller('/search', 'CityNexus\CityNexus\Http\SearchController');
     Route::controller('/risk-score', 'CityNexus\CityNexus\Http\RiskScoreController');
     Route::controller('/admin', 'CityNexus\CityNexus\Http\AdminController');
     Route::controller('/settings', 'CityNexus\CityNexus\Http\CitynexusSettingsController');

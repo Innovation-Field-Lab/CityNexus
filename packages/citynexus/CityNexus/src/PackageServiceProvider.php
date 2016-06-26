@@ -68,6 +68,8 @@ class PackageServiceProvider extends ServiceProvider
         // Inluded Policies
         include_once __DIR__ . '/Policies/CityNexusPolicy.php';
 
+        include_once __DIR__ . '/helpers/HelperFunctions.php';
+
     }
 
 

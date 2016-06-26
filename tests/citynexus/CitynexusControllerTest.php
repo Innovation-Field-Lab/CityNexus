@@ -65,7 +65,7 @@ class CitynexusControllerTest extends TestCase
             ->assertResponseOk();
 
         $this->actingAs($access)->visit(action('\CityNexus\CityNexus\Http\CitynexusController@getIndex'))
-            ->click('Saved Report Views')
+            ->click('Saved Views')
             ->assertResponseOk();
 
         $this->actingAs($access)->visit(action('\CityNexus\CityNexus\Http\CitynexusController@getIndex'))

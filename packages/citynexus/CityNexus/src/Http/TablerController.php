@@ -301,7 +301,7 @@ class TablerController extends Controller
         }
 
         Session::flash('flash_success', "Records have been recorded as aliases.");
-        return redirect(action('\CityNexus\CityNexus\Http\CitynexusController@getProperty', ['property_id' => $id]));
+        return redirect(action('\CityNexus\CityNexus\Http\PropertyController@getShow', ['property_id' => $id]));
     }
 
     public function getDemergeProperty($id)

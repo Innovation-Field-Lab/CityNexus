@@ -14,7 +14,7 @@ class ProcessData extends Job implements SelfHandling, ShouldQueue
 {
     use InteractsWithQueue, SerializesModels;
     private $id;
-    private $table_id;
+    private $table;
     /**
      * Create a new job instance.
      *
@@ -22,10 +22,10 @@ class ProcessData extends Job implements SelfHandling, ShouldQueue
      * @param string $table_id
      * @param Property $upload_id
      */
-    public function __construct($id, $table_id)
+    public function __construct($id, $table)
     {
         $this->id = $id;
-        $this->table_id = $table_id;
+        $this->table = $table;
     }
     /**
      * Execute the job.
@@ -39,13 +39,9 @@ class ProcessData extends Job implements SelfHandling, ShouldQueue
         $tabler = new TableBuilder();
         //Process each individual record
 
-        $table = Table::find($this->table_id);
-
-        $id = $tabler->processRecord($this->id, $table);
-
         try
         {
-
+            $id = $tabler->processRecord($this->id, $this->table);
         }
         catch(\Exception $e)
         {

@@ -6,11 +6,14 @@ namespace CityNexus\CityNexus;
 
 use Carbon\Carbon;
 use CityNexus\CityNexus;
+use Geocoder\Geocoder;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use CityNexus\CityNexus\GeocodeJob;
+use CityNexus\CityNexus\Location;
+use CityNexus\CityNexus\Property;
 
 class TableBuilder
 {
@@ -67,7 +70,6 @@ class TableBuilder
                 $results[$key] = $i[$type];
             }
         }
-
         return $results;
     }
 
@@ -77,7 +79,7 @@ class TableBuilder
      * @param $syncValues
      * @return mixed
      */
-    public function findSyncId( $table_name, $i, $syncValues)
+    public function findSyncId( $i, $syncValues)
     {
         $search = [];
 
@@ -92,28 +94,64 @@ class TableBuilder
         {
 
         //Get the ID of the first row matching the sync parameters
-        $return = DB::table($table_name)
-            ->where($search)
-            ->pluck('id');
+        $return = Property::where($search)->pluck('id');
 
-        //Create new property record
-        if($return == null)
-        {
+        // Run Geocode of Address
+        if($return == null) {
 
-            // Check if should be flagged
-            $search = $this->checkAddress($search);
+            $curl = new \Ivory\HttpAdapter\CurlHttpAdapter();
+            $geocoder = new \Geocoder\Provider\GoogleMaps($curl);
 
-            // Add timestamp fields
-            $search['created_at'] = Carbon::now();
-            $search['updated_at'] = Carbon::now();
+            $geocode = $geocoder->geocode($search['full_address'] . ', ' . config('citynexus.city_state'));
+            $geocode = $geocode->first();
+            $full_address = trim($geocode->getStreetNumber() . ' ' . $geocode->getStreetName() . ' ' . $search['unit']);
 
-            // Create a new record in the master table.
-            $return = DB::table($table_name)
-                ->insertGetId($search);
+            $return = \CityNexus\CityNexus\Property::where('full_address', $full_address)->pluck('id');
+
+            if($return == null)
+            {
+                // Check if should be flagged
+                $search = $this->checkAddress($search);
+
+                // Create Location
+                $location = new Location;
+                $location->lat = $geocode->getLatitude();
+                $location->long = $geocode->getLongitude();
+                $location->street_number = $geocode->getStreetNumber();
+                $location->street_name = $geocode->getStreetName();
+                $location->polygon = json_encode($geocode->getBounds());
+                $location->locality = $geocode->getLocality();
+                $location->postal_code = $geocode->getPostalCode();
+                $location->sub_locality = $geocode->getSubLocality();
+                $location->admin_levels = json_encode($geocode->getAdminLevels());
+                $location->country = $geocode->getCountry();
+                $location->country_code = $geocode->getCountryCode();
+                $location->timezone = $geocode->getTimezone();
+                $location->raw = json_encode($geocode);
+                $location->address = $location->street_number . ' ' . $location->street_name;
+                $location->save();
+
+                $new = new Property;
+
+                $new->full_address = $full_address;
+                $new->house_number = $location->street_number;
+                $new->street_name = $location->street_name;
+                $new->unit = $search['unit'];
+                $new->city = $location->locality;
+                $new->state =
+                $new->zip = $location->postal_code;
+                $new->location_id = $location->id;
+
+                $new->save();
+
+                // Create a new record in the master table.
+                $return = $new->id;
+            }
+
+
         }
 
         return $return;
-
 
         }
         else
@@ -321,12 +359,11 @@ class TableBuilder
         //if there is a sync value, identify the index id
         if(isset($settings->property_id) && $settings->property_id)
         {
-            dd("hellow");
             $record[config('citynexus.index_id')] = $data->$settings->property_id;
         }
         elseif( count( $syncValues ) > 0)
         {
-            $record[config('citynexus.index_id')] = $this->findSyncId( config('citynexus.index_table'), $data, $syncValues );
+            $record[config('citynexus.index_id')] = $this->findSyncId($data, $syncValues);
         }
 
         if(isset($record[config('citynexus.index_id')]))
@@ -419,11 +456,6 @@ class TableBuilder
         }
 
         return $record;
-    }
-
-    public function geocode()
-    {
-
     }
 
 }

@@ -31,7 +31,7 @@ $section = 'properties';
                 </div>
                 <div class="panel-body">
                     <div class="form-inline">
-                        <input type="text" class="form-control" placeholder="Search property..." id="merge_search">
+                        <input type="text" class="form-control" placeholder="Search property..." id="search">
                         <button class="btn btn-primary" onclick="search()">Search</button>
                     </div>
                 </div>
@@ -58,8 +58,8 @@ $section = 'properties';
 <script>
     function search()
     {
-        var search = $('#merge_search').val();
-        var id = "{{$property->id}}";
+        var string = $('#search').val();
+        var id = {{$property->id}};
 
         $.ajax({
             url: "{{action('\CityNexus\CityNexus\Http\TablerController@postMergeSearch')}}",
@@ -67,7 +67,7 @@ $section = 'properties';
             data: {
                 _token: "{{csrf_token()}}",
                 id: id,
-                search: search
+                search: string
             }
         }).success(function(data){
             $('#results').removeClass('hidden');

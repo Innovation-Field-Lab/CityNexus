@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use CityNexus\CityNexus\GeocodeJob;
 use CityNexus\CityNexus\Location;
 use CityNexus\CityNexus\MergeProps;
+use CityNexus\CityNexus\ProcessData;
 use CityNexus\CityNexus\Property;
 use CityNexus\CityNexus\Upload;
 use Illuminate\Console\Scheduling\Schedule;
@@ -196,6 +197,24 @@ class AdminController extends Controller
         $schedule->command(
             "db:backup --database=mysql --destination=s3 --destinationPath=/{$environment}/projectname_{$environment}_{$date} --compression=gzip"
         )->weekly();
+    }
+
+    public function getProcessDataset($table_id, $record = false)
+    {
+        if($record)
+        {
+            $this->dispatch(new ProcessData($record, $table_id));
+        }
+        else
+        {
+            $records = DB::table(Table::find($table_id)->table_name)->list('id');
+            foreach($records as $id)
+            {
+                $this->dispatch(new ProcessData($id, $table_id));
+            }
+        }
+
+        return "success";
     }
 
 }

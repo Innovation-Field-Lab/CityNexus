@@ -85,6 +85,7 @@ class TablerController extends Controller
            'table_name' => 'max:255|required'
         ]);
         $tabler = new TableBuilder();
+
         $map = $request->get('map');
         $table = Table::find($id);
         $table->scheme = json_encode($map);
@@ -93,10 +94,12 @@ class TablerController extends Controller
         $table->table_description = $request->get('table_description');
         $table->settings = json_encode($request->get('settings'));
         $table->save();
+
         $upload = Upload::create(['table_id' => $table->id, 'note' => 'Initial Upload']);
 
         $this->processUpload( $table, json_decode($table->raw_upload, true)['parsed'], $upload->id);
 
+        $table->raw_upload = null;
         $table->save();
 
         return redirect('/tabler/');
@@ -250,7 +253,7 @@ class TablerController extends Controller
             foreach($new_ids as $record)
             {
 
-                $this->dispatch(new ProcessData($record, $table->id));
+                $this->dispatch(new ProcessData($record, $table));
 
             }
 
@@ -298,7 +301,7 @@ class TablerController extends Controller
         }
 
         Session::flash('flash_success', "Records have been recorded as aliases.");
-        return redirect(action('\CityNexus\CityNexus\Http\CitynexusController@getProperty', ['property_id' => $id]));
+        return redirect(action('\CityNexus\CityNexus\Http\PropertyController@getShow', ['property_id' => $id]));
     }
 
     public function getDemergeProperty($id)

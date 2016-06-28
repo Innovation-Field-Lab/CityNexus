@@ -9,6 +9,8 @@ $section = 'datasets';
 @section(config('citynexus.section'))
 
     <div class="row">
+        <a href="#custom-modal" class="btn btn-primary waves-effect waves-light m-r-5 m-b-10" data-animation="sidefall" data-plugin="custommodal"
+           data-overlaySpeed="100" data-overlayColor="#36404a">Side Fall</a>
         <div class="col-sm-12">
             <div class="card-box table-responsive">
                     <i style="cursor: pointer" onclick="getHelp('tabler.uploader')" class="ti-help pull-right"></i>

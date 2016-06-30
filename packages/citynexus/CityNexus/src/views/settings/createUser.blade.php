@@ -2,8 +2,7 @@
 
 @section(config('citynexus.section'))
 
-
-
+            @include('citynexus::master._errors')
             <form action="{{action('\CityNexus\CityNexus\Http\CitynexusSettingsController@postCreateUser')}}" class="form-horizontal" method="post">
                 {{csrf_field()}}
                 <div class="panel panel-default">
@@ -45,33 +44,22 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="admin" class="control-label col-sm-4">Admin User</label>
+                            <label for="admin" class="control-label col-sm-4">Super Admin User</label>
 
                             <div class="col-sm-8">
                                 <input type="checkbox" id="admin" name="admin" value="true" @if(old('admin')) checked @endif"/>
                             </div>
                         </div>
+
                         <div class="form-group">
-                            <label for="upload" class="control-label col-sm-4">Upload Permission</label>
+                            <label for="admin" class="control-label col-sm-4">Permissions</label>
 
                             <div class="col-sm-8">
-                                <input type="checkbox" id="upload" name="upload"  value="true" @if(old('upload') != null) checked @endif/>
+                            @include('citynexus::settings._permissions')
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="upload" class="control-label col-sm-4">Create Dataset Permission</label>
 
-                            <div class="col-sm-8">
-                                <input type="checkbox" id="dataset" name="dataset" value="true" @if(old('dataset') != null) checked @endif/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="upload" class="control-label col-sm-4">Create Scores Permission</label>
 
-                            <div class="col-sm-8">
-                                <input type="checkbox" id="scores" name="scores" value="true" @if(old('scores') != null) checked @endif/>
-                            </div>
-                        </div>
                     </div>
                     <div class="panel-footer">
                         <input type="submit" class="btn btn-primary" value="Invite user">
@@ -81,3 +69,25 @@
         </div>
 
     @stop
+
+    @push('javascript')
+
+<script>
+    function select( type  )
+    {
+        event.preventDefault();
+        $('.' + type).prop("checked", true);
+        $('#' + type + 'SelectAll').addClass('hidden');
+        $('#' + type + 'UnselectAll').removeClass('hidden');
+    }
+
+    function clearChecks( type  )
+    {
+        event.preventDefault()
+        $('.' + type).prop("checked", false);
+        $('#' + type + 'SelectAll').removeClass('hidden');
+        $('#' + type + 'UnselectAll').addClass('hidden');
+    }
+</script>
+
+    @endpush

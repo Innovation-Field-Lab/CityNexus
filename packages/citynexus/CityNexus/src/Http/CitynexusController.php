@@ -8,6 +8,7 @@ use CityNexus\CityNexus\Note;
 use CityNexus\CityNexus\Property;
 use CityNexus\CityNexus\DatasetQuery;
 use CityNexus\CityNexus\GenerateScore;
+use CityNexus\CityNexus\SendEmail;
 use CityNexus\CityNexus\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -24,34 +25,6 @@ class CitynexusController extends Controller
         return view('citynexus::dashboards.citymanager', compact('notes'));
     }
 
-//    public function getProperty($id)
-//    {
-//        $this->authorize('citynexus', [ 'properties',  'show']);
-//
-//        $property = Property::find($id);
-//        $datasets = DatasetQuery::relatedSets( $id );
-//        $tables = Table::all();
-//        $tags = Tag::select('tag')->lists('tag');
-//        $apts = Property::where('house_number', $property->house_number)
-//            ->where('street_name', $property->street_name)
-//            ->where('street_type', $property->street_type)
-//            ->where('id', '!=', $property->id)
-//            ->get();
-//
-//        // Initiallizes the variable to disclose aliases in dataset
-//        $disclaimer = false;
-//
-//        return view('citynexus::property.show', compact('property', 'datasets', 'tables', 'disclaimer', 'tags', 'apts'));
-//    }
-//
-//    public function getProperties()
-//    {
-//        $this->authorize('citynexus', ['properties', 'view']);
-//
-//        $properties = Property::where('alias_of', null)->get();
-//        return view('citynexus::property.index', compact('properties'));
-//    }
-
     public function postSubmitTicket(Request $request)
     {
         Mail::send('citynexus::email.submit_ticket', ['request' => $request], function ($m) use ($request) {
@@ -61,29 +34,33 @@ class CitynexusController extends Controller
         });
     }
 
-//    public function postAssociateTag(Request $request)
-//    {
-//        $this->authorize('citynexus', [ 'properties', 'show']);
-//        //Format Tag
-//        $tag = ucwords(strtolower($request->get('tag')));
-//
-//        //Get Tag ID
-//        $tag = Tag::firstOrCreate(['tag' => $tag]);
-//
-//        //Associate with property
-//        Property::find($request->get('property_id'))->tags()->attach($tag);
-//
-//        //Return snipit
-//        return view('citynexus::property._tag')->with('tag', $tag);
-//    }
-//
-//    public function postRemoveTag(Request $request)
-//    {
-//        $this->authorize('citynexus', ['properties', 'show']);
-//
-//        return Property::find($request->get('property_id'))->tags()->detach($request->get('tag_id'));
-//    }
+    /**
+     * @param Request $request
+     *                  - to: email address
+     *                  - subject: email address
+     *                  - message: email message, HTML formatted permitted
+     *                  - redirect: path to redirect after function called (optional)
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function postSendEmail(Request $request)
+    {
 
+        $to = $request->get('to');
+        $subject = $request->get('subject');
+        $message = $request->get('message');
+
+        $this->dispatch(new SendEmail($to, $subject, $message));
+
+        if($request->get('redirect') != null)
+        {
+            return redirect($request->get('redirect'));
+        }
+        else
+        {
+            return redirect()->back();
+        }
+    }
 
 
 }

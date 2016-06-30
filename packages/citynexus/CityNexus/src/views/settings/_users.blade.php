@@ -54,6 +54,21 @@
 
 @push('js_footer')
 <script>
+
+    @if(\Illuminate\Support\Facades\Session::get('flash_token') != null)
+    var newTitle = 'Invite User';
+    var newBody = "<form action={{action('\CityNexus\CityNexus\Http\CitynexusController@postSendEmail')}} method='post' class='form'>" +
+            '{{csrf_field()}}' +
+            "<input type='hidden' name='to' value='{{\Illuminate\Support\Facades\Session::get('flash_email')}}'>" +
+            "<input type='text' class='form-control' value='{{\Illuminate\Support\Facades\Session::get('flash_email')}}' disabled>" +
+            "<br><input class='form-control' type='text' name='subject' value='Welcome to CityNexus'>'" +
+            "<textarea class='form-control' name='message'>" +
+                    "To activate you account follow this link: {{ url('/activate-account?key=' . \Illuminate\Support\Facades\Session::get('flash_token')) }}" +
+            "</textarea>" +
+            "<br><br><input type='submit' class='btn btn-primary' value='Invite User'>"
+
+    triggerModal(newTitle, newBody);
+    @endif
     function editPermissions( id )
     {
         $.ajax({

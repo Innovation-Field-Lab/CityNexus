@@ -61,7 +61,7 @@ class PackageServiceProvider extends ServiceProvider
         // Include jobs
         include_once __DIR__ . '/Jobs/UploadData.php';
         include_once __DIR__ . '/Jobs/Geocode.php';
-        include_once __DIR__ . '/Jobs/InviteUser.php';
+        include_once __DIR__ . '/Jobs/SendEmail.php';
         include_once __DIR__ . '/Jobs/MergeProps.php';
         include_once __DIR__ . '/Jobs/ProcessData.php';
 

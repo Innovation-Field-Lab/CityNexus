@@ -161,9 +161,10 @@
     ]
 
 ?>
-
+@if(isset($user))
 <input type="hidden" name="user_id" value="{{$user->id}}">
 {{csrf_field()}}
+@endif
 
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
     {{--Data sets--}}

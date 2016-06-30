@@ -56,22 +56,26 @@ class CitynexusSettingsController extends Controller
             $user->last_name = $request->get('last_name');
             $user->email = $request->get('email');
             $user->password = str_random();
-            $user->admin = $this->testPref($request->all(), 'admin');
+            $user->admin = $request->get('admin');
+            $user->permissions = json_encode($request->get('permissions'));
+
+            // Create activation token;
+
+            $token = str_random(36);
+            $user->activation = $token;
 
             //Save the user Model
             $user->save();
-
-            $this->dispatch(new InviteUser($user->id));
 
         }
         catch(\Exception $e) {
             Session::flash('flash_warning', "Uh oh. " . $e);
             return redirect()->back()->withInput();
         }
-        finally
-        {
-        }
-        Session::flash('flash_success', "New user successfully invited.");
+
+
+        Session::flash('flash_token', $token);
+        Session::flash('flash_email', $user->email);
 
         return redirect(action('\CityNexus\CityNexus\Http\CitynexusSettingsController@getIndex'));
     }

@@ -137,6 +137,8 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         BackupManager\Laravel\Laravel5ServiceProvider::class,
+        Toin0u\Geocoder\GeocoderServiceProvider::class,
+
 
         /*
          * Application Service Providers...
@@ -196,7 +198,8 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
-        'Excel'     => Maatwebsite\Excel\Facades\Excel::class
+        'Excel'     => Maatwebsite\Excel\Facades\Excel::class,
+        'Geocoder' => Toin0u\Geocoder\Facade\Geocoder::class
     ],
 
 ];

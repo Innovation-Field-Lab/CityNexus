@@ -142,7 +142,7 @@
             ],
             [
                     'title' => 'Administrator',
-                    'key' => 'admin-rights',
+                    'key' => 'admin',
                     'permissions' => [
                             [
                                     'permission' => "View Admin Panel",

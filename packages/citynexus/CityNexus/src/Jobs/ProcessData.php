@@ -19,6 +19,7 @@ class ProcessData extends Job implements SelfHandling, ShouldQueue
      * Create a new job instance.
      *
      * @param string $data
+     * @param string $table_id
      * @param Property $upload_id
      */
     public function __construct($id, $table)
@@ -38,9 +39,12 @@ class ProcessData extends Job implements SelfHandling, ShouldQueue
         $tabler = new TableBuilder();
         //Process each individual record
 
+        $table = Table::find($this->table_id);
+
         try
         {
             $id = $tabler->processRecord($this->id, $this->table);
+
         }
         catch(\Exception $e)
         {

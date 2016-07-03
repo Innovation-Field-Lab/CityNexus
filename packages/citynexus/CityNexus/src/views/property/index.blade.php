@@ -47,7 +47,7 @@
                                 <a class="btn btn-sm btn-primary" href="{{action('\CityNexus\CityNexus\Http\PropertyController@getShow', ['id' => $item->id])}}">Details</a>
                                 @endcan
                                 @can('citynexus', ['group' => 'properties', 'method' => 'merge'])
-                                <a class="btn btn-sm btn-primary" href="{{action('\CityNexus\CityNexus\Http\TablerController@getMergeRecords')}}/{{$item->id}}">Merge Property</a>
+                                <a class="btn btn-sm btn-primary" href="{{action('\CityNexus\CityNexus\Http\TablerController@getMergeRecords', [$item->id])}}">Merge Property</a>
                                 @endcan
                             </td>
                         </tr>

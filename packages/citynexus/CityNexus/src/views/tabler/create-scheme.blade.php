@@ -66,12 +66,15 @@
                         <td>Ignore</td>
                         <td>Visible</td>
                         <td>Field Name
-                            <i class="ti-help" style="cursor: pointer" onclick="getHelp('tabler.uploader.fieldname')" ></i>
-                        </td>
-                        <td>Field Type</td>
+                            <i class="ti-help" style="cursor: pointer" onclick="getHelp('tabler.uploader.fieldName')" ></i></td>
+                        <td>Key
+                            <i class="ti-help" style="cursor: pointer" onclick="getHelp('tabler.uploader.key')" ></i></td>
+                        <td>First Value
+                            <i class="ti-help" style="cursor: pointer" onclick="getHelp('tabler.uploader.firstValue')" ></i></td>
+                        <td>Field Type
+                            <i class="ti-help" style="cursor: pointer" onclick="getHelp('tabler.uploader.fieldType')" ></i></td>
                         <td>Sync
-                            <i class="ti-help" style="cursor: pointer" onclick="getHelp('tabler.uploader.sync')" ></i>
-                        </td>
+                            <i class="ti-help" style="cursor: pointer" onclick="getHelp('tabler.uploader.sync')" ></i></td>
                         <td>Push</td>
                         <td>Meta</td>
                         </thead>

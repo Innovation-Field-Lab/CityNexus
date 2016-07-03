@@ -26,16 +26,17 @@ class RiskScoreController extends Controller
     public function getIndex()
     {
         $this->authorize('citynexus', ['group' => 'scores', 'method' => 'view']);
-
+        $scores = Score::all();
         return view('citynexus::risk-score.index')
-            ->with('scores', Score::all());
+            ->with('scores', $scores);
     }
 
     public function getCreate()
     {
         $this->authorize('citynexus', ['scores', 'create']);
 
-        $datasets = Table::all();
+        $datasets = Table::whereNotNull('table_title')->orderBy('table_title')->get();
+
         return view('citynexus::risk-score.new', compact('datasets'));
     }
 

@@ -46,7 +46,6 @@ class SendEmail extends Job implements SelfHandling, ShouldQueue
         $subject = $this->subject;
         $content = $this->message;
 
-
         Mail::send('citynexus::email.basic_email', ['content' => $content], function ($m) use ($to, $subject) {
             $m->from('postmaster@citynexus.org', 'CityNexus');
             $m->to($to)->subject($subject);

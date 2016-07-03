@@ -75,7 +75,7 @@ class ViewControllerTest extends TestCase
     {
         $access = factory(App\User::class)->create(
             [
-                'permissions' => '{"reports":{"view": "true"}, "scores":{"view": "true"}}',
+                'permissions' => '{"reports":{"view": "true"}, "scores":{"view": "true", "create": "true"}}',
 
             ]
         );

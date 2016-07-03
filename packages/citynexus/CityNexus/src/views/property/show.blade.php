@@ -148,7 +148,14 @@ $section = 'properties';
                     </div>
                 </div>
                 <div class="col-sm-4">
-
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary dropdown-toggle waves-effect" data-toggle="dropdown" aria-expanded="false"> Property Actions <span class="caret"></span> </button>
+                        <br><br>
+                        <ul class="dropdown-menu">
+                            <li><a onclick="addTask()">Add Task</a></li>
+                            <li><a href="{{action('\CityNexus\CityNexus\Http\TablerController@getMergeRecords')}}/{{$property->id}}">Merge Property</a></li>
+                        </ul>
+                    </div>
                     @if($property->location_id != null && 'local' != env('APP_ENV'))
                         <div class="panel panel-default">
                                 <div id="pano" style="height: 250px"></div>
@@ -156,6 +163,9 @@ $section = 'properties';
                         <div class="panel panel-default">
                             <div id="map" style="height: 250px"></div>
                         </div>
+                    @endif
+                    @if($property->tasks->count() > 0)
+                        @include('citynexus::property._tasks')
                     @endif
 
                     <div class="panel panel-default">
@@ -439,6 +449,32 @@ $section = 'properties';
         triggerModal(newTitle, message);
     }
 </script>
+<<<<<<< HEAD
+<script>
+    function addTask()
+    {
+        var taskForm = '<form action="{{action('\CityNexus\CityNexus\Http\TaskController@postCreate')}}" method="post">' +
+                        '{{csrf_field()}}' +
+                        '<input type="hidden" name="model" value="Property">' +
+                        '<input type="hidden" name="model_id" value="{{$property->id}}">' +
+                        '<input type="hidden" name="relation" value="tasks">' +
+                        '<label for="task">Task</label>' +
+                        '<input class="form-control" type="text" name="task">' +
+                        '<label for="description">Description</label>' +
+                        '<textarea class="form-control" name="description"></textarea>' +
+                        '<label for="assigned_to">Assign Task To:</label>' +
+                        '<select class="form-control" name="assigned_to">' +
+                            '<option value="">Select One</option>' +
+                            @foreach($users as $person)
+                                '<option value="{{$person->id}}">{{$person->fullname()}}</option>' +
+                            @endforeach
+                        '</select>' +
+                        '<br><br><input type="submit" class="btn btn-primary" value="Create Task"></form>';
+
+        triggerModal('Create Task', taskForm);
+    }
+</script>
+=======
 
 <script>
     function addImage()
@@ -474,5 +510,6 @@ $section = 'properties';
 
 </script>
 
+>>>>>>> master
 @endpush
 

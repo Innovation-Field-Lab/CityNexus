@@ -30,22 +30,3 @@
 @push('style')
 <link href="/vendor/citynexus/plugins/bootstrap-sweetalert/sweet-alert.css" rel="stylesheet" type="text/css" />
 @endpush
-@if(!isset($settings->unique_id))
-    @push('js_footer')
-    <script src="/vendor/citynexus/plugins/bootstrap-sweetalert/sweet-alert.min.js"></script>
-    <script>
-        //Info
-        $('#file').change(function () {
-            swal({
-                title: "No unique ID set for table",
-                text: "There is no unique ID set for this table. If you add duplicate data without a unique ID set it will create multiple records within the system. Please consider setting through the table's edit menu.",
-                type: "info",
-                showCancelButton: false,
-                confirmButtonClass: 'btn-info waves-effect waves-light',
-                confirmButtonText: 'Okay'
-            });
-        });
-    </script>
-
-    @endpush
-@endif

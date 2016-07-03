@@ -40,7 +40,7 @@ $section = 'datasets';
                                 {{$table->created_at->diffForHumans()}}
                             </td>
                             <td>
-                                {{$table->updated_at->diffForHumans()}}
+                                {{$table->updated_at->formatLocalized('%B %d, %Y')}}
                             </td>
                             <td>
                                 @can('citynexus', ['datasets', 'upload'])

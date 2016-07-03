@@ -30,16 +30,18 @@
                     <table id="datatable" class="table table-striped table-bordered">
                         <thead>
                         <tr>
-                            <th>Id</th>
-                            <th>Address</th>
+                            <th>House Number</th>
+                            <th>Street</th>
+                            <th>Unit</th>
                             <th></th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($properties as $item)
                         <tr>
-                            <td>{{$item->id}}</td>
-                            <td>{{ucwords($item->full_address)}}</td>
+                            <td>{{ucwords($item->house_number)}}</td>
+                            <td>{{ucwords($item->street_name . ' ' . $item->street_type)}}</td>
+                            <td>{{ucwords($item->unit)}}</td>
                             <td>
                                 @can('citynexus', ['group' => 'properties', 'method' => 'show'])
                                 <a class="btn btn-sm btn-primary" href="{{action('\CityNexus\CityNexus\Http\PropertyController@getShow', ['id' => $item->id])}}">Details</a>

@@ -19,7 +19,6 @@ class ProcessData extends Job implements SelfHandling, ShouldQueue
      * Create a new job instance.
      *
      * @param string $data
-     * @param string $table_id
      * @param Property $upload_id
      */
     public function __construct($id, $table)

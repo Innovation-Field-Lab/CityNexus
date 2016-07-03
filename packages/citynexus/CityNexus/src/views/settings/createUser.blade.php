@@ -70,24 +70,24 @@
 
     @stop
 
-    @push('javascript')
+    @push('js_footer')
 
-<script>
-    function select( type  )
-    {
-        event.preventDefault();
-        $('.' + type).prop("checked", true);
-        $('#' + type + 'SelectAll').addClass('hidden');
-        $('#' + type + 'UnselectAll').removeClass('hidden');
-    }
+    <script>
+        function select( type  )
+        {
+            event.preventDefault();
+            $('.' + type).prop("checked", true);
+            $('#' + type + 'SelectAll').addClass('hidden');
+            $('#' + type + 'UnselectAll').removeClass('hidden');
+        }
 
-    function clearChecks( type  )
-    {
-        event.preventDefault()
-        $('.' + type).prop("checked", false);
-        $('#' + type + 'SelectAll').removeClass('hidden');
-        $('#' + type + 'UnselectAll').addClass('hidden');
-    }
-</script>
+        function clearChecks( type  )
+        {
+            event.preventDefault()
+            $('.' + type).prop("checked", false);
+            $('#' + type + 'SelectAll').removeClass('hidden');
+            $('#' + type + 'UnselectAll').addClass('hidden');
+        }
+    </script>
 
     @endpush

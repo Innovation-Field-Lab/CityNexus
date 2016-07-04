@@ -40,6 +40,35 @@ class TableBuilderControllerTest extends TestCase
         $this->assertSame($property->id, $result);
     }
 
+    /**
+     *
+     * Test Tabler Index page
+     *
+     */
+    public function testFindSyncIDWithHypenedAddresses()
+    {
+        $tableBulider = new TableBuilder();
+
+        $syncValues = [
+            'house_number' => 'house_number',
+            'street_name' => 'street_name',
+            'street_type' => 'street_type'];
+
+        $data = \GuzzleHttp\json_decode(json_encode(['house_number' => '1-23',
+            'street_name' => 'testing',
+            'street_type' => 'street']));
+
+        $property = \CityNexus\CityNexus\Property::create([
+            'full_address' => '1 testing street',
+            'house_number' => '1',
+            'street_name' => 'testing',
+            'street_type' => 'street'
+        ]);
+
+        $result = $tableBulider->findSyncId('citynexus_properties', $data, $syncValues);
+
+        $this->assertSame($property->id, $result);
+    }
 
     public function testUnitsInHouseNumbers()
     {

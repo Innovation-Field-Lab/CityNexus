@@ -87,7 +87,7 @@ $section = 'scores';
                 update.addClass('btn-primary');
                 update.removeClass('btn-default');
             }).error(function(data){
-                alert('Uh oh. Something has gone wrong with this score. Please harass Sean about it. His personal cell phone number is (646) 373-1438.' + data.Message);
+                Command: toastr["alert"]("'Uh oh. Something has gone wrong with this score. ' + data.Message")
             });
         }
     }

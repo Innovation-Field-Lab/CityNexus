@@ -88,29 +88,34 @@ class TableBuilder
 
         $search = $this->processAddress($search);
 
+        if($search['house_number'] == null)
+        {
+            $return = false;
+        }
+
         if($search)
         {
-
         //Get the ID of the first row matching the sync parameters
         $return = DB::table($table_name)
             ->where($search)
             ->pluck('id');
 
-        //Create new property record
-        if($return == null)
-        {
 
-            // Check if should be flagged
-            $search = $this->checkAddress($search);
+            //Create new property record
+            if($return === null)
+            {
 
-            // Add timestamp fields
-            $search['created_at'] = Carbon::now();
-            $search['updated_at'] = Carbon::now();
+                // Check if should be flagged
+                $search = $this->checkAddress($search);
 
-            // Create a new record in the master table.
-            $return = DB::table($table_name)
-                ->insertGetId($search);
-        }
+                // Add timestamp fields
+                $search['created_at'] = Carbon::now();
+                $search['updated_at'] = Carbon::now();
+
+                // Create a new record in the master table.
+                $return = DB::table($table_name)
+                    ->insertGetId($search);
+            }
 
         return $return;
 
@@ -171,6 +176,14 @@ class TableBuilder
             $return['unit'] = '#' . $elements[1];
         }
 
+        // Find house house number with hypen
+        if(array_key_exists('house_number', $input) && strpos($input['house_number'], '-') != null)
+        {
+            $elements = explode('-', $input['house_number']);
+            $return['house_number'] = trim($elements[0]);
+        }
+
+        //
         if(array_key_exists('house_number', $input) && array_key_exists('street_name', $input))
         {
             if($return['house_number'] == null){
@@ -321,12 +334,20 @@ class TableBuilder
         //if there is a sync value, identify the index id
         if(isset($settings->property_id) && $settings->property_id)
         {
-            dd("hellow");
             $record[config('citynexus.index_id')] = $data->$settings->property_id;
         }
         elseif( count( $syncValues ) > 0)
         {
-            $record[config('citynexus.index_id')] = $this->findSyncId( config('citynexus.index_table'), $data, $syncValues );
+            $syncId = $this->findSyncId( config('citynexus.index_table'), $data, $syncValues );
+            if($syncId)
+            {
+                $record[config('citynexus.index_id')] = $syncId;
+
+            }
+            else
+            {
+                return false;
+            }
         }
 
         if(isset($record[config('citynexus.index_id')]))

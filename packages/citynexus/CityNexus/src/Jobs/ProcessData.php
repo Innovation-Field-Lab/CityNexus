@@ -37,10 +37,15 @@ class ProcessData extends Job implements SelfHandling, ShouldQueue
 
         $tabler = new TableBuilder();
         //Process each individual record
-        
+
         try
         {
             $id = $tabler->processRecord($this->id, $this->table);
+
+            if(!$id)
+            {
+                die;
+            }
 
         }
         catch(\Exception $e)

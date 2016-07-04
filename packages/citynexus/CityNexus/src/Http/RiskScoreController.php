@@ -91,31 +91,6 @@ class RiskScoreController extends Controller
         return view('citynexus::reports.ranking', compact('score', 'properties'));
     }
 
-//    public function getHeatMap($id)
-//    {
-//        $this->authorize('citynexus', ['scores', 'view']);
-//
-//        $rs = Score::find($id);
-//        $scores = Score::all();
-//
-//        $table = 'citynexus_scores_' . $rs->id;
-//
-//        $raw_data = DB::table($table)
-//            ->where('score', '>', '0')
-//            ->whereNotNull('lat')
-//            ->whereNotNull('long')
-//            ->join('citynexus_properties', 'citynexus_properties.id', '=', 'property_id')
-//            ->select($table . '.property_id', $table . '.score', 'citynexus_properties.lat', 'citynexus_properties.long')
-//            ->get();
-//
-//        $max = DB::table($table)
-//            ->max('score');
-//
-//
-//        return view('citynexus::reports.maps.heatmap', compact('rs', 'scores', 'data', 'max'));
-//
-//    }
-
     public function getPinMap($id)
     {
         $rs = Score::find($id);

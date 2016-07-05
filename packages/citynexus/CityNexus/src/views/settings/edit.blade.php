@@ -20,7 +20,7 @@
                                     {{--Application Settings--}}
                                 {{--</a>--}}
                             {{--</li>--}}
-                            @can('citynexus', ['users', 'create'])
+                            @can('citynexus', ['usersAdmin', 'create'])
                             <li role="presentation" class="">
                                 <a href="#users" role="tab" id="users-tab" data-toggle="tab" aria-controls="users" aria-expanded="false">
                                     User Accounts
@@ -93,7 +93,7 @@
                                     </div>
                                 </div>
                             </div>
-                            @can('citynexus', ['users', 'create'])
+                            @can('citynexus', ['usersAdmin', 'create'])
                             <div role="tabpanel" class="tab-pane fade" id="users" aria-labelledby="users-tab">
                                 <div class="panel">
                                     <div class="panel-body">

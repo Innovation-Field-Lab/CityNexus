@@ -252,9 +252,7 @@ class TablerController extends Controller
 
             foreach($new_ids as $record)
             {
-
-                $this->dispatch(new ProcessData($record, $table));
-
+                $this->dispatch(new ProcessData($record, $table->table_name));
             }
 
         }
@@ -264,8 +262,6 @@ class TablerController extends Controller
 
             return redirect()->back();
         }
-
-//        Artisan::call('queue:listen');
 
         Session::flash('flash_success', "Upload has been successfully queued.");
 
@@ -419,8 +415,6 @@ class TablerController extends Controller
 
         return $file;
     }
-
-    // AJAX Requests
 
     public function getDataFields($id)
     {

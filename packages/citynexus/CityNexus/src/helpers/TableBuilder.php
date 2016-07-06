@@ -61,13 +61,13 @@ class TableBuilder
         $results = [];
 
         // Decode Scheme
-        $scheme = json_decode($scheme, true);
         foreach ($scheme as $key => $i) {
-            if (isset($i[$type]) && $i[$type] != null) {
-                $results[$key] = $i[$type];
+            $value = $i->$type;
+            if ($value != 'null')
+            {
+                $results[$key] = $i->$type;
             }
         }
-
         return $results;
     }
 
@@ -81,6 +81,7 @@ class TableBuilder
     {
         $search = [];
 
+
         foreach($syncValues as $key => $field)
         {
             if($key != null && isset($i->$key)) $search[$field] = $i->$key;
@@ -90,8 +91,9 @@ class TableBuilder
 
         if($search['house_number'] == null)
         {
-            $return = false;
+            return false;
         }
+
 
         if($search)
         {
@@ -102,7 +104,7 @@ class TableBuilder
 
 
             //Create new property record
-            if($return === null)
+            if($return == null)
             {
 
                 // Check if should be flagged
@@ -119,7 +121,6 @@ class TableBuilder
 
         return $return;
 
-
         }
         else
             return false;
@@ -127,30 +128,6 @@ class TableBuilder
 
     protected function checkAddress($search)
     {
-
-        // Check if there are more than three addresses on the street
-        if(Property::where('street_name', $search['street_name'])
-                ->where('street_type', $search['street_type'])
-                ->count() < 1)
-        {
-            $search['review'] = true;
-        }
-
-        //Check if there are more than a single unit in the building
-        if(Property::where('street_name', $search['street_name'])
-                ->where('street_type', $search['street_type'])
-                ->where('house_number', $search['house_number'])
-                ->where('unit', '!=', 'null')
-                ->count() < 1)
-        {
-            $search['review'] = true;
-        }
-
-//        if($search['street_name'] == null && $search['house_number'] == null)
-//        {
-//            throw new \Exception('No meaningful address');
-//        }
-
         return $search;
     }
 
@@ -159,6 +136,7 @@ class TableBuilder
      */
     protected function processAddress($input)
     {
+
         $return = ['full_address' => null, 'house_number' => null, 'street_name' => null, 'street_type' => null, 'unit' => null];
 
         $streets = config('citynexus.street_types');
@@ -166,7 +144,6 @@ class TableBuilder
         $units = config('citynexus.unit_types');
 
         $parts = null;
-
 
         // Find house numbers with apt number embedded
         if(array_key_exists('house_number', $input) && strpos($input['house_number'], '#') != null)
@@ -198,17 +175,33 @@ class TableBuilder
         //If full address is provided
         if(array_key_exists('full_address', $input))
         {
-            $full_address = $input['full_address'];
-            $full_address = preg_replace('/[^\p{L}\p{N}\s]/u', '', $full_address);
+            $address = $input['full_address'];
+            $full_address = preg_replace('/[^\p{L}\p{N}\s]/u', '', $address);
             $full_address = strtolower($full_address);
             //break up into array
             $parts = explode(' ', $full_address);
-            //Use first element as street number
-            $return['house_number'] = $parts[0];
-            unset($parts[0]);
+            if(strpos($address, '-') != null)
+            {
+                $elements = explode('-', $address);
+                $return['house_number'] = trim($elements[0]);
+                unset($parts[0]);
+            }
+            //Use first element as street number if the first element is a number
+            if($return['house_number'] == null)
+            {
+                $return['house_number'] = $parts[0];
+                unset($parts[0]);
+            }
+
+            if(!is_numeric($return['house_number']))
+            {
+                return false;
+            }
+
         }
 
         $unit = false;
+
         if($parts != null)
         {
         foreach($parts as $k => $i)
@@ -240,18 +233,24 @@ class TableBuilder
             unset($parts[$k]);
         }
 
-        if(array_key_exists('unit', $input)) $return['unit'] = trim($input['unit']);
-        if(array_key_exists('street_type', $input)) $return['street_type'] = trim($input['street_type']);
+        if(array_key_exists('unit', $input)) {
+            $return['unit'] = trim($input['unit']);
+        }
+        if(array_key_exists('street_type', $input)) {
+            $return['street_type'] = trim($input['street_type']);
+        }
 
-        //Clear stray characters of unit variable.
-        if($return['unit'] == null) $return['unit'] = null;
+            //Clear stray characters of unit variable.
+            if($return['unit'] == null)
+            {
+                $return['unit'] = null;
+            }
 
-        $return['full_address'] = trim(trim($return['house_number']) . ' ' . trim($return['street_name']) . ' ' . trim($return['street_type']) . ' ' . $return['unit']);
+            $return['full_address'] = trim(trim($return['house_number']) . ' ' . trim($return['street_name']) . ' ' . trim($return['street_type']) . ' ' . $return['unit']);
 
             return $return;
         }
         else
-
             return false;
 
     }
@@ -319,17 +318,17 @@ class TableBuilder
 
         //Create a empty array of the record
         $record = [];
+        $dataset = Table::where('table_name', $table)->first();
 
-        $data = json_decode($data = DB::table($table->table_name)->where('id', $id)->pluck('raw'));
-        $settings = \GuzzleHttp\json_decode($table->settings);
+        $data = json_decode(DB::table($table)->where('id', $id)->pluck('raw'));
+
+        $settings = $dataset->schema;
 
         $tabler = new TableBuilder();
 
         //create an array of sync values
-        $syncValues = $tabler->findValues( $table->scheme, 'sync' );
-        $pushValues = $tabler->findValues( $table->scheme, 'push' );
-
-        $scheme = json_decode($table->scheme);
+        $syncValues = $tabler->findValues( $settings, 'sync' );
+        $pushValues = $tabler->findValues( $settings, 'push' );
 
         //if there is a sync value, identify the index id
         if(isset($settings->property_id) && $settings->property_id)
@@ -339,43 +338,40 @@ class TableBuilder
         elseif( count( $syncValues ) > 0)
         {
             $syncId = $this->findSyncId( config('citynexus.index_table'), $data, $syncValues );
-            if($syncId)
+
+            if($syncId != null)
             {
                 $record[config('citynexus.index_id')] = $syncId;
-
             }
             else
             {
                 return false;
             }
         }
-
         if(isset($record[config('citynexus.index_id')]))
         {
-
             //add remaining elements to the array
-            $record = $this->addElements($record, $data, $scheme);
-            $record = $this->processElements($scheme, $record);
-            $record = $this->checkForUsedKeys($record, $table);
+            $record = $this->addElements($record, $data, $settings);
+            $record = $this->processElements($settings, $record);
+            $record = $this->checkForUsedKeys($record, $dataset);
 
             if (isset($settings->timestamp) && $settings->timestamp != null) {
                 $record['created_at'] = $record[$settings->timestamp];
             }
 
             try{
-
-                DB::table($table->table_name)->where('id', $id)->update($record);
-
+                DB::table($table)->where('id', $id)->update($record);
             }
             catch(\Exception $e)
             {
                 Error::create(['location' => 'processRecord - Insert Record', 'data' => json_encode(['e' => $e, 'id' => $id, 'table' => $table, 'record' => $record])]);
             }
+
             //If there are push values, update the primary property record
             if (count($pushValues) > 0) {
                 $property = Property::find($record['property_id']);
                 foreach ($pushValues as $key => $value) {
-                    $property->$value = $data[$key];
+                    $property->$value = $data->$key;
                 }
                 $property->save();
             }
@@ -398,7 +394,7 @@ class TableBuilder
      */
     private function checkForUsedKeys($records, $table)
     {
-        $settings = \GuzzleHttp\json_decode($table->settings);
+        $settings = $table->setting;
 
         $keys = ['id', 'property_id', 'upload_id', 'updated_at', 'raw', 'created_at'];
         foreach($keys as $i) {

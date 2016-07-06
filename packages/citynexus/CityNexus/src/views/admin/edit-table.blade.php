@@ -27,6 +27,9 @@
                     @can('citynexus', ['dataset', 'delete'])
                         <th></th>
                     @endcan
+                    @can('citynexus', ['dataset', 'edit'])
+                        <th></th>
+                    @endcan
                     @foreach($table[0] as $k => $i)
                         <th>
                             <a href="{{Request::url()}}?sort_by={{$k}}">{{$k}}</a>
@@ -40,6 +43,11 @@
                             <td>
                                 <a href="/{{config('citynexus.root_directory')}}/admin/remove-data?table_name={{$table_name}}&row_id={{$row->id}}&_token={{csrf_token()}}" class="btn btn-primary btn-sm">Delete</a>
                             </td>
+                        @endcan
+                        @can('citynexus', ['dataset', 'edit'])
+                        <td>
+                            <a href="{{action('\CityNexus\CityNexus\Http\AdminController@getProcessData', [$row->id, $table_name])}}" class="btn btn-primary btn-sm">Process Row</a>
+                        </td>
                         @endcan
                         @foreach($row as $item)
                             <td>

@@ -35,6 +35,7 @@ class ProcessData extends Job implements SelfHandling, ShouldQueue
     {
 //        DB::reconnect();
 
+
         $tabler = new TableBuilder();
         //Process each individual record
 
@@ -42,11 +43,10 @@ class ProcessData extends Job implements SelfHandling, ShouldQueue
         {
             $id = $tabler->processRecord($this->id, $this->table);
 
-            if(!$id)
+            if($id == false)
             {
-                die;
+                return false;
             }
-
         }
         catch(\Exception $e)
         {

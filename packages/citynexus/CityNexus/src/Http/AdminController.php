@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use CityNexus\CityNexus\GeocodeJob;
 use CityNexus\CityNexus\Location;
 use CityNexus\CityNexus\MergeProps;
+use CityNexus\CityNexus\ProcessData;
 use CityNexus\CityNexus\Property;
 use CityNexus\CityNexus\Upload;
 use Illuminate\Console\Scheduling\Schedule;
@@ -35,6 +36,13 @@ class AdminController extends Controller
         $tables = DB::table('information_schema.tables')->where('table_schema', 'public')->get();
         return view('citynexus::admin.index', compact('tables'));
 
+    }
+
+    public function getProcessData($id, $table_name)
+    {
+        $this->dispatch(new ProcessData($id, $table_name));
+
+        return redirect()->back();
     }
 
     public function getRefreshGeocoding()

@@ -56,14 +56,7 @@ class CitynexusSettingsController extends Controller
             $user->last_name = $request->get('last_name');
             $user->email = $request->get('email');
             $user->password = str_random();
-            if($request->get('admin') == null)
-            {
-                $user->admin = false;
-            }
-            else
-            {
-                $user->admin = true;
-            }
+            $user->admin = $request->get('admin');
             $user->permissions = json_encode($request->get('permissions'));
 
             // Create activation token;
@@ -76,7 +69,7 @@ class CitynexusSettingsController extends Controller
 
         }
         catch(\Exception $e) {
-            Session::flash('flash_warning', "Uh oh. Something went wrong.");
+            Session::flash('flash_warning', "Uh oh. " . $e);
             return redirect()->back()->withInput();
         }
 
@@ -106,7 +99,7 @@ class CitynexusSettingsController extends Controller
 
     public function postRemoveUser(Request $request)
     {
-        $this->authorize('citynexus', 'usersAdmin', 'delete');
+        $this->authorize('citynexus', 'userAdmin', 'delete');
 
         $user = User::find($request->get('user_id'));
         $user->delete();

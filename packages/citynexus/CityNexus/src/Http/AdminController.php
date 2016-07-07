@@ -206,4 +206,20 @@ class AdminController extends Controller
         )->weekly();
     }
 
+    public function getMigrateAdmin()
+    {
+        $users = User::all();
+        foreach($users as $i)
+        {
+            if($i->admin)
+            {
+                $i->super_admin = true;
+                $i->save();
+            }
+        }
+
+        Session::flash('flash_success', 'Updates completed');
+        return redirect()->back();
+    }
+
 }

@@ -16,7 +16,8 @@
         "phaza/laravel-postgis": "2.*",
         "willdurand/geocoder": "^2.8",
         "toin0u/geocoder-laravel": "@stable",
-        "spatie/laravel-glide": "^2.3"
+        "spatie/laravel-glide": "^2.3",
+        "doctrine/dbal": "*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

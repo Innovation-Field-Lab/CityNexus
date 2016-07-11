@@ -39,8 +39,6 @@ class GeocodeJob extends Job implements SelfHandling, ShouldQueue
             $location = Location::find($this->p_id);
             $geocode = Geocoder::geocode(   $location->full_address  . ', ' . config('citynexus.city_state'));
 
-            dd($geocode);
-            
             if($geocode)
             {
                 $location->lat = $geocode->getLatitude();

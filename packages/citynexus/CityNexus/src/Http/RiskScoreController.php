@@ -358,9 +358,16 @@ class RiskScoreController extends Controller
         DB::table($table)->insert($insert);
 
         $aliases = DB::table('citynexus_properties')->whereNotNull('alias_of')->select('id', 'alias_of')->get();
-        foreach($aliases as $i)
+        if(count($aliases) > 0)
         {
-            $alias[$i->id] = $i->alias_of;
+            foreach($aliases as $i)
+            {
+                $alias[$i->id] = $i->alias_of;
+            }
+        }
+        else
+        {
+            $alias = null;
         }
 
         foreach ($elements as $element)

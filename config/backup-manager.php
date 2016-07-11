@@ -11,7 +11,7 @@ return [
         'secret' => env('S3_SECRET'),
         'region' => env('S3_REGION'),
         'bucket' => env('S3_BACKUP_BUCKET'),
-        'root'   => env('S3_BACKUP_ROOT') . '/' . date("Y") . '/' . date("m") . '/' . date("d"),
+        'root'   => env('S3_BACKUP_ROOT') . '/' . date("Y") . '/' . date("m") . '/',
     ],
     'gcs' => [
         'type' => 'Gcs',

@@ -36,19 +36,16 @@ class GeocodeJob extends Job implements SelfHandling, ShouldQueue
         try
         {
             // Get property record
-            $property = Property::find($this->p_id);
-            $geocode = Geocoder::geocode(   $property->full_address  . ', ' . config('citynexus.city_state'));
+            $location = Location::find($this->p_id);
+            $geocode = Geocoder::geocode(   $location->full_address  . ', ' . config('citynexus.city_state'));
 
             if($geocode)
             {
-                $location = Location::create([
-                    'lat' => $geocode->getLatitude(),
-                    'long' => $geocode->getLongitude(),
-                    'full_address' => $property->full_address,
-                ]);
+                $location->lat = $geocode->getLatitude();
+                $location->long = $geocode->getLongitude();
             }
 
-            $property->save();
+            $location->save();
         }
         catch(\Exception $e)
         {

@@ -395,6 +395,7 @@ class TablerController extends Controller
 
     public function getDownloadTable($table_name)
     {
+        set_time_limit(240);
         try{
 
 
@@ -405,7 +406,7 @@ class TablerController extends Controller
             $excel->sheet('Sheet 1', function($sheet) use($table) {
                 $sheet->fromArray($table);
             });
-        })->export('xls');
+        })->download('csv');
         }
         catch(\Exception $e)
         {

@@ -14,7 +14,6 @@ return [
     // The first one to return a result will be used.
     'providers' => [
         'Geocoder\Provider\GoogleMapsProvider' => ['en-US', 'US', true],
-        'Geocoder\Provider\FreeGeoIpProvider'  => null,
     ],
     'adapter'  => 'Geocoder\HttpAdapter\CurlHttpAdapter',
 ];

@@ -47,7 +47,7 @@
                             <label for="admin" class="control-label col-sm-4">Super Admin User</label>
 
                             <div class="col-sm-8">
-                                <input type="checkbox" id="admin" name="admin" value="true" @if(old('admin')) checked @endif"/>
+                                <input type="checkbox" id="admin" name="super_admin" value="true" @if(old('admin')) checked @endif"/>
                             </div>
                         </div>
 

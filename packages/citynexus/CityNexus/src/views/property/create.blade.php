@@ -54,6 +54,7 @@ $section = 'properties';
                                 <option value="circle" @if(old('street_type') == 'circle') selected @endif>Circle</option>
                                 <option value="court" @if(old('street_type') == 'court') selected @endif>Court</option>
                                 <option value="drive" @if(old('street_type') == 'drive') selected @endif>Drive</option>
+                                <option value="expressway" @if(old('street_type') == 'highway') selected @endif>Highway</option>
                                 <option value="expressway" @if(old('street_type') == 'expressway') selected @endif>Express Way</option>
                                 <option value="lane" @if(old('street_type') == 'lane') selected @endif>Lane</option>
                                 <option value="parkway" @if(old('street_type') == 'parkway') selected @endif>Parkway</option>

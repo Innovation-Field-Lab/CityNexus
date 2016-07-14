@@ -17,16 +17,6 @@
 
 
     <a href="/{{config('citynexus.root_directory')}}/admin/merge-properties" class="btn btn-primary">Merge Properties</a>
-
-    <br>
-    <br>
-    <a href="{{action('\CityNexus\CityNexus\Http\AdminController@getMigrateAdmin')}}" class="btn btn-primary">Migrate Admin</a>
-    <br>
-    <br>
-    <a href="{{action('\CityNexus\CityNexus\Http\AdminController@getMigratePropertiesToLocations')}}" class="btn btn-primary">Migrate Properties to Locations</a>
-    <br>
-    <br>
-    <a href="{{action('\CityNexus\CityNexus\Http\AdminController@getMigrateTimeStamps')}}" class="btn btn-primary">Migrate Timestamps</a>
     <br>
     <br>
 

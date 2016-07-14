@@ -165,9 +165,11 @@ class AdminController extends Controller
             {
                 $tables = Table::whereNotNull('table_name')->get();
 
+
                 foreach($tables as $i)
                 {
-                    $dataset = DB::table($i->table_name)->whereNotNull('property_id')->get(['id']);
+
+                    $dataset = DB::table($i->table_name)->whereNotNull('property_id')->lists('id');
                     $dataset = array_chunk($dataset, 200);
                     foreach($dataset as $ids)
                     {
@@ -186,9 +188,10 @@ class AdminController extends Controller
                 }
             }
 
+            Session::flash('flash_success', 'That worked!');
 
         }
-        Session::flash('flash_success', 'That worked!');
+
         return redirect('/');
     }
 

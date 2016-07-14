@@ -23,7 +23,7 @@ class CreateRaw extends Job implements SelfHandling, ShouldQueue
      */
     public function __construct($table, $ids)
     {
-        $this->id = $ids;
+        $this->ids = $ids;
         $this->table = $table;
     }
     /**
@@ -33,7 +33,7 @@ class CreateRaw extends Job implements SelfHandling, ShouldQueue
      */
     public function handle()
     {
-        DB::reconnect();
+//        DB::reconnect();
 
         if(is_array($this->ids))
         {

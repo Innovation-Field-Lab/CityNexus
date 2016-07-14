@@ -352,9 +352,7 @@ class TableBuilder
 
     public function saveRawAddress($table, $id)
     {
-
         //Create a empty array of the record
-        $record = [];
         $dataset = Table::where('table_name', $table)->first();
 
         $data = json_decode(DB::table($table)->where('id', $id)->pluck('raw'));

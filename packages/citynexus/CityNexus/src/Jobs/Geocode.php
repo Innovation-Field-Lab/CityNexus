@@ -33,23 +33,36 @@ class GeocodeJob extends Job implements SelfHandling, ShouldQueue
     {
         DB::reconnect();
 
-        try
+        if(!is_array($this->p_id))
         {
-            // Get property record
-            $location = Location::find($this->p_id);
-            $geocode = Geocoder::geocode(   $location->full_address  . ', ' . config('citynexus.city_state'));
-
-            if($geocode)
-            {
-                $location->lat = $geocode->getLatitude();
-                $location->long = $geocode->getLongitude();
-            }
-
-            $location->save();
+            $this->p_id[] =$this->p_id;
         }
-        catch(\Exception $e)
-        {
-            Error::create(['location' => 'GeoCode Job', 'data' => json_encode(['pid' => $this->p_id, 'e' => $e])]);
+
+        foreach($this->p_id as $id) {
+            try {
+                // Get property record
+                $location = Location::find($id);
+                $geocode = Geocoder::geocode($location->full_address . ', ' . config('citynexus.city_state'));
+
+                if ($geocode) {
+                    $location->lat = $geocode->getLatitude();
+                    $location->long = $geocode->getLongitude();
+                    $location->polygon = \GuzzleHttp\json_encode($geocode->getBounds());
+                    $location->street_number = $geocode->getStreetNumber();
+                    $location->street_name = $geocode->getStreetName();
+                    $location->locality = $geocode->getLocality();
+                    $location->postal_code = $geocode->getPostalCode();
+                    $location->sub_locality = $geocode->getSubLocality();
+                    $location->admin_levels = \GuzzleHttp\json_encode($geocode->getAdminLevels());
+                    $location->country = $geocode->getCountry();
+                    $location->country_code = $geocode->getCountryCode();
+                    $location->timezone = $geocode->getTimezone();
+                }
+
+                $location->save();
+            } catch (\Exception $e) {
+                Error::create(['location' => 'GeoCode Job', 'data' => json_encode(['pid' => $this->p_id, 'e' => $e])]);
+            }
         }
 
     }

@@ -13,12 +13,13 @@ return [
         'bucket' => env('S3_BACKUP_BUCKET'),
         'root'   => env('S3_BACKUP_ROOT') . '/' . date("Y") . '/' . date("z") . '/' . date("G"),
     ],
-    'gcs' => [
-        'type' => 'Gcs',
-        'key'    => '',
-        'secret' => '',
-        'bucket' => '',
-        'root'   => '',
+    'recovery' => [
+        'type' => 'AwsS3',
+        'key'    => env('S3_KEY'),
+        'secret' => env('S3_SECRET'),
+        'region' => env('S3_REGION'),
+        'bucket' => env('S3_BACKUP_BUCKET'),
+        'root'   => env('S3_BACKUP_ROOT') . '/',
     ],
     'rackspace' => [
         'type' => 'Rackspace',

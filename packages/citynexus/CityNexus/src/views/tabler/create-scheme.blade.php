@@ -22,6 +22,7 @@
                                 <label for="timestamp" class="control-label col-sm-4">Time Stamp</label>
 
                                 <div class="col-sm-8">
+
                                     <select name="settings[timestamp]" class="form-control" id="timestamp">
                                         <option value="">Use Today's Date</option>
                                         @foreach($table as $key => $item)

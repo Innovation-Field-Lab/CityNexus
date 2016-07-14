@@ -10,6 +10,7 @@ class PropertyControllerTest extends TestCase
 
     public function testGetProperties()
     {
+        $property = factory(\CityNexus\CityNexus\Property::class)->create();
         $access = factory(App\User::class)->create(
             [
                 'permissions' => '{"properties":{"view":"true","show":"true","merge":"true","edit":"true"}}'

@@ -65,12 +65,7 @@ class AuthController extends Controller
                 'last_name' => $data['last_name'],
                 'email' => $data['email'],
                 'password' => bcrypt($data['password']),
-                'admin' => true,
-                'permissions' => json_encode([
-                    'upload' => true,
-                    'dataset' => true,
-                    'score' => true
-                ])
+                'super_admin' => true,
             ]);
         }
 

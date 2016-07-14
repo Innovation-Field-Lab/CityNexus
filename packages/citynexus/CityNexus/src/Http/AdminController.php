@@ -4,6 +4,7 @@ namespace CityNexus\CityNexus\Http;
 
 use App\User;
 use Carbon\Carbon;
+use CityNexus\CityNexus\CreateRaw;
 use CityNexus\CityNexus\GeocodeJob;
 use CityNexus\CityNexus\Location;
 use CityNexus\CityNexus\MergeProps;
@@ -92,80 +93,31 @@ class AdminController extends Controller
         return redirect('/');
     }
 
-    public function getMergeProperties()
+    protected function schedule(Schedule $schedule)
     {
-        $this->authorize('citynexus', ['admin', 'view']);
+        $date = Carbon::now()->toW3cString();
+        $environment = env('APP_ENV');
+        $schedule->command(
+            "db:backup --database=mysql --destination=s3 --destinationPath=/{$environment}/projectname_{$environment}_{$date} --compression=gzip"
+        )->weekly();
+    }
 
-        $properties = Property::all();
-
-        $sorted = array();
-        $counter = 0;
-        foreach ($properties as $i) {
-            if (isset($sorted[trim($i->full_address)])) {
-                Property::find($i->id)->update(['alias_of' => $sorted[trim($i->full_address)]]);
-                $counter++;
-            } else {
-                $sorted[trim($i->full_address)] = $i->id;
+    public function getMigrateAdmin()
+    {
+        $users = User::all();
+        foreach($users as $i)
+        {
+            if($i->admin)
+            {
+                $i->super_admin = true;
+                $i->save();
             }
         }
 
-        Session::flash('flash_success', $counter . " Properties updated!");
-
+        Session::flash('flash_success', 'Updates completed');
         return redirect()->back();
     }
 
-
-    public function getMigratePropertiesToLocations()
-    {
-        $properties = Property::whereNull('location_id')->whereNotNull('lat')->get();
-
-        $count = null;
-        foreach($properties as $i)
-        {
-            $new_loc = Location::firstOrCreate(['lat' => $i->lat, 'long' => $i->long]);
-            $new_loc->full_address = $i->house_number . ' ' . $i->street_name . ' ' . $i->street_type;
-            $new_loc->source = "New Property GeoCoding";
-            $new_loc->save();
-            $i->location_id = $new_loc->id;
-            $i->save();
-            $count++;
-        }
-
-        Session::flash('flash_success', $count . ' converted to locations.');
-
-        return redirect()->back();
-    }
-
-    public function getMigrateTimeStamps()
-    {
-
-        $count = 0;
-        $tables = Table::whereNotNull('timestamp')->get();
-
-        if(!Schema::hasColumn('tabler_tables', 'settings'))
-        {
-            Schema::table('tabler_tables', function(Blueprint $table)
-            {
-               $table->json('settings')->nullable();
-            });
-        }
-
-        foreach($tables as $i)
-        {
-            $i->settings = json_encode(['timestamp' => $i->timestamp]);
-
-            $i->save();
-            $count++;
-        }
-
-            Schema::table('tabler_tables', function(Blueprint $table){
-            $table->dropColumn('timestamp');
-        });
-
-        Session::flash('flash_success', $count . ' timestamps migrated.');
-
-        return redirect()->back();
-    }
 
     public function getCreateRawRows($table_name)
     {
@@ -197,29 +149,49 @@ class AdminController extends Controller
         return redirect()->back();
     }
 
-    protected function schedule(Schedule $schedule)
-    {
-        $date = Carbon::now()->toW3cString();
-        $environment = env('APP_ENV');
-        $schedule->command(
-            "db:backup --database=mysql --destination=s3 --destinationPath=/{$environment}/projectname_{$environment}_{$date} --compression=gzip"
-        )->weekly();
-    }
 
-    public function getMigrateAdmin()
+    public function getSaveRawAddress($table = null, $id = null)
     {
-        $users = User::all();
-        foreach($users as $i)
+        if($id != null)
         {
-            if($i->admin)
-            {
-                $i->super_admin = true;
-                $i->save();
-            }
+            $tableBuilder = new TableBuilder();
+            $tableBuilder->saveRawAddress($table, $id);
+            return 'success';
         }
 
-        Session::flash('flash_success', 'Updates completed');
-        return redirect()->back();
+        else
+        {
+            if($table == null)
+            {
+                $tables = Table::whereNotNull('table_name')->get();
+
+                foreach($tables as $i)
+                {
+                    $dataset = DB::table($i->table_name)->whereNotNull('property_id')->get(['id']);
+                    $dataset = array_chunk($dataset, 200);
+                    foreach($dataset as $ids)
+                    {
+                        $this->dispatch(new CreateRaw($i->table_name, $ids));
+                    }
+                }
+
+            }
+
+            else{
+                $dataset = DB::table($table)->whereNotNull('property_id')->get(['id']);
+                $dataset = array_chunk($dataset, 200);
+                foreach($dataset as $ids)
+                {
+                    $this->dispatch(new CreateRaw($table, $ids));
+                }
+            }
+
+
+        }
+        Session::flash('flash_success', 'That worked!');
+        return redirect('/');
     }
+
+
 
 }

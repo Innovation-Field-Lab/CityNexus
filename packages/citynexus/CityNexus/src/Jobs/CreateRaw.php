@@ -10,10 +10,10 @@ use Illuminate\Support\Facades\Queue;
 use Toin0u\Geocoder\Facade\Geocoder;
 
 
-class ProcessData extends Job implements SelfHandling, ShouldQueue
+class CreateRaw extends Job implements SelfHandling, ShouldQueue
 {
     use InteractsWithQueue, SerializesModels;
-    private $id;
+    private $ids;
     private $table;
     /**
      * Create a new job instance.
@@ -21,9 +21,9 @@ class ProcessData extends Job implements SelfHandling, ShouldQueue
      * @param string $data
      * @param Property $upload_id
      */
-    public function __construct($id, $table)
+    public function __construct($table, $ids)
     {
-        $this->id = $id;
+        $this->id = $ids;
         $this->table = $table;
     }
     /**
@@ -33,12 +33,18 @@ class ProcessData extends Job implements SelfHandling, ShouldQueue
      */
     public function handle()
     {
-//        DB::reconnect();
+        DB::reconnect();
 
-        $tabler = new TableBuilder();
-        //Process each individual record
+        if(is_array($this->ids))
+        {
+            foreach($this->ids as $id)
+            {
+                $tabler = new TableBuilder();
 
-        $tabler->processRecord($this->id, $this->table);
+                //Process each individual record
+                $tabler->saveRawAddress($this->table, $id);
+            }
+        }
 
     }
 }

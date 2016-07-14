@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Property extends Model
 {
     protected $fillable = ['full_address', 'house_number', 'alias_of', 'street_name', 'street_type', 'unit', 'city', 'state', 'zip', 'lat', 'long',
-        'map', 'lot', 'type', 'tiger_line_id', 'side'];
+        'map', 'lot', 'type', 'tiger_line_id', 'side', 'location_id'];
 
     protected $table = 'citynexus_properties';
 
@@ -54,5 +54,10 @@ class Property extends Model
     public function images()
     {
         return $this->hasMany('\CityNexus\CityNexus\Image')->orderBy('created_at', 'DESC');
+    }
+
+    public function getFullAddressAttribute()
+    {
+        return trim($this->house_number . ' ' . $this->street_name . ' ' . $this->street_type . ' ' . $this->unit);
     }
 }

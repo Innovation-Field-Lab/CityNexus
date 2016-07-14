@@ -199,7 +199,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
         'Excel'     => Maatwebsite\Excel\Facades\Excel::class,
-        'Geocoder' => Toin0u\Geocoder\Facade\Geocoder::class
+        'Geocoder' => Toin0u\Geocoder\Facade\Geocoder::class,
+        'PSync'    => \CityNexus\CityNexus\PropertySync::class
     ],
 
 ];

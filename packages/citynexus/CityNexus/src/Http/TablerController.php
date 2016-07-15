@@ -237,6 +237,12 @@ class TablerController extends Controller
         {
             $upload = null;
             $existing = DB::table($table->table_name)->lists('id');
+            if(!Schema::hasColumn($table->table_name, 'processed_at'))
+            {
+                Schema::table($table->table_name, function(Blueprint $table){
+                   $table->dateTime('processed_at')->nullable();
+                });
+            }
             foreach($data as $i)
             {
                 if(isset($settings->unique_id) && $settings->unique_id != null)

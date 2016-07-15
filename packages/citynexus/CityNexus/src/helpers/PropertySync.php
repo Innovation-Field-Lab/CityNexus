@@ -121,7 +121,7 @@ class PropertySync
      */
     private function cleanAddress($address)
     {
-        $pre = null;
+        $post = null;
 
         foreach($address as $k => $i)
         {

@@ -169,4 +169,9 @@ class TableBuilderControllerTest extends TestCase
         $this->assertEquals(1, $result, "Creation of location record");
 
     }
+
+    public function testRawUploadErrors()
+    {
+        $rawUpload = '{"pin":"B-14-32","0":null,"owner_name":"CRUZ, PAMELA A.","permit_for":"Express: Insulation, Weatherization","date_issued":{"date":"2014-01-14 13:56:00.000000","timezone_type":3,"timezone":"UTC"},"parcel_id":"121 15 0","house":"168","street":"ALBEE ST","building_type":"Single Family","work_description":"Upgrade to attic, and basement insulation","contractor_name":"Schwartz, Richard","project_cost":3743,"total_fee":50}';
+    }
 }

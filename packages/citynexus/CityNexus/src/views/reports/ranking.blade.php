@@ -24,6 +24,7 @@
                 </thead>
                 <tbody>
                 @foreach($properties as $rank => $item)
+                    @if($item->score !== null)
                     <tr>
                         <td>{{$rank + 1}}</td>
                         <td>{{$item->score}}</td>
@@ -31,6 +32,7 @@
                         <td>{{$item->property_id}}</td>
                         <td><a class="btn btn-sm btn-primary" href="{{action('\CityNexus\CityNexus\Http\PropertyController@getShow', ['id' => $item->property_id])}}">Property Details</a></td>
                     </tr>
+                    @endif
                 @endforeach
                 </tbody>
             </table>

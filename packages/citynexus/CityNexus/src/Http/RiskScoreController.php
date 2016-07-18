@@ -84,6 +84,7 @@ class RiskScoreController extends Controller
         $properties = DB::table($table)
             ->join('citynexus_properties', 'citynexus_properties.id', '=', 'property_id')
             ->select($table . '.property_id', $table . '.score', 'citynexus_properties.full_address')
+            ->whereNotNull($table . '.score')
             ->orderBy($table . '.score', 'DESC')
             ->get();
 
@@ -455,7 +456,7 @@ class RiskScoreController extends Controller
             }
 
 
-            if($updated_score === 0 | $updated_score > 0)
+            if($updated_score !== null)
             {
                 $upload[] = [
                     'property_id' => $i['property_id'],
@@ -551,7 +552,7 @@ class RiskScoreController extends Controller
 
                 $new_score = $scores[$pid]['score'] + $scorebuilder->calcElement($value, $element);
 
-                if($new_score === 0 | $new_score > 0)
+                if($new_score !== null)
                 {
                     $scores[$pid] = [
                         'property_id' => $pid,

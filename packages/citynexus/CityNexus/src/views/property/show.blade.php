@@ -20,7 +20,7 @@ if($property->aliases->count() > 0)
                 </span>';
 }
 
-if($property->aliasOf != null)
+if($property->alias_of != null)
     {
 
     $pagename .=

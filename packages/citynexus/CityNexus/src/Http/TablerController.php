@@ -190,8 +190,8 @@ class TablerController extends Controller
             if($table->title != $request->get('table_title'))
             {
                 $tableBuilder = new TableBuilder();
-                $newTableName =  $tableBuilder->cleanName($request->get('table_title'));
-//                Schema::rename($table->table_name, $newTableName);
+                $newTableName =  'tabler_' . $tableBuilder->cleanName($request->get('table_title'));
+                Schema::rename($table->table_name, $newTableName);
                 $table->table_name = $newTableName;
             }
 

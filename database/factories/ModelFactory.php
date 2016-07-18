@@ -38,3 +38,11 @@ $factory->define(CityNexus\CityNexus\Property::class, function (Faker\Generator 
     ];
 });
 
+$factory->define(CityNexus\CityNexus\Table::class, function (Faker\Generator $faker) {
+    return [
+        'table_title' => 'Testing Table',
+        'table_name' => 'tabler_testing_table',
+        'scheme' => null,
+    ];
+});
+

@@ -172,6 +172,33 @@ class TableBuilderControllerTest extends TestCase
 
     public function testRawUploadErrors()
     {
-        $rawUpload = '{"pin":"B-14-32","0":null,"owner_name":"CRUZ, PAMELA A.","permit_for":"Express: Insulation, Weatherization","date_issued":{"date":"2014-01-14 13:56:00.000000","timezone_type":3,"timezone":"UTC"},"parcel_id":"121 15 0","house":"168","street":"ALBEE ST","building_type":"Single Family","work_description":"Upgrade to attic, and basement insulation","contractor_name":"Schwartz, Richard","project_cost":3743,"total_fee":50}';
+        $tableBuilder = new TableBuilder();
+
+        $table = factory(CityNexus\CityNexus\Table::class)->create([
+            'scheme' => '{"rownum":{"show":"on","name":"Rownum","key":"rownum","type":"integer","sync":"","push":""},"cfs_no":{"show":"on","name":"Cfs_no","key":"cfs_no","type":"string","sync":"","push":""},"grid_pol":{"show":"on","name":"Grid_pol","key":"grid_pol","type":"string","sync":"","push":""},"town_code":{"show":"on","name":"Town_code","key":"town_code","type":"string","sync":"","push":""},"badge_no_primary":{"show":"on","name":"Badge_no_primary","key":"badge_no_primary","type":"string","sync":"","push":""},"primary_unit":{"show":"on","name":"Primary_unit","key":"primary_unit","type":"string","sync":"","push":""},"agency_pol":{"show":"on","name":"Agency_pol","key":"agency_pol","type":"string","sync":"","push":""},"act_call_type":{"show":"on","name":"Act_call_type","key":"act_call_type","type":"integer","sync":"","push":""},"call_description":{"show":"on","name":"Call_description","key":"call_description","type":"string","sync":"","push":""},"call_type":{"show":"on","name":"Call_type","key":"call_type","type":"integer","sync":"","push":""},"time_rec_tm":{"show":"on","name":"Time_rec_tm","key":"time_rec_tm","type":"string","sync":"","push":""},"disp_pol":{"show":"on","name":"Disp_pol","key":"disp_pol","type":"string","sync":"","push":""},"location":{"show":"on","name":"Location","key":"location","type":"string","sync":"full_address","push":""},"premise_name":{"show":"on","name":"Premise_name","key":"premise_name","type":"string","sync":"","push":""},"tag_no":{"show":"on","name":"Tag_no","key":"tag_no","type":"string","sync":"","push":""},"date_occured":{"show":"on","name":"Date_occured","key":"date_occured","type":"string","sync":"","push":""},"latitude":{"show":"on","name":"Latitude","key":"latitude","type":"string","sync":"","push":"lat"},"longitude":{"show":"on","name":"Longitude","key":"longitude","type":"string","sync":"","push":"long"},"call_type_tat_icon":{"show":"on","name":"Call_type_tat_icon","key":"call_type_tat_icon","type":"string","sync":"","push":""},"stop_nature":{"show":"on","name":"Stop_nature","key":"stop_nature","type":"string","sync":"","push":""},"stop_disposition":{"show":"on","name":"Stop_disposition","key":"stop_disposition","type":"string","sync":"","push":""},"city":{"show":"on","name":"City","key":"city","type":"string","sync":"","push":""},"dow":{"show":"on","name":"Dow","key":"dow","type":"string","sync":"","push":""},"statute":{"show":"on","name":"Statute","key":"statute","type":"string","sync":"","push":""},"statute2":{"show":"on","name":"Statute2","key":"statute2","type":"string","sync":"","push":""},"casedispo":{"show":"on","name":"Casedispo","key":"casedispo","type":"string","sync":"","push":""}}'
+        ]);
+
+        $tableBuilder->create($table);
+
+        $rawUpload = '{"rownum":127,"cfs_no":"1500751931","grid_pol":null,"town_code":"T258","badge_no_primary":null,"primary_unit":null,"agency_pol":"P","act_call_type":140,"call_description":"DISTURBANCE-GENERAL ","call_type":140,"time_rec_tm":"3\/1\/15 0:34","disp_pol":null,"location":"00019 HAZEL ST","premise_name":null,"tag_no":null,"date_occured":"3\/1\/15 0:00","latitude":null,"longitude":null,"call_type_tat_icon":"p.png","stop_nature":null,"stop_disposition":null,"city":"Salem","dow":"Sunday","statute":null,"statute2":null,"casedispo":null}';
+
+        $row = DB::table($table->table_name)->insertGetId(['upload_id' => 9999, 'raw' => $rawUpload, 'updated_at' => \Carbon\Carbon::now(), 'created_at' => \Carbon\Carbon::now()]);
+
+        $tableBuilder->processRecord($row, $table->table_name);
+
+        $result = DB::table($table->table_name)->where('id', $row)->first();
+
+        $this->assertEquals(\CityNexus\CityNexus\Property::find($result->property_id)->house_number, 19);
+
+    }
+
+    public function testCleanName()
+    {
+        $rawname = "Hell's Bells!";
+        $cleanname = 'hells_bells';
+        $tabeBuilder = new TableBuilder();
+        $result = $tabeBuilder->cleanName($rawname);
+
+        $this->assertSame($cleanname, $result);
     }
 }

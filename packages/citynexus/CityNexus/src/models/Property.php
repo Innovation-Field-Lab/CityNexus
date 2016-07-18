@@ -56,8 +56,8 @@ class Property extends Model
         return $this->hasMany('\CityNexus\CityNexus\Image')->orderBy('created_at', 'DESC');
     }
 
-    public function getFullAddressAttribute()
-    {
-        return trim($this->house_number . ' ' . $this->street_name . ' ' . $this->street_type . ' ' . $this->unit);
-    }
+//    public function getFullAddressAttribute()
+//    {
+//        return trim($this->house_number . ' ' . $this->street_name . ' ' . $this->street_type . ' ' . $this->unit);
+//    }
 }

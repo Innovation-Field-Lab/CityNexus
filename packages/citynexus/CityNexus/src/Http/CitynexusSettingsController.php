@@ -47,7 +47,11 @@ class CitynexusSettingsController extends Controller
             'last_name' => 'required|max:255',
             'email' => 'required|max:255|email',
         ]);
-
+        if(User::where('email', $request->get('email'))->count() > 0)
+        {
+            Session::flash('flash_success', 'Oh oh! Looks like that email address already has an associated account.');
+            return redirect()->back()->withInput();
+        }
         try {
             // Save the request as a new User
             $user = new User();
@@ -69,7 +73,7 @@ class CitynexusSettingsController extends Controller
 
         }
         catch(\Exception $e) {
-            Session::flash('flash_warning', "Uh oh. " . $e->getMessage());
+            Session::flash('flash_warning', "Uh oh. Something went wrong.");
             return redirect()->back()->withInput();
         }
 
@@ -99,7 +103,7 @@ class CitynexusSettingsController extends Controller
 
     public function postRemoveUser(Request $request)
     {
-        $this->authorize('citynexus', 'userAdmin', 'delete');
+        $this->authorize('citynexus', 'usersAdmin', 'delete');
 
         $user = User::find($request->get('user_id'));
         $user->delete();

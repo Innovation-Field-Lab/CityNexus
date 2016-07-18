@@ -49,8 +49,12 @@
                         {{csrf_field()}}
                         <input type="text" id="search" name="query" placeholder="Search..."
                                class="form-control">
-                        <a href=""><i class="fa fa-search"></i></a>
-                        <input type="submit" class="hidden">
+                        <input type="submit" style="    border: 0 none;
+    height: 0;
+    width: 0;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;">
                     </form>
                 </li>
             </ul>

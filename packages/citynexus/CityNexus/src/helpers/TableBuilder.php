@@ -14,6 +14,10 @@ use CityNexus\CityNexus\GeocodeJob;
 
 class TableBuilder
 {
+//    public function createTable($table)
+//    {
+//        return $this->create($table);
+//    }
     public function create($table)
     {
         $table_name = 'tabler_' . $this->cleanName($table->table_title);
@@ -25,7 +29,6 @@ class TableBuilder
                 // Create table's index id file
                 $table->increments('id');
                 $table->integer('upload_id');
-
                 // Add another index field if one is set in the config file.
                 if (config('citynexus.index_id') != null && config('citynexus.index_id') != 'id') {
                     $table->integer(config('citynexus.index_id'))->nullable();
@@ -47,7 +50,11 @@ class TableBuilder
 
     public function cleanName($name)
     {
-        return strtolower(str_replace(' ', '_', (preg_replace('/[^a-zA-Z0-9_ -%][().\'][\/]/s', '', $name))));
+        $return = preg_replace("/[^a-zA-Z0-9_ -%][().'!][\/]/s", '', $name);
+        $return = strtolower($return);
+        $return = str_replace(["'", "`", "!"], '',$return);
+        $return = str_replace(["/", " ", "-"], '_',$return);
+        return $return;
     }
 
 
@@ -283,9 +290,9 @@ class TableBuilder
 
     }
 
+
     public function processRecord($id, $table)
     {
-
         //Create a empty array of the record
         $record = [];
         $dataset = Table::where('table_name', $table)->first();
@@ -318,7 +325,6 @@ class TableBuilder
 
         }
 
-
         //add remaining elements to the array
             $record = $this->addElements($record, $data, $settings);
             $record = $this->processElements($settings, $record);
@@ -336,16 +342,6 @@ class TableBuilder
             {
                 Error::create(['location' => 'processRecord - Insert Record', 'data' => json_encode([ 'id' => $id, 'table' => $table])]);
             }
-
-//            //If there are push values, update the primary property record
-//            if (count($pushValues) > 0) {
-//                $property = Property::find($record['property_id']);
-//                foreach ($pushValues as $key => $value) {
-//                    dd($property);
-//                    $property->$value = $data->$key;
-//                }
-//                $property->save();
-//            }
 
     }
 

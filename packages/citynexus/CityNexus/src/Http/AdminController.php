@@ -195,6 +195,20 @@ class AdminController extends Controller
         return redirect('/');
     }
 
+    public function getCreateFullAddresses()
+    {
+        $properties = Property::whereNull('full_address')->get();
+        $count = 0;
+        foreach($properties as $i)
+        {
+            $i->full_address = trim($i->house_number . ' ' . $i->street_name . ' ' . $i->street_type . ' ' . $i->unit);
+            $i->save();
+            $count++;
+
+            return $count;
+        }
+    }
+
 
 
 }

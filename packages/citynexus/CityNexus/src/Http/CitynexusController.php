@@ -62,5 +62,10 @@ class CitynexusController extends Controller
         }
     }
 
+    public function getHelp()
+    {
+        return view('citynexus::help.portal');
+    }
+
 
 }

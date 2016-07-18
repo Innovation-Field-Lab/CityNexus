@@ -187,6 +187,14 @@ class TablerController extends Controller
 
             $table = Table::find($id);
 
+            if($table->title != $request->get('table_title'))
+            {
+                $tableBuilder = new TableBuilder();
+                $newTableName = $tableBuilder->cleanName($request->get('table_title'));
+                Schema::rename($table->table_name, $newTableName);
+                $table->table_name = 'tabler_' . $newTableName;
+            }
+
             $table->table_title = $request->get('table_title');
             $table->table_description = $request->get('table_description');
             $table->scheme = json_encode($request->get('map'));

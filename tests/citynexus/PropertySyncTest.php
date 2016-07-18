@@ -76,7 +76,7 @@ class PropertySyncTest extends TestCase
         $this->assertSame(['house_number' => '1234'], $post, 'Returns four digit address');
 
         $post = $this->invokeMethod($PSync, 'setHouseNumber', array("Main"));
-        $this->assertSame(['house_number' => null], $post, 'Zero address');
+        $this->assertEquals(['house_number' => null], $post, 'Zero address');
 
         $post = $this->invokeMethod($PSync, 'setHouseNumber', array('12-34'));
         $this->assertSame(['house_number' => '12'], $post);

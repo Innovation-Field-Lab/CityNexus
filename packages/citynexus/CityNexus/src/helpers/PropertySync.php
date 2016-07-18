@@ -70,6 +70,9 @@ class PropertySync
         //Check for properties
         $address = array_filter($address);
         $property = Property::firstOrCreate($address);
+        $property->full_address = $property->full_address = trim($property->house_number . ' ' . $property->street_name . ' ' . $property->street_type . ' ' . $property->unit);
+
+        $property->save();
 
         //Save the raw upload
         RawAddress::create(['address' => json_encode($raw_address), 'property_id' => $property->id]);
@@ -91,6 +94,8 @@ class PropertySync
                 $location->timezone = $geocode->getTimezone();
             }
             $location->save();
+            $property->location_id = $location->id;
+            $property->save();
         }
 
         return $property->id;
@@ -166,19 +171,21 @@ class PropertySync
     private function setHouseNumber($houseNumber)
     {
 
+        $property['house_number']= $houseNumber;
+
         //Test for hypenated addresses
         if(strpos($houseNumber, '-'))
         {
-            $exploded = explode('-', $houseNumber);
+            $exploded = explode('-', $property['house_number']);
             $property['house_number'] = $exploded[0];
         }
-        else
-        {
-            $property['house_number'] = $houseNumber;
-        }
+
+
+        // Clear leading zeros
+        $property['house_number'] = ltrim($property['house_number'], '0');
 
         //Test if address is not a zero address
-        if (!ctype_digit($property['house_number'])) {
+        if (!ctype_digit($houseNumber)) {
             $property = $this->checkForUnitInAddress($property['house_number']);
             if (!ctype_digit($property['house_number'])) {
                 $property['house_number'] = null;

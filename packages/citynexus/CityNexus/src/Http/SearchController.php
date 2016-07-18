@@ -18,9 +18,18 @@ class SearchController extends Controller
 {
     public function getSearch(Request $request)
     {
-        $property = Property::where('full_address', 'LIKE', $request->get('query'))->first();
+        $query = "%" . $request->get('query') . "%";
 
-        return redirect(action('\CityNexus\CityNexus\Http\PropertyController@getShow', ['id' => $property->id]));
+        if(Property::where('full_address', 'LIKE', $query)->count() != 1)
+        {
+            $results = Property::where('full_address', 'LIKE', $query)->orderBy('full_address')->paginate(25);
+            return view('citynexus::search.results', compact('results'));
+        }
+        else
+        {
+            $property = Property::where('full_address', 'LIKE', $query)->first();
+            return redirect(action('\CityNexus\CityNexus\Http\PropertyController@getShow', ['id' => $property->id]));
+        }
     }
     public function getQuery(Request $request)
     {

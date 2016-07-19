@@ -30,7 +30,7 @@
                 <input type="submit" class="btn btn-primary" value="Refresh">
             </form>
             @can('citynexus', ['datasets', 'download']) <a class="btn btn-primary btn-sm" href="/{{config('citynexus.tabler_root')}}/download-table/{{$table_name}}"><i class="glyphicon glyphicon-download"></i> Download CSV</a>@endcan
-            @can('superadmin') <a class="btn btn-primary btn-sm" href="{{action('\CityNexus\CityNexus\Http\AdminController@getProcessData', [$table_name])}}"><i class="glyphicon glyphicon-refresh"></i> Reprocess Full Table</a>@endcan
+            @if(isset($tableRecord)) @can('superadmin') <a class="btn btn-primary btn-sm" href="{{action('\CityNexus\CityNexus\Http\AdminController@getProcessData', [$table_name])}}"><i class="glyphicon glyphicon-refresh"></i> Reprocess Full Table</a>@endcan @endif
 
         </div>
         <div class="panel-body" style="overflow: scroll;">

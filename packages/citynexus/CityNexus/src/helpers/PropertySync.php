@@ -52,6 +52,7 @@ class PropertySync
             $raw_address = $this->cleanAddress($raw_address);
 
             // Add house number to array
+            $address = null;
             if(isset($raw_address['house_number'])) $address = $this->setHouseNumber($raw_address['house_number']);
             if(isset($raw_address['street_name'])) $address = array_merge($address, $this->processStreetName(explode(' ', $raw_address['street_name'])));
             if(isset($raw_address['street_type'])) {$address['street_type'] = $raw_address['street_type'];}

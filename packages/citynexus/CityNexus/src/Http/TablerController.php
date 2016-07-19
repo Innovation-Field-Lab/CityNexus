@@ -214,7 +214,7 @@ class TablerController extends Controller
             Session::flash('flash_success', 'Dataset changes saved successfully.');
         }
 
-        return redirect('/' . config('tabler.root_directory'));
+        return redirect('/tabler');
     }
 
 

@@ -42,7 +42,7 @@ class NoteController extends Controller
     {
         $note = Note::find($id);
 
-        if($note->creator->id == Auth::getUser()->id)
+        if($note->creator->id == Auth::getUser()->id | Auth::getUser()->super_admin == true)
         {
             $note->delete();
 

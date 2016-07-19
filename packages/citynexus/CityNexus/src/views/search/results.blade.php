@@ -19,7 +19,7 @@ $section = 'search';
 
         <div class="portlet-body">
             @if($results->count() != 0)
-                {!! $results->render() !!}
+                {!! $results->appends(Input::except('page'))->render() !!}
 
                 <table class="table">
                 @foreach($results as $i)
@@ -35,7 +35,7 @@ $section = 'search';
                 @endforeach
             </table>
 
-                {!! $results->render() !!}
+                {!! $results->appends(Input::except('page'))->render() !!}
 
             @else
                 <div class="alert alert-info">

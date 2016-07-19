@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use CityNexus\CityNexus\Geocode;
 use CityNexus\CityNexus\Table;
+use Illuminate\Support\Facades\Session;
 
 
 class ViewController extends Controller
@@ -319,6 +320,14 @@ class ViewController extends Controller
             $view->save();
         }
 
-        return '<a onclick="updatView(' . $view->id . ')" id="save-view" style="cursor: pointer"> Save View Updates</a>';
+        return '<a onclick="updateView(' . $view->id . ')" id="save-view" style="cursor: pointer"> Save View Updates</a>';
+    }
+
+    public function getDelete($id)
+    {
+        $this->authorize('citynexus', ['reports', 'delete']);
+        View::find($id)->delete();
+        Session::flash('flash_success', 'View deleted.');
+        return redirect(action('\CityNexus\CityNexus\Http\ViewController@getIndex'));
     }
 }

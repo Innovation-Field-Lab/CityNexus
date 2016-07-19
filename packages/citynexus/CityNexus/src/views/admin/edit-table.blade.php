@@ -1,7 +1,16 @@
 
 <?php
-$pagename = 'TABLE: ' . $tableRecord->table_title;
-$section = 'dashboard';
+        if(isset($tableRecord))
+            {
+                $pagename = 'TABLE: ' . $tableRecord->table_title;
+
+            }
+        else
+            {
+                $pagename = 'TABLE: ' . $table_name;
+            }
+            $section = 'tabler';
+
 ?>
 
 @extends(config('citynexus.template'))

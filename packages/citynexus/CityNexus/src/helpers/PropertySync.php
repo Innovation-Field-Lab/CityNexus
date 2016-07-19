@@ -61,7 +61,7 @@ class PropertySync
         }
 
         //If a zero address, return false
-        if($address == false | $address['house_number'] == null)
+        if($address == false |  null == $address['house_number'])
         {
             return false;
         }

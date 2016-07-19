@@ -61,12 +61,17 @@ class PropertySync
         }
 
         //If a zero address, return false
-        if($address == false |  null == $address['house_number'])
+        if($address == false)
         {
             return false;
         }
 
-        $address = array_filter($address);
+        if(isset($address['house_number']) && $address['house_number'] == null)
+        {
+            return false;
+        }
+
+            $address = array_filter($address);
 
         //Check for properties
         $address = array_filter($address);

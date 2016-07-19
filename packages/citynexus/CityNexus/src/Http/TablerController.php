@@ -187,7 +187,8 @@ class TablerController extends Controller
 
             $table = Table::find($id);
 
-            if($table->title != $request->get('table_title'))
+
+            if($table->table_title != $request->get('table_title'))
             {
                 $tableBuilder = new TableBuilder();
                 $newTableName =  'tabler_' . $tableBuilder->cleanName($request->get('table_title'));

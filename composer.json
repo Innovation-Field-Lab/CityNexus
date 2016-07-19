@@ -17,7 +17,8 @@
         "willdurand/geocoder": "^2.8",
         "toin0u/geocoder-laravel": "@stable",
         "spatie/laravel-glide": "^2.3",
-        "doctrine/dbal": "*"
+        "doctrine/dbal": "*",
+        "graham-campbell/dropbox": "^3.3"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

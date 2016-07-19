@@ -170,7 +170,7 @@ class TableBuilderControllerTest extends TestCase
 
     }
 
-    public function testRawUploadErrors()
+    public function testLeadingZeroIssues()
     {
         $tableBuilder = new TableBuilder();
 
@@ -201,4 +201,23 @@ class TableBuilderControllerTest extends TestCase
 
         $this->assertSame($cleanname, $result);
     }
+
+//    public function testWinOwnerOcc()
+//    {
+//        $tableBuilder = new TableBuilder();
+//
+//        $table = factory(CityNexus\CityNexus\Table::class)->create([
+//            'scheme' => '{"number":{"show":"on","name":"Number","key":"number","type":"string","sync":"","push":"","meta":""},"street":{"show":"on","name":"Street","key":"street","type":"string","sync":"","push":"","meta":""},"0":{"skip":"on","name":"0","key":"0","type":"string","sync":"","push":"","meta":""},"owner":{"show":"on","name":"Owner","key":"owner","type":"string","sync":"","push":"","meta":""},"use_code":{"show":"on","name":"Use_code","key":"use_code","type":"string","sync":"","push":"","meta":""},"use_description":{"show":"on","name":"Use_description","key":"use_description","type":"string","sync":"","push":"","meta":""},"mailing_address":{"show":"on","name":"Mailing_address","key":"mailing_address","type":"string","sync":"","push":"","meta":""},"citytown":{"show":"on","name":"Citytown","key":"citytown","type":"string","sync":"","push":"","meta":""},"state":{"show":"on","name":"State","key":"state","type":"string","sync":"","push":"","meta":""},"zip_code":{"show":"on","name":"Zip_code","key":"zip_code","type":"string","sync":"","push":"","meta":""},"letter_sent":{"show":"on","name":"Letter_sent","key":"letter_sent","type":"datetime","sync":"","push":"","meta":""},"2nd_notice":{"show":"on","name":"2nd_notice","key":"2nd_notice","type":"datetime","sync":"","push":"","meta":""},"3rd_notice":{"show":"on","name":"3rd_notice","key":"3rd_notice","type":"datetime","sync":"","push":"","meta":""},"insp_date":{"show":"on","name":"Insp_date","key":"insp_date","type":"datetime","sync":"","push":"","meta":""},"results":{"show":"on","name":"Results","key":"results","type":"string","sync":"","push":"","meta":""},"email":{"show":"on","name":"Email","key":"email","type":"string","sync":"","push":"","meta":""},"phone":{"show":"on","name":"Phone","key":"phone","type":"string","sync":"","push":"","meta":""},"notes":{"show":"on","name":"Notes","key":"notes","type":"string","sync":"","push":"","meta":""}}'    ]);
+//
+//        $tableBuilder->create($table);
+//
+//        $rawUpload = '{"number":117,"street":"LOCUST ST","0":null,"owner":"O\'BRIEN MARTIN W","use_code":1050,"use_description":"APT 3 UNIT","mailing_address":"16 MAPLE RD","citytown":"WINTHROP","state":"MA","zip_code":2152,"letter_sent":"9\/15\/2014","2nd_notice":null,"3rd_notice":null,"insp_date":null,"results":"1 UNIT PASS","email":null,"phone":null,"notes":null}';
+//
+//        $row = DB::table($table->table_name)->insertGetId(['upload_id' => 9999, 'raw' => $rawUpload, 'updated_at' => \Carbon\Carbon::now(), 'created_at' => \Carbon\Carbon::now()]);
+//
+//        $tableBuilder->processRecord($row, $table->table_name);
+//
+//        $this->assertTrue(DB::table($table->table_name)->where('id', $row)->first());
+//
+//    }
 }

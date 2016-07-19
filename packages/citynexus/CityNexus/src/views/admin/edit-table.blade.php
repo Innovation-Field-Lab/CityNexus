@@ -1,4 +1,9 @@
 
+<?php
+$pagename = 'TABLE: ' . $tableRecord->table_title;
+$section = 'dashboard';
+?>
+
 @extends(config('citynexus.template'))
 
 @section(config('citynexus.section'))
@@ -15,9 +20,9 @@
                 </select>
                 <input type="submit" class="btn btn-primary" value="Refresh">
             </form>
+            @can('citynexus', ['datasets', 'download']) <a class="btn btn-primary btn-sm" href="/{{config('citynexus.tabler_root')}}/download-table/{{$table_name}}"><i class="glyphicon glyphicon-download"></i> Download CSV</a>@endcan
+            @can('superadmin') <a class="btn btn-primary btn-sm" href="{{action('\CityNexus\CityNexus\Http\AdminController@getProcessData', [$table_name])}}"><i class="glyphicon glyphicon-refresh"></i> Reprocess Full Table</a>@endcan
 
-            <span class="panel-title">TABLE: {{$table_name}}</span> <br>
-            <a  href="/{{config('citynexus.tabler_root')}}/download-table/{{$table_name}}"><i class="glyphicon glyphicon-download"></i> Download CSV</a>
         </div>
         <div class="panel-body" style="overflow: scroll;">
             {!! $table->render() !!}
@@ -46,7 +51,7 @@
                         @endcan
                         @can('citynexus', ['dataset', 'edit'])
                         <td>
-                            <a href="{{action('\CityNexus\CityNexus\Http\AdminController@getProcessData', [$row->id, $table_name])}}" class="btn btn-primary btn-sm">Process Row</a>
+                            <a href="{{action('\CityNexus\CityNexus\Http\AdminController@getProcessData', [$table_name, $row->id])}}" class="btn btn-primary btn-sm">Process Row</a>
                         </td>
                         @endcan
                         @foreach($row as $item)

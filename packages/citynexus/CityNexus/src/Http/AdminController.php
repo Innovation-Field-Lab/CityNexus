@@ -41,9 +41,25 @@ class AdminController extends Controller
 
     }
 
-    public function getProcessData($id, $table_name)
+    public function getProcessData($table_name, $id = null)
     {
-        $this->dispatch(new ProcessData($id, $table_name));
+        if($id != null)
+        {
+            $this->dispatch(new ProcessData($id, $table_name));
+        }
+
+        else
+        {
+            $ids = DB::table($table_name)->get(['id']);
+
+            foreach($ids as $i)
+            {
+                $this->dispatch(new ProcessData($i->id, $table_name));
+            }
+
+        }
+
+        Session::flash('flash_success', 'Data processing queued.');
 
         return redirect()->back();
     }

@@ -378,6 +378,7 @@ class TablerController extends Controller
 
     public function getShowTable($table_name)
     {
+        $tableRecord = Table::where('table_name', $table_name)->first();
         if($table_name != null)
         {
             if(isset($_GET['sort_by']))
@@ -411,7 +412,7 @@ class TablerController extends Controller
             ->where('table_name', '!=', 'citynexus_settings')
             ->get();
 
-        return view('citynexus::admin.edit-table', compact('table', 'table_name', 'tables'));
+        return view('citynexus::admin.edit-table', compact('table', 'table_name', 'tableRecord', 'tables'));
     }
 
     public function getDownloadTable($table_name)

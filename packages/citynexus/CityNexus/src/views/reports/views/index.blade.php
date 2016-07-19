@@ -29,7 +29,7 @@ $section = 'reports';
                         <td>{{$item->setting->type}}</td>
                         <td>{{$item->updated_at->diffForHumans()}}</td>
                         <td><a class="btn btn-primary" href="{{action('\CityNexus\CityNexus\Http\ViewController@getShow', ['id' => $item->id])}}">Visit</a>
-                        <a class="btn btn-danger" href="{{action('\CityNexus\CityNexus\Http\ViewController@getDelete', ['id' => $item->id])}}"><i class="glyphicon glyphicon-trash"></i> Remove</a></td>
+                        @can('citynexus', ['reports', 'delete'])<a class="btn btn-danger" href="{{action('\CityNexus\CityNexus\Http\ViewController@getDelete', ['id' => $item->id])}}"><i class="glyphicon glyphicon-trash"></i> Remove</a>@endcan</td>
 
                     </tr>
                 @endforeach

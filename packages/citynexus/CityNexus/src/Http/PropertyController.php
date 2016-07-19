@@ -112,5 +112,43 @@ class PropertyController extends Controller
         return redirect(action('\CityNexus\CityNexus\Http\PropertyController@getShow', ['id' => $property->id]));
     }
 
+    public function getUpdate($id)
+    {
+        $property = Property::find($id);
+
+        return view('citynexus::property.update', compact('property'));
+    }
+
+    public function postUpdate($id, Request $request)
+    {
+        $this->authorize('citynexus', ['property', 'edit']);
+        $this->validate($request, [
+            'house_number' => 'max:20|required',
+            'street_name' => 'max:250|required',
+            'unit' => 'max:100'
+        ]);
+        $property = Property::find($id);
+        $property->update($request->all());
+
+        Session::flash('flash_success', 'Property address updated');
+        return redirect()->back();
+    }
+
+    public function getDelete($id)
+    {
+        $this->authorize('citynexus', ['property', 'delete']);
+        try
+        {
+            Property::find($id)->delete();
+        }
+        catch(\Exception $e)
+        {
+            Session::flash('flash_error', "Oh oh! Something went wrong.");
+            return redirect()->back();
+        }
+        Session::flash('flash_info', 'Property deleted.');
+        return redirect(action('\CityNexus\CityNexus\Http\PropertyController@getIndex'));
+    }
+
 
 }

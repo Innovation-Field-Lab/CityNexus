@@ -2,6 +2,7 @@
 
 namespace CityNexus\CityNexus\Http;
 
+use App\Jobs\FakeLocation;
 use App\User;
 use Carbon\Carbon;
 use CityNexus\CityNexus\CreateRaw;
@@ -16,6 +17,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Session;
@@ -64,6 +66,15 @@ class AdminController extends Controller
         $table_name = $request->get('table_name');
 
         return redirect('/tabler/show-table/' . $table_name);
+    }
+
+    public function getFakeLocations()
+    {
+        $properties = Property::get(['id'])->chunk(100);
+        foreach($properties as $i)
+        {
+            $this->dispatch(new FakeLocation($i));
+        }
     }
 
     public function getRemoveData(Request $request)

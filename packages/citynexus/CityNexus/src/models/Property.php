@@ -3,9 +3,12 @@
 namespace CityNexus\CityNexus;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Property extends Model
 {
+    use SoftDeletes;
+
     protected $fillable = ['full_address', 'house_number', 'alias_of', 'street_name', 'street_type', 'unit', 'city', 'state', 'zip', 'lat', 'long',
         'map', 'lot', 'type', 'tiger_line_id', 'side', 'location_id'];
 

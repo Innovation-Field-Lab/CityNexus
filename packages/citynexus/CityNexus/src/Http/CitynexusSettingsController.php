@@ -164,4 +164,14 @@ class CitynexusSettingsController extends Controller
         $setting->save();
         return response('Success');
     }
+
+    public function getInvite($id)
+    {
+        $user = User::find($id);
+
+        Session::flash('flash_token', $user->activation);
+        Session::flash('flash_email', $user->email);
+
+        return redirect()->back();
+    }
 }

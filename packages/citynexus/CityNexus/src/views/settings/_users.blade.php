@@ -15,9 +15,11 @@
                 @if(\Illuminate\Support\Facades\Auth::getUser()->id != $user->id)
                     <button class="btn btn-xs btn-primary" onclick="editPermissions({{$user->id}})">Permissions</button>
                     <button class="btn btn-xs btn-danger" onclick="removeUser({{$user->id}})">Delete</button>
-                    <button class="btn btn-xs btn-caution @if($user->admin) hidden @endif" id="super-{{$user->id}}" onclick="superUser(true, {{$user->id}})">Make Super User</button>
                     @if(\Illuminate\Support\Facades\Auth::getUser()->admin)
                         <button class="btn btn-xs btn-caution @if(!$user->admin) hidden @endif" id="desuper-{{$user->id}}" onclick="superUser(false, {{$user->id}})">Remove Super User</button>
+                    @endif
+                    @if($user->activation != null)
+                        <a class="btn btn-xs btn-info" id="invite-{{$user->id}}" href="{{action('\CityNexus\CityNexus\Http\CitynexusSettingsController@getInvite')}}/{{$user->id}}">Re-Invite</a>
                     @endif
                 @endif
             </td>
@@ -63,7 +65,7 @@
             "<input type='text' class='form-control' value='{{\Illuminate\Support\Facades\Session::get('flash_email')}}' disabled>" +
             "<br><input class='form-control' type='text' name='subject' value='Welcome to CityNexus'>'" +
             "<textarea class='form-control' name='message'>" +
-                    "To activate you account follow this link: {{ url('/activate-account?key=' . \Illuminate\Support\Facades\Session::get('flash_token')) }}" +
+                    "To activate your account follow this link: {{ url('/activate-account?key=' . \Illuminate\Support\Facades\Session::get('flash_token')) }}" +
             "</textarea>" +
             "<br><br><input type='submit' class='btn btn-primary' value='Invite User'>"
 

@@ -213,6 +213,7 @@ class ViewController extends Controller
             ->where( $key, '>', '0')
             ->join('citynexus_properties', 'citynexus_properties.id', '=', 'property_id')
             ->join('citynexus_locations', 'citynexus_locations.id', '=', 'citynexus_properties.location_id')
+            ->whereNull('citynexus_properties.deleted_at')
             ->whereNotNull('citynexus_properties.location_id')
             ->select('citynexus_locations.lat', 'citynexus_locations.long', $table . '.' . $key)
             ->get();

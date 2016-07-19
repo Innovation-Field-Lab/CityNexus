@@ -1,4 +1,4 @@
-<div class="col-md-8">
+<div class="col-md-9">
     <table class="table">
         <thead>
             <tr>
@@ -28,7 +28,7 @@
     </table>
 </div>
 
-<div class="col-sm-4">
+<div class="col-sm-3">
     <a href="{{action('\CityNexus\CityNexus\Http\CitynexusSettingsController@getCreateUser')}}" class="btn btn-primary pull-right" >Create New User</a>
 </div>
 

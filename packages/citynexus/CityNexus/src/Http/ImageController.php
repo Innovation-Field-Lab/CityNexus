@@ -36,7 +36,7 @@ class ImageController extends Controller
         $img_object->property_id = $request->get('property_id');
         $img_object->caption = $request->get('caption');
         $img_object->description = $request->get('description');
-        $img_object->source = 'https://s3-us-west-2.amazonaws.com/' . env('S3_BUCKET') . '/' . $filePath;
+        $img_object->source = 'https://s3-us-west-2.amazonaws.com/' . env('S3_BUCKET') . $filePath;
         $img_object->save();
 
         return redirect()->back();

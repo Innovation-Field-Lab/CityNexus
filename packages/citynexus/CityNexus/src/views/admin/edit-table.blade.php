@@ -35,7 +35,6 @@
         </div>
         <div class="panel-body" style="overflow: scroll;">
             {!! $table->appends(Input::except('page'))->render() !!}
-            render() !!}
             @if(count($table) > 0)
             <table class="table table-bordered table-striped">
                 <tr>

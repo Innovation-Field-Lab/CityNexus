@@ -539,7 +539,7 @@ class RiskScoreController extends Controller
 
             if(!isset($scores[$pid]))
             {
-                $scores[$pid] = ['score' => null];
+                $scores[$pid] = ['property_id' => $pid, 'score' => null];
             }
 
 

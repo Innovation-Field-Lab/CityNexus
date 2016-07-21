@@ -36,7 +36,7 @@ class Property extends Model
 
     public function tags()
     {
-        return $this->belongsToMany('\CityNexus\CityNexus\Tag', 'property_tag')->whereNull('property_tag.deleted_at')->withTimestamps();
+        return $this->belongsToMany('\CityNexus\CityNexus\Tag', 'property_tag')->whereNull('property_tag.deleted_at')->withTimestamps()->withPivot('created_by');
     }
 
     public function allTags()

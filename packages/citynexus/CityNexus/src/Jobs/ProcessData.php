@@ -38,7 +38,17 @@ class ProcessData extends Job implements SelfHandling, ShouldQueue
         $tabler = new TableBuilder();
         //Process each individual record
 
-        $tabler->processRecord($this->id, $this->table);
+        try{
+            $tabler->processRecord($this->id, $this->table);
+        }
+        catch(\PDOException $e)
+        {
+            app('Illuminate\Contracts\Bus\Dispatcher')->dispatch(new ProcessData($this->id, $this->table))->delay(600);
+        }
+        catch(\Exception $e)
+        {
+            Error::new(['location' => 'processData', 'data' => ['property_id' => $this->id, 'table' => $this->table]]);
+        }
 
     }
 }

@@ -50,7 +50,7 @@ class AdminController extends Controller
 
         else
         {
-            $ids = DB::table($table_name)->get(['id']);
+            $ids = DB::table($table_name)->whereNull('property_id')->get(['id']);
 
             foreach($ids as $i)
             {

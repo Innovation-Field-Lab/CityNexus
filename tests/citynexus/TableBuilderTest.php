@@ -234,6 +234,7 @@ class TableBuilderControllerTest extends TestCase
     }
 
 
+
         public function testTownHall()
         {
             $tableBuilder = new TableBuilder();
@@ -252,6 +253,27 @@ class TableBuilderControllerTest extends TestCase
             $results = DB::table($table->table_name)->where('id', $row)->first();
             $property = \CityNexus\CityNexus\Property::find($results->property_id);
 
-            dd($property);
         }
+
+public function testPoliceData()
+{
+    $tableBuilder = new TableBuilder();
+
+    $table = factory(CityNexus\CityNexus\Table::class)->create([
+        'scheme' => '{"callnum":{"show":"on","name":"Callnum","key":"callnum","type":"string","sync":"null","push":"null","meta":""},"datetime":{"show":"on","name":"Datetime","key":"datetime","type":"datetime","sync":"null","push":"null","meta":""},"address":{"show":"on","name":"Address","key":"address","type":"string","sync":"full_address","push":"null","meta":""},"description":{"show":"on","name":"Description","key":"description","type":"string","sync":"null","push":"null","meta":""}}'
+    ]);
+    $tableBuilder->create($table);
+
+    $rawUpload = '{"callnum":"11-2","datetime":"1\/1\/2011 1:06:00 AM","address":"POND ST","description":"M\/V PARKING"}';
+
+    $row = DB::table($table->table_name)->insertGetId(['upload_id' => 9999, 'raw' => $rawUpload, 'updated_at' => \Carbon\Carbon::now(), 'created_at' => \Carbon\Carbon::now()]);
+
+    $tableBuilder->processRecord($row, $table->table_name);
+
+    $results = DB::table($table->table_name)->where('id', $row)->first();
+    $property = \CityNexus\CityNexus\Property::find($results->property_id);
+
+    dd($results);
+
+}
 }

@@ -85,25 +85,31 @@ class PropertySync
 
         if(null == $property->location_id )
         {
-            $location = Location::firstOrCreate(['full_address' => $property->full_address]);
-            if(env('APP_ENV') != 'testing')
-            {
-                $geocode = Geocoder::geocode(   $location->full_address  . ', ' . config('citynexus.city_state'));
-                $location->lat = $geocode->getLatitude();
-                $location->long = $geocode->getLongitude();
-                $location->polygon = \GuzzleHttp\json_encode($geocode->getBounds());
-                $location->street_number = $geocode->getStreetNumber();
-                $location->street_name = $geocode->getStreetName();
-                $location->locality = $geocode->getCity();
-                $location->postal_code = $geocode->getZipcode();
-                $location->sub_locality = $geocode->getRegion();
-                $location->country = $geocode->getCountry();
-                $location->country_code = $geocode->getCountryCode();
-                $location->timezone = $geocode->getTimezone();
+            try{
+                $location = Location::firstOrCreate(['full_address' => $property->full_address]);
+                if(env('APP_ENV') != 'testing')
+                {
+                    $geocode = Geocoder::geocode(   $location->full_address  . ', ' . config('citynexus.city_state'));
+                    $location->lat = $geocode->getLatitude();
+                    $location->long = $geocode->getLongitude();
+                    $location->polygon = \GuzzleHttp\json_encode($geocode->getBounds());
+                    $location->street_number = $geocode->getStreetNumber();
+                    $location->street_name = $geocode->getStreetName();
+                    $location->locality = $geocode->getCity();
+                    $location->postal_code = $geocode->getZipcode();
+                    $location->sub_locality = $geocode->getRegion();
+                    $location->country = $geocode->getCountry();
+                    $location->country_code = $geocode->getCountryCode();
+                    $location->timezone = $geocode->getTimezone();
+                }
+                $location->save();
+                $property->location_id = $location->id;
+                $property->save();
             }
-            $location->save();
-            $property->location_id = $location->id;
-            $property->save();
+            catch(\Exception $e)
+            {
+                Error::create(['location' => 'geocode', 'data' => ['property_id' => $property->id]]);
+            }
         }
 
         return $property->id;

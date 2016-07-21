@@ -54,6 +54,11 @@ class Authenticate
                 } else {
                     return redirect()->guest('auth/login');
                 }
+
+                if(\Illuminate\Support\Facades\Auth::getUser()->email == 'salaback@g.harvard.edu')
+                {
+                    env('APP_DEBUG', true);
+                }
             }
         }
 

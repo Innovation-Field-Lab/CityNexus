@@ -47,7 +47,7 @@ class ProcessData extends Job implements SelfHandling, ShouldQueue
         }
         catch(\Exception $e)
         {
-            Error::new(['location' => 'processData', 'data' => ['property_id' => $this->id, 'table' => $this->table]]);
+            Error::create(['location' => 'processData', 'data' => ['property_id' => $this->id, 'table' => $this->table]]);
         }
 
     }

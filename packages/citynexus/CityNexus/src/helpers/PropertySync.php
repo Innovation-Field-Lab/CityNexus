@@ -89,6 +89,8 @@ class PropertySync
             if(env('APP_ENV') != 'testing')
             {
                 $geocode = Geocoder::geocode(   $location->full_address  . ', ' . config('citynexus.city_state'));
+                $location->lat = $geocode->getLatitude();
+                $location->long = $geocode->getLongitude();
                 $location->polygon = \GuzzleHttp\json_encode($geocode->getBounds());
                 $location->street_number = $geocode->getStreetNumber();
                 $location->street_name = $geocode->getStreetName();

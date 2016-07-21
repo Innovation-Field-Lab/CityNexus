@@ -202,6 +202,7 @@ class TableBuilderControllerTest extends TestCase
         $this->assertSame($cleanname, $result);
     }
 
+
     public function testWinOwnerOcc()
     {
         $tableBuilder = new TableBuilder();
@@ -231,4 +232,26 @@ class TableBuilderControllerTest extends TestCase
 
         $this->assertSame($expected, $result);
     }
+
+
+        public function testTownHall()
+        {
+            $tableBuilder = new TableBuilder();
+
+            $table = factory(CityNexus\CityNexus\Table::class)->create([
+                'scheme' => '{"residential_address_street_number":{"show":"on","name":"Residential_address_street_number","key":"residential_address_street_number","type":"integer","sync":"house_number","push":"","meta":""},"residential_address_street_suffix":{"show":"on","name":"Residential_address_street_suffix","key":"residential_address_street_suffix","type":"string","sync":"","push":"","meta":""},"residential_address_street_name":{"show":"on","name":"Residential_address_street_name","key":"residential_address_street_name","type":"string","sync":"street_name","push":"","meta":""},"residential_address_apartment_number":{"show":"on","name":"Residential_address_apartment_number","key":"residential_address_apartment_number","type":"string","sync":"unit","push":"","meta":""},"precinct_number":{"show":"on","name":"Precinct_number","key":"precinct_number","type":"integer","sync":"","push":"","meta":""}}'
+                ]);
+            $tableBuilder->create($table);
+
+            $rawUpload = '{"residential_address_street_number":4,"residential_address_street_suffix":null,"residential_address_street_name":"ATLANTIC ST","residential_address_apartment_number":1,"precinct_number":1}';
+
+            $row = DB::table($table->table_name)->insertGetId(['upload_id' => 9999, 'raw' => $rawUpload, 'updated_at' => \Carbon\Carbon::now(), 'created_at' => \Carbon\Carbon::now()]);
+
+            $tableBuilder->processRecord($row, $table->table_name);
+
+            $results = DB::table($table->table_name)->where('id', $row)->first();
+            $property = \CityNexus\CityNexus\Property::find($results->property_id);
+
+            dd($property);
+        }
 }

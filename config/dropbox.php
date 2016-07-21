@@ -42,9 +42,9 @@ return [
             'app'    => 'your-app',
         ],
 
-        'alternative' => [
-            'token'  => 'your-token',
-            'app'    => 'your-app',
+        'test' => [
+            'token'  => 'C8oGDpOoOKUAAAAAAAAPs5eYBpdVMyUbd6GbgTVvpBDKucx09jnlaPXQyx_NFvLd',
+            'app'    => 'd10tut6g3aazh9x',
         ],
 
     ],

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2ee5984f193a01d80746aa1981528511",
-    "content-hash": "4ddfc95fc4cacd92c9923f01ebf01ae2",
+    "hash": "46b07e5c9f98c77505c96b3ab5d8b12f",
+    "content-hash": "2db8f74037577201d27ee61aabf7703e",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -1657,6 +1657,64 @@
                 "geospatial"
             ],
             "time": "2015-09-27 15:35:21"
+        },
+        {
+            "name": "jyggen/curl",
+            "version": "v3.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jyggen/curl.git",
+                "reference": "6ff247fd855e80e50baf67f6147c62e5bff42c4f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jyggen/curl/zipball/6ff247fd855e80e50baf67f6147c62e5bff42c4f",
+                "reference": "6ff247fd855e80e50baf67f6147c62e5bff42c4f",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=5.3.0",
+                "symfony/http-foundation": "~2.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "dev-master"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "jyggen\\Curl": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jonas Stendahl",
+                    "email": "jonas.stendahl@gmail.com",
+                    "homepage": "http://jyggen.com/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A simple and lightweight cURL library with support for multiple requests in parallel.",
+            "homepage": "http://docs.jyggen.com/curl",
+            "keywords": [
+                "Multi-thread",
+                "bot",
+                "curl",
+                "http",
+                "laravel",
+                "parallel",
+                "spider"
+            ],
+            "time": "2013-08-21 11:59:16"
         },
         {
             "name": "laravel/framework",

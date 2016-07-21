@@ -18,7 +18,8 @@
         "toin0u/geocoder-laravel": "@stable",
         "spatie/laravel-glide": "^2.3",
         "doctrine/dbal": "*",
-        "graham-campbell/dropbox": "^3.3"
+        "graham-campbell/dropbox": "^3.3",
+        "jyggen/curl": "^3.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

@@ -272,7 +272,7 @@ class AdminController extends Controller
             {
                 Error::create(['location' => 'geocode', 'data' => \GuzzleHttp\json_encode(['property_id' => $property->id])]);
             }
-
+            $i->delete();
             return $count;
         }
     }

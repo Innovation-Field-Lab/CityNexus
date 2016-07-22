@@ -239,10 +239,10 @@ class AdminController extends Controller
 
     public function getGeocodeErrors()
     {
+        $count = 0;
         $errors = Error::where('location', 'geocode');
         foreach($errors as $i)
         {
-            $count = 0;
             $property = Property::find(\GuzzleHttp\json_decode($i->data)->property_id);
 
             try{
@@ -273,8 +273,8 @@ class AdminController extends Controller
                 Error::create(['location' => 'geocode', 'data' => \GuzzleHttp\json_encode(['property_id' => $property->id])]);
             }
             $i->delete();
-            return $count;
         }
+        return $count;
     }
 
 

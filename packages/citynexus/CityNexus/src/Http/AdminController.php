@@ -70,9 +70,9 @@ class AdminController extends Controller
     {
         $this->authorize('citynexus', ['admin', 'view']);
 
-        $properties = Property::whereNull('lat')->get();
+        $locactions = Location::whereNull('lat')->get();
 
-        foreach ($properties as $i) {
+        foreach ($locactions as $i) {
             $this->dispatch(new GeocodeJob($i->id));
         }
     }

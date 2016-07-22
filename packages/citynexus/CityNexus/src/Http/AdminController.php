@@ -6,6 +6,7 @@ use App\Jobs\FakeLocation;
 use App\User;
 use Carbon\Carbon;
 use CityNexus\CityNexus\CreateRaw;
+use CityNexus\CityNexus\Error;
 use CityNexus\CityNexus\GeocodeJob;
 use CityNexus\CityNexus\Location;
 use CityNexus\CityNexus\MergeProps;
@@ -233,6 +234,44 @@ class AdminController extends Controller
             $count++;
 
             return $count;
+        }
+    }
+
+    public function getGeocodeErrors()
+    {
+        $errors = Error::where('location', 'geocode');
+        foreach($errors as $i)
+        {
+            $count = 0;
+            $property = Property::find(\GuzzleHttp\json_decode($i->data)->property_id);
+
+            try{
+                $location = Location::firstOrCreate(['full_address' => $property->full_address]);
+                if(env('APP_ENV') != 'testing')
+                {
+                    $geocode = Geocoder::geocode(   $location->full_address  . ', ' . config('citynexus.city_state'));
+                    $location->lat = $geocode->getLatitude();
+                    $location->long = $geocode->getLongitude();
+                    $location->polygon = \GuzzleHttp\json_encode($geocode->getBounds());
+                    $location->street_number = $geocode->getStreetNumber();
+                    $location->street_name = $geocode->getStreetName();
+                    $location->locality = $geocode->getCity();
+                    $location->postal_code = $geocode->getZipcode();
+                    $location->sub_locality = $geocode->getRegion();
+                    $location->country = $geocode->getCountry();
+                    $location->country_code = $geocode->getCountryCode();
+                    $location->timezone = $geocode->getTimezone();
+                }
+                $location->save();
+                $property->location_id = $location->id;
+                $property->save();
+
+                $count++;
+            }
+            catch(\Exception $e)
+            {
+                Error::create(['location' => 'geocode', 'data' => \GuzzleHttp\json_encode(['property_id' => $property->id])]);
+            }
         }
     }
 

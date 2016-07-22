@@ -195,7 +195,7 @@ class ScoreBuilderTest extends TestCase
     public function testTextContains()
     {
         $score = \GuzzleHttp\json_decode(json_encode(
-            ['function' => 'contains', 'test' => 'pass', 'result' => '5']));
+            ['function' => 'contains', 'test' => 'Pass', 'result' => '5']));
         $value = 'thisisapassingentry';
         $scorebuilder = new \CityNexus\CityNexus\ScoreBuilder();
         $result = $scorebuilder->calcElement($value, $score);

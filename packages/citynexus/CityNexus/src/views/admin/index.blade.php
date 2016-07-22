@@ -22,7 +22,7 @@
 
     <div class="list-group">
         @foreach(\CityNexus\CityNexus\Table::whereNull('raw_upload')->get() as $i)
-        <a href="{{action('\CityNexus\CityNexus\Http\AdminController@getCreateRawRows')}}/{{$i->table_name}}" class="list-group-item">{{$i->table_title}} @if(isset(json_decode($i->settings)->raw_migrated)) <i class="glyphicon glyphicon-check"></i> @endif </a>
+            {{$i->table_title}} {{DB::table($i->table_name)->whereNull('property_id')->count()}} out of {{DB::table($i->table_name)->count()}} un coded.
         @endforeach
     </div>
 

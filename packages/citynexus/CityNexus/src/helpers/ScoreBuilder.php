@@ -18,6 +18,7 @@ class ScoreBuilder
 
     public function genScore($record, $elements)
     {
+
         $score = 0;
 
         $today = Carbon::today();
@@ -99,13 +100,22 @@ class ScoreBuilder
 
     public function calcElement($value, $score)
     {
-
         $return = null;
 
-        if($score->function == 'func') $return = $this->runFunc($value, $score);
-        elseif($score->function == 'float') $return = $this->runFunc($value, $score);
-        elseif($score->function == 'range') $return = $this->runRange($value, $score);
-        else $return = $this->runText($value, $score);
+        switch ($score->function)
+        {
+            case 'func':
+                $return = $this->runFunc($value, $score);
+                break;
+            case 'float':
+                $return = $this->runFunc($value, $score);
+                break;
+            case 'range':
+                $return = $this->runRange($value, $score);
+                break;
+            default:
+                $return = $this->runText($value, $score);
+        }
 
         return $return;
     }
@@ -138,8 +148,8 @@ class ScoreBuilder
         elseif($score->function == 'empty' && $value == null) { return $score->result; }
         elseif($score->function == 'equals' && $value == $score->test) { return $score->result; }
         elseif($score->function == 'doesntequal' && $value != $score->test) { return $score->result; }
-        elseif($score->function == 'contains'&& strpos($value, $score->test) != false) { return $score->result; }
-        elseif($score->function == 'doesntcontain'&& strpos($value, $score->test) == false) { return $score->result; }
+        elseif($score->function == 'contains'&& stripos($value, $score->test) !== false) { return $score->result; }
+        elseif($score->function == 'doesntcontain'&& stripos($value, $score->test) == false) { return $score->result; }
         else return null;
     }
 

@@ -13,6 +13,7 @@ use CityNexus\CityNexus\MergeProps;
 use CityNexus\CityNexus\ProcessData;
 use CityNexus\CityNexus\Property;
 use CityNexus\CityNexus\Upload;
+use Geocoder\Geocoder;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Artisan;

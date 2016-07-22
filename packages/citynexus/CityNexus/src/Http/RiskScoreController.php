@@ -536,7 +536,7 @@ class RiskScoreController extends Controller
                     $scores[$pid] = ['property_id' => $pid, 'score' => null];
                 }
 
-                $new_score = $scores[$pid] + $scorebuilder->calcElement($value, $element);
+                $new_score = $scores[$pid]['score'] + $scorebuilder->calcElement($value, $element);
 
                 if($new_score !== null)
                 {

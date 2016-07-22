@@ -240,7 +240,7 @@ class AdminController extends Controller
     public function getGeocodeErrors()
     {
         $count = 0;
-        $errors = Error::where('location', 'geocode');
+        $errors = Error::where('location', 'geocode')->get();
         foreach($errors as $i)
         {
             $property = Property::find(\GuzzleHttp\json_decode($i->data)->property_id);

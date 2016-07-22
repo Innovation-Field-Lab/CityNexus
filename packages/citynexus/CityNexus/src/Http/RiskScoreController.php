@@ -353,7 +353,10 @@ class RiskScoreController extends Controller
 
         foreach($properties as $i)
         {
-            $insert[] = ['property_id' => $i];
+            if($i != null)
+            {
+                $insert[] = ['property_id' => $i];
+            }
         }
 
         DB::table($table)->insert($insert);
@@ -473,6 +476,7 @@ class RiskScoreController extends Controller
 
     private function genByAllElement($element, $score_id, $alias)
     {
+
         $key = $element->key;
         $scorebuilder = new ScoreBuilder();
 
@@ -520,29 +524,11 @@ class RiskScoreController extends Controller
         {
             $pid = $i->property_id;
 
-            if(isset($alias[$i->property_id]))
-            {
-                $pid = $alias[$i->property_id];
-
-            }
-
             $sortedvalues[$pid][] = $i->$key;
         }
 
         foreach($sortedvalues as $pid => $values)
         {
-
-            if(isset($alias[$pid]))
-            {
-                $pid = $alias[$pid];
-            }
-
-            if(!isset($scores[$pid]))
-            {
-                $scores[$pid] = ['property_id' => $pid, 'score' => null];
-            }
-
-
             foreach($values as $value)
             {
                 if(!isset($scores[$pid]))
@@ -550,7 +536,7 @@ class RiskScoreController extends Controller
                     $scores[$pid] = ['property_id' => $pid, 'score' => null];
                 }
 
-                $new_score = $scores[$pid]['score'] + $scorebuilder->calcElement($value, $element);
+                $new_score = $scorebuilder->calcElement($value, $element);
 
                 if($new_score !== null)
                 {
@@ -563,6 +549,23 @@ class RiskScoreController extends Controller
 
             }
         }
+
+        foreach($alias as $k => $i)
+        {
+            if(isset($scores[$k]))
+            {
+
+                if(!isset($scores[$i]))
+                {
+                    $scores[$i] = ['property_id' => $i, 'score' => null];
+                }
+
+                $scores[$i]['score'] = $scores[$k]['score'] + $scores[$i]['score'];
+                unset($scores[$k]);
+            }
+        }
+
+        if(isset($scores[''])) {unset($scores['']);}
 
         DB::table('citynexus_scores_' . $score_id)->truncate();
         DB::table('citynexus_scores_' . $score_id)->insert($scores);

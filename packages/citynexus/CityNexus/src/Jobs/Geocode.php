@@ -35,10 +35,14 @@ class GeocodeJob extends Job implements SelfHandling, ShouldQueue
 
         if(!is_array($this->p_id))
         {
-            $this->p_id[] =$this->p_id;
+            $pids[] =$this->p_id;
+        }
+        else
+        {
+            $pids = $this->p_id;
         }
 
-        foreach($this->p_id as $id) {
+        foreach($pids as $id) {
             try {
                 // Get property record
                 $location = Location::find($id);

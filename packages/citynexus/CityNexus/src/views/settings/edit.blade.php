@@ -15,6 +15,11 @@
                                     User Settings
                                 </a>
                             </li>
+                            <li role="presentation" class="">
+                                <a href="#dashboard_settings" id="dashboard_settings_tab" role="tab" data-toggle="tab" aria-controls="user" aria-expanded="false">
+                                    Dashboard Settings
+                                </a>
+                            </li>
                             {{--<li role="presentation" class="">--}}
                                 {{--<a href="#application" role="tab" id="application-tab" data-toggle="tab" aria-controls="application" aria-expanded="false">--}}
                                     {{--Application Settings--}}
@@ -38,39 +43,14 @@
                         <div id="myTabContent" class="tab-content">
                             <div role="tabpanel" class="tab-pane fade active in" id="user" aria-labelledby="home-tab">
                                 <div class="panel-body">
-                                    <form action="/{{config('citynexus.root_directory')}}/settings/update-user" class="form form-horizontal" method="post">
-                                        {{csrf_field()}}
-                                    <div class="form-group">
-                                        <label for="email" class="control-label col-sm-4">Email Address</label>
-
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" id="email" name="email"
-                                                   value="{{$user->email}}"/>
-                                        </div>
+                                    @include(('citynexus::settings._user_settings'))
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="dashboard_settings" aria-labelledby="dashboard_settings-tab">
+                                <div class="panel">
+                                    <div class="panel-body">
+                                        @include('citynexus::settings._dashboard_settings')
                                     </div>
-                                    <div class="form-group">
-                                        <label for="password" class="control-label col-sm-4">Current Password</label>
-
-                                        <div class="col-sm-8">
-                                            <input type="password" class="form-control" id="password" name="password"/>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="new_password" class="control-label col-sm-4">New Password</label>
-
-                                        <div class="col-sm-8">
-                                            <input type="password" class="form-control" id="new_password" name="new_password"/>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="confirm_password" class="control-label col-sm-4">Confirm Password</label>
-
-                                        <div class="col-sm-8">
-                                            <input type="password" class="form-control" id="confirm_password" name="confirm_password"/>
-                                        </div>
-                                    </div>
-                                        <input type="submit" class="btn btn-primary" value="Update User">
-                                </form>
                                 </div>
                             </div>
                             <div role="tabpanel" class="tab-pane fade" id="application" aria-labelledby="profile-tab">
@@ -93,6 +73,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             @can('citynexus', ['usersAdmin', 'create'])
                             <div role="tabpanel" class="tab-pane fade" id="users" aria-labelledby="users-tab">
                                 <div class="panel">

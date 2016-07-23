@@ -165,6 +165,14 @@ class CitynexusSettingsController extends Controller
         return response('Success');
     }
 
+    public function postUpdateDashboard(Request $request)
+    {
+        $dashboard = Setting::firstOrCreate(['key' => 'globalDashboard']);
+        $dashboard->value = '[' . ($request->get('data')) . ']';
+        $dashboard->save();
+        return 'Success';
+    }
+
     public function getInvite($id)
     {
         $user = User::find($id);

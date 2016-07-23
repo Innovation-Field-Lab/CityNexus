@@ -273,7 +273,5 @@ public function testPoliceData()
     $results = DB::table($table->table_name)->where('id', $row)->first();
     $property = \CityNexus\CityNexus\Property::find($results->property_id);
 
-    dd($results);
-
 }
 }

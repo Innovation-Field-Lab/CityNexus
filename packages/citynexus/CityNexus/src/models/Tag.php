@@ -12,6 +12,6 @@ class Tag extends Model
 
     public function properties()
     {
-        return $this->belongsToMany('\CityNexus\CityNexus\Property', 'property_tag')->whereNull('property_tag.deleted_at');
+        return $this->belongsToMany('\CityNexus\CityNexus\Property', 'property_tag')->whereNull('property_tag.deleted_at')->withPivot('created_at', 'created_by')->orderBy('property_tag.created_at', 'desc');
     }
 }

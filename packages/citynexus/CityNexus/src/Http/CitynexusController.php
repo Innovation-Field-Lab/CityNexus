@@ -11,6 +11,7 @@ use CityNexus\CityNexus\GenerateScore;
 use CityNexus\CityNexus\SendEmail;
 use CityNexus\CityNexus\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use CityNexus\CityNexus\Table;
 use CityNexus\CityNexus\Geocode;
@@ -21,8 +22,8 @@ class CitynexusController extends Controller
 
     public function getIndex()
     {
-        $notes = Note::orderBy('created_at', "DEC")->take(20)->with('creator')->with('property')->get();
-        return view('citynexus::dashboards.citymanager', compact('notes'));
+        $widgets = Auth::getUser()->widgets;
+        return view('citynexus::dashboards.citymanager', compact('notes', 'widgets'));
     }
 
     public function postSubmitTicket(Request $request)

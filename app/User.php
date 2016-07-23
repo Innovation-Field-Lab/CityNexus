@@ -2,6 +2,7 @@
 
 namespace App;
 
+use CityNexus\CityNexus\Widget;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -55,5 +56,21 @@ class User extends Model implements AuthenticatableContract,
         if(!isset($permissions->$set->$permission) or !$permissions->$set->$permission) return true;
         else return false;
 
+    }
+
+    public function getWidgetsAttribute()
+    {
+        if($this->dashboard)
+        {
+            $widgets = json_decode($this->dashboard);
+        }
+        else
+        {
+
+            $widgets = json_decode(setting('globalDashboard'));
+        }
+
+        $widgets = Widget::findMany($widgets);
+        return $widgets;
     }
 }

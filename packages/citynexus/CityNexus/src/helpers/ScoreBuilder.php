@@ -148,8 +148,8 @@ class ScoreBuilder
         elseif($score->function == 'empty' && $value == null) { return $score->result; }
         elseif($score->function == 'equals' && $value == $score->test) { return $score->result; }
         elseif($score->function == 'doesntequal' && $value != $score->test) { return $score->result; }
-        elseif($score->function == 'contains'&& stripos($value, $score->test) !== false) { return $score->result; }
-        elseif($score->function == 'doesntcontain'&& stripos($value, $score->test) == false) { return $score->result; }
+        elseif($score->function == 'contains'&& stripos($value, $score->test) != false) { return $score->result; }
+        elseif($score->function == 'doesntcontain'&& stripos($value, $score->test) === false) { return $score->result; }
         else return null;
     }
 

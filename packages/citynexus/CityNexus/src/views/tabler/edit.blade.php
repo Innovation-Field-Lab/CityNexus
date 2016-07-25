@@ -23,7 +23,7 @@
                                 <div class="col-sm-8">
                                     <select name="settings[timestamp]" class="form-control" id="timestamp">
                                         <option value="">Use Today's Date</option>
-                                        @foreach($table as $key => $item)
+                                        @foreach($scheme as $key => $item)
                                             <option value="{{$key}} @if(isset($settings->timestamp) && $settings->timestamp == $key) selected @endif">{{$key}}</option>
                                         @endforeach
                                     </select>
@@ -32,11 +32,11 @@
                             <br><br>
                             <div class="form-group">
                                 <label for="timestamp" class="control-label col-sm-4">Unique ID</label>
-
                                 <div class="col-sm-8">
                                     <select name="settings[unique_id]" class="form-control" id="unique_id">
                                         <option value="">None</option>
-                                        @foreach($table as $key => $item)
+
+                                        @foreach($scheme as $key => $item)
                                             <option value="{{$key}}" @if(isset($settings->unique_id) && $settings->unique_id == $key) selected @endif>{{$key}}</option>
                                         @endforeach
                                     </select>
@@ -49,7 +49,7 @@
                                 <div class="col-sm-8">
                                     <select name="settings[property_id]" class="form-control" id="property_id">
                                         <option value="">None</option>
-                                        @foreach($table as $key => $item)
+                                        @foreach($scheme as $key => $item)
                                             <option value="{{$key}}" @if(isset($settings->property_id) && $settings->property_id == $key) selected @endif >{{$key}}</option>
                                         @endforeach
                                     </select>

@@ -6,7 +6,7 @@
                 <i class="zmdi zmdi-more-vert"></i>
             </a>
             <ul class="dropdown-menu" role="menu">
-                <li><a onclick="removeWidget({{$widget->id}})">Action</a></li>
+                <li><a onclick="removeWidget({{$widget->id}})">Remove Widget</a></li>
             </ul>
         </div>
         @endcan

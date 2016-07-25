@@ -39,8 +39,7 @@ class WidgetController extends Controller
 
     public function getRemove($id)
     {
-        $user = Auth::getUser();
-        $widgets = $user->widgets;
+        $widgets = setting('globalDashboard');
         foreach($widgets as $i)
         {
             if($id != $i->id)
@@ -48,11 +47,20 @@ class WidgetController extends Controller
                 $new[] = $i->id;
             }
         }
-        $user->dashboard = json_encode($new);
-        $user->save();
+        $dashboard = Setting::where(['key' => 'globalDashboard']);
+        $dashboard->value = json_encode($new);
+        $dashboard->save();
 
         return 'success';
 
+    }
+
+    public function getDelete($id)
+    {
+        $widget = Widget::find($id);
+        $widget->delete();
+
+        return 'success';
     }
 
 }

@@ -27,7 +27,7 @@ use CityNexus\CityNexus\Widget;
     <ul id="inactive-dashboard" class="list-group connectedSortable">
         @foreach($user_widgets as $i)
             @unless(isset($widget_list[$i->id]))
-            <li class="list-group-item" id="{{$i->id}}"><i class="fa fa-sort"></i> {{$i->name}}</li>
+            <li class="list-group-item" id="{{$i->id}}"><i class="fa fa-sort"></i> {{$i->name}} <i></i></li>
             @endunless
         @endforeach
         @foreach($global_widgets as $i)

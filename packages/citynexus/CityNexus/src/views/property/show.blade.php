@@ -115,10 +115,11 @@ $section = 'properties';
     </script>
 @endif
 
-
+@if(env('GMAPI_KEY') != null)
 <script async defer
         src="{{'https://maps.googleapis.com/maps/api/js?key=' . env('GMAPI_KEY') . '&signed_in=true&callback=initialize'}}">
 </script>
+@endif
 
 
 <script>
@@ -142,6 +143,42 @@ $section = 'properties';
         });
     }
 
+    function unlink(table, id)
+    {
+        $.ajax({
+            url: "{{action('\CityNexus\CityNexus\Http\TablerController@getRelinkRecord')}}/" + table + '/' + id
+        }).success(
+                function(){
+                    $("#" + table + '_' + id).addClass('hidden');
+                }
+        )
+    }
+
+</script>
+
+<script>
+    function addTask()
+    {
+        var taskForm = '<form action="{{action('\CityNexus\CityNexus\Http\TaskController@postCreate')}}" method="post">' +
+                '{{csrf_field()}}' +
+                '<input type="hidden" name="model" value="Property">' +
+                '<input type="hidden" name="model_id" value="{{$property->id}}">' +
+                '<input type="hidden" name="relation" value="tasks">' +
+                '<label for="task">Task</label>' +
+                '<input class="form-control" type="text" name="task" required>' +
+                '<label for="description">Description</label>' +
+                '<textarea class="form-control" name="description"></textarea>' +
+                '<label for="assigned_to">Assign Task To:</label>' +
+                '<select class="form-control" name="assigned_to">' +
+                '<option value="">Select One</option>' +
+                @foreach($users as $person)
+                    '<option value="{{$person->id}}">{{$person->fullname()}}</option>' +
+                @endforeach
+            '</select>' +
+                '<br><br><input type="submit" class="btn btn-primary" value="Create Task"></form>';
+
+        triggerModal('Create Task', taskForm);
+    }
 </script>
 
 @endpush

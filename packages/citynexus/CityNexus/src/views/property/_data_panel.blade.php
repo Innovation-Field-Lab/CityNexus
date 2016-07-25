@@ -10,7 +10,6 @@
                     <th>@if(isset($column->meta) && $column->meta != null) <i onclick="viewMeta('{{$column->meta}}', '{{$column->name}}')" class="fa  fa-info-circle center" style="cursor: pointer"></i>@endif<br>{{$column->name}} </th>
                 @endif
             @endforeach
-                @can('citynexus', ['dataset', 'rematch'])<th></th>@endcan
             </tr>
         </thead>
         <tbody>
@@ -21,7 +20,6 @@
                 <td>{{$r}}</td>
                 @endif
             @endforeach
-                @can('citynexus', ['dataset', 'rematch'])<td><div  class="btn btn-sm btn-default" onclick="unlink('{{$tables->find($key)->table_name}}', {{$rid}})">Unlink</div></td>@endcan
             </tr>
         @endforeach
         </tbody>

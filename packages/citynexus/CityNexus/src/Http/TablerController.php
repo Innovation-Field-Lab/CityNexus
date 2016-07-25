@@ -464,4 +464,11 @@ class TablerController extends Controller
         unset($dataset['_token']);
         return view('citynexus::tabler.snipits._field_settings', compact('dataset', 'scheme', 'field'));
     }
+
+    public function getRelinkRecord($table, $id, $newId = null)
+    {
+        DB::table($table)->where('id', $id)->update(['property_id' => $newId]);
+
+        return 'success';
+    }
 }

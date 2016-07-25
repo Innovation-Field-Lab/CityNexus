@@ -18,7 +18,6 @@
                     <th>Rank</th>
                     <th>Score</th>
                     <th>Address</th>
-                    <th>Property ID</th>
                     <th></th>
                 </tr>
                 </thead>
@@ -29,7 +28,6 @@
                         <td>{{$rank + 1}}</td>
                         <td>{{$item->score}}</td>
                         <td>{{ucwords($item->full_address)}}</td>
-                        <td>{{$item->property_id}}</td>
                         <td><a class="btn btn-sm btn-primary" href="{{action('\CityNexus\CityNexus\Http\PropertyController@getShow', ['id' => $item->property_id])}}">Property Details</a></td>
                     </tr>
                     @endif

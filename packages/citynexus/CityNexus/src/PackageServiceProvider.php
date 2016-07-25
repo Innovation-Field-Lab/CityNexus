@@ -70,6 +70,7 @@ class PackageServiceProvider extends ServiceProvider
         include_once __DIR__ . '/Jobs/MergeProps.php';
         include_once __DIR__ . '/Jobs/ProcessData.php';
         include_once __DIR__ . '/Jobs/CreateRaw.php';
+        include_once __DIR__ . '/Jobs/MakeUnique.php';
 
         // Inluded Policies
         include_once __DIR__ . '/Policies/CityNexusPolicy.php';

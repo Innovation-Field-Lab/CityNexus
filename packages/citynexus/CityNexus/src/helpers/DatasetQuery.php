@@ -27,11 +27,11 @@ class DatasetQuery
                     ->join('citynexus_properties', $table->table_name . '.property_id', '=', 'citynexus_properties.id')
                     ->where('property_id', $pid)
                     ->orWhere('citynexus_properties.alias_of', $pid)
-                    ->get();
+                    ->get([$table->table_name . '.id']);
 
                 //add each object to array
                 foreach ($results as $result) {
-                    $return[$table->id][] = $result;
+                    $return[$table->id][] = $results = DB::table($table->table_name)->where('id', $result->id)->first();
                 }
             }
         }

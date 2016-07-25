@@ -9,6 +9,7 @@ use CityNexus\CityNexus\CreateRaw;
 use CityNexus\CityNexus\Error;
 use CityNexus\CityNexus\GeocodeJob;
 use CityNexus\CityNexus\Location;
+use CityNexus\CityNexus\MakeUnique;
 use CityNexus\CityNexus\MergeProps;
 use CityNexus\CityNexus\ProcessData;
 use CityNexus\CityNexus\Property;
@@ -276,6 +277,18 @@ class AdminController extends Controller
             $i->delete();
         }
         return $count;
+    }
+
+    public function getMakeUnique()
+    {
+        $tables = DB::table('tabler_police_calls')->get(['id', 'callnum']);
+
+        $results = array_chunk($tables, 1000);
+
+        foreach($results as $i){
+            $this->dispatch(new MakeUnique($i));
+        }
+        return 'success';
     }
 
 

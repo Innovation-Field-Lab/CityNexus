@@ -80,22 +80,14 @@ class TaskController extends Controller
 
         <p>The following task has been assigned to you:</p>
         <b>" . $task->task . "</b><br>
-        <p> " . $task->description . "</p>'";
+        <p> " . $task->description . "</p>";
 
         if($task->due_by != null)
         {
             $message .= "<p><b>Due Date: " . $task->due_at->formatLocalized('%d %B %Y') . "</b></p>";
         }
-        $message .= "<a style='background-color: #008CBA; /* Blue */
-          border: none;
-          color: white;
-          padding: 7px 24px;
-          text-align: center;
-          text-decoration: none;
-          display: inline-block;
-          font-size: 12px;
-          border-radius: 8px;'
-          href='\\" . url(action('\CityNexus\CityNexus\Http\TaskController@getShow', ['id' => $task->id])) . "'>Open in CityNexus</a>";
+        $message .= 'Open task in CityNexus: </br>';
+        $message .= url(action('\CityNexus\CityNexus\Http\TaskController@getShow', ['id' => $task->id]));
 
         $this->dispatch(new SendEmail($assignee->email, 'New Task: ' . $task->task, $message));
         Session::flash('flash_success', "Email sent to task owner");

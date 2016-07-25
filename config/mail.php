@@ -1,17 +1,5 @@
 <?php
 
-$mail_password = 'c2dd4f93ab30f6db13a63fbc22e67a79';
-$mail_username = 'postmaster@sandbox47964c35f2ac45009d5a691b305c1a48.mailgun.org';
-$mail_from_address = 'postmaster@citynexus.org';
-$mail_from_name = 'CityNexus';
-$mail_smtp = 'smtp.mailgun.org';
-
-//$mail_password = \CityNexus\CityNexus\Setting::where('key', 'mail_password')->pluck('value');
-//$mail_username = \CityNexus\CityNexus\Setting::where('key', 'mail_username')->pluck('value');
-//$mail_from_address = \CityNexus\CityNexus\Setting::where('key', 'mail_from_address')->pluck('value');
-//$mail_from_name = \CityNexus\CityNexus\Setting::where('key', 'mail_from_name')->pluck('value');
-//$mail_smtp = \CityNexus\CityNexus\Setting::where('key', 'mail_smtp')->pluck('value');
-
 return [
 
     /*
@@ -27,7 +15,7 @@ return [
     |
     */
 
-    'driver' => env('MAIL_DRIVER', 'smtp'),
+    'driver' => env('MAIL_DRIVER', 'mailgun'),
 
     /*
     |--------------------------------------------------------------------------
@@ -40,7 +28,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', $mail_smtp),
+    'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
 
     /*
     |--------------------------------------------------------------------------
@@ -66,7 +54,7 @@ return [
     |
     */
 
-    'from' => ['address' => $mail_from_address, 'name' => $mail_from_name],
+    'from' => ['address' => 'postmaster@citynexus.org', 'name' => 'CityNexus'],
 
     /*
     |--------------------------------------------------------------------------
@@ -92,7 +80,7 @@ return [
     |
     */
 
-    'username' => env('MAIL_USERNAME', $mail_username),
+    'username' => env('MAIL_USERNAME', 'postmaster@citynexus.org'),
 
     /*
     |--------------------------------------------------------------------------
@@ -105,7 +93,7 @@ return [
     |
     */
 
-    'password' => env('MAIL_PASSWORD', $mail_password),
+    'password' => env('MAIL_PASSWORD', 'secret'),
 
     /*
     |--------------------------------------------------------------------------

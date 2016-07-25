@@ -28,15 +28,18 @@ $section = 'tasks';
                <h3>{{$task->task}}</h3>
                 @if($task->property != null)
                     @foreach($task->property as $property)
-                    <a href="{{action('\CityNexus\CityNexus\Http\PropertyController@getShow', [$property->id])}}">{{$property->full_address}}</a>
+                    <a href="{{action('\CityNexus\CityNexus\Http\PropertyController@getShow', [$property->id])}}">{{ucwords($property->full_address)}}</a>
                     @endforeach
                 @endif
                 @if($task->due_at != null)
                     <p><b>Due: {{$task->due_at->diffForHumans()}}</b></p>
                 @endif
                 <p>{{$task->description}}</p>
+                @unless($task->completed_at)
                 <a class="btn btn-success" href="{{action('\CityNexus\CityNexus\Http\TaskController@getMarkComplete',  [$task->id])}}">Mark Complete</a>
-              
+                @else
+                <p>Marked Complete: {{$task->completed_at->formatLocalized('%A %d %B %Y')}}</p>
+                @endunless
                
             </div>
         </div>

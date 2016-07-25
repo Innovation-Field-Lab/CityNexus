@@ -70,7 +70,7 @@ $section = 'properties';
                         <div id="map" style="height: 250px"></div>
                     </div>
                 @endif
-                @if($property->tasks->count() > 0)
+                @if($property->tasks()->open()->get()->count() != null)
                     @include('citynexus::property._tasks')
                 @endif
 

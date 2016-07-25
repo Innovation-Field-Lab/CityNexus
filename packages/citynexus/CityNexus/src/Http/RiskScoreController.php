@@ -85,6 +85,7 @@ class RiskScoreController extends Controller
             ->join('citynexus_properties', 'citynexus_properties.id', '=', 'property_id')
             ->select($table . '.property_id', $table . '.score', 'citynexus_properties.full_address')
             ->whereNotNull($table . '.score')
+            ->where($table . '.score', 0)
             ->orderBy($table . '.score', 'DESC')
             ->get();
 

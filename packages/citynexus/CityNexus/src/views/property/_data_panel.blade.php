@@ -14,11 +14,7 @@
             </tr>
         </thead>
         <tbody>
-<<<<<<< HEAD
         @foreach($dataset as $row)
-=======
-        @foreach($dataset as $rid => $row)
->>>>>>> master
             <tr id="{{$tables->find($key)->table_name}}_{{$row->id}}" @unless($row->property_id == $property->id) class="warning" <?php $disclaimer = true; ?> @endunless>
             @foreach($row as $k => $r)
                 @if(isset($table->$k->show) && $table->$k->show == true)

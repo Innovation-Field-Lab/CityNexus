@@ -22,3 +22,32 @@
         </div>
     </div>
 </div>
+
+@push('js_footer')
+
+<script>
+    function addTask()
+    {
+        var taskForm = '<form action="{{action('\CityNexus\CityNexus\Http\TaskController@postCreate')}}" method="post">' +
+                '{{csrf_field()}}' +
+                '<input type="hidden" name="model" value="Property">' +
+                '<input type="hidden" name="model_id" value="{{$property->id}}">' +
+                '<input type="hidden" name="relation" value="tasks">' +
+                '<label for="task">Task</label>' +
+                '<input class="form-control" type="text" name="task" required>' +
+                '<label for="description">Description</label>' +
+                '<textarea class="form-control" name="description"></textarea>' +
+                '<label for="assigned_to">Assign Task To:</label>' +
+                '<select class="form-control" name="assigned_to">' +
+                '<option value="">Select One</option>' +
+                @foreach($users as $person)
+                    '<option value="{{$person->id}}">{{$person->fullname()}}</option>' +
+                @endforeach
+            '</select>' +
+                '<br><br><input type="submit" class="btn btn-primary" value="Create Task"></form>';
+
+        triggerModal('Create Task', taskForm);
+    }
+</script>
+
+@endpush

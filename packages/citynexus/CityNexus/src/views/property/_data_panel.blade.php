@@ -13,8 +13,8 @@
             </tr>
         </thead>
         <tbody>
-        @foreach($dataset as $rid => $row)
-            <tr id="{{$tables->find($key)->table_name}}_{{$row->id}}" @unless($row->property_id == $property->id) class="warning" <?php $disclaimer = true; ?> @endunless>
+        @foreach($dataset as $row)
+            <tr @unless($row->property_id == $property->id) class="warning" <?php $disclaimer = true; ?> @endunless>
             @foreach($row as $k => $r)
                 @if(isset($table->$k->show) && $table->$k->show == true)
                 <td>{{$r}}</td>

@@ -66,7 +66,7 @@ class PropertySync
             return false;
         }
 
-        if(isset($address['house_number']) && $address['house_number'] == null)
+        if(!isset($address['house_number']) or $address['house_number'] == null)
         {
             return false;
         }

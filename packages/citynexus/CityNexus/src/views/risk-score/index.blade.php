@@ -6,8 +6,8 @@ $section = 'scores';
 @extends(config('citynexus.template'))
 
 @section(config('citynexus.section'))
-
-    <div class="portlet">
+<div style="padding-bottom: 100px">
+    <div class="portlet" >
         {{--<div class="portlet-heading portlet-default">--}}
             {{--<div class="portlet-widgets">--}}
                 {{--<a href="javascript:;" data-toggle="reload"><i class="zmdi zmdi-refresh"></i></a>--}}
@@ -58,6 +58,7 @@ $section = 'scores';
                 </table>
             </div>
         </div>
+</div>
 @stop
 
 @push('js_footer')

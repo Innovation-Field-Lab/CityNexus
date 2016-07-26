@@ -26,19 +26,7 @@ class ImageController extends Controller
 {
     public function postUpload(Request $request)
     {
-        $image = $request->file('image');
-        $imageFileName = time() . '.' . $image->getClientOriginalExtension();
-        $s3 = Storage::disk('s3');
-        $filePath = '/images/' . $imageFileName;
-        $s3->put($filePath, file_get_contents($image), 'public');
-
-        $img_object = new Image();
-        $img_object->property_id = $request->get('property_id');
-        $img_object->caption = $request->get('caption');
-        $img_object->description = $request->get('description');
-        $img_object->source = 'https://s3-us-west-2.amazonaws.com/' . env('S3_BUCKET') . $filePath;
-        $img_object->save();
-
+        Image::create($request->all());
         return redirect()->back();
     }
 
@@ -58,5 +46,16 @@ class ImageController extends Controller
     public function getShow($id)
     {
         return Image::find($id);
+    }
+
+    public function getUploader(Request $request)
+    {
+        if(null != $request->get('property_id'))
+        {
+            $property_id = $request->get('property_id');
+            return view('citynexus::image.uploader', compact('property_id'));
+        }
+
+        return view('citynexus::image.uploader');
     }
 }

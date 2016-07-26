@@ -9,7 +9,7 @@ class Image extends Model
 {
     use SoftDeletes;
     protected $table = 'citynexus_images';
-    protected $fillable = ['caption', 'description', 'source', 'location_id'];
+    protected $fillable = ['caption', 'description', 'source', 'location_id', 'property_id'];
 
     public function property()
     {

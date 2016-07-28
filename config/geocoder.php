@@ -13,7 +13,8 @@ return [
     // Providers get called in the chain order given here.
     // The first one to return a result will be used.
     'providers' => [
-        'Geocoder\Provider\GoogleMapsProvider' => ['en-US', 'US', true, env('GMAPI_KEY')],
+//        'Geocoder\Provider\GoogleMapsProvider' => ['en-US', 'US', true],
+        '\Geocoder\Provider\GoogleMapsBusiness' => ['en-US', env('GCLIENT_ID'), env('GMAPI_KEY'), 'US', true, true]
     ],
     'adapter'  => 'Geocoder\HttpAdapter\CurlHttpAdapter',
 ];

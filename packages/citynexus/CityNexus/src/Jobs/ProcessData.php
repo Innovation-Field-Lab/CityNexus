@@ -43,11 +43,11 @@ class ProcessData extends Job implements SelfHandling, ShouldQueue
         }
         catch(\PDOException $e)
         {
-            app('Illuminate\Contracts\Bus\Dispatcher')->dispatch(new ProcessData($this->id, $this->table))->delay(600);
+            Error::create(['location' => 'processData PDO', 'data' => json_encode(['property_id' => $this->id, 'table' => $this->table])]);
         }
         catch(\Exception $e)
         {
-            Error::create(['location' => 'processData', 'data' => \GuzzleHttp\json_encode(['property_id' => $this->id, 'table' => $this->table])]);
+            Error::create(['location' => 'processData', 'data' => json_encode(['property_id' => $this->id, 'table' => $this->table])]);
         }
 
     }

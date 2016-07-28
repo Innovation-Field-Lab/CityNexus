@@ -108,10 +108,10 @@ class PropertySync
             }
             catch(\Exception $e)
             {
-                Error::create(['location' => 'geocode', 'data' => \GuzzleHttp\json_encode(['property_id' => $property->id])]);
+                Error::create(['location' => 'geocode', 'data' => json_encode(['property_id' => $property->id])]);
+                return $property->id;
             }
         }
-
         return $property->id;
     }
 

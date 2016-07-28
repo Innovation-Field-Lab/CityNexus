@@ -14,7 +14,7 @@ return [
     // The first one to return a result will be used.
     'providers' => [
 //        'Geocoder\Provider\GoogleMapsProvider' => ['en-US', 'US', true],
-        '\Geocoder\Provider\GoogleMapsBusiness' => ['en-US', env('GCLIENT_ID'), env('GMAPI_KEY'), 'US', true, true]
+        '\Geocoder\Provider\GoogleMapsBusinessProvider' => ['en-US', env('GCLIENT_ID'), env('GMAPI_KEY'), 'US', true, true]
     ],
     'adapter'  => 'Geocoder\HttpAdapter\CurlHttpAdapter',
 ];

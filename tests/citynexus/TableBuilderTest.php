@@ -296,4 +296,26 @@ class TableBuilderControllerTest extends TestCase
 
 
     }
+
+    public function testLaw()
+    {
+        $tableBuilder = new TableBuilder();
+
+        $table = factory(CityNexus\CityNexus\Table::class)->create([
+            'scheme' => '{"ref":{"show":"on","name":"Ref","key":"ref","type":"integer","sync":"null","push":"null","meta":""},"number":{"show":"on","name":"Number","key":"number","type":"integer","sync":"house_number","push":"null","meta":""},"address_of_building":{"show":"on","name":"Address_of_building","key":"address_of_building","type":"string","sync":"street_name","push":"null","meta":""},"unit":{"show":"on","name":"Unit","key":"unit","type":"string","sync":"unit","push":"null","meta":""},"date_entered":{"show":"on","name":"Date_entered","key":"date_entered","type":"datetime","sync":"null","push":"null","meta":""},"name_of_loc_prop_man":{"show":"on","name":"Name_of_loc_prop_man","key":"name_of_loc_prop_man","type":"string","sync":"null","push":"null","meta":""},"company":{"show":"on","name":"Company","key":"company","type":"string","sync":"null","push":"null","meta":""},"address_of_loc_prop_man":{"show":"on","name":"Address_of_loc_prop_man","key":"address_of_loc_prop_man","type":"string","sync":"null","push":"null","meta":""},"suite":{"show":"on","name":"Suite","key":"suite","type":"string","sync":"null","push":"null","meta":""},"city":{"show":"on","name":"City","key":"city","type":"string","sync":"null","push":"null","meta":""},"state":{"show":"on","name":"State","key":"state","type":"string","sync":"null","push":"null","meta":""},"zip_code":{"show":"on","name":"Zip_code","key":"zip_code","type":"string","sync":"null","push":"null","meta":""},"changed_ownership":{"show":"on","name":"Changed_ownership","key":"changed_ownership","type":"string","sync":"null","push":"null","meta":""}}'
+        ]);
+        $tableBuilder->create($table);
+
+        $rawUpload = '{"ref":22,"number":null,"address_of_building":null,"unit":null,"date_entered":null,"name_of_loc_prop_man":null,"company":null,"address_of_loc_prop_man":null,"suite":null,"city":null,"state":null,"zip_code":null,"changed_ownership":null}';
+
+        $row = DB::table($table->table_name)->insertGetId(['upload_id' => 9999, 'raw' => $rawUpload, 'updated_at' => \Carbon\Carbon::now(), 'created_at' => \Carbon\Carbon::now()]);
+
+        $tableBuilder->processRecord($row, $table->table_name);
+
+        $results = DB::table($table->table_name)->where('id', $row)->first();
+
+        $this->assertSame(null, $results->property_id);
+
+
+    }
 }

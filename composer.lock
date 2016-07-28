@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0d3909d0783af9b05f99058051abeb22",
-    "content-hash": "b2dc48052ab0ec0e0634246050cead7f",
+    "hash": "41dea1464f43f18ce368fbe93ea92227",
+    "content-hash": "324eceedb2b58e4bf7fed3a05f4c992a",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.18.32",
+            "version": "3.18.33",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "84b9927ee116b30babf90a9fc723764672543e29"
+                "reference": "d787cfc514f77f5bee6990a466bc6922c0cf1526"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/84b9927ee116b30babf90a9fc723764672543e29",
-                "reference": "84b9927ee116b30babf90a9fc723764672543e29",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/d787cfc514f77f5bee6990a466bc6922c0cf1526",
+                "reference": "d787cfc514f77f5bee6990a466bc6922c0cf1526",
                 "shasum": ""
             },
             "require": {
@@ -85,7 +85,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2016-07-21 22:30:58"
+            "time": "2016-07-26 18:19:04"
         },
         {
             "name": "backup-manager/backup-manager",
@@ -265,22 +265,22 @@
         },
         {
             "name": "bosnadev/database",
-            "version": "0.16",
+            "version": "0.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Bosnadev/Database.git",
-                "reference": "c2748d118415d30ce69b792448689285d01ffdb9"
+                "reference": "79c4f136bd88cc7b5a84e30cb38a29442d7a46a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Bosnadev/Database/zipball/c2748d118415d30ce69b792448689285d01ffdb9",
-                "reference": "c2748d118415d30ce69b792448689285d01ffdb9",
+                "url": "https://api.github.com/repos/Bosnadev/Database/zipball/79c4f136bd88cc7b5a84e30cb38a29442d7a46a7",
+                "reference": "79c4f136bd88cc7b5a84e30cb38a29442d7a46a7",
                 "shasum": ""
             },
             "require": {
                 "illuminate/database": "~5.0",
                 "php": ">=5.4",
-                "ramsey/uuid": "~3.0"
+                "ramsey/uuid": "~2.8"
             },
             "require-dev": {
                 "doctrine/dbal": "~2.5",
@@ -313,7 +313,7 @@
                 "mysql",
                 "postgresql"
             ],
-            "time": "2016-04-27 15:18:36"
+            "time": "2015-09-17 06:20:21"
         },
         {
             "name": "classpreloader/classpreloader",
@@ -1009,27 +1009,22 @@
         },
         {
             "name": "geo-io/interface",
-            "version": "v1.0.0",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/geo-io/interface.git",
-                "reference": "cdbb55801e3f8d5485227c2031cc7a3c16ccd06a"
+                "reference": "cf46fe7b013de20ab8b601238c7d91b480810644"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/geo-io/interface/zipball/cdbb55801e3f8d5485227c2031cc7a3c16ccd06a",
-                "reference": "cdbb55801e3f8d5485227c2031cc7a3c16ccd06a",
+                "url": "https://api.github.com/repos/geo-io/interface/zipball/cf46fe7b013de20ab8b601238c7d91b480810644",
+                "reference": "cf46fe7b013de20ab8b601238c7d91b480810644",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "GeoIO\\": "src/"
@@ -1051,7 +1046,7 @@
                 "geometry",
                 "io"
             ],
-            "time": "2015-04-17 18:52:52"
+            "time": "2016-07-28 07:17:02"
         },
         {
             "name": "geo-io/wkb-parser",
@@ -1657,64 +1652,6 @@
                 "geospatial"
             ],
             "time": "2015-09-27 15:35:21"
-        },
-        {
-            "name": "jyggen/curl",
-            "version": "v3.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/jyggen/curl.git",
-                "reference": "6ff247fd855e80e50baf67f6147c62e5bff42c4f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/jyggen/curl/zipball/6ff247fd855e80e50baf67f6147c62e5bff42c4f",
-                "reference": "6ff247fd855e80e50baf67f6147c62e5bff42c4f",
-                "shasum": ""
-            },
-            "require": {
-                "ext-curl": "*",
-                "php": ">=5.3.0",
-                "symfony/http-foundation": "~2.0"
-            },
-            "require-dev": {
-                "mockery/mockery": "dev-master"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.1-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "jyggen\\Curl": "lib/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jonas Stendahl",
-                    "email": "jonas.stendahl@gmail.com",
-                    "homepage": "http://jyggen.com/",
-                    "role": "Developer"
-                }
-            ],
-            "description": "A simple and lightweight cURL library with support for multiple requests in parallel.",
-            "homepage": "http://docs.jyggen.com/curl",
-            "keywords": [
-                "Multi-thread",
-                "bot",
-                "curl",
-                "http",
-                "laravel",
-                "parallel",
-                "spider"
-            ],
-            "time": "2013-08-21 11:59:16"
         },
         {
             "name": "laravel/framework",
@@ -2653,20 +2590,20 @@
         },
         {
             "name": "phaza/laravel-postgis",
-            "version": "2.17",
+            "version": "2.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/njbarrett/laravel-postgis.git",
-                "reference": "642506422a50d51212ac419eec1305170cb8aa91"
+                "reference": "846828f396009252cc2b0aa4f6a5bdc351b9ba38"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/njbarrett/laravel-postgis/zipball/642506422a50d51212ac419eec1305170cb8aa91",
-                "reference": "642506422a50d51212ac419eec1305170cb8aa91",
+                "url": "https://api.github.com/repos/njbarrett/laravel-postgis/zipball/846828f396009252cc2b0aa4f6a5bdc351b9ba38",
+                "reference": "846828f396009252cc2b0aa4f6a5bdc351b9ba38",
                 "shasum": ""
             },
             "require": {
-                "bosnadev/database": "~0.1",
+                "bosnadev/database": "0.12",
                 "geo-io/wkb-parser": "~1.0",
                 "illuminate/database": "~5.1.0",
                 "jmikola/geojson": "~1.0",
@@ -2677,7 +2614,7 @@
                 "illuminate/pagination": "~5.0",
                 "mockery/mockery": "0.9.*",
                 "phpunit/phpunit": "~4.5",
-                "satooshi/php-coveralls": "~0.6"
+                "satooshi/php-coveralls": "~1.0"
             },
             "type": "library",
             "autoload": {
@@ -2696,7 +2633,7 @@
                 }
             ],
             "description": "Postgis extensions for laravel. Aims to make it easy to work with geometries from laravel models",
-            "time": "2016-01-26 08:39:12"
+            "time": "2016-07-26 01:54:46"
         },
         {
             "name": "phenx/php-font-lib",
@@ -2950,54 +2887,46 @@
         },
         {
             "name": "ramsey/uuid",
-            "version": "3.4.1",
+            "version": "2.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ramsey/uuid.git",
-                "reference": "b4fe3b7387cb323fd15ad5837cae992422c9fa5c"
+                "reference": "b2ef4dd9584268d73f92f752a62bc24cd534dc9a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ramsey/uuid/zipball/b4fe3b7387cb323fd15ad5837cae992422c9fa5c",
-                "reference": "b4fe3b7387cb323fd15ad5837cae992422c9fa5c",
+                "url": "https://api.github.com/repos/ramsey/uuid/zipball/b2ef4dd9584268d73f92f752a62bc24cd534dc9a",
+                "reference": "b2ef4dd9584268d73f92f752a62bc24cd534dc9a",
                 "shasum": ""
             },
             "require": {
                 "paragonie/random_compat": "^1.0|^2.0",
-                "php": ">=5.4"
+                "php": ">=5.3.3"
             },
             "replace": {
                 "rhumsaa/uuid": "self.version"
             },
             "require-dev": {
-                "apigen/apigen": "^4.1",
-                "codeception/aspect-mock": "1.0.0",
-                "goaop/framework": "1.0.0-alpha.2",
-                "ircmaxell/random-lib": "^1.1",
+                "doctrine/dbal": ">=2.3",
                 "jakub-onderka/php-parallel-lint": "^0.9.0",
-                "mockery/mockery": "^0.9.4",
-                "moontoast/math": "^1.1",
-                "phpunit/phpunit": "^4.7|^5.0",
-                "satooshi/php-coveralls": "^0.6.1",
-                "squizlabs/php_codesniffer": "^2.3"
+                "moontoast/math": "~1.1",
+                "phpunit/phpunit": "~4.1|~5.0",
+                "satooshi/php-coveralls": "~0.6",
+                "squizlabs/php_codesniffer": "^2.3",
+                "symfony/console": "~2.3|~3.0"
             },
             "suggest": {
-                "ext-libsodium": "Provides the PECL libsodium extension for use with the SodiumRandomGenerator",
-                "ext-uuid": "Provides the PECL UUID extension for use with the PeclUuidTimeGenerator and PeclUuidRandomGenerator",
-                "ircmaxell/random-lib": "Provides RandomLib for use with the RandomLibAdapter",
-                "moontoast/math": "Provides support for converting UUID to 128-bit integer (in string form).",
-                "ramsey/uuid-console": "A console application for generating UUIDs with ramsey/uuid",
-                "ramsey/uuid-doctrine": "Allows the use of Ramsey\\Uuid\\Uuid as Doctrine field type."
+                "doctrine/dbal": "Allow the use of a UUID as doctrine field type.",
+                "moontoast/math": "Support for converting UUID to 128-bit integer (in string form).",
+                "symfony/console": "Support for use of the bin/uuid command line tool."
             },
+            "bin": [
+                "bin/uuid"
+            ],
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.x-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
-                    "Ramsey\\Uuid\\": "src/"
+                    "Rhumsaa\\Uuid\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -3010,23 +2939,18 @@
                     "email": "marijn.huizendveld@gmail.com"
                 },
                 {
-                    "name": "Thibaud Fabre",
-                    "email": "thibaud@aztech.io"
-                },
-                {
                     "name": "Ben Ramsey",
-                    "email": "ben@benramsey.com",
-                    "homepage": "https://benramsey.com"
+                    "homepage": "http://benramsey.com"
                 }
             ],
-            "description": "Formerly rhumsaa/uuid. A PHP 5.4+ library for generating RFC 4122 version 1, 3, 4, and 5 universally unique identifiers (UUID).",
+            "description": "A PHP 5.3+ library for generating RFC 4122 version 1, 3, 4, and 5 universally unique identifiers (UUID).",
             "homepage": "https://github.com/ramsey/uuid",
             "keywords": [
                 "guid",
                 "identifier",
                 "uuid"
             ],
-            "time": "2016-04-24 00:30:41"
+            "time": "2016-03-22 18:20:19"
         },
         {
             "name": "spatie/laravel-glide",
@@ -4858,16 +4782,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "4.0.0",
+            "version": "4.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "900370c81280cc0d942ffbc5912d80464eaee7e9"
+                "reference": "5f3f7e736d6319d5f1fc402aff8b026da26709a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/900370c81280cc0d942ffbc5912d80464eaee7e9",
-                "reference": "900370c81280cc0d942ffbc5912d80464eaee7e9",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/5f3f7e736d6319d5f1fc402aff8b026da26709a3",
+                "reference": "5f3f7e736d6319d5f1fc402aff8b026da26709a3",
                 "shasum": ""
             },
             "require": {
@@ -4876,7 +4800,7 @@
                 "phpunit/php-text-template": "~1.2",
                 "phpunit/php-token-stream": "^1.4.2",
                 "sebastian/code-unit-reverse-lookup": "~1.0",
-                "sebastian/environment": "^1.3.2",
+                "sebastian/environment": "^1.3.2 || ^2.0",
                 "sebastian/version": "~1.0|~2.0"
             },
             "require-dev": {
@@ -4917,7 +4841,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2016-06-03 05:03:56"
+            "time": "2016-07-26 14:39:29"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -5102,16 +5026,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "5.4.7",
+            "version": "5.4.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "6c8a756c17a1a92a066c99860eb57922e8b723da"
+                "reference": "3132365e1430c091f208e120b8845d39c25f20e6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/6c8a756c17a1a92a066c99860eb57922e8b723da",
-                "reference": "6c8a756c17a1a92a066c99860eb57922e8b723da",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/3132365e1430c091f208e120b8845d39c25f20e6",
+                "reference": "3132365e1430c091f208e120b8845d39c25f20e6",
                 "shasum": ""
             },
             "require": {
@@ -5123,7 +5047,7 @@
                 "myclabs/deep-copy": "~1.3",
                 "php": "^5.6 || ^7.0",
                 "phpspec/prophecy": "^1.3.1",
-                "phpunit/php-code-coverage": "^4.0",
+                "phpunit/php-code-coverage": "^4.0.1",
                 "phpunit/php-file-iterator": "~1.4",
                 "phpunit/php-text-template": "~1.2",
                 "phpunit/php-timer": "^1.0.6",
@@ -5176,7 +5100,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2016-07-21 06:55:27"
+            "time": "2016-07-26 14:48:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",

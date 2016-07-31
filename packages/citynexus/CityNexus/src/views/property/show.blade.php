@@ -172,7 +172,7 @@ $section = 'properties';
                 '<select class="form-control" name="assigned_to">' +
                 '<option value="">Select One</option>' +
                 @foreach($users as $person)
-                    '<option value="{{$person->id}}">{{$person->fullname()}}</option>' +
+                    '<option value="{{$person->id}}">{{$person->fullname()}} @if($person->title != null) ({{$person->title}}) @elseif($person->department != null) ({{$person->department != null}}) @endif</option>' +
                 @endforeach
             '</select>' +
                 '<br><br><input type="submit" class="btn btn-primary" value="Create Task"></form>';

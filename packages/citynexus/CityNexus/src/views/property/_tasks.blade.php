@@ -9,7 +9,7 @@
                     <b>{{$task->task}}</b><br>
                     <small>
                     @if($task->assigned_to != null)
-                        Assigned to: {{$task->assignee->fullname()}}<br>
+                        Assigned to: {{$task->assignee->fullname()}} @if($task->assignee->title != null) ({{$task->assignee->title}}) @elseif($task->assignee->department != null) ({{$task->assignee->department != null}}) @endif<br>
                     @endif
                         {{$task->created_at->diffForHumans()}}
                     @if($task->due_at != null)

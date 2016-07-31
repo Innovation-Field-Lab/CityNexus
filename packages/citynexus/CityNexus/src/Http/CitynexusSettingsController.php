@@ -127,14 +127,15 @@ class CitynexusSettingsController extends Controller
     {
 
         $user = Auth::getUser();
-        $user->email = $request->get('email');
-        if($request->exists('password'))
+
+        if($request->get('password') != null)
         {
             if(Hash::check($request->get('password'), $user->password))
             {
                 if($request->get('new_password') == $request->get('confirm_password'))
                 {
                     $user->password = Hash::make($request->get('new_password'));
+                    $user->save();
                 }
                 else
                 {
@@ -148,6 +149,8 @@ class CitynexusSettingsController extends Controller
                 return redirect()->back();
             }
         }
+
+        $user->update($request->all());
 
         $user->save();
 

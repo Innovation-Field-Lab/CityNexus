@@ -29,5 +29,37 @@
             <input type="password" class="form-control" id="confirm_password" name="confirm_password"/>
         </div>
     </div>
+    <div class="form-group">
+        <label for="first_name" class="control-label col-sm-4">First Name</label>
+
+        <div class="col-sm-8">
+            <input type="text" class="form-control" id="first_name" name="first_name"
+                   value="{{$user->first_name}}"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="last_name" class="control-label col-sm-4">Last Name</label>
+
+        <div class="col-sm-8">
+            <input type="text" class="form-control" id="last_name" name="confirm_password"
+                   value="{{$user->last_name}}"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="title" class="control-label col-sm-4">Title</label>
+
+        <div class="col-sm-8">
+            <input type="text" class="form-control" id="title" name="title"
+                   value="{{$user->title}}"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="department" class="control-label col-sm-4">Department</label>
+
+        <div class="col-sm-8">
+            <input type="text" class="form-control" id="department" name="department"
+                   value="{{$user->department}}"/>
+        </div>
+    </div>
     <input type="submit" class="btn btn-primary" value="Update User">
 </form>

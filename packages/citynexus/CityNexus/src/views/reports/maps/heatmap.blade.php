@@ -162,7 +162,7 @@ $("#intensity").ionRangeSlider({
 
 function saveReport() {
     var table_id = $('#h_dataset').val();
-        var table_name = $('#table_name').val();
+    var table_name = $('#table_name').val();
     var key = $('#datafield').val();
     var intensity = $('#intensity').val();
 

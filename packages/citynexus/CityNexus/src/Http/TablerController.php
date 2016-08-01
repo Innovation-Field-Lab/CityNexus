@@ -26,7 +26,7 @@ class TablerController extends Controller
     public function getIndex()
     {
 
-        $this->authorize('citynexus', ['group' => 'datasets', 'method' => 'view']);
+        $this->authorize('citynexus', ['datasets', 'view']);
 
         if(isset($_GET['trashed']))
         {
@@ -48,7 +48,7 @@ class TablerController extends Controller
     public function postUploader(Request $request)
     {
 
-        $this->authorize('citynexus', ['group' => 'datasets', 'method' => 'create']);
+        $this->authorize('citynexus', ['datasets', 'create']);
 
         $this->validate($request, [
                 'file' => 'required'
@@ -63,7 +63,7 @@ class TablerController extends Controller
 
     public function getCreateScheme($id)
     {
-        $this->authorize('citynexus', ['group' => 'datasets', 'method' => 'create']);
+        $this->authorize('citynexus', ['datasets', 'create']);
 
         $table = json_decode(Table::find($id)->raw_upload)->parsed;
         if($table == null)
@@ -85,7 +85,7 @@ class TablerController extends Controller
      */
     public function postCreateScheme($id, Request $request)
     {
-        $this->authorize('citynexus', ['group' => 'datasets', 'method' => 'create']);
+        $this->authorize('citynexus', ['datasets', 'create']);
 
         $this->validate($request, [
            'table_name' => 'max:255|required'
@@ -113,7 +113,7 @@ class TablerController extends Controller
 
     public function getNewUpload($id)
     {
-        $this->authorize('citynexus', ['group' => 'datasets', 'method' => 'creates']);
+        $this->authorize('citynexus', ['group' => 'datasets', 'method' => 'create']);
 
         $table = Table::find($id);
         return view('citynexus::tabler.new-upload', compact('table'));

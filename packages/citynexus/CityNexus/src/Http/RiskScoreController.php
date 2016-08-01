@@ -240,7 +240,7 @@ class RiskScoreController extends Controller
         $score->status = 'complete';
         $score->save();
 
-        $this->runScore($score, $elements);
+        $this->runScore($score);
 
         return redirect( action('\CityNexus\CityNexus\Http\RiskScoreController@getIndex') );
     }
@@ -309,7 +309,7 @@ class RiskScoreController extends Controller
     }
 
 
-    private function runScore($score, $elements)
+    private function runScore($score)
     {
 
         // Find tables in Score
@@ -377,37 +377,40 @@ class RiskScoreController extends Controller
 
         foreach ($elements as $element)
         {
-            if($element->scope == 'last') $this->genByLastElement($element,  $score->id, $alias);
+            if($element->scope == 'last' or $element->scope == 'score') $this->genByLastElement($element,  $score->id, $alias);
             if($element->scope == 'all') $this->genByAllElement($element,  $score->id, $alias);
         }
     }
 
     private function genByLastElement($element, $score_id, $alias)
     {
-        $key = $element->key;
+
         $scorebuilder = new ScoreBuilder();
 
         if(null != $element->scope && $element->scope == 'score')
         {
-            $table_name = 'citynexus_score_' . $element->table_id;
+            $table_name = 'citynexus_scores_' . $element->table_id;
+            $key = 'score';
         }
         else
         {
             $table_name = $element->table_name;
+            $key = $element->key;
+
+            if($element->period != null)
+            {
+                $today = Carbon::today();
+
+                $values = DB::table($table_name)
+                    ->where('updated_at', '>', $today->subDays($element->period))
+                    ->whereNotNull($key)
+                    ->orderBy('created_at')
+                    ->select('property_id', $key)->get();
+            }
+
         }
 
-
-        if($element->period != null)
-        {
-            $today = Carbon::today();
-
-            $values = DB::table($table_name)
-                ->where('updated_at', '>', $today->subDays($element->period))
-                ->whereNotNull($key)
-                ->orderBy('created_at')
-                ->select('property_id', $key)->get();
-        }
-        else
+        if(!isset($values))
         {
             $values = DB::table($table_name)
                 ->whereNotNull($key)

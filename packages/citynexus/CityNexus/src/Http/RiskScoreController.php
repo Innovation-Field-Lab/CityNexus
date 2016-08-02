@@ -391,6 +391,10 @@ class RiskScoreController extends Controller
         {
             $table_name = 'citynexus_scores_' . $element->table_id;
             $key = 'score';
+
+            $values = DB::table($table_name)
+                ->whereNotNull($key)
+                ->select('property_id', $key)->get();
         }
         else
         {

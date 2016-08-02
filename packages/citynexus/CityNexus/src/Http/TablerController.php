@@ -200,7 +200,6 @@ class TablerController extends Controller
             $table->table_description = $request->get('table_description');
             $table->scheme = json_encode($request->get('map'));
             $table->settings = json_encode($request->get('settings'));
-            dd($table);
             $table->save();
         }
         catch(Exception $e)

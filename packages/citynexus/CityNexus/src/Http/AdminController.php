@@ -45,16 +45,7 @@ class AdminController extends Controller
 
     public function getProcessData($table_name, $id = null)
     {
-        if($id == 'all_records')
-        {
-            $ids = DB::table($table_name)->get(['id']);
-
-            foreach($ids as $i)
-            {
-                $this->dispatch(new ProcessData($i->id, $table_name));
-            }
-        }
-        elseif($id != null)
+        if($id != null)
         {
             $this->dispatch(new ProcessData($id, $table_name));
         }

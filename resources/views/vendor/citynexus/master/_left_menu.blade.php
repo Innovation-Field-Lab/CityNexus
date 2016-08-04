@@ -58,6 +58,15 @@
                 </li>
                 @endcan
 
+                @can('superAdmin')
+                <li class="has_sub">
+                    <a href="javascript:void(0);" class="waves-effect @if(isset($section) && $section == 'reports') active @endif "><i class="fa fa-area-chart"></i> <span> Reports </span> <span class="menu-arrow"></span></a>
+                    <ul class="list-unstyled">
+                            <li class="@if(isset($pagename) &&  $pagename == 'Reports') active @endif"><a href="{{action('\CityNexus\CityNexus\Http\ReportController@getCreateProperty')}}">Create Property Report</a></li>
+                    </ul>
+                </li>
+                @endcan
+
                 @can('citynexus', ['scores', 'view'])
                 <li class="has_sub">
                     <a href="javascript:void(0);" class="waves-effect @if(isset($section) && $section == 'scores') active @endif "><i class="fa fa-tachometer"></i> <span> Scores </span> <span class="menu-arrow"></span></a>

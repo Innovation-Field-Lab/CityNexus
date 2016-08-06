@@ -1,7 +1,5 @@
 <?php
-
 namespace CityNexus\CityNexus\Http;
-
 use App\Http\Controllers\Controller;
 use CityNexus\CityNexus\Property;
 use CityNexus\CityNexus\GenerateScore;
@@ -13,20 +11,14 @@ use CityNexus\CityNexus\Geocode;
 use CityNexus\CityNexus\Table;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\View;
-
-
 class ReportController extends Controller
 {
-
     public function getCreateProperty()
     {
         $this->authorize('citynexus', ['reports', 'create']);
-
         $datasets = Table::whereNotNull('table_name')->get();
         $tables = new Table();
-
         return view('citynexus::reports.property.create', compact('datasets', 'tables'));
-
     }
 
     public function postCreateProperty(Request $request)
@@ -58,7 +50,6 @@ class ReportController extends Controller
                     null;
             }
         }
-
         return view('citynexus::reports.property.view', compact('report_info', 'property', 'report'));
     }
 
@@ -103,10 +94,8 @@ class ReportController extends Controller
                 }
                 $rows[] = $row;
             }
-
             if($rows != null) $return[$table_name] = $rows;
         }
-
         return $return;
     }
 }

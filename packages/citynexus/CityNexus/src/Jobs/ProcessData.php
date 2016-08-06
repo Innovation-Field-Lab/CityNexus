@@ -37,18 +37,27 @@ class ProcessData extends Job implements SelfHandling, ShouldQueue
 
         $tabler = new TableBuilder();
         //Process each individual record
-
-        try{
-            $tabler->processRecord($this->id, $this->table);
-        }
-        catch(\PDOException $e)
+        if(!is_array($this->id))
         {
-            Error::create(['location' => 'processData PDO', 'data' => json_encode(['property_id' => $this->id, 'table' => $this->table])]);
+            $ids[] = $this->id;
         }
-        catch(\Exception $e)
+        else
         {
-            Error::create(['location' => 'processData', 'data' => json_encode(['property_id' => $this->id, 'table' => $this->table])]);
+            $ids = $this->id;
         }
-
+        foreach($ids as $id)
+        {
+            try{
+                $tabler->processRecord($id, $this->table);
+            }
+            catch(\PDOException $e)
+            {
+                Error::create(['location' => 'processData PDO', 'data' => json_encode(['property_id' => $this->id, 'table' => $this->table])]);
+            }
+            catch(\Exception $e)
+            {
+                Error::create(['location' => 'processData', 'data' => json_encode(['property_id' => $this->id, 'table' => $this->table])]);
+            }
+        }
     }
 }

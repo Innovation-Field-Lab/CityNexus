@@ -1,7 +1,6 @@
-
 <?php
-        $pagename = "Heat Map";
-        $section = "reports";
+$pagename = "Heat Map";
+$section = "reports";
 ?>
 
 @extends(config('citynexus.template'))
@@ -18,11 +17,11 @@
                 <ul class="dropdown-menu" role="menu">
                     <li><a href="javascript:void(0);" class="map-bar-toggle">Open Map Settings</a></li>
                     @can('citynexus', ['reports', 'save'])
-                        @if(!isset($report_id))
+                    @if(!isset($report_id))
                         <li id="save-report-line"><a onclick="saveReport()" id="save-report" style="cursor: pointer"> Save as Report</a></li>
-                            @else
-                            <li><a onclick="updateReport({{$report_id}})" id="save-report" style="cursor: pointer"> Save Report Updates</a></li>
-                            @endif
+                    @else
+                        <li><a onclick="updateReport({{$report_id}})" id="save-report" style="cursor: pointer"> Save Report Updates</a></li>
+                    @endif
                     @endcan
                 </ul>
             </div>
@@ -31,15 +30,15 @@
         </div>
     </div><!-- end col -->
 
-    @stop
+@stop
 
 @push('sidebar')
-    @include('citynexus::reports.includes.heatmap._map_setting')
+@include('citynexus::reports.includes.heatmap._map_setting')
 @endpush
 
-    @push('style')
+@push('style')
 <link rel="stylesheet" href="/vendor/citynexus/css/leaflet.css"/>
-    <link rel="stylesheet" href="/vendor/citynexus/css/slider.css"/>
+<link rel="stylesheet" href="/vendor/citynexus/css/slider.css"/>
 <link href='http://fonts.googleapis.com/css?family=Open+Sans|Fjalla+One' rel='stylesheet' type='text/css'>
 <link type="text/css" rel="stylesheet" href="/vendor/citynexus/css/shCoreEclipse.css"/>
 <!--[if lte IE 8]>
@@ -57,7 +56,6 @@
     canvas {
         opacity: 1
     }
-
     #map-setting
     {
         width: 75px;
@@ -71,8 +69,8 @@
     }
 </style>
 
-    <link href="/vendor/citynexus/plugins/ion-rangeslider/ion.rangeSlider.css" rel="stylesheet" type="text/css"/>
-    <link href="/vendor/citynexus/plugins/ion-rangeslider/ion.rangeSlider.skinFlat.css" rel="stylesheet" type="text/css"/>
+<link href="/vendor/citynexus/plugins/ion-rangeslider/ion.rangeSlider.css" rel="stylesheet" type="text/css"/>
+<link href="/vendor/citynexus/plugins/ion-rangeslider/ion.rangeSlider.skinFlat.css" rel="stylesheet" type="text/css"/>
 
 @endpush
 
@@ -85,16 +83,13 @@
 <script type="text/javascript" src="/vendor/citynexus/js/webgl-heatmap-leaflet.js"></script>
 <script src="/vendor/citynexus/plugins/ion-rangeslider/ion.rangeSlider.min.js"></script>
 <script type="text/javascript">
-
     @if(!isset($key))
     $('#wrapper').toggleClass('right-bar-enabled');
     @endif
     // right side-bar toggle
     $('.map-bar-toggle').on('click', function (e) {
-
         $('#wrapper').toggleClass('right-bar-enabled');
     });
-
     var map = L.map('mapid').setView([{{env('MAP_LAT')}}, {{env('MAP_LONG')}}], {{env('MAP_ZOOM')}});
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
@@ -102,97 +97,78 @@
         id: 'seanalaback.piieb4dh',
         accessToken: 'pk.eyJ1Ijoic2VhbmFsYWJhY2siLCJhIjoiY2ltaTNpbWtrMDA0YnV0a2c3YjQxZ2YxYyJ9.w85abrrlR743J2MVtrROKw'
     }).addTo(map);
-        L.control.scale().addTo(map);
-
-        //custom size for this example, and autoresize because map style has a percentage width
-        var heatmap = L.webGLHeatmap({
-            size: 50,
-            units: 'px',
-            alphaRange: 0.4
-        });
-
-        @if(isset($table) && isset($key))
-
+    L.control.scale().addTo(map);
+    //custom size for this example, and autoresize because map style has a percentage width
+    var heatmap = L.webGLHeatmap({
+        size: 50,
+        units: 'px',
+        alphaRange: 0.4
+    });
+    @if(isset($table) && isset($key))
+    $.ajax({
+        'url': '{{action('\CityNexus\CityNexus\Http\ViewController@getHeatMapData')}}/{{$table}}/{{$key}}',
+        'dataType': "json"
+    }).success(function(data){
+        heatmap.setData(data);
+    });
+    @endif
+    @if(isset($settings->table) && isset($settings->key))
+    $.ajax({
+        'url': '{{action('\CityNexus\CityNexus\Http\ViewController@getHeatMapData')}}/{{$settings->table}}/{{$settings->key}}',
+        'dataType': "json"
+    }).success(function(data){
+        heatmap.setData(data);
+    });
+    @endif
+function refreshMap(table, key)
+    {
         $.ajax({
-            'url': '{{action('\CityNexus\CityNexus\Http\ViewController@getHeatMapData')}}/{{$table}}/{{$key}}',
+            'url': '{{action('\CityNexus\CityNexus\Http\ViewController@getHeatMapData')}}/' + table + '/' + key,
             'dataType': "json"
         }).success(function(data){
             heatmap.setData(data);
         });
-
-        @endif
-
-        @if(isset($settings->table) && isset($settings->key))
-
-        $.ajax({
-            'url': '{{action('\CityNexus\CityNexus\Http\ViewController@getHeatMapData')}}/{{$settings->table}}/{{$settings->key}}',
-            'dataType': "json"
-        }).success(function(data){
-            heatmap.setData(data);
-        });
-
-        @endif
-
-    function refreshMap(table, key)
-        {
-            $.ajax({
-                'url': '{{action('\CityNexus\CityNexus\Http\ViewController@getHeatMapData')}}/' + table + '/' + key,
-                'dataType': "json"
-            }).success(function(data){
-                heatmap.setData(data);
-            });
-        }
-
-        map.addLayer(heatmap);
-
-
-$("#intensity").ionRangeSlider({
-            min: 1,
-            max: 100,
-            from: @if(isset($settings->intensity)) {{$settings->intensity}} @else 50 @endif
+    }
+    map.addLayer(heatmap);
+    $("#intensity").ionRangeSlider({
+        min: 1,
+        max: 100,
+        from: @if(isset($settings->intensity)) {{$settings->intensity}} @else 50 @endif
         }).on('change', function (ev) {
-            var value = $('#intensity').val();
-            heatmap.multiply(value / 50);
-        });
-
+        var value = $('#intensity').val();
+        heatmap.multiply(value / 50);
+    });
     @if(isset($setting->intensity))
      heatmap.multiply({{$setting->intensity/50}});
     @endif
-
-
 function saveReport() {
-    var table_id = $('#h_dataset').val();
-    var table_name = $('#table_name').val();
-    var key = $('#datafield').val();
-    var intensity = $('#intensity').val();
-
-    var name = prompt('What name would you like to give this report view?', 'Unnamed Report');
-
-    if(name != null)
-    {
-        $.ajax({
-            url: "{{action('\CityNexus\CityNexus\Http\ViewController@postSaveView')}}",
-            type: 'post',
-            data: {
-                _token: "{{csrf_token()}}",
-                settings: {
-                    type: 'Heat Map',
-                    table_name: table_name,
-                    table_id: table_id,
-                    key: key,
-                    intensity: intensity,
-                },
-                name: name
-            }
-        }).success(function (data) {
-            Command: toastr["success"](name, "Report View Saved");
-            $('#save-report-line').html( data );
-        });
+        var table_id = $('#h_dataset').val();
+        var table_name = $('#table_name').val();
+        var key = $('#datafield').val();
+        var intensity = $('#intensity').val();
+        var name = prompt('What name would you like to give this report view?', 'Unnamed Report');
+        if(name != null)
+        {
+            $.ajax({
+                url: "{{action('\CityNexus\CityNexus\Http\ViewController@postSaveView')}}",
+                type: 'post',
+                data: {
+                    _token: "{{csrf_token()}}",
+                    settings: {
+                        type: 'Heat Map',
+                        table_name: table_name,
+                        table_id: table_id,
+                        key: key,
+                        intensity: intensity,
+                    },
+                    name: name
+                }
+            }).success(function (data) {
+                Command: toastr["success"](name, "Report View Saved");
+                $('#save-report-line').html( data );
+            });
+        }
     }
-
-
-}
-
     function updateReport( id )
     {
         var table_id = $('#h_dataset').val();
@@ -212,12 +188,10 @@ function saveReport() {
                     intensity: intensity,
                 },
                 id: id
-
             }
         }).success(function(){
             Command: toastr["success"](name, "Report View Updated");
         });
-
     }
 </script>
 @endpush

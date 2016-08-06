@@ -97,7 +97,7 @@ class TablerController extends Controller
         $table->scheme = json_encode($map);
         $table->table_title = $request->get('table_name');
         $table->table_name = $tabler->create($table);
-        $table->table_description = $request->get('table_description');
+        $table->description = $request->get('description');
         $table->settings = json_encode($request->get('settings'));
         $table->save();
 
@@ -197,7 +197,7 @@ class TablerController extends Controller
             }
 
             $table->table_title = $request->get('table_title');
-            $table->table_description = $request->get('table_description');
+            $table->description = $request->get('description');
             $table->scheme = json_encode($request->get('map'));
             $table->settings = json_encode($request->get('settings'));
             $table->save();

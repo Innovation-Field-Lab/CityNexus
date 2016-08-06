@@ -34,36 +34,37 @@
                     <div class="well">
                         <h4>Datasets</h4>
                         <div class="panel-body">
-                                @foreach($datasets as $dataset)
-                                        <div class="panel-heading " role="tab" id="{{$dataset->table_name}}_heading">
-                                            <h4 class="panel-title">
-                                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#{{$dataset->table_name}}_detail" aria-expanded="false" aria-controls="collapseTwo">
-                                                    {{$dataset->table_title}}
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div id="{{$dataset->table_name}}_detail" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                                            <div class="list-group">
-                                                <div class="list-group-item"><input type="checkbox" class="dataset-{{$dataset->id}}" id="dataset-{{$dataset->id}}" onchange="selectAllDataset({{$dataset->id}})"> <b>Select All in Dataset</b></div>
-                                                <div class="list-group-item"><input type="checkbox" name="settings[datasets][{{$dataset->table_name}}][created_at]" class="dataset-{{$dataset->id}}" value="true"> Time Stamp </div>
+                            @foreach($datasets as $dataset)
+                                <div class="panel-heading " role="tab" id="{{$dataset->table_name}}_heading">
+                                    <h4 class="panel-title">
+                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#{{$dataset->table_name}}_detail" aria-expanded="false" aria-controls="collapseTwo">
+                                            {{$dataset->table_title}}
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="{{$dataset->table_name}}_detail" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                    <div class="list-group">
+                                        <div class="list-group-item"><input type="checkbox" class="dataset-{{$dataset->id}}" id="dataset-{{$dataset->id}}" onchange="selectAllDataset({{$dataset->id}})"> <b>Select All in Dataset</b></div>
+                                        <div class="list-group-item"><input type="checkbox" name="settings[datasets][{{$dataset->table_name}}][created_at]" class="dataset-{{$dataset->id}}" value="true"> Time Stamp </div>
 
-                                            @foreach($dataset->schema as $column)
-                                                @if(isset($column->show) && $column->show == true)
-                                                        <div class="list-group-item"><input type="checkbox" name="settings[datasets][{{$dataset->table_name}}][{{$column->key}}]" class="dataset-{{$dataset->id}}" value="true"> {{$column->name}} </div>
-                                                    @endif
-                                                @endforeach
-                                            </div>
-                                        </div>
-                                @endforeach
+                                        @foreach($dataset->schema as $column)
+                                            @if(isset($column->show) && $column->show == true)
+                                                <div class="list-group-item"><input type="checkbox" name="settings[datasets][{{$dataset->table_name}}][{{$column->key}}]" class="dataset-{{$dataset->id}}" value="true"> {{$column->name}} </div>
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                </div>
+                            @endforeach
 
 
-                            </div>
                         </div>
-                        <br>
+                    </div>
+                    <br>
                     <input type="submit" class="btn btn-primary" value="Create">
                 </form>
             </div>
-    </div>
+        </div>
+   
     </div>
 
 @stop
@@ -74,6 +75,7 @@
 <script>
     function selectAllDataset( id )
     {
+
        if($("#dataset-" + id).attr('checked') === 'checked')
        {
            $(".dataset-" + id).removeAttr('checked');
@@ -82,7 +84,6 @@
        {
            $(".dataset-" + id).attr('checked', 'checked');
        }
-
     }
 </script>
 @endpush

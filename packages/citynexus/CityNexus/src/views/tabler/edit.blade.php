@@ -14,7 +14,7 @@
                             <label for="table_title">Table Title</label>
                             <input type="text" name="table_title" class="form-control" value="{{$table->table_title}}"required>
                             <label for="description">Table Description</label>
-                            <textarea name="table_description" id="description" cols="30" rows="3" class="form-control">{{$table->table_description}}</textarea>
+                            <textarea name="description" id="description" cols="30" rows="3" class="form-control">{{$table->description}}</textarea>
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">

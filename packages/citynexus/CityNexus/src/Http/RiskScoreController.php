@@ -35,7 +35,7 @@ class RiskScoreController extends Controller
     {
         $this->authorize('citynexus', ['scores', 'create']);
 
-        $datasets = Table::whereNotNull('table_name')->orderBy('table_name')->get();
+        $datasets = Table::whereNotNull('table_title')->orderBy('table_title')->get();
 
         return view('citynexus::risk-score.new', compact('datasets'));
     }

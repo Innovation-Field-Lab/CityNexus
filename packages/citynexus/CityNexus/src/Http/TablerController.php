@@ -7,7 +7,6 @@ use CityNexus\CityNexus\ProcessData;
 use CityNexus\CityNexus\Property;
 use CityNexus\CityNexus\Upload;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Session;
@@ -17,11 +16,15 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use CityNexus\CityNexus\Table;
-use CityNexus\CityNexus\UploadData;
 use CityNexus\CityNexus\TableBuilder;
 
 class TablerController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->tableBuilder = new TableBuilder();
+    }
 
     public function getIndex()
     {
@@ -33,7 +36,7 @@ class TablerController extends Controller
             $tables = Table::withTrashed()->sortBy('table_name')->get();
         }
         else{
-            $tables = Table::all()->sortBy('table_name');
+            $tables = Table::orderBy('table_name')->get();
         }
 
         return view('citynexus::tabler.index', compact('tables'));
@@ -48,7 +51,7 @@ class TablerController extends Controller
     public function postUploader(Request $request)
     {
 
-        $this->authorize('citynexus', ['datasets', 'create']);
+        $this->authorize('citynexus', ['datasets', 'upload']);
 
         $this->validate($request, [
                 'file' => 'required'
@@ -245,7 +248,13 @@ class TablerController extends Controller
         {
             $upload = null;
             if(isset($settings->unique_id) && $settings->unique_id != null) {
-                $existing = DB::table($table->table_name)->lists($settings->unique_id);
+                $uid = $settings->unique_id;
+                $existing_records = DB::table($table->table_name)->get([$uid]);
+                $existing = [];
+                foreach($existing_records as $i)
+                {
+                    $existing[$uid] = $uid;
+                }
             }
             if(!Schema::hasColumn($table->table_name, 'processed_at'))
             {
@@ -278,7 +287,13 @@ class TablerController extends Controller
             if(count($upload) > 0)
             {
                 DB::table($table->table_name)->insert($upload);
-                $new_ids = DB::table($table->table_name)->where('upload_id', $upload_id)->lists('id');
+
+                $new_ids_obj = DB::table($table->table_name)->where('upload_id', $upload_id)->get(['id']);
+                $new_ids = [];
+                foreach($new_ids_obj as $i)
+                {
+                    $new_ids[] = $i;
+                }
 
                 foreach($new_ids as $record)
                 {

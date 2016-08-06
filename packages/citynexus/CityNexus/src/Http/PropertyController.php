@@ -7,7 +7,6 @@ use App\User;
 use CityNexus\CityNexus\GeocodeJob;
 use CityNexus\CityNexus\Property;
 use CityNexus\CityNexus\DatasetQuery;
-use CityNexus\CityNexus\Report;
 use CityNexus\CityNexus\Score;
 use CityNexus\CityNexus\Setting;
 use CityNexus\CityNexus\Tag;
@@ -42,7 +41,6 @@ class PropertyController extends Controller
         $datasets = DatasetQuery::relatedSets( $id );
         $tables = Table::all();
         $tags = Tag::select('tag')->lists('tag');
-        $reports = Report::where('type', 'property_report')->get();
         $apts = Property::where('house_number', $property->house_number)
             ->where('street_name', $property->street_name)
             ->where('street_type', $property->street_type)
@@ -51,9 +49,9 @@ class PropertyController extends Controller
 
         // Initiallizes the variable to disclose aliases in dataset
         $disclaimer = false;
-        $users = User::orderBy('last_name')->get();
+        $users = User::where('last_name', '>=', 'Alaback')->orderBy('last_name')->get();
 
-        return view('citynexus::property.show', compact('users', 'reports', 'property', 'datasets', 'tables', 'disclaimer', 'tags', 'apts'));
+        return view('citynexus::property.show', compact('users', 'property', 'datasets', 'tables', 'disclaimer', 'tags', 'apts'));
     }
 
     public function postAssociateTag(Request $request)

@@ -41,7 +41,7 @@ class SearchController extends Controller
 
     public function getPrefetch()
     {
-        $results = Property::lists('full_address');
+        $results = Property::get('full_address');
         return $results;
     }
 }

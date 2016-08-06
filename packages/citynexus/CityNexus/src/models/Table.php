@@ -16,6 +16,7 @@ class Table extends Model {
 
     public function getSettingAttribute()
     {
+
         return json_decode($this->settings);
     }
 
@@ -23,5 +24,6 @@ class Table extends Model {
     {
         return json_decode($this->scheme);
     }
+
 
 }

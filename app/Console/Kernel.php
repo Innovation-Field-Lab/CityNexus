@@ -26,6 +26,9 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
 
-        $schedule->command('citynexus:dropbox daily')->everyMinute();
+        $schedule->command('citynexus:dropbox hourly')->hourly();
+        $schedule->command('citynexus:dropbox daily')->daily();
+        $schedule->command('citynexus:dropbox weekly')->weekly();
+        $schedule->command('citynexus:dropbox monthly')->monthly();
     }
 }

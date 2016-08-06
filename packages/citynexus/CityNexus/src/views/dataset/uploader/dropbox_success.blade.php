@@ -12,6 +12,7 @@
         <div class="col-sm-8">
             <select type="text" class="form-control" id="frequency" name="frequency">
                 <option value="">Select One</option>
+                <option value="hourly">Hourly</option>
                 <option value="daily">Daily</option>
                 <option value="weekly">Weekly</option>
                 <option value="monthly">Monthly</option>

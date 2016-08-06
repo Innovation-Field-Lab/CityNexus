@@ -15,8 +15,9 @@ class CreateUploadersTable extends Migration
         Schema::create('citynexus_uploaders', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('dataset_id');
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->string('type');
+            $table->string("frequency")->nullable();
             $table->json('settings_json');
             $table->timestamps();
         });

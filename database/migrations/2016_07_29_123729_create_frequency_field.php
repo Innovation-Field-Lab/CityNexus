@@ -12,7 +12,7 @@ class CreateFrequencyField extends Migration
      */
     public function up()
     {
-        Schema::table('citynexus_uploader', function (Blueprint $table) {
+        Schema::table('citynexus_uploaders', function (Blueprint $table) {
             $table->string("frequency")->nullable();
         });
     }
@@ -24,7 +24,7 @@ class CreateFrequencyField extends Migration
      */
     public function down()
     {
-        Schema::table('citynexus_uploader', function (Blueprint $table) {
+        Schema::table('citynexus_uploaders', function (Blueprint $table) {
             $table->dropColumn('frequency');
         });
     }

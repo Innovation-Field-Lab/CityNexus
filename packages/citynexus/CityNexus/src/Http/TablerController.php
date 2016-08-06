@@ -288,13 +288,9 @@ class TablerController extends Controller
             {
                 DB::table($table->table_name)->insert($upload);
 
-                $new_ids_obj = DB::table($table->table_name)->where('upload_id', $upload_id)->get(['id']);
-                $new_ids = [];
-                foreach($new_ids_obj as $i)
-                {
-                    $new_ids[] = $i;
-                }
+                $new_ids = DB::table($table->table_name)->where('upload_id', $upload_id)->lists('id');
 
+                $new_ids = array_chunk($new_ids, 100);
                 foreach($new_ids as $record)
                 {
                     $this->dispatch(new ProcessData($record, $table->table_name));

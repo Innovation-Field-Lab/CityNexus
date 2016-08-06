@@ -249,12 +249,7 @@ class TablerController extends Controller
             $upload = null;
             if(isset($settings->unique_id) && $settings->unique_id != null) {
                 $uid = $settings->unique_id;
-                $existing_records = DB::table($table->table_name)->get([$uid]);
-                $existing = [];
-                foreach($existing_records as $i)
-                {
-                    $existing[$uid] = $uid;
-                }
+                $existing = DB::table($table->table_name)->lists($uid);
             }
             if(!Schema::hasColumn($table->table_name, 'processed_at'))
             {

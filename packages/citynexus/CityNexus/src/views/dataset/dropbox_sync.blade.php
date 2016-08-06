@@ -12,7 +12,8 @@ $section = 'dataset';
             <div class="card-box table-responsive" id="connection_setup">
 
                 <div class="form-group">
-                    <label for="settings[dropbox_token]" class="control-label col-sm-4">Dropbox Token</label>
+                    <label for="settings[dropbox_token]" class="control-label col-sm-4">Dropbox Token <i class="ti-help" style="cursor: pointer" onclick="getHelp('tabler.dropbox.token')" ></i>
+                    </label>
 
                     <div class="col-sm-8">
                         <input type="text" class="form-control" id="settings_dropbox_token" name="settings[dropbox_token]" value="C8oGDpOoOKUAAAAAAAAPs5eYBpdVMyUbd6GbgTVvpBDKucx09jnlaPXQyx_NFvLd"/>

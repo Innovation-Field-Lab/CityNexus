@@ -44,11 +44,15 @@ class Upload extends Command
     public function handle()
     {
         $uploaders = Uploader::where('frequency', $this->argument('frequency'))->get();
+        $count = null;
             foreach($uploaders as $i)
             {
-                $uploader = Uploader::find($i);
+                $uploader = Uploader::find($i->id);
                 $this->dropbox->processUpload($uploader->settings, $uploader->dataset_id);
+                $count++;
             }
+
+        print 'uploaded ' . $this->argument('frequency') . ' ' . $count . 'times';
     }
 
 }

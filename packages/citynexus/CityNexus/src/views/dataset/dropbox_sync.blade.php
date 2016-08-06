@@ -53,7 +53,7 @@ $section = 'dataset';
                 _token: "{{csrf_token()}}",
                 settings: {
                     dropbox_token: token,
-                    path: path
+                    dropbox_path: path
                 },
                 dataset_id:{{$dataset_id}}
             }
@@ -72,7 +72,7 @@ $section = 'dataset';
                 _token: "{{csrf_token()}}",
                 settings: {
                     dropbox_token: token,
-                    path: path
+                    dropbox_path: path
                 },
                 download: download,
                 dataset_id:{{$dataset_id}}

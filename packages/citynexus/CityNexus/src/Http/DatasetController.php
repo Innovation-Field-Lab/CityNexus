@@ -20,13 +20,6 @@ class DatasetController extends Controller
         $this->dropbox = new Dropbox();
     }
 
-    public function getTest()
-    {
-        $response = $this->dropbox->getFileList('Test');
-
-        dd($response);
-    }
-
     public function getDropboxSync($dataset_id)
     {
         return view('citynexus::dataset.dropbox_sync', compact('dataset_id'));

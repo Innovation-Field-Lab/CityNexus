@@ -121,7 +121,7 @@
             data: {
                 _token: '{{csrf_token()}}',
                 user:{
-                    admin: status
+                    super_admin: status
                 }
             }
         }).success(function(){

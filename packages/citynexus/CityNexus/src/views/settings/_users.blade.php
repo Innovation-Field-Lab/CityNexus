@@ -15,9 +15,11 @@
                 @if(\Illuminate\Support\Facades\Auth::getUser()->id != $user->id)
                     <button class="btn btn-xs btn-primary" onclick="editPermissions({{$user->id}})">Permissions</button>
                     <button class="btn btn-xs btn-danger" onclick="removeUser({{$user->id}})">Delete</button>
-                    @if(\Illuminate\Support\Facades\Auth::getUser()->admin)
-                        <button class="btn btn-xs btn-caution @if(!$user->admin) hidden @endif" id="desuper-{{$user->id}}" onclick="superUser(false, {{$user->id}})">Remove Super User</button>
-                    @endif
+                    @can('super_user')
+                        <button class="btn btn-xs btn-caution @if(!$user->super_admin) hidden @endif" id="desuper-{{$user->id}}" onclick="superUser(false, {{$user->id}})">Remove Super User</button>
+                        <button class="btn btn-xs btn-default @if($user->super_admin) hidden @endif" id="super-{{$user->id}}" onclick="superUser(true, {{$user->id}})">Make Super User</button>
+
+                    @endcan
                     @if($user->activation != null)
                         <a class="btn btn-xs btn-info" id="invite-{{$user->id}}" href="{{action('\CityNexus\CityNexus\Http\CitynexusSettingsController@getInvite')}}/{{$user->id}}">Re-Invite</a>
                     @endif

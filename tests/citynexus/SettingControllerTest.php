@@ -21,8 +21,12 @@ class SettingControllerTest extends TestCase
             ->type('Test', 'first_name')
             ->type('McTesterson', 'last_name')
             ->type('test.mctesterson@gmail.com', 'email')
+            ->type('Test Title', 'title')
             ->press('Invite User')
             ->assertResponseOk();
+
+        $this->actingAs($access)->visit(action('\CityNexus\CityNexus\Http\CitynexusSettingsController@getIndex'))
+            ->see('Test McTesterson');
 
         $this->visit(action('\CityNexus\CityNexus\Http\CitynexusSettingsController@getCreateUser'))
             ->type('Test', 'first_name')

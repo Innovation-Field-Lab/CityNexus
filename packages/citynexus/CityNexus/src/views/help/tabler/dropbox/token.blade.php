@@ -16,13 +16,8 @@
 
     <h3>How do I get a Dropbox Token?</h3>
     <p>
-
+        You can get a token by creating a Dropbox api token within the Dropbox
+        Developer panel.
     </p>
 
-    <h3>Can I use special characters?</h3>
-    <p>
-        Yes! This is only a label for the data so will not effect
-        how the data is actually stored in the database. However
-        you are still encouraged to keep such labels brief.
-    </p>
 @endsection

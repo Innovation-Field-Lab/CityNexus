@@ -95,7 +95,7 @@ class DatasetController extends Controller
         $table->settings = json_encode($request->get('settings'));
         $table->save();
 
-        $upload = Upload::create(['table_id' => $table->id, 'note' => 'Initial Upload']);
+        $upload = Upload::create(['table_id' => $table->id, 'note' => 'Dropbox Initial Upload']);
 
         $tabler->processUpload( $table, json_decode($table->raw_upload, true), $upload->id);
         $table->raw_upload = null;

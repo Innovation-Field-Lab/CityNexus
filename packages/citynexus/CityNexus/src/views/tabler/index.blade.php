@@ -44,7 +44,13 @@ $section = 'datasets';
                             </td>
                             <td>
                                 @can('citynexus', ['datasets', 'upload'])
-                                <a class="btn btn-sm btn-primary" href="/{{config('citynexus.tabler_root')}}/new-upload/{{$table->id}}">Upload</a>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default dropdown-toggle waves-effect" data-toggle="dropdown" aria-expanded="false"> Actions <span class="caret"></span> </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="/{{config('citynexus.tabler_root')}}/new-upload/{{$table->id}}">Upload</a></li>
+                                        <li><a href="{{action('\CityNexus\CityNexus\Http\DatasetController@getDropboxSync', [$table->id])}}">Dropbox Sync</a></li>
+                                    </ul>
+                                </div>
                                 @endcan
                                 @can('citynexus', ['datasets', 'view'])
                                 <a class="btn btn-sm btn-primary" href="/{{config('citynexus.tabler_root')}}/show-table/{{$table->table_name}}">View</a>

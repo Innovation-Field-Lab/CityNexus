@@ -75,6 +75,7 @@ Route::group(['middleware' => 'auth', 'prefix' => config('citynexus.root_directo
     Route::controller('/task', 'CityNexus\CityNexus\Http\TaskController');
     Route::controller('/image', 'CityNexus\CityNexus\Http\ImageController');
     Route::controller('/widget', 'CityNexus\CityNexus\Http\WidgetController');
+    Route::controller('/dataset', 'CityNexus\CityNexus\Http\DatasetController');
     Route::controller('/', 'CityNexus\CityNexus\Http\CitynexusController');
 
 });

@@ -5,8 +5,8 @@
         <!-- User -->
         <div class="user-box">
             {{--<div class="user-img">--}}
-                {{--<img src="/images/users/avatar-1.jpg" alt="user-img" title="Mat Helme" class="img-circle img-thumbnail img-responsive">--}}
-                {{--<div class="user-status offline"><i class="zmdi zmdi-dot-circle"></i></div>--}}
+            {{--<img src="/images/users/avatar-1.jpg" alt="user-img" title="Mat Helme" class="img-circle img-thumbnail img-responsive">--}}
+            {{--<div class="user-status offline"><i class="zmdi zmdi-dot-circle"></i></div>--}}
             {{--</div>--}}
             <h5><a href="#">{{\Illuminate\Support\Facades\Auth::getUser()->fullname()}}</a> </h5>
             <ul class="list-inline">
@@ -58,6 +58,15 @@
                 </li>
                 @endcan
 
+                @can('superAdmin')
+                <li class="has_sub">
+                    <a href="javascript:void(0);" class="waves-effect @if(isset($section) && $section == 'reports') active @endif "><i class="fa fa-area-chart"></i> <span> Reports </span> <span class="menu-arrow"></span></a>
+                    <ul class="list-unstyled">
+                        <li class="@if(isset($pagename) &&  $pagename == 'Reports') active @endif"><a href="{{action('\CityNexus\CityNexus\Http\ReportController@getCreateProperty')}}">Create Property Report</a></li>
+                    </ul>
+                </li>
+                @endcan
+
                 @can('citynexus', ['scores', 'view'])
                 <li class="has_sub">
                     <a href="javascript:void(0);" class="waves-effect @if(isset($section) && $section == 'scores') active @endif "><i class="fa fa-tachometer"></i> <span> Scores </span> <span class="menu-arrow"></span></a>
@@ -79,6 +88,7 @@
                         @can('citynexus', ['group' => 'datasets', 'method' => 'create'])
                         <li role="separator" class="divider"></li>
                         <li><a href="{{action('\CityNexus\CityNexus\Http\TablerController@getUploader')}}">New From Upload</a></li>
+                        <li><a href="{{action('\CityNexus\CityNexus\Http\DatasetController@getDropboxSync')}}">New From Dropbox</a></li>
                         @endcan
                     </ul>
                 </li>

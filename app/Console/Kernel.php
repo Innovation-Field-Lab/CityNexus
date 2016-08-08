@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         \App\Console\Commands\Inspire::class,
+        \App\Console\Commands\Upload::class,
     ];
 
     /**
@@ -24,7 +25,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('inspire')
-                 ->hourly();
+
+        $schedule->command('citynexus:dropbox hourly')->hourly();
+        $schedule->command('citynexus:dropbox daily')->daily();
+        $schedule->command('citynexus:dropbox weekly')->weekly();
+        $schedule->command('citynexus:dropbox monthly')->monthly();
     }
 }

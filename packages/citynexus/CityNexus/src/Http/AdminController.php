@@ -47,8 +47,8 @@ class AdminController extends Controller
     {
         if($id == 'all_records')
         {
-            $ids = DB::table($table_name)->get(['id']);
-
+            $ids = DB::table($table_name)->lists(['id']);
+            $ids = array_chunk($ids, 500);
             foreach($ids as $i)
             {
                 $this->dispatch(new ProcessData($i->id, $table_name));

@@ -219,7 +219,7 @@ class PropertySync
     {
         // check if first object is unit number
         $unit = null;
-        if(substr($address[0],0,1) == '#')
+        if(isset($address[0]) && substr($address[0],0,1) == '#')
         {
             $unit = $address[0];
             unset($address[0]);
@@ -230,7 +230,7 @@ class PropertySync
         $street_type = null;
 
         // Check for street names started with st for saint
-        if(trim($address[0]) == 'st')
+        if(isset($address[0]) && trim($address[0]) == 'st')
         {
             $street = 'saint';
             unset($address[0]);

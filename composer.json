@@ -19,7 +19,8 @@
         "spatie/laravel-glide": "^2.3",
         "doctrine/dbal": "*",
         "graham-campbell/dropbox": "^3.3",
-        "guzzlehttp/guzzle": "~5.3|~6.0"
+        "guzzlehttp/guzzle": "~5.3|~6.0",
+        "anlutro/curl": "^1.4"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

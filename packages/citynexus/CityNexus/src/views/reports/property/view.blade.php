@@ -47,7 +47,6 @@
     <h3>Data Sets</h3>
     @foreach($report_info['datasets'] as $k => $i)
         @if($i != null)
-
         <table>
             <caption>{{\CityNexus\CityNexus\Table::where('table_name', $k)->first()->table_title}}</caption>
             <tr>

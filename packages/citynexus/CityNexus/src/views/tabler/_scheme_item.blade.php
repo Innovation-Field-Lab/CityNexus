@@ -2,8 +2,10 @@
     <td>
         <input type="checkbox" name="map[{{$key}}][skip]" >
     </td>
+
     <td><input type="checkbox" name="map[{{$key}}][show]" checked></td>
     <td><input type="text" id="name-{{$key}}" name="map[{{$key}}][name]" class="form-control" value="{{ucwords($key)}}"></td>
+
     <td>
         {{$builder->cleanName($key)}}
         <input type="hidden" name="map[{{$key}}][key]" value="{{$key}}">
@@ -11,6 +13,7 @@
     <td>
         {{$item}}
     </td>
+
     <td><select name="map[{{$key}}][type]" class="form-control" id="type-{{$key}}">
             <option value="string">String</option>
             <option value="text" @if($typer->type($item) == 'text') selected @endif>Text Area</option>

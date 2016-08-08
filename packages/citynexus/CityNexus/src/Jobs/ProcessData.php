@@ -33,13 +33,14 @@ class ProcessData extends Job implements SelfHandling, ShouldQueue
      */
     public function handle()
     {
-//        DB::reconnect();
+//      DB::reconnect();
 
         $tabler = new TableBuilder();
         //Process each individual record
         if(!is_array($this->id))
         {
             $ids[] = $this->id;
+
         }
         else
         {
@@ -47,6 +48,7 @@ class ProcessData extends Job implements SelfHandling, ShouldQueue
         }
         foreach($ids as $id)
         {
+
             try{
                 $tabler->processRecord($id, $this->table);
             }

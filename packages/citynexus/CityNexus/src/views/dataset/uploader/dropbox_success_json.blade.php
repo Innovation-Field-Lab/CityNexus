@@ -1,12 +1,3 @@
-<?php
-$pagename = 'Create Dataset';
-$section = 'dataset';
-?>
-
-@extends(config('citynexus.template'))
-
-@section(config('citynexus.section'))
-
 <form action="{{action('\CityNexus\CityNexus\Http\DatasetController@postScheduleDropbox')}}" method="post">
     {!! csrf_field() !!}
     <h4>Upload Success</h4>
@@ -36,10 +27,8 @@ $section = 'dataset';
             <button class="form-control btn btn-primary">Schedule Dropbox Sync</button>
         </div>
     </div>
-    <input type="hidden" name="settings[dropbox_token]" id="final_settings_dropbox_token" value="{{$dropbox_token}}">
-    <input type="hidden" name="settings[dropbox_path]" id="final_settings_dropbox_path" value="{{$dropbox_path}}">
+    <input type="hidden" name="settings[dropbox_token]" id="final_settings_dropbox_token">
+    <input type="hidden" name="settings[dropbox_path]" id="final_settings_dropbox_path">
 
-    <input type="hidden" name="dataset_id" id="final_dataset_id" value="{{$dataset_id}}">
+    <input type="hidden" name="dataset_id" id="final_dataset_id">
 </form>
-
-@stop

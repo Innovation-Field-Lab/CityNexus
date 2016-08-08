@@ -88,6 +88,7 @@
                         @can('citynexus', ['group' => 'datasets', 'method' => 'create'])
                         <li role="separator" class="divider"></li>
                         <li><a href="{{action('\CityNexus\CityNexus\Http\TablerController@getUploader')}}">New From Upload</a></li>
+                        <li><a href="{{action('\CityNexus\CityNexus\Http\DatasetController@getDropboxSync')}}">New From Dropbox</a></li>
                         @endcan
                     </ul>
                 </li>

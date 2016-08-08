@@ -72,7 +72,7 @@ class TablerController extends Controller
         if($table == null)
         {
             Table::find($id)->delete();
-            Session::flash('flash_success', "Uploaded file may have been uploaded, please try again.");
+            Session::flash('flash_success', "Uploaded file may not have been uploaded, please try again.");
             return redirect()->back();
         }
         $typer = new Typer();

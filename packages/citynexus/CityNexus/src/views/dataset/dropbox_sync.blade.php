@@ -16,7 +16,7 @@ $section = 'dataset';
                     </label>
 
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" id="settings_dropbox_token" name="settings[dropbox_token]" value="C8oGDpOoOKUAAAAAAAAPs5eYBpdVMyUbd6GbgTVvpBDKucx09jnlaPXQyx_NFvLd"/>
+                        <input type="text" class="form-control" id="settings_dropbox_token" name="settings[dropbox_token]" value=""/>
                     </div>
                 </div>
 
@@ -25,7 +25,7 @@ $section = 'dataset';
 
                     <div class="col-sm-8">
                         <input type="text" class="form-control" id="settings_path" name="settings[dropbox_path]"
-                               value="/Winthrop Data/"/>
+                               value=""/>
                     </div>
                 </div>
 
@@ -56,11 +56,13 @@ $section = 'dataset';
                     dropbox_token: token,
                     dropbox_path: path
                 },
-                dataset_id:{{$dataset_id}}
+                dataset_id:"{{$dataset_id}}"
             }
         }).success(function(data){
             $('#connection_results').html(data);
             $('#test_connection').val('Refresh Connection');
+        }).fail(function(){
+            Command: toastr["warning"]('Uh oh. Something has gone wrong. Please check your internet connection.')
         });
     }
 
@@ -76,7 +78,7 @@ $section = 'dataset';
                     dropbox_path: path
                 },
                 download: download,
-                dataset_id:{{$dataset_id}}
+                dataset_id:"{{$dataset_id}}"
 
             }
         }).success(function (data) {
@@ -85,6 +87,8 @@ $section = 'dataset';
             $('#final_settings_dropbox_token').val(token);
             $('#final_settings_dropbox_path').val(path);
             $('#final_dataset_id').val({{$dataset_id}});
+        }).fail(function(){
+            Command: toastr["warning"]('Uh oh. Something has gone wrong. Please check your internet connection.')
         });
     }
 

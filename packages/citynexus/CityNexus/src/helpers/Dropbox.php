@@ -36,10 +36,6 @@ class Dropbox
     {
         //Open Dropbox Connection
 
-
-        $url = 'https://content.dropboxapi.com/2/files/download';
-        $curl = curl_init($url); //initialise
-
         if(!$path)
         {
             $list = $this->getFileList($settings);
@@ -47,27 +43,10 @@ class Dropbox
             $path = $last_file->id;
         }
 
-        $data =[
-            'path' => $path
-        ];
-        $post = json_encode($data);
-        curl_setopt($curl,CURLOPT_HTTPHEADER,array('Authorization: Bearer ' . $settings->dropbox_token,'Content-Type: ', 'Dropbox-API-Arg: ' . $post));
-        curl_setopt($curl, CURLOPT_POST, 1);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        $response = curl_exec($curl);
-        $file = $response;
-
-        $metadata = $this->getMetadata($settings, $path);
-
-        file_put_contents(storage_path($metadata->name), $file);
-
-        //process and delete temp file
-        $data = Excel::load(storage_path($metadata->name), function($reader){$reader->toArray();})->parsed;
-        unlink(storage_path($metadata->name));
-
+        $data = $this->download($settings->token, $path);
         //Get Table
-        $table = Table::find($table_id);
 
+        $table = Table::find($table_id);
         $upload = Upload::create(['table_id' => $table_id, 'note' => 'Dropbox initial upload']);
         $tabler = new TablerController();
         $tabler->processUpload($table, $data, $upload->id);
@@ -76,7 +55,7 @@ class Dropbox
 
     }
 
-    public function getMetadata($settings, $path)
+    public function getMetadata($token, $path)
     {
         $data =[
             'path' => $path
@@ -85,7 +64,7 @@ class Dropbox
 
         $url = 'https://api.dropboxapi.com/2/files/get_metadata';
         $curl = curl_init($url); //initialise
-        curl_setopt($curl,CURLOPT_HTTPHEADER,array('Authorization: Bearer ' . $settings->dropbox_token,'Content-Type: application/json'));
+        curl_setopt($curl,CURLOPT_HTTPHEADER,array('Authorization: Bearer ' . $token,'Content-Type: application/json'));
         curl_setopt($curl, CURLOPT_POST, 1);
         curl_setopt($curl, CURLOPT_POSTFIELDS, $post);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -94,5 +73,33 @@ class Dropbox
         $data = \GuzzleHttp\json_decode($response);
 
         return $data;
+    }
+
+    public function download($token, $path)
+    {
+        $url = 'https://content.dropboxapi.com/2/files/download';
+        $curl = curl_init($url); //initialise
+
+        $data =[
+            'path' => $path
+        ];
+        $post = json_encode($data);
+        curl_setopt($curl,CURLOPT_HTTPHEADER,array('Authorization: Bearer ' . $token,'Content-Type: ', 'Dropbox-API-Arg: ' . $post));
+        curl_setopt($curl, CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        $response = curl_exec($curl);
+        $file = $response;
+
+        $metadata = $this->getMetadata($token, $path);
+
+        file_put_contents(storage_path($metadata->name), $file);
+
+        //process and delete temp file
+        $data = Excel::load(storage_path($metadata->name), function($reader){$reader->toArray();})->parsed;
+
+        unlink(storage_path($metadata->name));
+
+        return $data;
+
     }
 }

@@ -43,7 +43,7 @@ class Dropbox
             $path = $last_file->id;
         }
 
-        $data = $this->download($settings->token, $path);
+        $data = $this->download($settings->dropbox_token, $path);
         //Get Table
 
         $table = Table::find($table_id);

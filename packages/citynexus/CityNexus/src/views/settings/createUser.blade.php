@@ -34,6 +34,23 @@
                                 <input type="email" class="form-control" id="email" name="email" value="{{old('email')}}" required/>
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <label for="title" class="control-label col-sm-4">Title</label>
+
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="title" name="title" value="{{old('title')}}"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="department" class="control-label col-sm-4">Department</label>
+
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="department" name="department " value="{{old('department')}}"/>
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <label for="admin" class="control-label col-sm-4">Super Admin User</label>
 

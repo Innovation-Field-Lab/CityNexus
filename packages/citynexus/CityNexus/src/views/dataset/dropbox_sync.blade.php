@@ -42,11 +42,12 @@ $section = 'dataset';
 
 <script>
 
-    var token = $('#settings_dropbox_token').val();
-    var path = $('#settings_path').val();
 
     function checkConnection()
     {
+        var token = $('#settings_dropbox_token').val();
+        var path = $('#settings_path').val();
+
         $.ajax({
             url: "{{action('\CityNexus\CityNexus\Http\DatasetController@postCreateDropboxSync')}}",
             type: 'POST',
@@ -67,6 +68,9 @@ $section = 'dataset';
     }
 
     function processUpload(download) {
+
+        var token = $('#settings_dropbox_token').val();
+        var path = $('#settings_path').val();
 
         $.ajax({
             url: "{{action('\CityNexus\CityNexus\Http\DatasetController@postProcessDropboxSync')}}",

@@ -164,6 +164,40 @@
 @if(isset($user))
 <input type="hidden" name="user_id" value="{{$user->id}}">
 {{csrf_field()}}
+<div class="form-horizontal">
+<div class="form-group">
+    <label for="first_name" class="control-label col-sm-4">First Name</label>
+
+    <div class="col-sm-8">
+        <input type="text" class="form-control" id="first_name" name="first_name" value="{{$user->first_name}}"/>
+    </div>
+</div>
+<div class="form-group">
+    <label for="last_name" class="control-label col-sm-4">Last Name</label>
+
+    <div class="col-sm-8">
+        <input type="text" class="form-control" id="last_name" name="last_name" value="{{$user->last_name}}"/>
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="title" class="control-label col-sm-4">Title</label>
+
+    <div class="col-sm-8">
+        <input type="text" class="form-control" id="title" name="title" value="{{$user->title}}"/>
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="department" class="control-label col-sm-4">Department</label>
+
+    <div class="col-sm-8">
+        <input type="text" class="form-control" id="department" name="department" value="{{$user->department}}"/>
+    </div>
+</div>
+</div>
+
+    <h4>Edit Permissions</h4>
 @endif
 
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">

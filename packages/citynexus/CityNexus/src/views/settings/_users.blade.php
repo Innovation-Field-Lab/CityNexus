@@ -13,7 +13,7 @@
             <td>{{$user->email}}</td>
             <td>
                 @if(\Illuminate\Support\Facades\Auth::getUser()->id != $user->id)
-                    <button class="btn btn-xs btn-primary" onclick="editPermissions({{$user->id}})">Permissions</button>
+                    <button class="btn btn-xs btn-primary" onclick="editUserSettings({{$user->id}})">Settings</button>
                     <button class="btn btn-xs btn-danger" onclick="removeUser({{$user->id}})">Delete</button>
                     @can('super_user')
                         <button class="btn btn-xs btn-caution @if(!$user->super_admin) hidden @endif" id="desuper-{{$user->id}}" onclick="superUser(false, {{$user->id}})">Remove Super User</button>
@@ -36,15 +36,15 @@
 
 <!-- Modal -->
 <div class="modal fade" id="permissions" tabindex="-1" role="dialog" aria-labelledby="permissions">
-    <form id="permissions" action="/{{config('citynexus.root_directory')}}/settings/permissions" method="post">
+    <form id="user-settings" action="/{{config('citynexus.root_directory')}}/settings/settings-update" method="post">
 
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="permissions_title">Permissions</h4>
+                <h4 class="modal-title" id="permissions_title">User Settings</h4>
             </div>
-            <div class="modal-body" id="permissions-modal">
+            <div class="modal-body" id="user-settings-modal">
 
             </div>
             <div class="modal-footer">
@@ -73,13 +73,14 @@
 
     triggerModal(newTitle, newBody);
     @endif
-    function editPermissions( id )
+
+    function editUserSettings( id )
     {
         $.ajax({
-            url: '/citynexus/settings/permissions/' + id
+            url: '/citynexus/settings/user-settings/' + id
         }).success( function( data ) {
-            $('#permissions-modal').html(data);
-            $('#permissions').modal('show');
+            $('#user-settings-modal').html(data);
+            $('#user-settings').modal('show');
         })
     }
 

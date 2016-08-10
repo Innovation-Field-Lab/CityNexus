@@ -61,6 +61,8 @@ class CitynexusSettingsController extends Controller
             $user->email = $request->get('email');
             $user->password = str_random();
             $user->super_admin = $request->get('super_admin');
+            $user->title = $request->get('title');
+            $user->department = $request->get('department');
             $user->permissions = json_encode($request->get('permissions'));
 
             // Create activation token;
@@ -84,7 +86,7 @@ class CitynexusSettingsController extends Controller
         return redirect(action('\CityNexus\CityNexus\Http\CitynexusSettingsController@getIndex'));
     }
 
-    public function getPermissions( $id)
+    public function getUserSettings( $id)
     {
         $user = User::find($id);
         $permissions = json_decode($user->permissions);
@@ -92,12 +94,13 @@ class CitynexusSettingsController extends Controller
         return view('citynexus::settings._permissions', compact('permissions', 'user'));
     }
 
-    public function postPermissions(Request $request)
+    public function postSettingsUpdate(Request $request)
     {
          $user = User::find($request->get('user_id'));
-         $user->permissions = json_encode($request->get('permissions'));
-         $user->save();
-         Session::flash('flash_success', "User permissions updated.");
+         $update = $request->all();
+         $update['permissions'] = json_encode($request->get('permissions'));
+         $user->update($update);
+         Session::flash('flash_success', "User updated.");
          return redirect()->back();
     }
 

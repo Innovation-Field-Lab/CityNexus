@@ -1,5 +1,7 @@
 <?php
-$pagename = "Pin Map - " . $tag->tag;
+$pagename = "Pin Map - ";
+if(isset($tag)) $pagename .= $tag->tag;
+elseif(isset($rs)) $pagename .= $rs->name;
 $section = "reports";
 ?>
 
@@ -86,7 +88,11 @@ $section = "reports";
                     _token: "{{csrf_token()}}",
                     settings: {
                         type: 'Pin Map',
+                        @if(isset($tag))
                         tag_id: {{$tag->id}}
+                        @elseif(isset($rs))
+                        score_id: {{$rs->id}}
+                        @endif
                     },
                     name: name
                 }
@@ -109,7 +115,11 @@ $section = "reports";
                 _token: "{{csrf_token()}}",
                 settings: {
                     type: 'Pin Map',
+                    @if(isset($tag))
                     tag_id: {{$tag->id}}
+                    @elseif(isset($rs))
+                    score_id: {{$rs->id}}
+                    @endif
                     },
                 id: id
             }

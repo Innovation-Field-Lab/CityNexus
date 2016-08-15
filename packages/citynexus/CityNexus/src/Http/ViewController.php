@@ -36,9 +36,17 @@ class ViewController extends Controller
                 return redirect(action('\CityNexus\CityNexus\Http\ViewController@getHeatMap') . "?table=" . $view->setting->table_name . "&key=" . $view->setting->key . '&view_id=' . $id);
                 break;
             case 'Pin Map':
-                $pin = Tag::find($view->setting->tag_id);
-                return redirect(action('\CityNexus\CityNexus\Http\TagController@getPinMap', [$pin->id]));
-                break;
+                if(isset($view->setting->tag_id))
+                {
+                    $pin = Tag::find($view->setting->tag_id);
+                    return redirect(action('\CityNexus\CityNexus\Http\TagController@getPinMap', [$pin->id]));
+                }
+                elseif(isset($view->setting->score_id))
+                {
+                    $score = Score::find($view->setting->score_id);
+                    return redirect(action('\CityNexus\CityNexus\Http\RiskScoreController@getPinMap', [$score->id]));
+                }
+                  break;
             case 'Distribution':
                 return redirect(action('\CityNexus\CityNexus\Http\ViewController@getDistribution', ['table' => $view->setting->table_name, "key" => $view->setting->key]) . '?view_id=' . $id);
                 break;

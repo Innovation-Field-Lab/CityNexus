@@ -15,16 +15,18 @@ class ProcessData extends Job implements SelfHandling, ShouldQueue
     use InteractsWithQueue, SerializesModels;
     private $id;
     private $table;
+    private $wo_pid;
     /**
      * Create a new job instance.
      *
      * @param string $data
      * @param Property $upload_id
      */
-    public function __construct($id, $table)
+    public function __construct($id, $table, $wo_pid = false)
     {
         $this->id = $id;
         $this->table = $table;
+        $this->wo_pid = $wo_pid;
     }
     /**
      * Execute the job.
@@ -50,7 +52,14 @@ class ProcessData extends Job implements SelfHandling, ShouldQueue
         {
 
             try{
-                $tabler->processRecord($id, $this->table);
+                if($this->wo_pid == true)
+                {
+                    $tabler->processRecordWithoutId($id, $this->table);
+                }
+                else
+                {
+                    $tabler->processRecord($id, $this->table);
+                }
             }
             catch(\PDOException $e)
             {

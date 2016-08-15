@@ -7,6 +7,7 @@ use CityNexus\CityNexus\Property;
 use CityNexus\CityNexus\GenerateScore;
 use CityNexus\CityNexus\Report;
 use CityNexus\CityNexus\Score;
+use CityNexus\CityNexus\Tag;
 use CityNexus\CityNexus\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -33,6 +34,10 @@ class ViewController extends Controller
             case 'Heat Map':
                 $table = Table::find($view->setting->table_id);
                 return redirect(action('\CityNexus\CityNexus\Http\ViewController@getHeatMap') . "?table=" . $view->setting->table_name . "&key=" . $view->setting->key . '&view_id=' . $id);
+                break;
+            case 'Pin Map':
+                $pin = Tag::find($view->setting->tag_id);
+                return redirect(action('\CityNexus\CityNexus\Http\TagController@getPinMap', [$pin->id]));
                 break;
             case 'Distribution':
                 return redirect(action('\CityNexus\CityNexus\Http\ViewController@getDistribution', ['table' => $view->setting->table_name, "key" => $view->setting->key]) . '?view_id=' . $id);

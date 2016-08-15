@@ -257,6 +257,7 @@ class TablerController extends Controller
                    $table->dateTime('processed_at')->nullable();
                 });
             }
+
             foreach($data as $i)
             {
                 if(isset($existing))

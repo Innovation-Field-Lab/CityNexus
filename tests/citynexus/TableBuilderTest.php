@@ -318,4 +318,28 @@ class TableBuilderControllerTest extends TestCase
 
 
     }
+
+    public function testLeadingZeros()
+    {
+        $tableBuilder = new TableBuilder();
+
+        $table = factory(CityNexus\CityNexus\Table::class)->create([
+            'scheme' => '{"account":{"show":"on","name":"Account","key":"account","type":"string","sync":"null","push":"null","meta":""},"mtu":{"show":"on","name":"Mtu","key":"mtu","type":"integer","sync":"null","push":"null","meta":""},"address":{"show":"on","name":"Address","key":"address","type":"string","sync":"full_address","push":"null","meta":""},"usage":{"show":"on","name":"Usage","key":"usage","type":"integer","sync":"null","push":"null","meta":""},"unable_to_contact_owner_meter_not_working":{"show":"on","name":"Unable_to_contact_owner_meter_not_working","key":"unable_to_contact_owner_meter_not_working","type":"string","sync":"null","push":"null","meta":""}}'
+        ]);
+        $tableBuilder->create($table);
+
+        $rawUpload = '{"id":12,"upload_id":25,"account":"B0972","mtu":11011986,"address":"0000492 LOWELL ST","usage":null,"unable_to_contact_owner_meter_not_working":"Unable to contact owner meter not working","created_at":"2016-04-18 00:00:00","updated_at":"2016-04-18 00:00:00","raw":null}';
+
+        $row = DB::table($table->table_name)->insertGetId(['upload_id' => 9999, 'raw' => $rawUpload, 'updated_at' => \Carbon\Carbon::now(), 'created_at' => \Carbon\Carbon::now()]);
+
+        $tableBuilder->processRecord($row, $table->table_name);
+
+        $results = DB::table($table->table_name)->where('id', $row)->first();
+
+        $property = \CityNexus\CityNexus\Property::find($results->property_id);
+
+        $this->assertSame('492', $property->house_number);
+
+
+    }
 }

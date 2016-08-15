@@ -14,10 +14,6 @@ use CityNexus\CityNexus\GeocodeJob;
 
 class TableBuilder
 {
-//    public function createTable($table)
-//    {
-//        return $this->create($table);
-//    }
     public function create($table)
     {
         $table_name = 'tabler_' . $this->cleanName($table->table_title);
@@ -87,6 +83,13 @@ class TableBuilder
     public function findSyncId( $table_name, $i, $syncValues)
     {
         $search = [];
+
+        $sync_id = config('citynexus.index_id');
+
+        if(isset($i->$sync_id))
+        {
+            return $i->$sync_id;
+        }
 
         foreach($syncValues as $key => $field)
         {
@@ -342,6 +345,61 @@ class TableBuilder
             {
                 Error::create(['location' => 'processRecord - Insert Record', 'data' => json_encode([ 'id' => $id, 'table' => $table])]);
             }
+
+    }
+
+    public function processRecordWithoutId($id, $table)
+    {
+        //Create a empty array of the record
+        $record = [];
+        $dataset = Table::where('table_name', $table)->first();
+
+        $data = json_decode(DB::table($table)->where('id', $id)->pluck('raw'));
+        unset($data->property_id);
+
+        $settings = $dataset->schema;
+
+        $tabler = new TableBuilder();
+
+        //create an array of sync values
+        $syncValues = $tabler->findValues( $settings, 'sync' );
+//        $pushValues = $tabler->findValues( $settings, 'push' );
+
+        //if there is a sync value, identify the index id
+        if(isset($settings->property_id) && $settings->property_id)
+        {
+
+            $record[config('citynexus.index_id')] = $data->$settings->property_id;
+        }
+        elseif( count( $syncValues ) > 0)
+        {
+            $syncId = $this->findSyncId( config('citynexus.index_table'), $data, $syncValues );
+
+            if($syncId != null)
+            {
+
+                $record[config('citynexus.index_id')] = $syncId;
+            }
+
+        }
+
+        //add remaining elements to the array
+        $record = $this->addElements($record, $data, $settings);
+        $record = $this->processElements($settings, $record);
+        $record = $this->checkForUsedKeys($record, $dataset);
+
+        if (isset($settings->timestamp) && $settings->timestamp != null) {
+            $record['created_at'] = $record[$settings->timestamp];
+        }
+
+        try{
+
+            DB::table($table)->where('id', $id)->update($record);
+        }
+        catch(\Exception $e)
+        {
+            Error::create(['location' => 'processRecord - Insert Record', 'data' => json_encode([ 'id' => $id, 'table' => $table])]);
+        }
 
     }
 

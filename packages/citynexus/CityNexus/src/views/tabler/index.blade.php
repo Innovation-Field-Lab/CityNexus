@@ -43,26 +43,26 @@ $section = 'datasets';
                                 {{$table->updated_at->formatLocalized('%B %d, %Y')}}
                             </td>
                             <td>
+                                @can('citynexus', ['datasets', 'view'])
+                                <a class="btn btn-sm btn-primary" href="/{{config('citynexus.tabler_root')}}/show-table/{{$table->table_name}}">View</a>
+                                @endcan
                                 @can('citynexus', ['datasets', 'upload'])
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-default dropdown-toggle waves-effect" data-toggle="dropdown" aria-expanded="false"> Actions <span class="caret"></span> </button>
                                     <ul class="dropdown-menu">
                                         <li><a href="/{{config('citynexus.tabler_root')}}/new-upload/{{$table->id}}">Upload</a></li>
                                         <li><a href="{{action('\CityNexus\CityNexus\Http\DatasetController@getDropboxSync', [$table->id])}}">Dropbox Sync</a></li>
+                                        @can('citynexus', ['datasets', 'edit'])
+                                        <li><a href="{{action('\CityNexus\CityNexus\Http\TablerController@getEditTable', [$table->id])}}">Hide Table</a></li>
+                                        @endcan
+                                        @can('citynexus', ['datasets', 'delete'])
+                                        <li><a href="{{action('\CityNexus\CityNexus\Http\TablerController@getRemoveTable', [$table->id])}}">Hide Table</a></li>
+                                        @endcan
+                                        @can('citynexus', ['datasets', 'rollback'])
+                                        <li><a href="{{action('\CityNexus\CityNexus\Http\TablerController@getRollback', [$table->id])}}">Hide Table</a></li>
+                                        @endcan
                                     </ul>
                                 </div>
-                                @endcan
-                                @can('citynexus', ['datasets', 'view'])
-                                <a class="btn btn-sm btn-primary" href="/{{config('citynexus.tabler_root')}}/show-table/{{$table->table_name}}">View</a>
-                                @endcan
-                                @can('citynexus', ['datasets', 'edit'])
-                                <a class="btn btn-sm btn-primary" href="/{{config('citynexus.tabler_root')}}/edit-table/{{$table->id}}">Edit</a>
-                                @endcan
-                                @can('citynexus', ['datasets', 'delete'])
-                                <a class="btn btn-sm btn-danger" href="/{{config('citynexus.tabler_root')}}/remove-table/{{$table->id}}"><i class="glyphicon glyphicon-trash"></i></a>
-                                @endcan
-                                @can('citynexus', ['datasets', 'rollback'])
-                                <a class="btn btn-sm btn-warning" href="/{{config('citynexus.tabler_root')}}/rollback/{{$table->id}}">Rollback</a>
                                 @endcan
                             </td>
                         </tr>

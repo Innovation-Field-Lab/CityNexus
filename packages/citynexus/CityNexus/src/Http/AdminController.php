@@ -43,7 +43,7 @@ class AdminController extends Controller
 
     }
 
-    public function getProcessData($table_name, $id = null)
+    public function getProcessData($table_name, $id = false, $without_pid = false)
     {
         if($id == 'all_records')
         {
@@ -51,7 +51,15 @@ class AdminController extends Controller
             $ids = array_chunk($ids, 500);
             foreach($ids as $i)
             {
-                $this->dispatch(new ProcessData($i->id, $table_name));
+                if($without_pid)
+                {
+                    $this->dispatch(new ProcessData($i->id, $table_name, true));
+                }
+                else
+                {
+                    $this->dispatch(new ProcessData($i->id, $table_name));
+                }
+
             }
         }
         elseif($id != null)
@@ -65,7 +73,14 @@ class AdminController extends Controller
 
             foreach($ids as $i)
             {
-                $this->dispatch(new ProcessData($i->id, $table_name));
+                if($without_pid)
+                {
+                    $this->dispatch(new ProcessData($i, $table_name, true));
+                }
+                else
+                {
+                    $this->dispatch(new ProcessData($i, $table_name));
+                }
             }
 
         }

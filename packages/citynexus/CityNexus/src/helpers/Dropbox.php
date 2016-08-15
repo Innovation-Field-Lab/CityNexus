@@ -35,7 +35,6 @@ class Dropbox
     public function processUpload($settings, $table_id, $path = null)
     {
         //Open Dropbox Connection
-
         if(!$path)
         {
             $list = $this->getFileList($settings);
@@ -50,6 +49,7 @@ class Dropbox
         $upload = Upload::create(['table_id' => $table_id, 'note' => 'Dropbox upload']);
         $tabler = new TablerController();
         $tabler->processUpload($table, $data, $upload->id);
+
 
         return view('citynexus::dataset.uploader.dropbox_success');
 
@@ -100,6 +100,7 @@ class Dropbox
         unlink(storage_path($metadata->name));
 
         return $data;
+
 
     }
 }

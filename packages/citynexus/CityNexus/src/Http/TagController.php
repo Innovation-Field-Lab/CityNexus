@@ -34,9 +34,11 @@ class TagController extends Controller
 
     public function getPinMap($id)
     {
-        $pins = Tag::find($id)->properties()->select('lat', 'long', 'id', 'full_address')->get();
+        $tag = Tag::find($id);
+        $pins = $tag->properties()->select('lat', 'long', 'id', 'full_address')->get();
 
-        return view('citynexus::reports.maps.pinmap', compact('pins'));
+
+        return view('citynexus::reports.maps.pinmap', compact('pins', 'tag'));
     }
 
     public function getList($id)

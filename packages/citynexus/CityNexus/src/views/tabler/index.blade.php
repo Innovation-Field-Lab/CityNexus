@@ -53,13 +53,13 @@ $section = 'datasets';
                                         <li><a href="/{{config('citynexus.tabler_root')}}/new-upload/{{$table->id}}">Upload</a></li>
                                         <li><a href="{{action('\CityNexus\CityNexus\Http\DatasetController@getDropboxSync', [$table->id])}}">Dropbox Sync</a></li>
                                         @can('citynexus', ['datasets', 'edit'])
-                                        <li><a href="{{action('\CityNexus\CityNexus\Http\TablerController@getEditTable', [$table->id])}}">Hide Table</a></li>
+                                        <li><a href="{{action('\CityNexus\CityNexus\Http\TablerController@getEditTable', [$table->id])}}">Edit Table</a></li>
+                                        @endcan
+                                        @can('citynexus', ['datasets', 'rollback'])
+                                        <li><a href="{{action('\CityNexus\CityNexus\Http\TablerController@getRollback', [$table->id])}}">Upload History</a></li>
                                         @endcan
                                         @can('citynexus', ['datasets', 'delete'])
                                         <li><a href="{{action('\CityNexus\CityNexus\Http\TablerController@getRemoveTable', [$table->id])}}">Hide Table</a></li>
-                                        @endcan
-                                        @can('citynexus', ['datasets', 'rollback'])
-                                        <li><a href="{{action('\CityNexus\CityNexus\Http\TablerController@getRollback', [$table->id])}}">Hide Table</a></li>
                                         @endcan
                                     </ul>
                                 </div>

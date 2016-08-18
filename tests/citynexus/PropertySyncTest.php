@@ -53,6 +53,18 @@ class PropertySyncTest extends TestCase
         $this->assertSame($expected, $post);
     }
 
+    public function testStreetTypeSync()
+    {
+        $pre = ['house_number' => '23', 'street_name' => 'Monmouth', 'street_type' => 'st'];
+        $expected = '23 monmouth street';
+
+        $PSync = new PropertySync();
+        $post_id = $this->invokeMethod($PSync, 'addressSync', array($pre));
+        $post = \CityNexus\CityNexus\Property::find($post_id)->full_address;
+        $this->assertSame($expected, $post);
+    }
+
+
     public function testCheckForRawID()
     {
         $property['full_address'] = '23 monmouth st';

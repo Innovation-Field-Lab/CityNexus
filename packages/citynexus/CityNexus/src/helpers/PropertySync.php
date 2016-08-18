@@ -22,6 +22,13 @@ class PropertySync
             $raw_address = ['full_address' => $raw_address];
         }
 
+        // check for raw match
+        if($this->checkForRawID(json_encode($raw_address)))
+        {
+            return $this->checkForRawID(json_encode($raw_address));
+        }
+
+
         if(isset($raw_address['full_address']))
         {
 
@@ -42,14 +49,18 @@ class PropertySync
         }
         else
         {
-            // check for raw match
-            if($this->checkForRawID(json_encode($raw_address)))
-            {
-                return $this->checkForRawID(json_encode($raw_address));
-            }
-
             // Clean array
             $raw_address = $this->cleanAddress($raw_address);
+
+            // Clean Street Type
+            if(isset($raw_address['street_type']))
+            {
+                $street_types = config('citynexus.street_types');
+                if(isset($street_types[$raw_address['street_type']]))
+                {
+                    $raw_address['street_type'] = $street_types[$raw_address['street_type']];
+                }
+            }
 
             // Add house number to array
             $address = [];

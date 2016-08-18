@@ -29,6 +29,7 @@ return [
         'property_id' => 'Property ID',
         'house_number' => 'House Number',
         'street_name' => 'Street Name',
+        'street_type' => 'Street Type',
         'unit' => 'Unit',
         'full_address' => 'Full Address',
     ],
@@ -54,6 +55,11 @@ return [
     'map_long' => env('MAP_LONG', 45),
     'map_zoom' => env('MAP_ZOOM', 15),
     'gmap_api' => env('GMAP_API', 'AIzaSyCI2g5iCOjoJu6i4P25ATKcG1_V3dFfwjI'),
+
+    //Data Filter Options
+    'datafilters' => [
+        ['name' => 'Search and Replace', 'function' => 'searchReplace']
+    ],
 
     // Address matching arrarys
 

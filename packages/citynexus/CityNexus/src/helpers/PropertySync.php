@@ -28,7 +28,6 @@ class PropertySync
             return $this->checkForRawID(json_encode($raw_address));
         }
 
-
         if(isset($raw_address['full_address']))
         {
 
@@ -56,9 +55,9 @@ class PropertySync
             if(isset($raw_address['street_type']))
             {
                 $street_types = config('citynexus.street_types');
-                if(isset($street_types[$raw_address['street_type']]))
+                if(isset($street_types[trim($raw_address['street_type'])]))
                 {
-                    $raw_address['street_type'] = $street_types[$raw_address['street_type']];
+                    $raw_address['street_type'] = $street_types[trim($raw_address['street_type'])];
                 }
             }
 
@@ -81,8 +80,7 @@ class PropertySync
         {
             return false;
         }
-
-            $address = array_filter($address);
+        $address = array_filter($address);
 
         //Check for properties
         $address = array_filter($address);
@@ -196,7 +194,7 @@ class PropertySync
     private function setHouseNumber($houseNumber)
     {
 
-        $property['house_number']= $houseNumber;
+        $property['house_number']= trim($houseNumber);
 
         //Test for hypenated addresses
         if(strpos($houseNumber, '-'))

@@ -342,4 +342,26 @@ class TableBuilderControllerTest extends TestCase
 
 
     }
+
+    public function testStreetTypeSyncExample()
+    {
+        $tableBuilder = new TableBuilder();
+
+        $table = factory(CityNexus\CityNexus\Table::class)->create([
+            'scheme' => '{"callnum":{"show":"on","name":"Callnum","key":"callnum","type":"string","sync":"null","push":"null","meta":""},"calldate":{"name":"Calldate","key":"calldate","type":"string","sync":"null","push":"null","meta":""},"weekday":{"name":"Weekday","key":"weekday","type":"string","sync":"null","push":"null","meta":""},"year":{"name":"Year","key":"year","type":"integer","sync":"null","push":"null","meta":""},"calltime":{"name":"Calltime","key":"calltime","type":"integer","sync":"null","push":"null","meta":""},"time":{"show":"on","name":"Time","key":"time","type":"string","sync":"null","push":"null","meta":""},"hour":{"name":"Hour","key":"hour","type":"integer","sync":"null","push":"null","meta":""},"reasontext":{"show":"on","name":"Reasontext","key":"reasontext","type":"string","sync":"null","push":"null","meta":""},"expr1008":{"show":"on","name":"Expr1008","key":"expr1008","type":"string","sync":"null","push":"null","meta":""},"reasoncode":{"show":"on","name":"Reasoncode","key":"reasoncode","type":"integer","sync":"null","push":"null","meta":""},"streetnum":{"name":"Streetnum","key":"streetnum","type":"string","sync":"house_number","push":"null","meta":""},"streetname":{"name":"Streetname","key":"streetname","type":"string","sync":"street_name","push":"null","meta":""},"streetsuf":{"name":"Streetsuf","key":"streetsuf","type":"string","sync":"street_type","push":"null","meta":""},"streetapt":{"name":"Streetapt","key":"streetapt","type":"string","sync":"null","push":"null","meta":""},"location":{"show":"on","name":"Location","key":"location","type":"string","sync":"null","push":"null","meta":""},"zone":{"show":"on","name":"Zone","key":"zone","type":"string","sync":"null","push":"null","meta":""},"address":{"show":"on","name":"Address","key":"address","type":"string","sync":"null","push":"null","meta":""},"realdate":{"show":"on","name":"Realdate","key":"realdate","type":"datetime","sync":"null","push":"null","meta":""},"foundedyn":{"show":"on","name":"Foundedyn","key":"foundedyn","type":"string","sync":"null","push":"null","meta":""},"actioncode":{"show":"on","name":"Actioncode","key":"actioncode","type":"string","sync":"null","push":"null","meta":""},"istreetname":{"show":"on","name":"Istreetname","key":"istreetname","type":"string","sync":"null","push":"null","meta":""},"officer1":{"show":"on","name":"Officer1","key":"officer1","type":"string","sync":"null","push":"null","meta":""},"officer2":{"show":"on","name":"Officer2","key":"officer2","type":"string","sync":"null","push":"null","meta":""}}' ]);
+        $tableBuilder->create($table);
+
+        $rawUpload = '{"callnum":"16-14656 ","calldate":20160401,"weekday":"Fri","year":2016,"calltime":"0055","time":"00:55","hour":"00","reasontext":"TRAFFIC ENFORCEMENT ","expr1008":"SD","reasoncode":6300,"streetnum":"691 ","streetname":"RIVER ","streetsuf":"ST ","streetapt":" ","location":"S&S LOBSTER LTD. ","zone":"C2 ","address":"691 RIVER ST & ","realdate":"01-Apr-16","foundedyn":"Y","actioncode":"SD","istreetname":" ","officer1":"157 ","officer2":" "}';
+
+        $row = DB::table($table->table_name)->insertGetId(['upload_id' => 9999, 'raw' => $rawUpload, 'updated_at' => \Carbon\Carbon::now(), 'created_at' => \Carbon\Carbon::now()]);
+
+        $tableBuilder->processRecord($row, $table->table_name);
+
+        $results = DB::table($table->table_name)->where('id', $row)->first();
+
+        $property = \CityNexus\CityNexus\Property::find($results->property_id);
+
+        $this->assertSame('691 river street', $property->full_address);
+
+    }
 }

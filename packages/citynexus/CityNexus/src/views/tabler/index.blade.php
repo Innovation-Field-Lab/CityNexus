@@ -8,21 +8,11 @@ $section = 'datasets';
 @section(config('citynexus.section'))
 
     <div class="portlet">
-        {{--<div class="portlet-heading portlet-default">--}}
-        {{--<div class="portlet-widgets">--}}
-        {{--<a href="javascript:;" data-toggle="reload"><i class="zmdi zmdi-refresh"></i></a>--}}
-        {{--<a data-toggle="collapse" data-parent="#accordion1" href="#bg-primary"><i class="zmdi zmdi-minus"></i></a>--}}
-        {{--<a href="#" data-toggle="remove"><i class="zmdi zmdi-close"></i></a>--}}
-        {{--</div>--}}
-        {{--<div class="clearfix"></div>--}}
-        {{--</div>--}}
-
         <div class="portlet-body">
             <table class="table table-hover">
                     <thead>
                     <td>Name</td>
                     <td>Record Count</td>
-                    <td>Created</td>
                     <td>Last Upload</td>
                     <td></td>
                     </thead>
@@ -37,10 +27,7 @@ $section = 'datasets';
                                 {{\Illuminate\Support\Facades\DB::table($table->table_name)->count()}}
                             </td>
                             <td>
-                                {{$table->created_at->diffForHumans()}}
-                            </td>
-                            <td>
-                                {{$table->updated_at->formatLocalized('%B %d, %Y')}}
+                                {{$table->updated_at->diffForHumans()}}
                             </td>
                             <td>
                                 @can('citynexus', ['datasets', 'view'])

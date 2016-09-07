@@ -45,33 +45,12 @@
 
 @push('js_footer')
 <script src="//cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
-<script src="//cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
-
 <script>
 
     $(document).ready(function() {
         $('#properties-table').DataTable(
                 {
-                    order: [[0, 'asc']],
-                    dom: 'Bfrtip',
-                    buttons: [
-                        {
-                        extend: 'print',
-                        className: 'btn btn-default'
-
-                        },
-                        {
-                            extend: 'csv',
-                            text: 'Copy all data',
-                            exportOptions: {
-                                modifier: {
-                                    search: 'none'
-                                }
-                            }
-                        }
-
-                    ]
+                    "order": [[0, 'asc']]
                 }
         );
         $('#loading').addClass('hidden');

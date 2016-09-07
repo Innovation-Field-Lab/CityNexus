@@ -35,8 +35,8 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="permissions" tabindex="-1" role="dialog" aria-labelledby="permissions">
-    <form id="user-settings" action="/{{config('citynexus.root_directory')}}/settings/settings-update" method="post">
+<div class="modal fade" id="user-settings-modal" tabindex="-1" role="dialog" aria-labelledby="permissions">
+    <form id="user-settings-form" action="/{{config('citynexus.root_directory')}}/settings/settings-update" method="post">
 
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -44,7 +44,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="permissions_title">User Settings</h4>
             </div>
-            <div class="modal-body" id="user-settings-modal">
+            <div class="modal-body" id="user-settings">
 
             </div>
             <div class="modal-footer">
@@ -79,8 +79,8 @@
         $.ajax({
             url: '/citynexus/settings/user-settings/' + id
         }).success( function( data ) {
-            $('#user-settings-modal').html(data);
-            $('#user-settings').modal('show');
+            $('#user-settings').html(data);
+            $('#user-settings-modal').modal('show');
         })
     }
 

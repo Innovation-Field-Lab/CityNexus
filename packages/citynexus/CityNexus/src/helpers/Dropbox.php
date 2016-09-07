@@ -9,6 +9,13 @@ use Maatwebsite\Excel\Facades\Excel;
 class Dropbox
 {
 
+    /**
+     *
+     * Generate list of contents of a folder
+     *
+     * @param $settings
+     * @return object
+     */
     public function getFileList($settings)
     {
         $data =[
@@ -32,6 +39,15 @@ class Dropbox
     }
 
 
+    /**
+     *
+     * Create a new dataset from a dropbox upload
+     *
+     * @param $settings array
+     * @param $table_id int
+     * @param null $path boolean
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function processUpload($settings, $table_id, $path = null)
     {
         //Open Dropbox Connection
@@ -46,15 +62,22 @@ class Dropbox
         //Get Table
 
         $table = Table::find($table_id);
+        $table->touch();
         $upload = Upload::create(['table_id' => $table_id, 'note' => 'Dropbox upload']);
         $tabler = new TablerController();
         $tabler->processUpload($table, $data, $upload->id);
 
-
         return view('citynexus::dataset.uploader.dropbox_success');
-
     }
 
+    /**
+     *
+     * Get metadata of a dropbox file
+     *
+     * @param $token string
+     * @param $path string
+     * @return array|mixed
+     */
     public function getMetadata($token, $path)
     {
         $data =[
@@ -75,6 +98,14 @@ class Dropbox
         return $data;
     }
 
+    /**
+     *
+     * Download a CSV or Excel file from dropbox and return contents in array
+     *
+     * @param $token
+     * @param $path
+     * @return array
+     */
     public function download($token, $path)
     {
         $url = 'https://content.dropboxapi.com/2/files/download';

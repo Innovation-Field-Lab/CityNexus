@@ -302,6 +302,90 @@ class AdminController extends Controller
         return $count;
     }
 
+    public function getMergeAliases()
+    {
 
+        $properties = Property::all()->lists('alias_of');
+
+        foreach($properties as $i)
+        {
+            if($i != null)
+            {
+                $array[$i] = $i;
+            }
+        }
+
+        $properties = array_chunk($array, 500);
+
+        foreach($properties as $i)
+        {
+            $this->dispatch(new MergeProps($i));
+        }
+    }
+
+    public function getDropZeroAddresses()
+    {
+
+        $properties = Property::where('house_number', 0)->get();
+        $datasets = DB::table('tabler_tables')->whereNotNull('table_name')->lists('table_name');
+
+        foreach ($properties as $i) {
+            DB::table('citynexus_images')->where('property_id', $i->id)->update(['property_id' => null]);
+            DB::table('citynexus_notes')->where('property_id', $i->id)->update(['property_id' => null]);
+            DB::table('citynexus_properties')->where('alias_of', $i->id)->update(['alias_of' => null]);
+            DB::table('citynexus_raw_addresses')->where('property_id', $i->id)->update(['property_id' => null]);
+            DB::table('citynexus_taskables')->where('citynexus_taskable_id', $i->id)->where('citynexus_taskable_type', 'CityNexus\CityNexus\Property')->delete();
+            DB::table('property_tag')->where('property_id', $i->id)->delete();
+
+            foreach ($datasets as $tn) {
+                if (Schema::hasTable($tn)) {
+                    DB::table($tn)->where('property_id', $i->id)->update(['property_id' => null]);
+                }
+            }
+
+            $i->delete();
+        }
+    }
+
+    public function getDropNoData()
+    {
+
+        $properties = Property::where('house_number', 0)->get();
+        $datasets = DB::table('tabler_tables')->whereNotNull('table_name')->lists('table_name');
+
+            $images = DB::table('citynexus_images')->lists('property_id');
+            $notes = DB::table('citynexus_notes')->lists('property_id');
+            $properties = DB::table('citynexus_properties')->lists('alias_of');
+            $raw = DB::table('citynexus_raw_addresses')->lists('property_id');
+            $tasks = DB::table('citynexus_taskables')->where('citynexus_taskable_type', 'CityNexus\CityNexus\Property')->lists('citynexus_taskable_id');
+            $tag = DB::table('property_tag')->lists('property_id');
+
+            $ids = array_merge($images, $notes, $properties, $raw, $tasks, $tag);
+
+            $data_ids = [];
+            foreach ($datasets as $tn) {
+                if (Schema::hasTable($tn)) {
+                    $new_ids = DB::table($tn)->lists('property_id');
+                    $data_ids = array_merge($new_ids, $data_ids);
+                }
+            }
+
+            $ids = array_merge($ids, $data_ids);
+            $ids = array_filter($ids);
+
+            $ap = Property::all()->lists('id');
+
+            $no_data = [];
+            foreach($ap as $i)
+            {
+                if(array_search($i, $ids) == null)
+                {
+                    Property::find($i)->delete();
+                }
+            }
+
+            return $no_data;
+
+    }
 
 }

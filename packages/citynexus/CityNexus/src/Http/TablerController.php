@@ -326,14 +326,26 @@ class TablerController extends Controller
     {
         $aliases = $request->alias;
         $id = $request->get('p_id');
+        $datasets = DB::table('tabler_tables')->whereNotNull('table_name')->lists('table_name');
         foreach($aliases as $i)
         {
-            $i = Property::find($i);
-            $i->alias_of = $id;
-            $i->save();
+            DB::table('citynexus_images')->where('property_id', $i)->update(['property_id' => $id]);
+            DB::table('citynexus_notes')->where('property_id', $i)->update(['property_id' => $id]);
+            DB::table('citynexus_properties')->where('alias_of', $i)->update(['alias_of' => $id]);
+            DB::table('citynexus_raw_addresses')->where('property_id', $i)->update(['property_id' => $id]);
+            DB::table('citynexus_taskables')->where('citynexus_taskable_id', $i)->where('citynexus_taskable_type', 'CityNexus\CityNexus\Property')->update(['property_id' => $id]);
+            DB::table('property_tag')->where('property_id', $i)->update(['property_id' => $id]);
+
+            foreach ($datasets as $tn) {
+                if (Schema::hasTable($tn)) {
+                    DB::table($tn)->where('property_id', $i)->update(['property_id' => $id]);
+                }
+            }
+
+            $i->delete();
         }
 
-        Session::flash('flash_success', "Records have been recorded as aliases.");
+        Session::flash('flash_success', "Records have been merged.");
         return redirect(action('\CityNexus\CityNexus\Http\PropertyController@getShow', ['property_id' => $id]));
     }
 

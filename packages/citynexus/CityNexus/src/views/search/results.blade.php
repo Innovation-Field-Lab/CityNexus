@@ -25,7 +25,11 @@ $section = 'search';
                 @foreach($results as $i)
                     <tr>
                         <td>
+                            @unless(isset($i->alias_of))
                             {{ucwords($i->full_address)}}
+                            @else
+                            {{$i->full_address}} (alias of <a href="{{action('\CityNexus\CityNexus\Http\PropertyController@getShow', ['id' => $i->alias_of])}}"> {{ucwords(\CityNexus\CityNexus\Property::find($i->alias_of)->full_address)}}</a>)
+                            @endunless
                         </td>
                         <td>
                             <a class='btn btn-primary btn-sm'href="{{action('\CityNexus\CityNexus\Http\PropertyController@getShow', ['id' => $i->id])}}">View Property</a>

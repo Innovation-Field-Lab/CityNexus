@@ -3,7 +3,11 @@
 <?php
 if(isset($widget->setting->tag_id))
 {
-    $tags = \CityNexus\CityNexus\Tag::find($widget->setting->tag_id)->properties->take(20);
+    if(\CityNexus\CityNexus\Tag::find($widget->setting->tag_id))
+        {
+            $tags = \CityNexus\CityNexus\Tag::find($widget->setting->tag_id)->properties->take(20);
+        }
+
 }
 ?>
     @if(isset($tags))

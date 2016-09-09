@@ -60,7 +60,7 @@ class PropertyController extends Controller
     {
         $this->authorize('citynexus', [ 'properties', 'show']);
         //Format Tag
-        $tag = ucwords(strtolower($request->get('tag')));
+        $tag = trim(ucwords(strtolower($request->get('tag'))));
 
         //Get Tag ID
         $tag = Tag::firstOrCreate(['tag' => $tag]);

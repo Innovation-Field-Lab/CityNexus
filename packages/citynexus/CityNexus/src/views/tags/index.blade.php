@@ -28,7 +28,6 @@ $section = 'properties';
                 </thead>
                 <tbody>
                 @foreach($tags as $tag)
-                    @if($tag->properties->count() > 0)
                     <tr>
                         <th>{{$tag->tag}}</th>
                         <th>{{$tag->properties->count()}}</th>
@@ -36,9 +35,12 @@ $section = 'properties';
                             {{--<a class="btn btn-sm btn-primary" href="/{{config('citynexus.root_directory')}}/tags/heat-map/{{$tag->id}}">Heat Map</a>--}}
                             <a class="btn btn-sm btn-primary" href="/{{config('citynexus.root_directory')}}/tags/pin-map/{{$tag->id}}">Pin Map</a>
                             <a class="btn btn-sm btn-primary" href="{{action('\CityNexus\CityNexus\Http\TagController@getList', ['id' => $tag->id])}}">List</a>
+                            <a class="btn btn-sm btn-primary" onclick="renameTag({{$tag->id}}, '{{$tag->tag}}')"> Merge Tags</a>
+                            <a class="btn btn-sm btn-warning" onclick="mergeTag({{$tag->id}})"> <i class="fa fa-code-fork"></i> Merge Tags</a>
+                            <a class="btn btn-sm btn-danger" href="{{action('\CityNexus\CityNexus\Http\TagController@getDelete', ['id' => $tag->id])}}"> <i class="fa fa-trash"></i> Delete</a>
+
                         </td>
                     </tr>
-                    @endif
                 @endforeach
             </table>
         </div>
@@ -47,5 +49,37 @@ $section = 'properties';
 
 @push('js_footer')
 
-
+<script>
+    function mergeTag(id)
+    {
+        var form = "<form action='{{action('\CityNexus\CityNexus\Http\TagController@postMergeTags')}}' method='post'>" +
+                "<input type='hidden' name='old_id' value='" + id +"'>" +
+                '{!! csrf_field() !!}' +
+                "<label>Select tag to merge into</label>" +
+                "<select class='form-control' name='new_id'>" +
+                "<option value=''>Select One</option>" +
+                @foreach(\CityNexus\CityNexus\Tag::all() as $tag)
+                "<option value='{{$tag->id}}' id='tagOp-{{$tag->id}}'>{{$tag->tag}}</option>" +
+                @endforeach
+                "</select>" +
+                "<br>" +
+                "<input type='submit' value='Merge' class='btn btn-primary'>" +
+                "</form>";
+        triggerModal('Merge Tags', form);
+        $('#tagOp-' + id).remove();
+    }
+    function renameTag(id, name)
+    {
+        var form = "<form action='{{action('\CityNexus\CityNexus\Http\TagController@postRename')}}' method='post'>" +
+                "<input type='hidden' name='tag_id' value='" + id +"'>" +
+                '{!! csrf_field() !!}' +
+                "<label>Change name of tag to:</label>" +
+                "<input name='name' class='form-control' value='" + name + "'>" +
+                "<br>" +
+                "<input type='submit' value='Rename Tag' class='btn btn-primary'>" +
+                "</form>";
+        var title = 'Rename "' + name + '"';
+        triggerModal(title, form);
+    }
+</script>
 @endpush

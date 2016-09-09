@@ -21,6 +21,8 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Queue;
 use CityNexus\CityNexus\Geocode;
 use CityNexus\CityNexus\Tag;
+use Illuminate\Support\Facades\Session;
+use Pheanstalk\Command\ReserveCommand;
 
 
 class TagController extends Controller
@@ -46,5 +48,31 @@ class TagController extends Controller
         $tag = Tag::find($id);
         return view('citynexus::tags.list', compact('tag'));
     }
+
+    public function postRename(Request $request)
+    {
+        $tag = Tag::find($request->get('tag_id'));
+        $tag->tag = $request->get('name');
+        $tag->save();
+        Session::flash('flash_success', 'Tag successfully renamed.');
+        return redirect(action('\CityNexus\CityNexus\Http\TagController@getIndex'));
+    }
+
+    public function postMergeTags(Request $request)
+    {
+        DB::table('property_tag')->where('tag_id', $request->get('old_id'))->update(['tag_id' => $request->get('new_id')]);
+        Tag::find($request->get('old_id'))->delete();
+        Session::flash('flash_success', 'Tags successfully merged.');
+        return redirect(action('\CityNexus\CityNexus\Http\TagController@getIndex'));
+    }
+
+    public function getDelete($id)
+    {
+        $tags = DB::table('property_tag')->where('tag_id', $id)->delete();
+        Tag::find($id)->delete();
+
+        return redirect()->back();
+    }
+
 
 }

@@ -30,7 +30,7 @@ class TagController extends Controller
 
     public function getIndex()
     {
-        $tags = Tag::with('properties')->get();
+        $tags = Tag::with('properties')->orderBy('tag')->get();
         return view('citynexus::tags.index', compact('tags'));
     }
 

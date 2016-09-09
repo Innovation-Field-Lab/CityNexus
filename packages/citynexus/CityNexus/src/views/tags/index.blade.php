@@ -35,7 +35,7 @@ $section = 'properties';
                             {{--<a class="btn btn-sm btn-primary" href="/{{config('citynexus.root_directory')}}/tags/heat-map/{{$tag->id}}">Heat Map</a>--}}
                             <a class="btn btn-sm btn-primary" href="/{{config('citynexus.root_directory')}}/tags/pin-map/{{$tag->id}}">Pin Map</a>
                             <a class="btn btn-sm btn-primary" href="{{action('\CityNexus\CityNexus\Http\TagController@getList', ['id' => $tag->id])}}">List</a>
-                            <a class="btn btn-sm btn-primary" onclick="renameTag({{$tag->id}}, '{{$tag->tag}}')"> Merge Tags</a>
+                            <a class="btn btn-sm btn-primary" onclick="renameTag({{$tag->id}}, '{{$tag->tag}}')"> Rename Tags</a>
                             <a class="btn btn-sm btn-warning" onclick="mergeTag({{$tag->id}})"> <i class="fa fa-code-fork"></i> Merge Tags</a>
                             <a class="btn btn-sm btn-danger" href="{{action('\CityNexus\CityNexus\Http\TagController@getDelete', ['id' => $tag->id])}}"> <i class="fa fa-trash"></i> Delete</a>
 

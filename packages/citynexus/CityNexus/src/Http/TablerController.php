@@ -333,7 +333,7 @@ class TablerController extends Controller
             DB::table('citynexus_notes')->where('property_id', $i)->update(['property_id' => $id]);
             DB::table('citynexus_properties')->where('alias_of', $i)->update(['alias_of' => $id]);
             DB::table('citynexus_raw_addresses')->where('property_id', $i)->update(['property_id' => $id]);
-            DB::table('citynexus_taskables')->where('citynexus_taskable_id', $i)->where('citynexus_taskable_type', 'CityNexus\CityNexus\Property')->update(['property_id' => $id]);
+            DB::table('citynexus_taskables')->where('citynexus_taskable_id', $i)->where('citynexus_taskable_type', 'CityNexus\CityNexus\Property')->update(['citynexus_taskable_id' => $id]);
             DB::table('property_tag')->where('property_id', $i)->update(['property_id' => $id]);
 
             foreach ($datasets as $tn) {

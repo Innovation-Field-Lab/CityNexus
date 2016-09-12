@@ -342,7 +342,7 @@ class TablerController extends Controller
                 }
             }
 
-            $i->delete();
+            Property::find($i)->delete();
         }
 
         Session::flash('flash_success', "Records have been merged.");

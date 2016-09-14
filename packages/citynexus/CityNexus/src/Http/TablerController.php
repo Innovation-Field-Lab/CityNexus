@@ -290,6 +290,7 @@ class TablerController extends Controller
                 foreach($new_ids as $record)
                 {
                     $this->dispatch(new ProcessData($record, $table->table_name));
+
                 }
             }
         }

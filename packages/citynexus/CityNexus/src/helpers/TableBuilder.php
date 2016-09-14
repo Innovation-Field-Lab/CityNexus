@@ -231,7 +231,8 @@ class TableBuilder
             return $return;
         }
         else
-            return false;
+
+        return false;
 
     }
 
@@ -300,7 +301,7 @@ class TableBuilder
         $record = [];
         $dataset = Table::where('table_name', $table)->first();
 
-        $data = json_decode(DB::table($table)->where('id', $id)->pluck('raw'));
+        $data = json_decode(DB::table($table)->where('id', $id)->value('raw'));
 
         $settings = $dataset->schema;
 

@@ -17,6 +17,7 @@ class PropertySync
 
     public function addressSync($raw_address)
     {
+
         if(!is_array($raw_address))
         {
             $raw_address = ['full_address' => $raw_address];
@@ -51,11 +52,23 @@ class PropertySync
             // Clean array
             $raw_address = $this->cleanAddress($raw_address);
 
+            // get full address array
+            $addresses = config('citynexus.street_types');
+
             // Add house number to array
             $address = [];
             if(isset($raw_address['house_number'])) $address = $this->setHouseNumber($raw_address['house_number']);
             if(isset($raw_address['street_name'])) $address = array_merge($address, $this->processStreetName(explode(' ', $raw_address['street_name'])));
-            if(isset($raw_address['street_type'])) {$address['street_type'] = $raw_address['street_type'];}
+            if(isset($raw_address['street_type']))
+            {
+                if(isset($addresses[$raw_address['street_type']]))
+                {
+                    $address['street_type'] = $addresses[$raw_address['street_type']];
+                }
+                else
+                {
+                }
+            }
             if(isset($raw_address['unit']) )  {$address['unit'] = $raw_address['unit'];}
             $raw_address = json_encode($raw_address);
         }
@@ -144,7 +157,7 @@ class PropertySync
 
         foreach($address as $k => $i)
         {
-            $post[$k] = str_replace(['.', ','], '', strtolower($i));
+            $post[$k] = trim(str_replace(['.', ','], '', strtolower($i)));
         }
 
         return $post;
@@ -184,8 +197,7 @@ class PropertySync
      */
     private function setHouseNumber($houseNumber)
     {
-
-        $property['house_number']= $houseNumber;
+        $property['house_number']= trim($houseNumber);
 
         //Test for hypenated addresses
         if(strpos($houseNumber, '-'))

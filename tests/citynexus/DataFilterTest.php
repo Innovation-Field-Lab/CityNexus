@@ -6,6 +6,10 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class DataFilterTest extends TestCase
 {
+    public function test()
+    {
+        $this->assertSame(1,1);
+    }
 //    use DatabaseTransactions;
 //    public function __construct()
 //    {

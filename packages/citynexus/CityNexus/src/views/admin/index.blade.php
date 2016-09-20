@@ -4,7 +4,7 @@
 
     <a href="/{{config('citynexus.root_directory')}}/admin/refresh-geocoding" class="btn btn-primary">Refresh Geo Coding</a>
 
-    <a href="/{{config('citynexus.root_directory')}}/admin/meger-aliases" class="btn btn-primary">Merge Aliases</a>
+    <a href="/{{config('citynexus.root_directory')}}/admin/merge-aliases" class="btn btn-primary">Merge Aliases</a>
     <a href="/{{config('citynexus.root_directory')}}/admin/drop-zero-addresses" class="btn btn-primary">Drop Zero Address</a>
     <a href="/{{config('citynexus.root_directory')}}/admin/drop-no-data" class="btn btn-primary">Drop No Data</a>
     <form action="/{{config('citynexus.root_directory')}}/admin/edit-table">

@@ -345,6 +345,8 @@ class AdminController extends Controller
 
             $i->delete();
         }
+
+        return 'success';
     }
 
     public function getDropNoData()

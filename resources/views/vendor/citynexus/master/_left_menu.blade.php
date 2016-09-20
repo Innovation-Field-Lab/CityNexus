@@ -22,6 +22,7 @@
                     </a>
                 </li>
             </ul>
+            <a href="{{action('\CityNexus\CityNexus\Http\CitynexusController@getSubmitTicket')}}" class="btn btn-sm btn-primary btn-rounded">Submit Support Ticket</a>
         </div>
         <!-- End User -->
 

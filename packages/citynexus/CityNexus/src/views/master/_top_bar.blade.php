@@ -57,6 +57,9 @@
     overflow: hidden;">
                     </form>
                 </li>
+                <li>
+                    <a href="{{action('\CityNexus\CityNexus\Http\CityNexusController@getSubmitTicket'}}" class="btn btn-sm btn-rounded">Submit Support Ticket</a>
+                </li>
             </ul>
 
         </div><!-- end container -->

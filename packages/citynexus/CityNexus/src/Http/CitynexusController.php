@@ -3,6 +3,7 @@
 namespace CityNexus\CityNexus\Http;
 
 use App\Http\Controllers\Controller;
+use App\User;
 use Carbon\Carbon;
 use CityNexus\CityNexus\Note;
 use CityNexus\CityNexus\Property;
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use CityNexus\CityNexus\Table;
 use CityNexus\CityNexus\Geocode;
+use Illuminate\Support\Facades\Session;
 
 
 class CitynexusController extends Controller
@@ -26,13 +28,24 @@ class CitynexusController extends Controller
         return view('citynexus::dashboards.citymanager', compact('notes', 'widgets'));
     }
 
+    public function getSubmitTicket(Request $request)
+    {
+        $referer = $request->server->get('HTTP_REFERER');
+        return view('citynexus::help.new_ticket', compact('referer'));
+    }
+
     public function postSubmitTicket(Request $request)
     {
-        Mail::send('citynexus::email.submit_ticket', ['request' => $request], function ($m) use ($request) {
-            $m->from('postmaster@citynexus.org', 'CityNexus');
-            $m->to("salaback@g.harvard.edu", "Sean Alaback")->subject('New CityNexus Ticket');
-            $m->cc($request->get('user_email'));
+        $user = Auth::getUser();
+
+        Mail::send('citynexus::email.submit_ticket', ['request' => $request, 'user' => $user], function ($m) use ($request, $user) {
+            $m->from($user->email, $user->fullname());
+            $m->to("citynexusorgsupport@citynexussupport.freshdesk.com", "Help Desk")->subject($request->get('subject'));
         });
+
+        Session::flash('flash_success', 'Ticket successfully submitted.');
+
+        return redirect('/');
     }
 
     /**

@@ -28,6 +28,11 @@ class CitynexusController extends Controller
         return view('citynexus::dashboards.citymanager', compact('notes', 'widgets'));
     }
 
+    public function getEmailTest()
+    {
+        return view('citynexus::email.email-template');
+    }
+
     public function getSubmitTicket(Request $request)
     {
         $referer = $request->server->get('HTTP_REFERER');

@@ -181,6 +181,9 @@ class CitynexusSettingsController extends Controller
 
     public function getInvite($id)
     {
+
+//      TODD: This needs to be factored, bad.
+
         $user = User::find($id);
 
         Session::flash('flash_token', $user->activation);

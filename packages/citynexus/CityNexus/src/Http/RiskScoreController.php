@@ -35,7 +35,7 @@ class RiskScoreController extends Controller
     {
         $this->authorize('citynexus', ['scores', 'create']);
 
-        $datasets = Table::whereNotNull('table_name')->orderBy('table_name')->get();
+        $datasets = Table::whereNotNull('table_name')->whereNotNull('table_name')->orderBy('table_name')->get();
 
         return view('citynexus::risk-score.new', compact('datasets'));
     }
@@ -248,7 +248,7 @@ class RiskScoreController extends Controller
     public function getEditScore($id)
     {
         $score = Score::find($id);
-        $datasets = Table::all();
+        $datasets = Table::whereNotNull('table_name')->whereNotNull('table_name')->orderBy('table_name')->get();
 
         return view('citynexus::risk-score.edit', compact('score', 'datasets'));
     }

@@ -14,7 +14,7 @@ class ScoreBuilderTest extends TestCase
      * test runRange Function
      *
      */
-    public function testRangeEquals ()
+    public function testRangeEquals()
     {
         $score = \GuzzleHttp\json_decode(json_encode(['function' => 'range', 'test' => '5 ', 'range' => '=', 'result' => '2']));
         $value = 5;

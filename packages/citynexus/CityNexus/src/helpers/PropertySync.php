@@ -15,12 +15,26 @@ use Toin0u\Geocoder\Facade\Geocoder;
 class PropertySync
 {
 
+    public function __construct()
+    {
+        $this->streets = config('citynexus.street_types');
+    }
+
     public function addressSync($raw_address)
     {
+
         if(!is_array($raw_address))
         {
-            $raw_address = ['full_address' => $raw_address];
+            $raw_address = ['full_address' => trim($raw_address)];
         }
+        else
+        {
+            foreach($raw_address as $k => $i)
+            {
+                $raw_address[$k] = trim($i);
+            }
+        }
+
 
         if(isset($raw_address['full_address']))
         {
@@ -55,14 +69,16 @@ class PropertySync
             $address = [];
             if(isset($raw_address['house_number'])) $address = $this->setHouseNumber($raw_address['house_number']);
             if(isset($raw_address['street_name'])) $address = array_merge($address, $this->processStreetName(explode(' ', $raw_address['street_name'])));
-            if(isset($raw_address['street_type'])) {$address['street_type'] = $raw_address['street_type'];}
-            if(isset($raw_address['unit']) )  {$address['unit'] = $raw_address['unit'];}
+            if(isset($raw_address['street_type']) && isset($this->streets[$raw_address['street_type']])) {$address['street_type'] = $this->streets[$raw_address['street_type']];}
+            elseif(isset($raw_address['street_type'])) {$address['street_type'] = $raw_address['street_type']; }
+            if(isset($raw_address['unit']))  {$address['unit'] = $raw_address['unit'];}
             $raw_address = json_encode($raw_address);
         }
 
         //If a zero address, return false
         if($address == false)
         {
+
             return false;
         }
 
@@ -112,6 +128,7 @@ class PropertySync
                 return $property->id;
             }
         }
+
         return $property->id;
     }
 
@@ -185,7 +202,7 @@ class PropertySync
     private function setHouseNumber($houseNumber)
     {
 
-        $property['house_number']= $houseNumber;
+        $property['house_number']= trim($houseNumber);
 
         //Test for hypenated addresses
         if(strpos($houseNumber, '-'))

@@ -393,7 +393,7 @@ class AdminController extends Controller
     public function getClearNullDataset()
     {
         $datasets = Table::where('table_title', NULL)->withTrashed()->get();
-        
+
         foreach($datasets as $i)
         {
             $i->forceDelete();

@@ -240,7 +240,7 @@ class TablerController extends Controller
         if(!Schema::hasColumn($table->table_name, 'raw'))
         {
             Schema::table($table->table_name, function (Blueprint $table) {
-                $table->json('raw');
+                $table->json('raw')->nullable();
             });
         }
 

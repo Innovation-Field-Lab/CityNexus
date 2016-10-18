@@ -216,7 +216,7 @@
     function getHelp( help )
     {
         $.ajax({
-            url: "{{action("\CityNexus\CityNexus\Http\HelpController@getItem")}}/" + help
+            url: "{{action('\CityNexus\CityNexus\Http\HelpController@getItem')}}/" + help
         }).success(function (data){
             $("#modal").html(data);
             Custombox.open({
@@ -229,18 +229,18 @@
 
     jQuery(document).ready(function($) {
         var engine = new Bloodhound({
-            datumTokenizer: Bloodhound.tokenizers.whitespace,
+            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('full_address'),
             queryTokenizer: Bloodhound.tokenizers.whitespace,
-            prefetch: '{{action('\CityNexus\CityNexus\Http\SearchController@getPrefetch')}}'
+            remote: {
+                url:'{{action('\CityNexus\CityNexus\Http\SearchController@getSearch')}}?query=%QUERY',
+                wildcard: '%QUERY'
+            }
         });
 
-        $("#search").typeahead({
-            hint: true,
-            highlight: true,
-            minLength: 2
-        }, {
-            source: engine,
-            name: 'search_list'
+        $("#search").typeahead(null, {
+            name: 'search_list',
+            display: 'full_address',
+            source: engine
         });
     });
 </script>

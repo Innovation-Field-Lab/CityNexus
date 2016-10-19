@@ -9,6 +9,7 @@ use CityNexus\CityNexus\DatasetQuery;
 use CityNexus\CityNexus\GenerateScore;
 use CityNexus\CityNexus\Score;
 use CityNexus\CityNexus\Setting;
+use CityNexus\CityNexus\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
@@ -42,20 +43,22 @@ class RiskScoreController extends Controller
 
     public function getDataFields(Request $request)
     {
-        if($request->get('dataset_id') == '_scores')
+        switch($request->get('dataset_id'))
         {
-            $scores = Score::orderBy('name')->get();
-            return view('citynexus::risk-score.scores', compact('scores'));
+            case '_scores':
+                $scores = Score::orderBy('name')->get();
+                return view('citynexus::risk-score.scores', compact('scores'));
+                break;
+            case'_tags':
+                $tags = Tag::orderBy('tag')->get();
+                return view('citynexus::risk-score.tags', compact('tags'));
+                break;
+            default:
+                $dataset = Table::find($request->get('dataset_id'));
+                $scheme = json_decode($dataset->scheme);
+                return view('citynexus::risk-score.datafields', compact('dataset', 'scheme'));
+                break;
         }
-        else
-        {
-            $dataset = Table::find($request->get('dataset_id'));
-            $scheme = json_decode($dataset->scheme);
-
-            return view('citynexus::risk-score.datafields', compact('dataset', 'scheme'));
-        }
-
-
     }
 
     public function getDataField(Request $request)
@@ -74,11 +77,9 @@ class RiskScoreController extends Controller
         $this->authorize('citynexus', ['scores', 'view']);
 
         // Get Score Model
-
         $score = Score::find($id);
 
         // Create pivot table of properties with scores
-
         $table = 'citynexus_scores_' . $score->id;
 
         $properties = DB::table($table)
@@ -116,39 +117,32 @@ class RiskScoreController extends Controller
         $table = 'citynexus_scores_' . $rs->id;
         $max = DB::table($table)->max('score');
 
-        if($request->get('with_zeros'))
-        {
+        if ($request->get('with_zeros')) {
             $data = DB::table($table)->orderBy('score')->lists('score');
             $min = DB::table($table)->min('score');
-        }
-        else
-        {
+        } else {
             $data = DB::table($table)->where('score', '>', 0)->orderBy('score')->lists('score');
             $min = DB::table($table)->where('score', '>', 0)->min('score');
         }
         // Bern view
         $count = count($data);
 
-        if($request->get('feel') != null)
-        {
-            if($request->get('feel') == 'bern')
-            {
-                $bern = $count - ($count/100);
-                $bern = intval ($bern);
+        if ($request->get('feel') != null) {
+            if ($request->get('feel') == 'bern') {
+                $bern = $count - ($count / 100);
+                $bern = intval($bern);
                 $cutoff = $data[$bern];
             }
 
-            if($request->get('feel') == 'malthus')
-            {
-                $malthus = $count - ($count/20);
-                $malthus = intval ($malthus);
+            if ($request->get('feel') == 'malthus') {
+                $malthus = $count - ($count / 20);
+                $malthus = intval($malthus);
                 $cutoff = $data[$malthus];
             }
 
-            if($request->get('feel') == 'castro')
-            {
-                $castro = $count - ($count/10);
-                $castro = intval ($castro);
+            if ($request->get('feel') == 'castro') {
+                $castro = $count - ($count / 10);
+                $castro = intval($castro);
                 $cutoff = $data[$castro];
             }
 
@@ -160,17 +154,17 @@ class RiskScoreController extends Controller
 
         $zeros = DB::table($table)->where('score', '<=', '0')->count();
         $sum = DB::table($table)->sum('score');
-        $middle = $count/2;
-        $firstQ = $count/4;
+        $middle = $count / 2;
+        $firstQ = $count / 4;
         $thirdQ = $middle + $firstQ;
-        $bTen = $count/10;
+        $bTen = $count / 10;
         $tTen = $count - $bTen;
 
         $stats = [
             'max' => $max,
             'min' => $min,
             'count' => $count,
-            'mean' => $sum/$count,
+            'mean' => $sum / $count,
             'bTen' => $bTen,
             'firstQ' => $firstQ,
             'median' => $middle,
@@ -191,8 +185,7 @@ class RiskScoreController extends Controller
 
         $scores = null;
 
-        if($request->get('type') == 'heatmap')
-        {
+        if ($request->get('type') == 'heatmap') {
             $scores = DB::table($table)
                 ->where('score', '>', '0')
                 ->join('citynexus_properties', 'citynexus_properties.id', '=', 'property_id')
@@ -227,21 +220,16 @@ class RiskScoreController extends Controller
         ]);
 
         // test if there is a score_id
-        if($request->get('score_id') != null)
-        {
+        if ($request->get('score_id') != null) {
             $score = Score::find($request->get('score_id'));
-        }
-
-        // If no score_id create a new score
-        else
-        {
+        } // If no score_id create a new score
+        else {
             $score = new Score;
         }
 
         // Encode elements array
         $elements = array();
-        foreach($request->get('elements') as $i)
-        {
+        foreach ($request->get('elements') as $i) {
             $elements[] = json_decode($i);
         }
 
@@ -252,14 +240,13 @@ class RiskScoreController extends Controller
 
         $this->runScore($score);
 
-        return redirect( action('\CityNexus\CityNexus\Http\RiskScoreController@getIndex') );
+        return redirect(action('\CityNexus\CityNexus\Http\RiskScoreController@getIndex'));
     }
 
     public function getEditScore($id)
     {
         $score = Score::find($id);
-        $datasets = Table::all();
-
+        $datasets = Table::whereNotNull('table_name')->orderBy('table_name')->get();
         return view('citynexus::risk-score.edit', compact('score', 'datasets'));
     }
 
@@ -287,14 +274,12 @@ class RiskScoreController extends Controller
         $score = Score::find($id);
         try {
             Schema::drop('citynexus_scores_' . $score->id);
-        }
-        catch(\Exception $e)
-        {
+        } catch (\Exception $e) {
             Session::flash('flash_warning', "Something went wrong. " . $e);
             return redirect()->back();
         }
-            $score->delete();
-            Session::flash('flash_success', "Score has been successfully removed");
+        $score->delete();
+        Session::flash('flash_success', "Score has been successfully removed");
 
         return redirect()->back();
 
@@ -306,7 +291,7 @@ class RiskScoreController extends Controller
         $score->name = $score->name . ' Copy';
         $score->save();
 
-        return $this->getEditScore( $score->id );
+        return $this->getEditScore($score->id);
     }
 
     public function getSettings()
@@ -322,19 +307,16 @@ class RiskScoreController extends Controller
     private function runScore($score)
     {
 
-        // get elements in the scoore
+        // get elements in the score
         $elements = \GuzzleHttp\json_decode($score->elements);
 
 
         // create the name of the score
         $table = 'citynexus_scores_' . $score->id;
 
-        if( Schema::hasTable('citynexus_scores_' . $score->id) )
-        {
+        if (Schema::hasTable('citynexus_scores_' . $score->id)) {
             DB::table('citynexus_scores_' . $score->id)->truncate();
-        }
-        else
-        {
+        } else {
             Schema::create($table, function (Blueprint $table) {
                 $table->increments('id');
                 $table->integer('property_id');
@@ -346,34 +328,28 @@ class RiskScoreController extends Controller
 
         // create an array of all properties with data
 
-        foreach($elements as $element)
-        {
+        foreach ($elements as $element) {
             // check if data type is a score
-            if(null != $element->scope && $element->scope == 'score')
-            {
+            if (null != $element->scope && $element->scope == 'score') {
                 $table_name = 'citynexus_scores_' . $element->table_id;
                 $key = 'score';
-            }
-            else
-            {
+            } else {
                 $table_name = $element->table_name;
                 $key = $element->key;
             }
 
-            $properties = array_merge( $properties, DB::table($table_name)->whereNotNull($key)->whereNotNull('property_id')->lists('property_id'));
+            $properties = array_merge($properties, DB::table($table_name)->whereNotNull($key)->whereNotNull('property_id')->lists('property_id'));
         }
 
         $properties = array_unique($properties);        // remove duplicate array values
 
         sort($properties);                              // sort array by property id value
-        if($properties[0] == '') unset($properties[0]);  //if first element is equal to null, remove
+        if ($properties[0] == '') unset($properties[0]);  //if first element is equal to null, remove
 
         $insert = array();
 
-        foreach($properties as $i)
-        {
-            if($i != null)
-            {
+        foreach ($properties as $i) {
+            if ($i != null) {
                 $insert[] = ['property_id' => $i];
             }
         }
@@ -384,14 +360,18 @@ class RiskScoreController extends Controller
         // process based on element score
         foreach ($elements as $element) {
             switch ($element->scope) {
+
+                case 'tag':
+                    $this->getByTag($element, $score->id);
+                    break;
                 case 'last':
-                    $this->genByLastElement($element,  $score->id);
+                    $this->genByLastElement($element, $score->id);
                     break;
                 case 'score':
-                    $this->genByLastElement($element,  $score->id);
+                    $this->genByLastElement($element, $score->id);
                     break;
                 case 'all':
-                    $this->genByAllElement($element,  $score->id);
+                    $this->genByAllElement($element, $score->id);
                     break;
             }
 
@@ -407,8 +387,7 @@ class RiskScoreController extends Controller
         $scorebuilder = new ScoreBuilder();
 
         // Check if the score element is based on a score.
-        if(null != $element->scope && $element->scope == 'score')
-        {
+        if (null != $element->scope && $element->scope == 'score') {
             $table_name = 'citynexus_scores_' . $element->table_id;
             $key = 'score';
 
@@ -416,14 +395,11 @@ class RiskScoreController extends Controller
                 ->whereNotNull($key)
                 ->whereNotNull('property_id')
                 ->select('property_id', $key)->get();
-        }
-        else
-        {
+        } else {
             $table_name = $element->table_name;
             $key = $element->key;
 
-            if($element->period != null)
-            {
+            if ($element->period != null) {
                 $today = Carbon::today();
 
                 $values = DB::table($table_name)
@@ -436,8 +412,7 @@ class RiskScoreController extends Controller
 
         }
 
-        if(!isset($values))
-        {
+        if (!isset($values)) {
             $values = DB::table($table_name)
                 ->whereNotNull($key)
                 ->orderBy('created_at')
@@ -448,8 +423,7 @@ class RiskScoreController extends Controller
 
         $scores = array();
 
-        foreach($oldscores as $i)
-        {
+        foreach ($oldscores as $i) {
             $scores[$i->property_id] = [
                 'property_id' => $i->property_id,
                 'score' => $i->score
@@ -458,28 +432,22 @@ class RiskScoreController extends Controller
 
 
         $new_score = array();
-        foreach($values as $value)
-        {
+        foreach ($values as $value) {
             $scores[$value->property_id] = ['score' => null, 'property_id' => $value->property_id];
 
             $new_score[$value->property_id] = $scorebuilder->calcElement($value->$key, $element);
         }
 
-        foreach($scores as $i)
-        {
+        foreach ($scores as $i) {
 
-            if(isset($new_score[$i['property_id']]))
-            {
+            if (isset($new_score[$i['property_id']])) {
                 $updated_score = $i['score'] + $new_score[$i['property_id']];
-            }
-            else
-            {
+            } else {
                 $updated_score = $i['score'];
             }
 
 
-            if($updated_score !== null)
-            {
+            if ($updated_score !== null) {
                 $upload[] = [
                     'property_id' => $i['property_id'],
                     'score' => $updated_score,
@@ -500,19 +468,15 @@ class RiskScoreController extends Controller
         $scorebuilder = new ScoreBuilder();
 
 
-        if($element->table_name != null)
-        {
+        if ($element->table_name != null) {
             // if there is a table name, use it
             $table_name = $element->table_name;
-        }
-        else
-        {
+        } else {
             return false;
         }
 
 
-        if($element->period != null)
-        {
+        if ($element->period != null) {
             $today = Carbon::today();
 
             $values = DB::table($table_name)
@@ -520,9 +484,7 @@ class RiskScoreController extends Controller
                 ->whereNotNull($key)
                 ->orderBy('created_at')
                 ->select('property_id', $key)->get();
-        }
-        else
-        {
+        } else {
             $values = DB::table($table_name)
                 ->whereNotNull($key)
                 ->orderBy('created_at')
@@ -532,8 +494,7 @@ class RiskScoreController extends Controller
 
         $scores = array();
 
-        foreach($oldscores as $i)
-        {
+        foreach ($oldscores as $i) {
             $scores[$i->property_id] = [
                 'property_id' => $i->property_id,
                 'score' => $i->score
@@ -544,20 +505,16 @@ class RiskScoreController extends Controller
         $sortedvalues = array();
 
         // create array of values values associated with PID
-        foreach($values as $i)
-        {
+        foreach ($values as $i) {
             $sortedvalues[$i->property_id][] = $i->$key;
         }
 
         // Process each property ID
-        foreach($sortedvalues as $pid => $values)
-        {
+        foreach ($sortedvalues as $pid => $values) {
             // process each value for the property
-            foreach($values as $value)
-            {
+            foreach ($values as $value) {
                 // Check that the pid exists, if not create a record for it
-                if(!isset($scores[$pid]))
-                {
+                if (!isset($scores[$pid])) {
                     break;
                 }
 
@@ -565,8 +522,7 @@ class RiskScoreController extends Controller
                 $new_score = $scores[$pid]['score'] + $scorebuilder->calcElement($value, $element);
 
                 // if new_score is null, create a place holder score
-                if($new_score !== null)
-                {
+                if ($new_score !== null) {
                     $scores[$pid] = [
                         'property_id' => $pid,
                         'score' => $new_score,
@@ -578,5 +534,46 @@ class RiskScoreController extends Controller
         }
         DB::table('citynexus_scores_' . $score_id)->truncate();
         DB::table('citynexus_scores_' . $score_id)->insert($scores);
+    }
+
+    private function genByTag($element, $score_id)
+    {
+
+        $scorebuilder = new ScoreBuilder();
+
+        // Get all properties with tag
+
+        $tagged = Tag::find($element->tag_id)->properties;
+
+        // Get all existing scores
+
+        $scores = DB::table('citynexus_scores_' . $score_id)->get();
+
+        // create array of score adjustments
+        foreach ($tagged as $k => $i)
+        {
+            if(isset($score_adj[$i->property_id]))
+            {
+                $score_adj[$i->property_id] = $score_adj[$i->property_id] + $element->result;
+            }
+            else
+            {
+                $score_adj[$i->property_id] = $element->result;
+            }
+        }
+        // Loop through properties and adjust scores
+
+        foreach ($scores as $k => $i)
+        {
+            if(isset($score_adj[$i->property_id]))
+            {
+                $i->score = $i->score + $score_adj[$i->property_id];
+            }
+        }
+
+        // Store final scores
+        DB::table('citynexus_scores_' . $score_id)->truncate();
+        DB::table('citynexus_scores_' . $score_id)->insert($scores);
+
     }
 }

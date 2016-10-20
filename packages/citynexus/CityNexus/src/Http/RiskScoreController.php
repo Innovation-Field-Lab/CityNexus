@@ -310,6 +310,20 @@ class RiskScoreController extends Controller
         // get elements in the score
         $elements = \GuzzleHttp\json_decode($score->elements);
 
+        $ignore_ids = [];
+        // create array of ignored properties
+        foreach ($elements as $k => $i)
+        {
+            if(isset($i->score_type) && $i->score_type == 'ignore')
+            {
+                $ids = Tag::find($i->tag_id)->properties->lists('id');
+                foreach ($ids as $id)
+                {
+                    $ignore_ids[$id] = false;
+                }
+            unset($elements[$k]);
+            }
+        }
 
         // create the name of the score
         $table = 'citynexus_scores_' . $score->id;
@@ -329,16 +343,27 @@ class RiskScoreController extends Controller
         // create an array of all properties with data
 
         foreach ($elements as $element) {
-            // check if data type is a score
-            if (null != $element->scope && $element->scope == 'score') {
-                $table_name = 'citynexus_scores_' . $element->table_id;
-                $key = 'score';
-            } else {
-                $table_name = $element->table_name;
-                $key = $element->key;
+
+            switch($element->scope)
+            {
+                case 'score':
+                    $table_name = 'citynexus_scores_' . $element->table_id;
+                    $key = 'score';
+                    $properties = array_merge($properties, DB::table($table_name)->whereNotNull($key)->whereNotNull('property_id')->lists('property_id'));
+
+                    break;
+                case 'tag':
+                    $table_name = null;
+                    $key = null;
+                    $properties = array_merge($properties, DB::table('property_tag')->where('tag_id', $element->tag_id)->whereNull('deleted_at')->lists('property_id'));
+                    break;
+                default:
+                    $table_name = $element->table_name;
+                    $key = $element->key;
+                    $properties = array_merge($properties, DB::table($table_name)->whereNotNull($key)->whereNotNull('property_id')->lists('property_id'));
+                    break;
             }
 
-            $properties = array_merge($properties, DB::table($table_name)->whereNotNull($key)->whereNotNull('property_id')->lists('property_id'));
         }
 
         $properties = array_unique($properties);        // remove duplicate array values
@@ -348,8 +373,9 @@ class RiskScoreController extends Controller
 
         $insert = array();
 
+        // remove ignore properties and prepare insert
         foreach ($properties as $i) {
-            if ($i != null) {
+            if ($i != null && !isset($ignore_ids[$i])) {
                 $insert[] = ['property_id' => $i];
             }
         }
@@ -362,7 +388,7 @@ class RiskScoreController extends Controller
             switch ($element->scope) {
 
                 case 'tag':
-                    $this->getByTag($element, $score->id);
+                    $this->genByTag($element, $score->id);
                     break;
                 case 'last':
                     $this->genByLastElement($element, $score->id);
@@ -539,14 +565,10 @@ class RiskScoreController extends Controller
     private function genByTag($element, $score_id)
     {
 
-        $scorebuilder = new ScoreBuilder();
-
         // Get all properties with tag
-
         $tagged = Tag::find($element->tag_id)->properties;
 
         // Get all existing scores
-
         $scores = DB::table('citynexus_scores_' . $score_id)->get();
 
         // create array of score adjustments
@@ -554,26 +576,38 @@ class RiskScoreController extends Controller
         {
             if(isset($score_adj[$i->property_id]))
             {
-                $score_adj[$i->property_id] = $score_adj[$i->property_id] + $element->result;
+                if($i->score_type == 'add')
+                    $score_adj[$i->property_id] = $score_adj[$i->property_id] + $element->factor;
+                elseif($i->score_type == 'subtract')
+                    $score_adj[$i->property_id] = $score_adj[$i->property_id] - $element->factor;
+
             }
             else
             {
-                $score_adj[$i->property_id] = $element->result;
+
+                if($i->score_type == 'add')
+                    $score_adj[$i->property_id] = $element->factor;
+                elseif($i->score_type == 'subtract')
+                    $score_adj[$i->property_id] = 0 - $element->factor;
+
             }
         }
+
         // Loop through properties and adjust scores
 
         foreach ($scores as $k => $i)
         {
+            $new_scores[$k] = ['property_id' => $i->property_id, 'score' => $i->score];
             if(isset($score_adj[$i->property_id]))
             {
-                $i->score = $i->score + $score_adj[$i->property_id];
+                $new_scores[$k]['score'] = $i->score + $score_adj[$i->property_id];
             }
         }
-
         // Store final scores
         DB::table('citynexus_scores_' . $score_id)->truncate();
-        DB::table('citynexus_scores_' . $score_id)->insert($scores);
+        
+        DB::table('citynexus_scores_' . $score_id)->insert($new_scores);
+
 
     }
 }

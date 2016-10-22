@@ -19,7 +19,7 @@ class CreateFileVersionTable extends Migration
             $table->integer('size')->unsigned();
             $table->string('type');
             $table->string('source');
-            $table->dateTime('added_at');
+            $table->timestamps();
         });
     }
 

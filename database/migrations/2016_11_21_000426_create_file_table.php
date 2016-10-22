@@ -18,7 +18,7 @@ class CreateFileTable extends Migration
             $table->integer('property_id')->nullable();
             $table->string('caption')->nullable();
             $table->string('description')->nullable();
-            $table->integer('version_id');
+            $table->integer('version_id')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
@@ -31,6 +31,6 @@ class CreateFileTable extends Migration
      */
     public function down()
     {
-        Schema::drop('citynexus_file');
+        Schema::drop('citynexus_files');
     }
 }

@@ -31,7 +31,7 @@ class FileController extends Controller
         $file = File::create($request->all());
         $version = FileVersion::create([
             'added_by'  => Auth::getUser()->id,
-            'size'      => $request->get('size'),
+            'size'      => $request->get('size') / 1000,
             'type'      => $request->get('type'),
             'source'    => $request->get('source'),
             'file_id'   => $file->id

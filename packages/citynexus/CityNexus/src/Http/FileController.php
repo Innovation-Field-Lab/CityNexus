@@ -62,7 +62,7 @@ class FileController extends Controller
 
     public function getDownload($id)
     {
-        return response()->download(File::find($id)->current->source);
+        return redirect(File::find($id)->current->source);
     }
 
     public function getUploader(Request $request)

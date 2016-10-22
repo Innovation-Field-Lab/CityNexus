@@ -103,7 +103,7 @@ return compact('url', 'inputs');
     </form>
     <form action="{{action('\CityNexus\CityNexus\Http\FileController@postUpload')}}" method="post">
         {!! csrf_field() !!}
-        <label for="caption">Image Caption</label>
+        <label for="caption">File Name</label>
         <input type="text" class="form-control" name="caption">
 
         <input type="hidden" name="size" id="size" value="">
@@ -115,7 +115,7 @@ return compact('url', 'inputs');
         <input type="hidden" name="source" id="source">
 
         <br><br>
-        <input type="submit" id="image_submit" class="btn btn-default disabled" value="Save Image">
+        <input type="submit" id="file_submit" class="btn btn-default disabled" value="Save File">
     </form>
     <!-- This area will be filled with our results (mainly for debugging) -->
 

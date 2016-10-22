@@ -4,6 +4,8 @@ namespace CityNexus\CityNexus\Http;
 
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
+use CityNexus\CityNexus\File;
+use CityNexus\CityNexus\FileVersion;
 use CityNexus\CityNexus\Image;
 use CityNexus\CityNexus\Property;
 use CityNexus\CityNexus\DatasetQuery;
@@ -22,17 +24,27 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
 
-class ImageController extends Controller
+class FileController extends Controller
 {
     public function postUpload(Request $request)
     {
-        Image::create($request->all());
+        $file = File::create($request->all());
+        $version = FileVersion::create([
+            'added_by'  => Auth::getUser()->id,
+            'size'      => $request->get('size'),
+            'type'      => $request->get('type'),
+            'source'    => $request->get('source'),
+            'file_id'   => $file->id
+        ]);
+        $file->version_id = $version->id;
+        $file->save();
+
         return redirect()->back();
     }
 
     public function getDelete($id, Request $request)
     {
-        Image::find($id)->delete();
+        File::find($id)->delete();
         if($request->isJson())
         {
             return response();
@@ -45,7 +57,12 @@ class ImageController extends Controller
 
     public function getShow($id)
     {
-        return Image::find($id);
+        return File::find($id)->getFile();
+    }
+
+    public function getDownload($id)
+    {
+        return response()->download(File::find($id)->current->source);
     }
 
     public function getUploader(Request $request)
@@ -53,9 +70,9 @@ class ImageController extends Controller
         if(null != $request->get('property_id'))
         {
             $property_id = $request->get('property_id');
-            return view('citynexus::image.uploader', compact('property_id'));
+            return view('citynexus::file.uploader', compact('property_id'));
         }
 
-        return view('citynexus::image.uploader');
+        return view('citynexus::file.uploader');
     }
 }

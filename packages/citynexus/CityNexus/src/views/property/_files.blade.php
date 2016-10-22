@@ -1,12 +1,38 @@
-@if($property->images->count() > 0)
+@if($property->files->count() > 0)
 <div class="panel panel-default">
     <div class="panel-heading">
-        <span class="panel-title">Images</span>
+        <span class="panel-title">Files</span>
     </div>
     <div class="panel-body">
         <div class="list-group">
-            @foreach($property->images as $image)
-                <div class="list-group-item" onclick="showImage({{$image->id}})" style="cursor: pointer"><i class="fa fa-image"></i> {{$image->caption}} ({{$image->created_at->diffForHumans()}})</div>
+            @foreach($property->files as $file)
+
+                    <?php
+                        if($file->current != null)
+                            {
+                                $type = $file->current->type;
+                            }
+                    ?>
+                    @if($type)
+                        <div class="list-group-item" @if(substr($type, 0, 6) == 'image/') onclick="showImage({{$file->id}})" @else onclick="downloadFile({{$file->id}})" @endif style="cursor: pointer">
+                        @if(
+                        $type == 'application/pdf' ||
+                        $type == 'application/x-pdf'
+                        )
+                            <i class="fa fa-file-pdf-o"> </i>
+                        @elseif(substr($type, 0, 6) == 'image/')
+                            <i class="fa fa-image-o"> </i>
+                        @elseif($type == 'application/msword')
+                            <i class="fa fa-file-word-o"> </i>
+                        @elseif($type == 'application/mspowerpoint')
+                            <i class="fa fa-file-powerpoint-o"> </i>
+                        @elseif($type == 'application/msexcel')
+                            <i class="fa fa-file-excel-o"> </i>
+                        @else
+                        <i class="fa fa-file"></i>
+                        @endif
+                        {{$file->caption}} ({{$file->updated_at->diffForHumans()}})</div>
+                    @endif
             @endforeach
         </div>
     </div>
@@ -21,7 +47,6 @@
 
 <?php
 
-// TODO Enter your bucket and region details (see details below)
 $s3FormDetails = getS3Details(env('S3_BUCKET'), env('S3_REGION'));
 
 
@@ -105,12 +130,12 @@ function getS3Details($s3Bucket, $region, $acl = 'private') {
 ?>
 
 <script>
-    function addImage()
+    function addFile()
     {
         $.ajax({
-            url: "{{action('\CityNexus\CityNexus\Http\ImageController@getUploader')}}?property_id={{$property->id}}",
+            url: "{{action('\CityNexus\CityNexus\Http\FileController@getUploader')}}?property_id={{$property->id}}",
         }).success(function(data){
-            var title = 'Image Upload';
+            var title = 'File Upload';
             triggerModal(title, data);
 
                 // Assigned to variable for later use.
@@ -120,6 +145,9 @@ function getS3Details($s3Bucket, $region, $acl = 'private') {
                 // Place any uploads within the descending folders
                 // so ['test1', 'test2'] would become /test1/test2/filename
                 var folders = [];
+
+                var size;
+                var type;
 
                 form.fileupload({
                     url: form.attr('action'),
@@ -138,6 +166,9 @@ function getS3Details($s3Bucket, $region, $acl = 'private') {
                         var filename = Date.now() + '.' + file.name.split('.').pop();
                         form.find('input[name="Content-Type"]').val(file.type);
                         form.find('input[name="key"]').val((folders.length ? folders.join('/') + '/' : '') + filename);
+
+                        size = file.size;
+                        type = file.type;
 
                         // Actually submit to form to S3.
                         data.submit();
@@ -168,11 +199,15 @@ function getS3Details($s3Bucket, $region, $acl = 'private') {
                         var original = data.files[0];
                         var s3Result = data.result.documentElement.children;
                         filesUploaded.push(s3Result[0].innerHTML);
+
                         $('#source').val(filesUploaded);
+                        $('#size').val(size);
+                        $('#type').val(type);
 
 
-                        $('#image_submit').removeClass('btn-default disabled');
-                        $('#image_submit').addClass('btn-success');
+
+                        $('#file_submit').removeClass('btn-default disabled');
+                        $('#file_submit').addClass('btn-success');
                     }
                 });
         })
@@ -181,17 +216,21 @@ function getS3Details($s3Bucket, $region, $acl = 'private') {
     function showImage(id)
     {
         $.ajax({
-            url: '{{action('\CityNexus\CityNexus\Http\ImageController@getShow')}}/' + id,
+            url: '{{action('\CityNexus\CityNexus\Http\FileController@getShow')}}/' + id,
         }).success(function(data){
-            var image = '<a href="' + data.source + '" target="_blank"><img style="max-width: 90%" class="model_image" src="' + data.source + '"/></a>'+
+            var file = '<a href="' + data.source + '" target="_blank"><img style="max-width: 90%" class="model_file" src="' + data.source + '"/></a>'+
                     @can('citynexus', ['property', 'delete'])
-                    '<br><a class="pull-right" href="/citynexus/image/delete/' + id + '">' +
+                    '<br><a class="pull-right" href="/citynexus/file/delete/' + id + '">' +
                     '<i class="fa fa-trash"></i> </a>' +
                     @endcan
                 '<p>' + data.description + '</p>';
-            triggerModal(data.caption, image);
+            triggerModal(data.caption, file);
 
         });
+    }
+    
+    function downloadFile(id) {
+        window.open("{{action('\CityNexus\CityNexus\Http\FileController@getDownload')}}/" + id);
     }
 
 </script>

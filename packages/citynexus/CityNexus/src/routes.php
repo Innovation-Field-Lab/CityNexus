@@ -73,7 +73,7 @@ Route::group(['middleware' => 'auth', 'prefix' => config('citynexus.root_directo
     Route::controller('/reports', 'CityNexus\CityNexus\Http\ReportController');
     Route::controller('/property', 'CityNexus\CityNexus\Http\PropertyController');
     Route::controller('/task', 'CityNexus\CityNexus\Http\TaskController');
-    Route::controller('/image', 'CityNexus\CityNexus\Http\ImageController');
+    Route::controller('/file', 'CityNexus\CityNexus\Http\FileController');
     Route::controller('/widget', 'CityNexus\CityNexus\Http\WidgetController');
     Route::controller('/dataset', 'CityNexus\CityNexus\Http\DatasetController');
     Route::controller('/', 'CityNexus\CityNexus\Http\CitynexusController');

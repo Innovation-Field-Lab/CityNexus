@@ -1,7 +1,5 @@
 <?php
 
-
-// TODO Enter your bucket and region details (see details below)
 $s3FormDetails = getS3Details(env('S3_BUCKET'), env('S3_REGION'));
 
 
@@ -94,20 +92,23 @@ return compact('url', 'inputs');
         <input type="hidden" name="<?php echo $name; ?>" value="<?php echo $value; ?>">
         <?php } ?>
 
-                <!-- Key is the file's name on S3 and will be filled in with JS -->
         <input type="hidden" name="key" value="">
+
+        <!-- Key is the file's name on S3 and will be filled in with JS -->
         <input type="file" name="file" multiple>
 
         <!-- Progress Bars to show upload completion percentage -->
         <div class="progress-bar-area progress-bar-striped" style="height: 25px"></div>
             <textarea class="hidden" id="uploaded"></textarea>
-
-
     </form>
-    <form action="{{action('\CityNexus\CityNexus\Http\ImageController@postUpload')}}" method="post">
+    <form action="{{action('\CityNexus\CityNexus\Http\FileController@postUpload')}}" method="post">
         {!! csrf_field() !!}
         <label for="caption">Image Caption</label>
         <input type="text" class="form-control" name="caption">
+
+        <input type="hidden" name="size" id="size" value="">
+        <input type="hidden" name="type" id="type" value="">
+
         <label for="description">Description</label>
         <textarea name="description" id="description"  class="form-control" rows="5"></textarea>
         @if(isset($property_id))<input type="hidden" name="property_id" value="{{$property_id}}">@endif

@@ -13,7 +13,7 @@ $section = 'help';
             </div>
             <div class="panel-body">
 
-                <form action="{{action('\CityNexus\CityNexus\Http\CitynexusController@postSubmitTicket')}}" class="form-horizontal" method="post">
+                <form action="{{action('\CityNexus\CityNexus\Http\HelpController@postSubmitTicket')}}" class="form-horizontal" method="post">
                     {!! csrf_field() !!}
                     <div class="form-group">
                         <label for="ticket_type" class="control-label col-sm-4">Ticket Type</label>

@@ -84,7 +84,7 @@ Route::group(['middleware' => 'auth', 'prefix' => config('citynexus.root_directo
 
 Route::group(['middleware' => 'auth', 'prefix' => config('citynexus.tabler_root') ], function() {
 
-Route::controller('/', 'CityNexus\CityNexus\Http\TablerController');
+    Route::controller('/', 'CityNexus\CityNexus\Http\TablerController');
 
 });
 

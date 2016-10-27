@@ -33,26 +33,6 @@ class CitynexusController extends Controller
         return view('citynexus::email.email-template');
     }
 
-    public function getSubmitTicket(Request $request)
-    {
-        $referer = $request->server->get('HTTP_REFERER');
-        return view('citynexus::help.new_ticket', compact('referer'));
-    }
-
-    public function postSubmitTicket(Request $request)
-    {
-        $user = Auth::getUser();
-
-        Mail::send('citynexus::email.submit_ticket', ['request' => $request, 'user' => $user], function ($m) use ($request, $user) {
-            $m->from($user->email, $user->fullname());
-            $m->to("citynexusorgsupport@citynexussupport.freshdesk.com", "Help Desk")->subject($request->get('subject'));
-        });
-
-        Session::flash('flash_success', 'Ticket successfully submitted.');
-
-        return redirect('/');
-    }
-
     /**
      * @param Request $request
      *                  - to: email address

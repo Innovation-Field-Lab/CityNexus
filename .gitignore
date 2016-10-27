@@ -4,3 +4,4 @@ Homestead.yaml
 Homestead.json
 .env
 /.idea
+resources/views/vendor/citynexus/master/main.blade.php

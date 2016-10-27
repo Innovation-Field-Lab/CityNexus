@@ -22,13 +22,31 @@ class SearchController extends Controller
 
         if(Property::where('full_address', 'LIKE', $query)->count() != 1)
         {
-            $results = Property::where('full_address', 'LIKE', $query)->orderBy('full_address')->paginate(25);
-            return view('citynexus::search.results', compact('results'));
+
+            // if ajax
+            if($request->ajax())
+            {
+                return Property::where('full_address', 'LIKE', $query)->orderBy('full_address')->get();
+            }
+            else
+            {
+                $results = Property::where('full_address', 'LIKE', $query)->orderBy('full_address')->paginate(25);
+
+                return view('citynexus::search.results', compact('results'));
+            }
         }
         else
         {
-            $property = Property::where('full_address', 'LIKE', $query)->first();
-            return redirect(action('\CityNexus\CityNexus\Http\PropertyController@getShow', ['id' => $property->id]));
+            // if ajax
+            if($request->ajax())
+            {
+                return Property::where('full_address', 'LIKE', $query)->first();
+            }
+            else
+            {
+                $property = Property::where('full_address', 'LIKE', $query)->first();
+                return redirect(action('\CityNexus\CityNexus\Http\PropertyController@getShow', ['id' => $property->id]));
+            }
         }
     }
     public function getQuery(Request $request)

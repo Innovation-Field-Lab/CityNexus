@@ -21,7 +21,7 @@
                         <div class="list-group-item well">Score Elements</div>
                         @foreach(json_decode($score->elements, true) as $element)
                             @include('citynexus::risk-score.element')
-                            @endforeach
+                        @endforeach
                     </div>
                     <input type="submit" class="btn btn-primary" value="Save Score">
                 </form>

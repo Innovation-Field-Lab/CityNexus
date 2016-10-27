@@ -18,7 +18,13 @@
             <div class="label label-default">{{$element['result']}}</div>
 
         @endif
-
+    @elseif(isset($element['scope']) && $element['scope'] == 'tag')
+        @if($element['score_type'] == 'ignore')
+            Remove all scores tagged <div class="label label-default">{{ucwords(\CityNexus\CityNexus\Tag::find($element['tag_id'])->tag)}}</div>.
+        @else
+            For all properties currently tagged <div class="label label-default">{{ucwords(\CityNexus\CityNexus\Tag::find($element['tag_id'])->tag)}}</div>
+            {{$element['score_type']}} <div class="label label-default">{{$element["factor"]}}</div> @if($element['score_type'] == 'add') to @else from @endif score.
+        @endif
     @else
     @if($element['function'] == 'func')
 

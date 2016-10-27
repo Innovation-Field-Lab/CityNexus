@@ -45,7 +45,7 @@ $section = 'properties';
             <div class="col-sm-8">
                 @include('citynexus::property._datasets')
 
-                @include('citynexus::property._images')
+                @include('citynexus::property._files')
 
                 @include('citynexus::property._notes')
             </div>
@@ -54,7 +54,7 @@ $section = 'properties';
                     <button type="button" class="btn btn-primary dropdown-toggle waves-effect col-sm-12" data-toggle="dropdown" aria-expanded="false"> Property Actions <span class="caret"></span> </button>
                     <br><br>
                     <ul class="dropdown-menu">
-                        <li><a onclick="addImage()"> Add Image</a></li>
+                        <li><a onclick="addFile()"> Add File</a></li>
                         <li><a onclick="addTask()">Add Task</a></li>
                         @can('citynexus', ['property', 'edit'])<li><a onclick="editAddress()">Edit Address</a></li>@endcan
                         <li><a href="{{action('\CityNexus\CityNexus\Http\TablerController@getMergeRecords')}}/{{$property->id}}">Merge Property</a></li>

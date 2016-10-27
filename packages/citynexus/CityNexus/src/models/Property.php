@@ -54,9 +54,9 @@ class Property extends Model
         return $this->morphToMany('\CityNexus\CityNexus\Task', 'citynexus_taskable');
     }
 
-    public function images()
+    public function files()
     {
-        return $this->hasMany('\CityNexus\CityNexus\Image')->orderBy('created_at', 'DESC');
+        return $this->hasMany('\CityNexus\CityNexus\File')->orderBy('created_at', 'DESC');
     }
 
 //    public function getFullAddressAttribute()

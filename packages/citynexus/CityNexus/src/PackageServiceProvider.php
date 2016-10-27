@@ -59,7 +59,8 @@ class PackageServiceProvider extends ServiceProvider
         include_once __DIR__ . '/models/Location.php';
         include_once __DIR__ . '/models/View.php';
         include_once __DIR__ . '/models/Task.php';
-        include_once __DIR__ . '/models/Image.php';
+        include_once __DIR__ . '/models/File.php';
+        include_once __DIR__ . '/models/FileVersion.php';
         include_once __DIR__ . '/models/RawAddress.php';
         include_once __DIR__ . '/models/Widget.php';
         include_once __DIR__ . '/models/Uploader.php';

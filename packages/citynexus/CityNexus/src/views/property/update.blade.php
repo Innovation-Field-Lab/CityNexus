@@ -13,7 +13,7 @@
 
         <div class="col-sm-9">
             <input type="text" class="form-control address" id="update_street_name" name="street_name"
-                   value="{{$property->street_name}}" onchange="updateFullAddress()">
+                   value="{{ucwords($property->street_name)}}" onchange="updateFullAddress()">
         </div>
     </div>
     <div class="form-group">

@@ -95,7 +95,6 @@ class PropertyController extends Controller
         $this->validate($request, [
             'house_number' => 'integer|required',
             'street_name' => 'max:150|required',
-            'street_type' => 'required',
             'unit' => 'max:50',
             'full_address' => 'max:255'
         ]);

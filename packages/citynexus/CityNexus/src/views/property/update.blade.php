@@ -40,6 +40,7 @@
                 <option value="square" @if($property->street_type == 'square') selected @endif>Square</option>
                 <option value="terrace" @if($property->street_type == 'terrace') selected @endif>Terrace</option>
                 <option value="way" @if($property->street_type == 'way') selected @endif>Way</option>
+                <option value="">None</option>
             </select>
         </div>
     </div>

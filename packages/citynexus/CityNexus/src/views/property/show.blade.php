@@ -56,17 +56,9 @@ $section = 'properties';
                     <ul class="dropdown-menu">
                         <li><a onclick="addFile()"> Add File</a></li>
                         <li><a onclick="addTask()">Add Task</a></li>
-                        @can('citynexus', ['property', 'edit'])<li><a onclick="editAddress()">Edit Address</a></li>@endcan
+                        @can('citynexus', ['properties', 'edit'])<li><a onclick="editAddress()">Edit Address</a></li>@endcan
                         <li><a href="{{action('\CityNexus\CityNexus\Http\TablerController@getMergeRecords')}}/{{$property->id}}">Merge Property</a></li>
-                        @can('citynexus', ['property', 'delete'])<li><a href="{{action('\CityNexus\CityNexus\Http\PropertyController@getDelete', ['id' => $property->id])}}/{{$property->id}}"><i class="fa fa-trash"></i> Delete Property</a></li>@endcan
-                        @if($reports != null)
-                            @can('superuser')
-                            <li><b>Reports</b></li>
-                            @foreach($reports as $i)
-                                <li><a href="{{action('\CityNexus\CityNexus\Http\ReportController@getPropertyReport', [$i->id, $property->id])}}" target="_blank">{{$i->name}}</a></li>
-                            @endforeach
-                            @endcan
-                        @endif
+                        @can('citynexus', ['properties', 'delete'])<li><a href="{{action('\CityNexus\CityNexus\Http\PropertyController@getDelete', ['id' => $property->id])}}/{{$property->id}}"><i class="fa fa-trash"></i> Delete Property</a></li>@endcan
                     </ul>
                 </div>
                 @if($property->location_id != null && 'local' != env('APP_ENV'))

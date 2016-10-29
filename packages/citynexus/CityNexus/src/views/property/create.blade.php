@@ -49,7 +49,7 @@ $section = 'properties';
                             <select name="street_type" id="street_type" class="form-control address" onchange="updateFullAddress()">
                                 <option value="">Select One</option>
                                 <option value="alley" @if(old('street_type') == 'alley') selected @endif>Alley</option>
-                                <option value="avenue" @if(old('street_type') == 'aveneu') selected @endif>Avenue</option>
+                                <option value="avenue" @if(old('street_type') == 'avenue') selected @endif>Avenue</option>
                                 <option value="boulevard" @if(old('street_type') == 'boulevard') selected @endif>Boulevard</option>
                                 <option value="circle" @if(old('street_type') == 'circle') selected @endif>Circle</option>
                                 <option value="court" @if(old('street_type') == 'court') selected @endif>Court</option>
@@ -65,6 +65,7 @@ $section = 'properties';
                                 <option value="square" @if(old('street_type') == 'square') selected @endif>Square</option>
                                 <option value="terrace" @if(old('street_type') == 'terrace') selected @endif>Terrace</option>
                                 <option value="way" @if(old('street_type') == 'way') selected @endif>Way</option>
+                                <option value="">None</option>
                             </select>
                         </div>
                     </div>

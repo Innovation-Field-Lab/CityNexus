@@ -13,7 +13,7 @@
 
         <div class="col-sm-9">
             <input type="text" class="form-control address" id="update_street_name" name="street_name"
-                   value="{{$property->street_name}}" onchange="updateFullAddress()">
+                   value="{{ucwords($property->street_name)}}" onchange="updateFullAddress()">
         </div>
     </div>
     <div class="form-group">
@@ -40,6 +40,7 @@
                 <option value="square" @if($property->street_type == 'square') selected @endif>Square</option>
                 <option value="terrace" @if($property->street_type == 'terrace') selected @endif>Terrace</option>
                 <option value="way" @if($property->street_type == 'way') selected @endif>Way</option>
+                <option value="">None</option>
             </select>
         </div>
     </div>

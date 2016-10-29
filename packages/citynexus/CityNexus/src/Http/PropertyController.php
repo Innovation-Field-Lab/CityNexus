@@ -122,7 +122,7 @@ class PropertyController extends Controller
 
     public function postUpdate($id, Request $request)
     {
-        $this->authorize('citynexus', ['property', 'edit']);
+        $this->authorize('citynexus', ['properties', 'edit']);
         $this->validate($request, [
             'house_number' => 'max:20|required',
             'street_name' => 'max:250|required',
@@ -137,7 +137,7 @@ class PropertyController extends Controller
 
     public function getDelete($id)
     {
-        $this->authorize('citynexus', ['property', 'delete']);
+        $this->authorize('citynexus', ['properties', 'delete']);
         try
         {
             Property::find($id)->delete();

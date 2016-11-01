@@ -47,7 +47,7 @@
                     <div class="panel-heading " role="tab" id="{{preg_replace('/\s+/', '_', $key)}}_heading">
                         <h4 class="panel-title">
                             <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#{{preg_replace('/\s+/', '_', $key)}}_detail" aria-expanded="false" aria-controls="collapseTwo">
-                                {{$tables->find($key)->table_title}}
+                                {{$tables->find($key)->table_title}} ({{ count($dataset) }})
                             </a>
                         </h4>
                     </div>

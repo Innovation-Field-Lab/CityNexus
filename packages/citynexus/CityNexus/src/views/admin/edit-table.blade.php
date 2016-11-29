@@ -47,16 +47,23 @@
                 </tr>
                 <tbody>
                 @foreach($table as $row)
-                    <tr>
+
+
+                        <tr>
                         <td>
+                        @if(isset($row->id))
+
                         <div class="btn-group">
                             <button type="button" class="btn btn-default dropdown-toggle waves-effect" data-toggle="dropdown" aria-expanded="false"> Actions <span class="caret"></span> </button>
                             <ul class="dropdown-menu">
                                 @can('citynexus', ['dataset', 'relink'])<li><a href="{{action('\CityNexus\CityNexus\Http\TablerController@getRelinkRecord', [$table_name, $row->id])}}">Unlink</a></li> @endcan
                                 @can('citynexus', ['dataset', 'edit'])<li><a href="{{action('\CityNexus\CityNexus\Http\AdminController@getProcessData', [$table_name, $row->id])}}">Process Row</a></li> @endcan
                                 @can('citynexus', ['dataset', 'delete'])<li> <a href="/{{config('citynexus.root_directory')}}/admin/remove-data?table_name={{$table_name}}&row_id={{$row->id}}&_token={{csrf_token()}}">Delete </a></li>@endcan
+
                             </ul>
                         </div>
+                        @endif
+
                         </td>
                         @foreach($row as $item)
                             <td>

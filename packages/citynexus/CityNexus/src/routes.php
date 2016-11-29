@@ -48,6 +48,7 @@ Route::post('/activate-account', function()
             $user->fill([
                 'password' => Hash::make($password)
             ])->save();
+            $user->save();
 
             \Illuminate\Support\Facades\Auth::loginUsingId( $user->id );
 

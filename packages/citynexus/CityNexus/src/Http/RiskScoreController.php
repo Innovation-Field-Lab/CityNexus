@@ -473,7 +473,7 @@ class RiskScoreController extends Controller
             }
 
 
-            if ($updated_score !== null) {
+            if ($updated_score !== null && $i['property_id'] != null) {
                 $upload[] = [
                     'property_id' => $i['property_id'],
                     'score' => $updated_score,
@@ -481,7 +481,6 @@ class RiskScoreController extends Controller
             }
 
         }
-
 
         DB::table('citynexus_scores_' . $score_id)->truncate();
         DB::table('citynexus_scores_' . $score_id)->insert($upload);

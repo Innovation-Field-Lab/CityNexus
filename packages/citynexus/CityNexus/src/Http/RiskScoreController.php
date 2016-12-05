@@ -536,6 +536,7 @@ class RiskScoreController extends Controller
 
         // Process each property ID
         foreach ($sortedvalues as $pid => $values) {
+
             // process each value for the property
             foreach ($values as $value) {
                 // Check that the pid exists, if not create a record for it
@@ -546,7 +547,7 @@ class RiskScoreController extends Controller
                 // add new score to existing score
                 $new_score = $scores[$pid]['score'] + $scorebuilder->calcElement($value, $element);
 
-                // if new_score is null, create a place holder score
+                // if new_score is not null, create a place holder score
                 if ($new_score !== null) {
                     $scores[$pid] = [
                         'property_id' => $pid,
@@ -557,6 +558,7 @@ class RiskScoreController extends Controller
 
             }
         }
+
         DB::table('citynexus_scores_' . $score_id)->truncate();
         DB::table('citynexus_scores_' . $score_id)->insert($scores);
     }

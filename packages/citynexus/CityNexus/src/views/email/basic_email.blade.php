@@ -1,5 +1,5 @@
 <!-- resources/views/emails/activate.blade.php -->
-@extends("email.email-template")
+@extends("citynexus::email.email-template")
 
 @section("content")
 

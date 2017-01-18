@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use CityNexus\CityNexus\Geocode;
 use CityNexus\CityNexus\Table;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\View;
 class ReportController extends Controller
@@ -92,4 +93,60 @@ class ReportController extends Controller
         }
         return $return;
     }
+
+    public function getPivotIndex(Request $request)
+    {
+        $table = $request->get('table');
+        $field = $request->get('field');
+
+        $properties = DB::table($table)
+            ->join('citynexus_properties', $table . '.property_id', '=', 'citynexus_properties.id')
+            ->get();
+
+        $results = [];
+        foreach ($properties as $property)
+        {
+
+            $results[$property->$field][$property->id] = $property;
+        }
+
+
+        return view('citynexus::reports.pivots.index', compact('results', 'field', 'table'));
+    }
+    public function getPivotProfile(Request $request)
+    {
+        $table = $request->get('table');
+        $field = $request->get('field');
+        $owner = $request->get('owner');
+
+        $pids = DB::table($table)
+            ->where($field, $owner)
+            ->lists('property_id');
+
+        $properties = Property::find($pids);
+
+        $pscores = [];
+
+        $scores = Score::all();
+
+        $result = null;
+        foreach($pids as $i)
+        {
+            foreach($scores as $score)
+            {
+                if(Schema::hasTable('citynexus_scores_' . $score->id))
+                {
+                    $result = DB::table('citynexus_scores_' . $score->id)->where('property_id', $i)->get();
+                }
+                if($result != null)
+                {
+                    $pscores[$i][$score->id] = $result;
+                }
+            }
+
+        }
+
+        return view('citynexus::reports.pivots.profile', compact('properties', 'owner', 'pscore'));
+    }
+
 }

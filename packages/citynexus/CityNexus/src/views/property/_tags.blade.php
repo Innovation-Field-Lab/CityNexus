@@ -11,6 +11,18 @@
             @endforelse
             <div class="hidden" id="pending"><i class="glyphicon glyphicon-refresh"></i></div>
         </div>
+
+        @if($property->trashedTags->count() > 0)
+
+            <div class="btn btn-xs btn-default" id="show-trash" onclick="$('#property_trash_tags').removeClass('hidden'); $('#show-trash').addClass('hidden'); ">View Deleted Tags</div>
+
+            <div class="list-group hidden" id="property_trash_tags">
+                @foreach($property->trashedTags as $tag)
+                    @include('citynexus::property._trash_tag')
+                @endforeach
+            </div>
+        @endif
+
     </div>
     <div class="panel-footer">
         <div id="new-tag-input">

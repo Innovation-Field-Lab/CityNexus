@@ -27,7 +27,7 @@ class RiskScoreController extends Controller
     public function getIndex()
     {
         $this->authorize('citynexus', ['group' => 'scores', 'method' => 'view']);
-        $scores = Score::all();
+        $scores = Score::orderBy('name')->get();
         return view('citynexus::risk-score.index')
             ->with('scores', $scores);
     }

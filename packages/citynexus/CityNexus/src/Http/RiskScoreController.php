@@ -27,7 +27,7 @@ class RiskScoreController extends Controller
     public function getIndex()
     {
         $this->authorize('citynexus', ['group' => 'scores', 'method' => 'view']);
-        $scores = Score::all();
+        $scores = Score::orderBy('name')->get();
         return view('citynexus::risk-score.index')
             ->with('scores', $scores);
     }
@@ -321,7 +321,8 @@ class RiskScoreController extends Controller
                 {
                     $ignore_ids[$id] = false;
                 }
-            unset($elements[$k]);
+
+                unset($elements[$k]);
             }
         }
 
@@ -459,9 +460,10 @@ class RiskScoreController extends Controller
 
         $new_score = array();
         foreach ($values as $value) {
-            $scores[$value->property_id] = ['score' => null, 'property_id' => $value->property_id];
-
-            $new_score[$value->property_id] = $scorebuilder->calcElement($value->$key, $element);
+            if(isset($scores[$value->property_id]))
+            {
+                $new_score[$value->property_id] = $scorebuilder->calcElement($value->$key, $element);
+            }
         }
 
         foreach ($scores as $i) {
@@ -537,25 +539,27 @@ class RiskScoreController extends Controller
         // Process each property ID
         foreach ($sortedvalues as $pid => $values) {
 
-            // process each value for the property
-            foreach ($values as $value) {
-                // Check that the pid exists, if not create a record for it
-                if (!isset($scores[$pid])) {
-                    break;
+            if(isset($scores[$pid]))
+            {
+                // process each value for the property
+                foreach ($values as $value) {
+                    // Check that the pid exists, if not create a record for it
+                    if (!isset($scores[$pid])) {
+                        break;
+                    }
+
+                    // add new score to existing score
+                    $new_score = $scores[$pid]['score'] + $scorebuilder->calcElement($value, $element);
+
+                    // if new_score is not null, create a place holder score
+                    if ($new_score !== null) {
+                        $scores[$pid] = [
+                            'property_id' => $pid,
+                            'score' => $new_score,
+                        ];
+
+                    }
                 }
-
-                // add new score to existing score
-                $new_score = $scores[$pid]['score'] + $scorebuilder->calcElement($value, $element);
-
-                // if new_score is not null, create a place holder score
-                if ($new_score !== null) {
-                    $scores[$pid] = [
-                        'property_id' => $pid,
-                        'score' => $new_score,
-                    ];
-
-                }
-
             }
         }
 

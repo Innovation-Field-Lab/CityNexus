@@ -36,7 +36,12 @@ class Property extends Model
 
     public function tags()
     {
-        return $this->belongsToMany('\CityNexus\CityNexus\Tag', 'property_tag')->whereNull('property_tag.deleted_at')->withTimestamps()->withPivot('created_by');
+        return $this->belongsToMany('\CityNexus\CityNexus\Tag', 'property_tag')->whereNull('property_tag.deleted_at')->orderBy('property_tag.created_at', 'desc')->withTimestamps()->withPivot('created_by');
+    }
+
+    public function trashedTags()
+    {
+        return $this->belongsToMany('\CityNexus\CityNexus\Tag', 'property_tag')->whereNotNull('property_tag.deleted_at')->orderBy('property_tag.deleted_at', 'desc')->withTimestamps()->withPivot('created_by', 'deleted_by', 'deleted_at');
     }
 
     public function allTags()

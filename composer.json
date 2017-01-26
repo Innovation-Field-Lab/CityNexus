@@ -20,7 +20,9 @@
         "doctrine/dbal": "*",
         "graham-campbell/dropbox": "^3.3",
         "guzzlehttp/guzzle": "~5.3|~6.0",
-        "anlutro/curl": "^1.4"
+        "anlutro/curl": "^1.4",
+        "oefenweb/statistics": "^1.1",
+        "mcordingley/regression": "^2.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

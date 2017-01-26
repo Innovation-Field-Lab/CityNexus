@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "32615d93cb94970c6440f8b403245a30",
-    "content-hash": "12f49db49780ce8f10e004c0cb785435",
+    "hash": "1d5b67303b4087e3441c913b0647399e",
+    "content-hash": "9e1473399a4c04fbdb85b3c2b8c4cce3",
     "packages": [
         {
             "name": "anlutro/curl",
@@ -307,12 +307,12 @@
             "version": "0.12",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Bosnadev/Database.git",
+                "url": "https://github.com/bosnadev/database.git",
                 "reference": "79c4f136bd88cc7b5a84e30cb38a29442d7a46a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Bosnadev/Database/zipball/79c4f136bd88cc7b5a84e30cb38a29442d7a46a7",
+                "url": "https://api.github.com/repos/bosnadev/database/zipball/79c4f136bd88cc7b5a84e30cb38a29442d7a46a7",
                 "reference": "79c4f136bd88cc7b5a84e30cb38a29442d7a46a7",
                 "shasum": ""
             },
@@ -407,6 +407,113 @@
                 "preload"
             ],
             "time": "2015-11-09 22:51:51"
+        },
+        {
+            "name": "composer/installers",
+            "version": "v1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/composer/installers.git",
+                "reference": "d78064c68299743e0161004f2de3a0204e33b804"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/composer/installers/zipball/d78064c68299743e0161004f2de3a0204e33b804",
+                "reference": "d78064c68299743e0161004f2de3a0204e33b804",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.0"
+            },
+            "replace": {
+                "roundcube/plugin-installer": "*",
+                "shama/baton": "*"
+            },
+            "require-dev": {
+                "composer/composer": "1.0.*@dev",
+                "phpunit/phpunit": "4.1.*"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "Composer\\Installers\\Plugin",
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Composer\\Installers\\": "src/Composer/Installers"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kyle Robinson Young",
+                    "email": "kyle@dontkry.com",
+                    "homepage": "https://github.com/shama"
+                }
+            ],
+            "description": "A multi-framework Composer library installer",
+            "homepage": "https://composer.github.io/installers/",
+            "keywords": [
+                "Craft",
+                "Dolibarr",
+                "Hurad",
+                "ImageCMS",
+                "MODX Evo",
+                "Mautic",
+                "OXID",
+                "Plentymarkets",
+                "RadPHP",
+                "SMF",
+                "Thelia",
+                "WolfCMS",
+                "agl",
+                "aimeos",
+                "annotatecms",
+                "attogram",
+                "bitrix",
+                "cakephp",
+                "chef",
+                "cockpit",
+                "codeigniter",
+                "concrete5",
+                "croogo",
+                "dokuwiki",
+                "drupal",
+                "elgg",
+                "expressionengine",
+                "fuelphp",
+                "grav",
+                "installer",
+                "joomla",
+                "kohana",
+                "laravel",
+                "lithium",
+                "magento",
+                "mako",
+                "mediawiki",
+                "modulework",
+                "moodle",
+                "phpbb",
+                "piwik",
+                "ppi",
+                "puppet",
+                "reindex",
+                "roundcube",
+                "shopware",
+                "silverstripe",
+                "symfony",
+                "typo3",
+                "wordpress",
+                "yawik",
+                "zend",
+                "zikula"
+            ],
+            "time": "2016-08-13 20:53:52"
         },
         {
             "name": "danielstjules/stringy",
@@ -2255,6 +2362,95 @@
             "time": "2016-01-22 12:22:23"
         },
         {
+            "name": "mcordingley/linearalgebra",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mcordingley/LinearAlgebra.git",
+                "reference": "c6df25af6e6da18d3392f6de5d7eed1f94594fd5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mcordingley/LinearAlgebra/zipball/c6df25af6e6da18d3392f6de5d7eed1f94594fd5",
+                "reference": "c6df25af6e6da18d3392f6de5d7eed1f94594fd5",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.0.0"
+            },
+            "require-dev": {
+                "codeclimate/php-test-reporter": "dev-master",
+                "phpunit/phpunit": "^5.5.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "MCordingley\\LinearAlgebra\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Cordingley",
+                    "email": "Michael.Cordingley@gmail.com"
+                }
+            ],
+            "description": "Matrix math for PHP.",
+            "keywords": [
+                "linear-algebra",
+                "matrix"
+            ],
+            "time": "2016-11-27 19:22:16"
+        },
+        {
+            "name": "mcordingley/regression",
+            "version": "2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mcordingley/Regression.git",
+                "reference": "220451426f705edea3ac296ef5dc5062b7a7a15e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mcordingley/Regression/zipball/220451426f705edea3ac296ef5dc5062b7a7a15e",
+                "reference": "220451426f705edea3ac296ef5dc5062b7a7a15e",
+                "shasum": ""
+            },
+            "require": {
+                "mcordingley/linearalgebra": "^2.0.0",
+                "php": "^7.0.0"
+            },
+            "require-dev": {
+                "codeclimate/php-test-reporter": "dev-master",
+                "phpunit/phpunit": "^5.5.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "MCordingley\\Regression\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Cordingley",
+                    "email": "Michael.Cordingley@gmail.com"
+                }
+            ],
+            "description": "Regression Package for PHP",
+            "keywords": [
+                "regression",
+                "statistics"
+            ],
+            "time": "2017-01-04 18:28:18"
+        },
+        {
             "name": "monolog/monolog",
             "version": "1.21.0",
             "source": {
@@ -2528,6 +2724,47 @@
                 "php"
             ],
             "time": "2016-04-19 13:41:41"
+        },
+        {
+            "name": "oefenweb/statistics",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Oefenweb/php-statistics.git",
+                "reference": "537b8cbdcb7d2f41618da7aecda12402d9cf7fa8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Oefenweb/php-statistics/zipball/537b8cbdcb7d2f41618da7aecda12402d9cf7fa8",
+                "reference": "537b8cbdcb7d2f41618da7aecda12402d9cf7fa8",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "~1.0",
+                "php": ">=5.4.16"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Oefenweb\\Statistics\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Oefenweb.nl BV team",
+                    "homepage": "https://github.com/Oefenweb/php-statistics/contributors"
+                }
+            ],
+            "description": "Statistics library for PHP",
+            "homepage": "http://github.com/Oefenweb/php-statistics",
+            "keywords": [
+                "statistics"
+            ],
+            "time": "2016-03-23 12:20:23"
         },
         {
             "name": "paragonie/random_compat",

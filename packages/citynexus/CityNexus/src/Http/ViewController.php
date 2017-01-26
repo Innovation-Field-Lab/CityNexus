@@ -53,6 +53,11 @@ class ViewController extends Controller
             case 'Scatter Chart':
                 return redirect(action('\CityNexus\CityNexus\Http\ViewController@getScatterChart', ['view_id' => $id]));
 
+            case 'Dot Map':
+                $table = Table::find($view->setting->table_id);
+                return redirect(action('\CityNexus\CityNexus\Http\ViewController@getDotMap') . "?table=" . $view->setting->table_name . "&key=" . $view->setting->key . '&view_id=' . $id);
+                break;
+
             default:
                 abort(404);
         }
@@ -190,6 +195,173 @@ class ViewController extends Controller
         else{
             return view('citynexus::reports.maps.heatmap', compact('datasets'));
         }
+    }
+
+    public function getDotMap(Request $request)
+    {
+        $this->authorize('citynexus', ['reports', 'view']);
+
+
+        $datasets = Table::whereNotNull('table_title')->orderBy('table_title')->get();
+        $scores = Score::all();
+
+
+        $table = $request->get('table');
+        $key = $request->get('key');
+
+        if($request->get('table') != null && $request->get('key') !=null)
+            return view('citynexus::reports.maps.dotmap', compact('datasets', 'table', 'key', 'scores'));
+
+        else
+            return view('citynexus::reports.maps.dotmap', compact('datasets', 'scores'));
+    }
+
+    public function postDotMap(Request $request)
+    {
+        switch ($request->get('type'))
+        {
+            case 'dataset':
+                return $this->createDataset($request);
+                break;
+
+            case 'datapoint':
+                return $this->createDatapoint($request);
+                break;
+
+            case 'score':
+                return $this->createScoreData($request);
+                break;
+
+            case 'tag':
+                break;
+
+            default:
+                return response(500, 'No such data');
+        }
+    }
+
+    private function createDatapoint($request)
+    {
+
+        $dataset = Table::find($request->get('dataset_id'));
+        $table = $dataset->table_name;
+        $key = $request->get('key');
+
+        $results = DB::table($table)
+            ->where($key, '>', '0')
+            ->orderBy($table . '.created_at')
+            ->join('citynexus_properties', $table . '.property_id', '=', 'citynexus_properties.id')
+            ->select($table . '.' . $key, 'citynexus_properties.id', 'citynexus_properties.full_address', 'citynexus_properties.lat', 'citynexus_properties.long')
+            ->get();
+
+        $max = 0;
+
+        foreach($results as $i)
+        {
+            if($i->lat != null && $i->long != null)
+            {
+                $points[$i->id] = [
+                    'name' => ucwords($i->full_address),
+                    'value' => $i->$key,
+                    'url' => action('\CityNexus\CityNexus\Http\PropertyController@getShow', [$i->id]),
+                    'lat' => $i->lat,
+                    'lng' => $i->long,
+                ];
+            }
+            if($max < $i->$key) $max = $i->$key;
+        }
+
+        $return['points'] = array_values($points);
+        $return['max'] = $max * 1.1;
+        $return['title'] = $dataset->table_title . " > " . $dataset->schema->$key->name;
+
+        return $return;
+    }
+
+
+    private function createDataset($request)
+    {
+        $dataset = Table::find($request->get('dataset_id'));
+        $table = $dataset->table_name;
+
+        $results = DB::table($table)
+            ->join('citynexus_properties', $table . '.property_id', '=', 'citynexus_properties.id')
+            ->select($table . '.id', 'citynexus_properties.id', 'citynexus_properties.full_address', 'citynexus_properties.lat', 'citynexus_properties.long')
+            ->get();
+
+        $max = 0;
+
+        $points = [];
+
+        foreach($results as $i)
+        {
+
+            if($i->lat != null && $i->long != null)
+            {
+                if(isset($points[$i->id]))
+                {
+                    $points[$i->id]['value'] = $points[$i->id]['value'] + 1;
+                }
+                else{
+                    $points[$i->id] = [
+                        'name' => ucwords($i->full_address),
+                        'value' => 1,
+                        'url' => action('\CityNexus\CityNexus\Http\PropertyController@getShow', [$i->id]),
+                        'lat' => $i->lat,
+                        'lng' => $i->long,
+                    ];
+                }
+                if($max < $points[$i->id]['value']) $max = $points[$i->id]['value'];
+
+            }
+        }
+
+
+        $return['points'] = array_values($points);
+        $return['max'] = $max * 1.1;
+        $return['title'] = 'Record Count: ' . $dataset->table_title;
+
+        return $return;
+    }
+
+    private function createScoreData($request)
+    {
+        $score = Score::find($request->get('id'));
+        $table = 'citynexus_scores_' . $score->id;
+
+        $results = DB::table($table)
+            ->join('citynexus_properties', $table . '.property_id', '=', 'citynexus_properties.id')
+            ->select($table . '.score', 'citynexus_properties.id', 'citynexus_properties.full_address', 'citynexus_properties.lat', 'citynexus_properties.long')
+            ->get();
+
+        $max = 0;
+
+        $points = [];
+
+        foreach($results as $i)
+        {
+
+            if($i->lat != null && $i->long != null)
+            {
+                $points[] = [
+                    'name' => ucwords($i->full_address),
+                    'value' => $i->score,
+                    'url' => action('\CityNexus\CityNexus\Http\PropertyController@getShow', [$i->id]),
+                    'lat' => $i->lat,
+                    'lng' => $i->long,
+                ];
+
+                if($max < $i->score) $max = $i->score;
+
+            }
+        }
+
+
+        $return['points'] = array_values($points);
+        $return['max'] = $max * 1.1;
+        $return['title'] = 'Property Score: ' . $score->name;
+
+        return $return;
     }
 
     // Ajax Calls

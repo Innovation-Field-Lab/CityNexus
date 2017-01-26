@@ -51,6 +51,7 @@
                         <ul class="list-unstyled">
                             <li><a href="{{action('\CityNexus\CityNexus\Http\ViewController@getIndex')}}">Saved Views</a></li>
                             <li role="separator" class="divider"></li>
+                            <li class="@if(isset($pagename) &&  $pagename == 'Dot Map') active @endif"><a href="{{action('\CityNexus\CityNexus\Http\ViewController@getDotMap')}}">Dot Map</a></li>
                             <li class="@if(isset($pagename) &&  $pagename == 'Scatter Chart') active @endif"><a href="{{action('\CityNexus\CityNexus\Http\ViewController@getScatterChart')}}">Scatter Chart Builder</a></li>
                             <li class="@if(isset($pagename) &&  $pagename == 'Bates Distribution') active @endif"><a href="{{action('\CityNexus\CityNexus\Http\ViewController@getDistribution')}}">Distribution Curve Builder</a></li>
                             <li class="@if(isset($pagename) &&  $pagename == 'Heat Map') active @endif"><a href="{{action('\CityNexus\CityNexus\Http\ViewController@getHeatMap')}}">Heat Map Builder</a></li>

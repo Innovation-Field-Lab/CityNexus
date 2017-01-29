@@ -1,0 +1,5 @@
+id,type,size,settings,created_at,updated_at,user_id,name,description
+1,comments,,"{""system_default"":true,""pull_length"":20}","2016-07-25 22:49:21","2016-07-25 22:49:21",,"Recent Comments","Listing of 20 most recently notes"
+2,tags,,"{""system_default"":true,""pull_length"":20}","2016-07-25 22:49:22","2016-07-25 22:49:22",,"Recently Tagged","Listing of 20 most recently tagged properties"
+3,tags,,"{""limit"":""20"",""tag_id"":""13""}","2016-07-25 22:51:20","2016-07-25 22:51:20",,"Code Compliance Issues",
+4,tags,,"{""limit"":""20"",""tag_id"":""11""}","2016-07-25 22:51:50","2016-07-25 22:51:50",,"Beautification Commitee",

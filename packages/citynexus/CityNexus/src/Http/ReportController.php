@@ -1,6 +1,7 @@
 <?php
 namespace CityNexus\CityNexus\Http;
 use App\Http\Controllers\Controller;
+use CityNexus\CityNexus\Export;
 use CityNexus\CityNexus\Property;
 use CityNexus\CityNexus\GenerateScore;
 use CityNexus\CityNexus\Report;
@@ -12,6 +13,9 @@ use CityNexus\CityNexus\Table;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\View;
+use Maatwebsite\Excel\Facades\Excel;
+use Yajra\Datatables\Facades\Datatables;
+
 class ReportController extends Controller
 {
     public function getCreateProperty()
@@ -21,6 +25,46 @@ class ReportController extends Controller
         $tables = new Table();
         return view('citynexus::reports.property.create', compact('datasets', 'tables'));
     }
+
+    public function getExportBuilder()
+    {
+        $datasets = Table::whereNotNull('table_name')->orderBy('table_title')->get();
+        $scores = Score::all();
+        return view('citynexus::reports.export.builder', compact('datasets', 'scores'));
+    }
+
+    public function postExportSave(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required|max:255'
+        ]);
+
+        $export = Export::create($request->all());
+
+        return redirect(action('\CityNexus\CityNexus\Http\ReportController@getRefreshExports', $export->id));
+    }
+
+    public function getExports()
+    {
+        $exports = Export::all();
+        return view('citynexus::reports.export.index', compact('exports'));
+
+    }
+
+    public function getRefreshExport($id)
+    {
+        $export = Export::find($id);
+        $this->buildExport($export);
+        return redirect(action('\CityNexus\CityNexus\Http\ReportController@getExports'));
+
+    }
+
+    public function getDownloadExport($id)
+    {
+        $export = Export::find($id);
+        return response()->download($export->source);
+    }
+
     public function postCreateProperty(Request $request)
     {
         $report = $request->all();
@@ -148,5 +192,286 @@ class ReportController extends Controller
 
         return view('citynexus::reports.pivots.profile', compact('properties', 'owner', 'pscore'));
     }
+
+    private function buildExport($export)
+    {
+
+        $random = '_' . str_random(8);
+        $path = storage_path() . '/' . time() .'-' . $export->name . '.csv';
+
+        $elements = $export->elements;
+        $results = [];
+        if(isset($elements['datasets'])) $results = $this->exportDatasets($elements['datasets'], $results);
+
+        $properties = Property::find(array_keys($results));
+
+        $plist = [];
+
+        foreach ($properties as $property)
+        {
+            $plist[0]['property_id'] = 'property_id';
+            $plist[$property->id]['property_id'] = $property->id;
+
+            if(isset($export->settings['property']['full_address']))
+            {
+                $plist[0]['full_address'] = 'full_address';
+                $plist[$property->id]['full_address'] = $property->full_address;
+            }
+
+            if(isset($export->settings['property']['parsed']))
+            {
+                $plist[0]['house_number'] = 'house_number';
+                $plist[0]['street_name'] = 'street_name';
+                $plist[0]['street_type'] = 'street_type';
+                $plist[0]['unit'] = 'unit';
+                $plist[0]['city'] = 'city';
+                $plist[0]['state'] = 'state';
+                $plist[0]['zip'] = 'zip';
+
+                $plist[$property->id]['house_number'] = $property->house_number;
+                $plist[$property->id]['street_name'] = $property->street_name;
+                $plist[$property->id]['street_type'] = $property->house_number;
+                $plist[$property->id]['unit'] = $property->unit;
+                $plist[$property->id]['city'] = $property->city;
+                $plist[$property->id]['state'] = $property->state;
+                $plist[$property->id]['zip'] = $property->zip;
+            }
+
+            if(isset($export->settings['property']['geocode']))
+            {
+                $plist[0]['lat'] = 'lat';
+                $plist[0]['long'] = 'long';
+
+                $plist[$property->id]['lat'] = $property->lat;
+                $plist[$property->id]['long'] = $property->long;
+            }
+
+        }
+
+        foreach($results as $pid => $result)
+        {
+            $results[$pid] = array_merge($plist[$pid], $results[$pid]);
+        }
+
+        ksort($results);
+
+        $fp = fopen($path, 'w+');
+
+        foreach($results as $row)
+        {
+            fputcsv($fp, $row);
+        }
+
+        fclose($fp);
+
+        $export->source = $path;
+        $export->save();
+
+        return 'success';
+    }
+
+    private function exportDatasets($settings, $results)
+    {
+        $data = [];
+
+        foreach($settings as $key => $elements)
+        {
+            $query = "SELECT citynexus_properties.id, " . $key . ".created_at, ";
+
+            // create list of fields to be selected
+            $fields = [];
+            foreach($elements as $element)
+            {
+                $fields[] = $key . '.' . $element['key'];
+            }
+
+            //clear duplicates
+            $fields = array_unique($fields);
+
+            $i = 0;
+            $len = count($fields);
+
+            foreach($fields as $field)
+            {
+                $query .= $field;
+                if ($i != $len - 1) $query .= ', ';
+                $i++;
+            }
+
+            $query .= ' FROM citynexus_properties ';
+
+            $query .=  'INNER JOIN ' . $key . ' ON citynexus_properties.id = ' . $key . '.property_id ';
+
+            $query .= 'ORDER BY ' . $key . '.created_at';
+
+            $data[$key] = DB::select(DB::raw($query));
+
+        }
+
+        $proceesed = [];
+
+        foreach($data as $key => $item)
+        {
+            foreach($item as $set => $dataset)
+            {
+                foreach($dataset as $k => $i)
+                {
+                    $proceesed[$dataset->id][$key][$set][$k] = $i;
+                }
+            }
+        }
+
+        $csv = [];
+
+        foreach($settings as $table => $element)
+        {
+            foreach($element as $i)
+            {
+                switch ($i['method'])
+                {
+                    case 'most-recent':
+                        $results = $this->processMostRecent($table, $i['key'], $proceesed, $results);
+                        break;
+                    case 'all':
+                        $results = $this->processAll($table, $i['key'], $proceesed, $results);
+                        break;
+                    case 'mean':
+                        $results = $this->processMean($table, $i['key'], $proceesed, $results);
+                        break;
+                    case 'count':
+                        $results = $this->processCount($table, $i['key'], $proceesed, $results);
+                        break;
+                    case 'sum':
+                        $results = $this->processCount($table, $i['key'], $proceesed, $results);
+                        break;
+                }
+            }
+        }
+        return $results;
+    }
+
+    private function processMostRecent($table, $key, $data, $results)
+    {
+        foreach($data as $pid => $datasets)
+        {
+            // Add name to titles
+            $results[0][$table . '_' . $key] = $table . '_' . $key;
+
+            if(isset($datasets[$table]))
+            {
+                $results[$pid][$table . '_' . $key] = current($datasets[$table])[$key];
+            }
+        }
+
+        return $results;
+    }
+
+
+    private function processAll($table, $key, $data, $results)
+    {
+
+        foreach($data as $pid => $datasets)
+        {
+            // Add name to titles
+            $results[0][$table . '_' . $key . '_all'] = $table . '_' . $key . '_all';
+
+            if(isset($datasets[$table]))
+            {
+                foreach($datasets[$table] as $item)
+                {
+                    if(isset($results[$pid][$table . '_' . $key . '_all']))
+                    {
+                        $results[$pid][$table . '_' . $key . '_all'] = $results[$pid][$table . '_' . $key . '_all'] . ', ' . $item[$key];
+                    }
+                    else
+                    {
+                        $results[$pid][$table . '_' . $key . '_all'] = $item[$key];
+                    }
+                }
+            }
+        }
+
+        return $results;
+    }
+
+    private function processMean($table, $key, $data, $results)
+    {
+        foreach($data as $pid => $datasets)
+        {
+            // Add name to titles
+            $results[0][$table . '_' . $key . '_mean'] = $table . '_' . $key . '_mean';
+
+            if(isset($datasets[$table]))
+            {
+                $sample = [];
+                foreach($datasets[$table] as $item)
+                {
+                    if($item[$key] != null)
+                    {
+                        $sample[] = $item[$key];
+                    }
+                }
+                if(count($sample) > 0)
+                {
+                    $results[$pid][$table . '_' . $key . '_mean'] = array_sum($sample) / count($sample);
+                }
+                else
+                {
+                    $results[$pid][$table . '_' . $key . '_mean'] = null;
+                }
+            }
+        }
+
+        return $results;
+    }
+
+    private function processSum($table, $key, $data, $results)
+    {
+        foreach($data as $pid => $datasets)
+        {
+            // Add name to titles
+            $results[0][$table . '_' . $key . '_sum'] = $table . '_' . $key . '_sum';
+
+            if(isset($datasets[$table]))
+            {
+                $sample = [];
+                foreach($datasets[$table] as $item)
+                {
+                    if($item[$key] !== null)
+                    {
+                        $sample[] = $item[$key];
+                    }
+                }
+                $results[$pid][$table . '_' . $key . '_sum'] = array_sum($sample);
+            }
+        }
+
+        return $results;
+    }
+
+    private function processCount($table, $key, $data, $results)
+    {
+        foreach($data as $pid => $datasets)
+        {
+            // Add name to titles
+            $results[0][$table . '_' . $key . '_count'] = $table . '_' . $key . '_count';
+
+            if(isset($datasets[$table]))
+            {
+                $sample = [];
+                foreach($datasets[$table] as $item)
+                {
+                    if($item[$key] !== null)
+                    {
+                        $sample[] = $item[$key];
+                    }
+                }
+                $results[$pid][$table . '_' . $key . '_count'] = count($sample);
+            }
+        }
+
+        return $results;
+    }
+
 
 }

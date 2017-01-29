@@ -50,4 +50,9 @@ class APIController extends Controller
             return response("Permission denied", 505);
         }
     }
+
+    public function getRequest(Request $request)
+    {
+
+    }
 }

@@ -5,6 +5,7 @@ namespace CityNexus\CityNexus\Http;
 use App\Jobs\FakeLocation;
 use App\User;
 use Carbon\Carbon;
+use CityNexus\CityNexus\BackUpTable;
 use CityNexus\CityNexus\CreateRaw;
 use CityNexus\CityNexus\Error;
 use CityNexus\CityNexus\GeocodeJob;
@@ -400,6 +401,17 @@ class AdminController extends Controller
         }
 
         return "that worked";
+    }
+
+    public function getSaveAllTables()
+    {
+        $tables = DB::table('pg_catalog.pg_tables')->get();
+
+        foreach($tables as $table)
+        {
+            if($table->schemaname == 'public') $this->dispatch(new BackUpTable($table->tablename));
+        }
+
     }
 
 }

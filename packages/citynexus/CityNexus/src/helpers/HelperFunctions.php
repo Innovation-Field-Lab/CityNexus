@@ -12,6 +12,3 @@ function setting( $key )
         return $setting->value;
     }
 }
-
-?>
-

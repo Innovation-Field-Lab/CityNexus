@@ -14,6 +14,8 @@ class PackageServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
+
         if (! $this->app->routesAreCached()) {
             require __DIR__ . '/routes.php';
         }
@@ -37,6 +39,7 @@ class PackageServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/migrations/' => database_path('migrations')
         ], 'migrations');
+
 
         // Include Helpers
         include_once __DIR__ . '/helpers/Helper.php';
@@ -65,7 +68,7 @@ class PackageServiceProvider extends ServiceProvider
         include_once __DIR__ . '/models/Widget.php';
         include_once __DIR__ . '/models/Uploader.php';
         include_once __DIR__ . '/models/Report.php';
-
+        include_once __DIR__ . '/models/Export.php';
 
         // Include jobs
         include_once __DIR__ . '/Jobs/UploadData.php';
@@ -74,11 +77,14 @@ class PackageServiceProvider extends ServiceProvider
         include_once __DIR__ . '/Jobs/MergeProps.php';
         include_once __DIR__ . '/Jobs/ProcessData.php';
         include_once __DIR__ . '/Jobs/CreateRaw.php';
+        include_once __DIR__ . '/Jobs/BackUpTable.php';
 
-        // Inluded Policies
+        // Included Policies
         include_once __DIR__ . '/Policies/CityNexusPolicy.php';
 
         include_once __DIR__ . '/helpers/HelperFunctions.php';
+
+
 
     }
 

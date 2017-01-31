@@ -197,7 +197,7 @@ class ReportController extends Controller
     {
 
         $random = '_' . str_random(8);
-        $path = storage_path() . '/' . time() .'-' . $export->name . '.csv';
+        $path = storage_path() . '/export_cache/' . time() .'-' . $export->name . '.csv';
 
         $elements = $export->elements;
         $results = [];

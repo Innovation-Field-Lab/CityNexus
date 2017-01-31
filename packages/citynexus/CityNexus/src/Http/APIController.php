@@ -5,10 +5,13 @@ namespace CityNexus\CityNexus\Http;
 use App\ApiKey;
 use App\User;
 use Carbon\Carbon;
+use CityNexus\CityNexus\APIRequest;
+use CityNexus\CityNexus\Export;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Salaback\Tabler\Table;
 
@@ -53,6 +56,38 @@ class APIController extends Controller
 
     public function getRequest(Request $request)
     {
+        $req = APIRequest::where('request', $request->get('request'))->first();
 
+        switch ($req->settings['type'])
+        {
+            case 'export':
+                return $this->returnExport($req);
+        }
+
+    }
+
+    public function getExport($id = null)
+    {
+        $request = new APIRequest();
+
+        $request->user_id = Auth::id();
+
+        $request->settings = [
+            'type' => 'export',
+            'export_id' => $id,
+        ];
+
+        $request->request = str_random(24);
+
+        $request->save();
+
+        return $request->request;
+    }
+
+    public function returnExport($request)
+    {
+        $export = Export::find($request->settings['export_id']);
+
+        return response()->download($export->source);
     }
 }

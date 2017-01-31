@@ -73,4 +73,9 @@ class User extends Model implements AuthenticatableContract,
         $widgets = Widget::findMany($widgets);
         return $widgets;
     }
+
+    public function api()
+    {
+        return $this->hasOne('\CityNexus\CityNexus\APISecret');
+    }
 }

@@ -66,11 +66,11 @@
                             ],
                             [
                                     'permission' => "Delete Score",
-                                    'key' => 'score'
+                                    'key' => 'delete'
                             ],
                             [
-                                    'permission' => "Export Score",
-                                    'key' => 'score'
+                                    'permission' => "Upload Score",
+                                    'key' => 'upload'
                             ]
                     ]
             ],
@@ -141,6 +141,20 @@
                     ]
             ],
             [
+                    'title' => 'Export',
+                    'key' => 'export',
+                    'permissions' => [
+                            [
+                                    'permission' => "View & Download Exports",
+                                    'key' => 'view'
+                            ],
+                            [
+                                    'permission' => "Create New Exports",
+                                    'key' => 'create'
+                            ]
+                    ]
+            ],
+            [
                     'title' => 'Administrator',
                     'key' => 'admin-rights',
                     'permissions' => [
@@ -157,21 +171,7 @@
                                     'key' => 'edit'
                             ]
                     ]
-            ],
-            [
-                    'title' => 'Export',
-                    'key' => 'export',
-                    'permissions' => [
-                            [
-                                    'permission' => "View & Download Exports",
-                                    'key' => 'view'
-                            ],
-                            [
-                                    'permission' => "Create New Exports",
-                                    'key' => 'create'
-                            ]
-                    ]
-            ],
+            ]
     ]
 
 ?>

@@ -5,3 +5,7 @@ Homestead.json
 .env
 /.idea
 resources/views/vendor/citynexus/master/main.blade.php
+
+storage/export_cache/*
+
+storage/export_cache/1485872065-40U Fines.csv

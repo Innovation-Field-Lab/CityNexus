@@ -54,9 +54,9 @@ class APIController extends Controller
         }
     }
 
-    public function getRequest(Request $request)
+    public function getRequest($request = null)
     {
-        $req = APIRequest::where('request', $request->get('request'))->first();
+        $req = APIRequest::where('request', $request)->first();
 
         switch ($req->settings['type'])
         {
@@ -87,7 +87,7 @@ class APIController extends Controller
     public function returnExport($request)
     {
         $export = Export::find($request->settings['export_id']);
-
-        return response()->download($export->source);
+        dd(array_map('str_getcsv', file($export->source)));
+        return array_map('str_getcsv', file($export->source));
     }
 }

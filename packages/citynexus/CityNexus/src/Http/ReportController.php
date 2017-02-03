@@ -12,6 +12,7 @@ use CityNexus\CityNexus\Geocode;
 use CityNexus\CityNexus\Table;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\Datatables\Facades\Datatables;
@@ -41,12 +42,12 @@ class ReportController extends Controller
 
         $export = Export::create($request->all());
 
-        return redirect(action('\CityNexus\CityNexus\Http\ReportController@getRefreshExports', $export->id));
+        return redirect(action('\CityNexus\CityNexus\Http\ReportController@getRefreshExport', $export->id));
     }
 
     public function getExports()
     {
-        $exports = Export::all();
+        $exports = Export::orderBy('updated_at', 'DESC')->paginate(15);
         return view('citynexus::reports.export.index', compact('exports'));
 
     }
@@ -197,37 +198,52 @@ class ReportController extends Controller
     {
 
         $random = '_' . str_random(8);
-        $path = storage_path() . '/export_cache/' . time() .'-' . $export->name . '.csv';
+
+        $name = str_replace(' ', '-', strtolower($export->name)) . '.csv';
+        $path = storage_path() . '/export_cache/' . time() .'-' . $name;
 
         $elements = $export->elements;
         $results = [];
         if(isset($elements['datasets'])) $results = $this->exportDatasets($elements['datasets'], $results);
+        if(isset($elements['scores'])) $results = $this->exportScores($elements['scores'], $results);
 
         $properties = Property::find(array_keys($results));
 
         $plist = [];
 
+        $plist[0]['property_id'] = 'property_id';
+        if(isset($export->elements['property']['full_address']))
+        {
+            $plist[0]['full_address'] = 'full_address';
+        }
+
+        if(isset($export->elements['property']['parsed']))
+        {
+            $plist[0]['house_number'] = 'house_number';
+            $plist[0]['street_name'] = 'street_name';
+            $plist[0]['street_type'] = 'street_type';
+            $plist[0]['unit'] = 'unit';
+            $plist[0]['city'] = 'city';
+            $plist[0]['state'] = 'state';
+            $plist[0]['zip'] = 'zip';
+        }
+
+        if(isset($export->elements['property']['coordinates'])) {
+            $plist[0]['lat'] = 'lat';
+            $plist[0]['long'] = 'long';
+        }
+
         foreach ($properties as $property)
         {
-            $plist[0]['property_id'] = 'property_id';
             $plist[$property->id]['property_id'] = $property->id;
 
-            if(isset($export->settings['property']['full_address']))
+            if(isset($export->elements['property']['full_address']))
             {
-                $plist[0]['full_address'] = 'full_address';
                 $plist[$property->id]['full_address'] = $property->full_address;
             }
 
-            if(isset($export->settings['property']['parsed']))
+            if(isset($export->elements['property']['parsed']))
             {
-                $plist[0]['house_number'] = 'house_number';
-                $plist[0]['street_name'] = 'street_name';
-                $plist[0]['street_type'] = 'street_type';
-                $plist[0]['unit'] = 'unit';
-                $plist[0]['city'] = 'city';
-                $plist[0]['state'] = 'state';
-                $plist[0]['zip'] = 'zip';
-
                 $plist[$property->id]['house_number'] = $property->house_number;
                 $plist[$property->id]['street_name'] = $property->street_name;
                 $plist[$property->id]['street_type'] = $property->house_number;
@@ -237,11 +253,8 @@ class ReportController extends Controller
                 $plist[$property->id]['zip'] = $property->zip;
             }
 
-            if(isset($export->settings['property']['geocode']))
+            if(isset($export->elements['property']['coordinates']))
             {
-                $plist[0]['lat'] = 'lat';
-                $plist[0]['long'] = 'long';
-
                 $plist[$property->id]['lat'] = $property->lat;
                 $plist[$property->id]['long'] = $property->long;
             }
@@ -250,7 +263,15 @@ class ReportController extends Controller
 
         foreach($results as $pid => $result)
         {
-            $results[$pid] = array_merge($plist[$pid], $results[$pid]);
+            if(isset($plist[$pid]))
+            {
+                $results[$pid] = array_merge($plist[$pid], $results[$pid]);
+            }
+            else
+            {
+                $results[$pid] = array_merge((array) Property::where('id', $pid)->pluck('id', 'full_address', 'lat', 'long'), $results[$pid]);
+            }
+
         }
 
         ksort($results);
@@ -321,8 +342,6 @@ class ReportController extends Controller
             }
         }
 
-        $csv = [];
-
         foreach($settings as $table => $element)
         {
             foreach($element as $i)
@@ -342,11 +361,31 @@ class ReportController extends Controller
                         $results = $this->processCount($table, $i['key'], $proceesed, $results);
                         break;
                     case 'sum':
-                        $results = $this->processCount($table, $i['key'], $proceesed, $results);
+                        $results = $this->processSum($table, $i['key'], $proceesed, $results);
                         break;
                 }
             }
         }
+        return $results;
+    }
+
+    private function exportScores($scores, $results)
+    {
+
+        foreach($scores as $score)
+        {
+            $score_model = Score::find($score);
+            $data = DB::table('citynexus_scores_' . $score)->get(['property_id', 'score']);
+            $name = 'score_' . str_replace(' ', '_', strtolower($score_model->name));
+
+            $results[0][$name] = $name;
+
+            foreach ($data as $i)
+            {
+                $results[$i->property_id][$name] = $i->score;
+            }
+        }
+
         return $results;
     }
 
@@ -362,6 +401,7 @@ class ReportController extends Controller
                 $results[$pid][$table . '_' . $key] = current($datasets[$table])[$key];
             }
         }
+
 
         return $results;
     }
@@ -471,6 +511,15 @@ class ReportController extends Controller
         }
 
         return $results;
+    }
+
+    public function postDeleteExport(Request $request)
+    {
+        $export = Export::find($request->get('export_id'));
+        if(file_exists($export->source)) unlink($export->source);
+        $export->delete();
+
+        return response('Success');
     }
 
 

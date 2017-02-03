@@ -44,6 +44,7 @@ $section = "reports";
             </div>
 
         </div>
+        <div id="layerCards"></div>
     </div>
 
 @stop
@@ -133,11 +134,10 @@ $section = "reports";
             accessToken: "{{env('MAPBOX_TOKEN')}}"
         }).addTo(mymap);
 
-        var points = L.layerGroup();
+        var layers = new Array();
 
         var loadDatasetPoint = function (dataset_id, key) {
             $("#settings_cog").addClass('fa-spin');
-            points.clearLayers();
 
             $.ajax({
                 type: 'post',
@@ -150,7 +150,7 @@ $section = "reports";
 
                 },
                 success: function(data) {
-                    reloadMap(data['points'], data['title'], data['max'])
+                    reloadMap(data['points'], data['title'], data['max'], data['handle'])
                 },
                 error: function(data){
                     $("#settings_cog").removeClass('fa-spin');
@@ -162,7 +162,6 @@ $section = "reports";
 
         var loadDataset = function (dataset_id) {
             $("#settings_cog").addClass('fa-spin');
-            points.clearLayers();
 
             $.ajax({
                 type: 'post',
@@ -174,7 +173,7 @@ $section = "reports";
 
                 },
                 success: function(data) {
-                    reloadMap(data['points'], data['title'], data['max'])
+                    reloadMap(data['points'], data['title'], data['max'], data['handle'])
                 },
                 error: function(data){
                     $("#settings_cog").removeClass('fa-spin');
@@ -186,7 +185,7 @@ $section = "reports";
 
         var loadScore = function (id) {
             $("#settings_cog").addClass('fa-spin');
-            points.clearLayers();
+
             $.ajax({
                 type: 'post',
                 url: '/citynexus/reports/views/dot-map',
@@ -196,7 +195,7 @@ $section = "reports";
                     id: id,
                 },
                 success: function(data) {
-                    reloadMap(data['points'], data['title'], data['max'])
+                    reloadMap(data['points'], data['title'], data['max'], data['handle'])
                 },
                 error: function(data){
                     $("#settings_cog").removeClass('fa-spin');
@@ -206,99 +205,167 @@ $section = "reports";
 
         };
 
-        var reloadMap = function(markers, title, max)
+
+        var colors = {
+            0: {
+                layer: null,
+                color:'#c93635'
+            },
+            1: {
+                layer: null,
+                color: '#003f5e'
+            },
+            2: {
+                layer: null,
+                color: '#35c980'
+            },
+            3: {
+                layer: null,
+                color: '#5e003f'
+            },
+            4: {
+                layer: null,
+                color: '#35c8c9'
+            },
+            5: {
+                layer: null,
+                color: '#357ec9'
+            }
+        };
+
+        var newColor = function(layer)
         {
+
+            for (var i=0; i < Object.keys(colors).length;  ++i)
+            {
+                if (colors[i]['layer'] == null)
+                {
+                    colors[i].layer = layer;
+                    return colors[i].color;
+                }
+            }
+
+        };
+
+        var reloadMap = function(markers, title, max, handle)
+        {
+            layers[handle] = L.layerGroup();
+
+            var color = newColor(handle);
+
             for (var i=0; i < markers.length;  ++i)
             {
-                points.addLayer( new L.circleMarker( [markers[i].lat, markers[i].lng], {
+                layers[handle].addLayer( new L.circleMarker( [markers[i].lat, markers[i].lng], {
                             radius: 4,
                             stroke: false,
                             color: 'black',
                             opacity: 1,
                             fill: true,
-                            fillColor: "#c93635",
+                            fillColor: color,
                             fillOpacity: (markers[i].value/max) + .1
                         } ).bindPopup( '<b>Value: ' + markers[i].value + '</b><br><a href="' + markers[i].url + '" target="_blank">' + markers[i].name + '</a>' )
                 );
             }
 
-            points.addTo(mymap);
-            $("#map-name").html(title);
+            layers[handle].addTo(mymap);
+            createLayerBox(handle, color, title);
             $("#settings_cog").removeClass('fa-spin');
-        }
+        };
 
         @if(isset($table) && isset($key))
         loadDataPoint("{{$table}}", "{{$key}}");
         @else
-            $('#map-wrapper').removeClass('col-md-12').addClass('col-md-9');
-            $('#map-settings').removeClass('hidden');
+        $('#map-wrapper').removeClass('col-md-12').addClass('col-md-9');
+        $('#map-settings').removeClass('hidden');
         @endif
 
         $('#hide-settings').click(function(){
             $('#map-wrapper').addClass('col-md-12').removeClass('col-md-9');
             $('#map-settings').addClass('hidden');
-        })
-    </script>
-<script>
-function saveReport() {
-        var table_id = $('#h_dataset').val();
-        var table_name = $('#table_name').val();
-        var key = $('#datafield').val();
-        var intensity = $('#intensity').val();
-        var name = prompt('What name would you like to give this report view?', 'Unnamed Report');
-        if(name != null)
+        });
+
+        var createLayerBox = function(layer, color, name)
         {
-            $.ajax({
-                url: "{{action('\CityNexus\CityNexus\Http\ViewController@postSaveView')}}",
-                type: 'post',
-                data: {
-                    _token: "{{csrf_token()}}",
-                    settings: {
-                        type: 'Dot Map',
-                        table_name: table_name,
-                        table_id: table_id,
-                        key: key,
-                        intensity: intensity,
-                    },
-                    name: name
+            var box = '<div class="card-box" id="layer_' + layer + '"><span class="fa fa-square" style="color: ' + color + '"></span> <b>' + name + '</b><span class="fa fa-trash pull-right" style="cursor: pointer" onclick="removeLayer(\'' + layer + '\')"></span></div>';
+            $('#layerCards').append(box);
+        };
+
+        function removeLayer(layer) {
+            layer = layer.trim();
+            layers[layer].clearLayers();
+            $('#layer_' + layer).remove();
+
+            for (var i=0; i < Object.keys(colors).length;  ++i)
+            {
+                if (colors[i]['layer'] == layer)
+                {
+                    colors[i].layer = null;
+                    break;
                 }
-            }).success(function (data) {
-                Command: toastr["success"](name, "Report View Saved");
-                $('#save-report-line').html( data );
-            });
-        }
-    }
-function updateReport( id )
-    {
-        var table_id = $('#h_dataset').val();
-        var key = $('#datafield').val();
-        var table_name = $('#table_name').val();
-        var intensity = $('#intensity').val();
-        $.ajax({
-            url: "{{action('\CityNexus\CityNexus\Http\ViewController@postSaveView')}}",
-            type: 'post',
-            data: {
-                _token: "{{csrf_token()}}",
-                settings: {
-                    type: 'Heat Map',
-                    table_name: table_name,
-                    table_id: table_id,
-                    key: key,
-                    intensity: intensity,
-                },
-                id: id
             }
-        }).success(function(){
-        Command: toastr["success"](name, "Report View Updated");
-    });
-}
+        };
 
-    $('#map-settings-toggle').click(function(){
-        $('#map-wrapper').removeClass('col-md-12').addClass('col-md-9');
-        $('#map-settings').removeClass('hidden');
+    </script>
+{{--<script>--}}
+{{--function saveReport() {--}}
+        {{--var table_id = $('#h_dataset').val();--}}
+        {{--var table_name = $('#table_name').val();--}}
+        {{--var key = $('#datafield').val();--}}
+        {{--var intensity = $('#intensity').val();--}}
+        {{--var name = prompt('What name would you like to give this report view?', 'Unnamed Report');--}}
+        {{--if(name != null)--}}
+        {{--{--}}
+            {{--$.ajax({--}}
+                {{--url: "{{action('\CityNexus\CityNexus\Http\ViewController@postSaveView')}}",--}}
+                {{--type: 'post',--}}
+                {{--data: {--}}
+                    {{--_token: "{{csrf_token()}}",--}}
+                    {{--settings: {--}}
+                        {{--type: 'Dot Map',--}}
+                        {{--table_name: table_name,--}}
+                        {{--table_id: table_id,--}}
+                        {{--key: key,--}}
+                        {{--intensity: intensity,--}}
+                    {{--},--}}
+                    {{--name: name--}}
+                {{--}--}}
+            {{--}).success(function (data) {--}}
+                {{--Command: toastr["success"](name, "Report View Saved");--}}
+                {{--$('#save-report-line').html( data );--}}
+            {{--});--}}
+        {{--}--}}
+    {{--}--}}
+{{--function updateReport( id )--}}
+    {{--{--}}
+        {{--var table_id = $('#h_dataset').val();--}}
+        {{--var key = $('#datafield').val();--}}
+        {{--var table_name = $('#table_name').val();--}}
+        {{--var intensity = $('#intensity').val();--}}
+        {{--$.ajax({--}}
+            {{--url: "{{action('\CityNexus\CityNexus\Http\ViewController@postSaveView')}}",--}}
+            {{--type: 'post',--}}
+            {{--data: {--}}
+                {{--_token: "{{csrf_token()}}",--}}
+                {{--settings: {--}}
+                    {{--type: 'Heat Map',--}}
+                    {{--table_name: table_name,--}}
+                    {{--table_id: table_id,--}}
+                    {{--key: key,--}}
+                    {{--intensity: intensity,--}}
+                {{--},--}}
+                {{--id: id--}}
+            {{--}--}}
+        {{--}).success(function(){--}}
+        {{--Command: toastr["success"](name, "Report View Updated");--}}
+    {{--});--}}
+{{--}--}}
 
-    });
-</script>
+    {{--$('#map-settings-toggle').click(function(){--}}
+        {{--$('#map-wrapper').removeClass('col-md-12').addClass('col-md-9');--}}
+        {{--$('#map-settings').removeClass('hidden');--}}
+
+    {{--});--}}
+{{--</script>--}}
 
 <script>
     $('#datasets').jstree({

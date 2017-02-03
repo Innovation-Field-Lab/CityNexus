@@ -274,6 +274,7 @@ class ViewController extends Controller
         $return['points'] = array_values($points);
         $return['max'] = $max * 1.1;
         $return['title'] = $dataset->table_title . " > " . $dataset->schema->$key->name;
+        $return['handle'] = $dataset->id . '_' . $key;
 
         return $return;
     }
@@ -320,6 +321,7 @@ class ViewController extends Controller
         $return['points'] = array_values($points);
         $return['max'] = $max * 1.1;
         $return['title'] = 'Record Count: ' . $dataset->table_title;
+        $return['handle'] = 'table_' . $dataset->id;
 
         return $return;
     }
@@ -360,6 +362,7 @@ class ViewController extends Controller
         $return['points'] = array_values($points);
         $return['max'] = $max * 1.1;
         $return['title'] = 'Property Score: ' . $score->name;
+        $return['handle'] = 'score_' . $score->id;
 
         return $return;
     }

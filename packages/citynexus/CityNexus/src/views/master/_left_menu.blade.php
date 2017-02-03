@@ -47,7 +47,7 @@
 
                 @can('citynexus', ['reports', 'view'])
                     <li class="has_sub">
-                        <a href="javascript:void(0);" class="waves-effect @if(isset($section) && $section == 'reports') active @endif "><i class="fa fa-area-chart"></i> <span> Charts and Maps </span> <span class="menu-arrow"></span></a>
+                        <a href="javascript:void(0);" class="waves-effect @if(isset($section) && $section == 'reports') active @endif "><i class="fa fa-area-chart"></i> <span> Data Visualization </span> <span class="menu-arrow"></span></a>
                         <ul class="list-unstyled">
                             <li><a href="{{action('\CityNexus\CityNexus\Http\ViewController@getIndex')}}">Saved Views</a></li>
                             <li role="separator" class="divider"></li>
@@ -91,6 +91,15 @@
                                 <li><a href="{{action('\CityNexus\CityNexus\Http\TablerController@getUploader')}}">New From Upload</a></li>
                                 <li><a href="{{action('\CityNexus\CityNexus\Http\DatasetController@getDropboxSync')}}">New From Dropbox</a></li>
                             @endcan
+                        </ul>
+                    </li>
+                @endcan
+                @can('citynexus', ['export', 'view'])
+                    <li class="has_sub">
+                        <a href="javascript:void(0);" class="waves-effect @if(isset($section) && $section == 'exports') active @endif "><i class="fa fa-download"></i> <span> Export Reports </span> <span class="menu-arrow"></span></a>
+                        <ul class="list-unstyled">
+                            <li class="@if(isset($pagename) &&  $pagename == 'All Exports') active @endif"><a href="{{action('\CityNexus\CityNexus\Http\ReportController@getExports')}}">All Export Reports</a></li>
+                            @can('citynexus', ['export', 'create'])<li class="@if(isset($pagename) &&  $pagename == 'Export Builder') active @endif"><a href="{{action('\CityNexus\CityNexus\Http\ReportController@getExportBuilder')}}">Create Export Report</a></li>@endcan
                         </ul>
                     </li>
                 @endcan

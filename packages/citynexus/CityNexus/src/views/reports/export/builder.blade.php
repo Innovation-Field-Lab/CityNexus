@@ -1,6 +1,6 @@
 <?php
 $pagename = "Export Builder";
-$section = "reports";
+$section = "exports";
 ?>
 
 @extends(config('citynexus.template'))

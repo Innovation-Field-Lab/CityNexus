@@ -157,7 +157,21 @@
                                     'key' => 'edit'
                             ]
                     ]
-            ]
+            ],
+            [
+                    'title' => 'Export',
+                    'key' => 'export',
+                    'permissions' => [
+                            [
+                                    'permission' => "View & Download Exports",
+                                    'key' => 'view'
+                            ],
+                            [
+                                    'permission' => "Create New Exports",
+                                    'key' => 'create'
+                            ]
+                    ]
+            ],
     ]
 
 ?>

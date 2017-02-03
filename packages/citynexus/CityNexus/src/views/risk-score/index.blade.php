@@ -32,8 +32,11 @@ $section = 'scores';
                                 <th>{{$score->name}}</th>
                                 <td id="age-{{$score->id}}">{{$score->updated_at->diffForHumans()}}</td>
                                 <td>
+                                    @if($score->scope == 'custom_upload')
+                                    <a class="btn btn-sm btn-primary" id="update-{{$score->id}}" href="{{action("\CityNexus\CityNexus\Http\RiskScoreController@getUpload")}}?score_id={{$score->id}}">Repload Score</a>
+                                    @else
                                     <span class="btn btn-sm btn-primary" onclick="updateScore({{$score->id}})" id="update-{{$score->id}}">Refresh Score</span>
-
+                                    @endif
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-default dropdown-toggle waves-effect" data-toggle="dropdown" aria-expanded="false"> Analysis <span class="caret"></span> </button>
                                         <ul class="dropdown-menu">
@@ -47,8 +50,10 @@ $section = 'scores';
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-default dropdown-toggle waves-effect" data-toggle="dropdown" aria-expanded="false"> Actions <span class="caret"></span> </button>
                                         <ul class="dropdown-menu">
-                                            <li><a href="{{action('\CityNexus\CityNexus\Http\RiskScoreController@getEditScore', ['score_id' => $score->id])}}">Edit Score</a></li>
-                                            <li><a href="{{action('\CityNexus\CityNexus\Http\RiskScoreController@getDuplicateScore', ['score_id' => $score->id])}}">Duplicate Score</a></li>
+                                            @unless($score->scope == 'custom_upload')
+                                                <li><a href="{{action('\CityNexus\CityNexus\Http\RiskScoreController@getEditScore', ['score_id' => $score->id])}}">Edit Score</a></li>
+                                                <li><a href="{{action('\CityNexus\CityNexus\Http\RiskScoreController@getDuplicateScore', ['score_id' => $score->id])}}">Duplicate Score</a></li>
+                                            @endunless
                                             <li><a href="{{action('\CityNexus\CityNexus\Http\RiskScoreController@getRemoveScore', ['score_id' => $score->id])}}">Remove Score</a></li>
                                         </ul>
                                     </div>

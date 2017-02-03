@@ -87,7 +87,6 @@ class APIController extends Controller
     public function returnExport($request)
     {
         $export = Export::find($request->settings['export_id']);
-        dd(array_map('str_getcsv', file($export->source)));
         return array_map('str_getcsv', file($export->source));
     }
 }

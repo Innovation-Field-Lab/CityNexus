@@ -19,6 +19,7 @@ use CityNexus\CityNexus\ScoreBuilder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Session;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 class RiskScoreController extends Controller
@@ -59,6 +60,75 @@ class RiskScoreController extends Controller
                 return view('citynexus::risk-score.datafields', compact('dataset', 'scheme'));
                 break;
         }
+    }
+
+    public function getUpload()
+    {
+        return view('citynexus::risk-score.upload');
+    }
+
+    public function postUpload(Request $request)
+    {
+        //get uploaded file
+        $file = $request->file('file');
+
+        //turn file into an object
+        Excel::load($file, function($reader) use($request) {
+            $data = $reader->toArray();
+
+            $error = false;
+            if(!isset($data[0]['property_id']))
+            {
+                $error = true;
+                Session::flash('flash_error', "Data set did not include a column header of \"property_id\". Please correct and reupload.");
+            }
+            if(!isset($data[0]['score']))
+            {
+                $error = true;
+                Session::flash('flash_error', "Data set did not include a column header of \"score\". Please correct and reupload.");
+            }
+            if($error)
+            {
+                return redirect()->back();
+            }
+
+            $upload = [];
+            foreach($data as $row)
+            {
+                if(isset($row['property_id']) && isset($row['score']))
+                {
+                    $upload[] = [
+                        'property_id' => $row['property_id'],
+                        'score' => $row['score']
+                    ];
+                }
+            }
+
+            if($request->exists('score_id'))  {
+                $score = Score::find($request->get('score_id'));
+                $score->name = $request->get('name');
+                $score->save();
+            }
+            else {
+                $score = Score::create(['name' => $request->get('name'), 'scope' => 'custom_upload']);
+            }
+
+            if (Schema::hasTable('citynexus_scores_' . $score->id)) {
+                DB::table('citynexus_scores_' . $score->id)->truncate();
+            } else {
+                Schema::create('citynexus_scores_' . $score->id, function (Blueprint $table) {
+                    $table->increments('id');
+                    $table->integer('property_id');
+                    $table->float('score')->nullable();
+                });
+            }
+
+            DB::table('citynexus_scores_' . $score->id)->insert($upload);
+
+        });
+
+        return redirect()->action('\CityNexus\CityNexus\Http\RiskScoreController@getIndex');
+
     }
 
     public function getDataField(Request $request)

@@ -32,8 +32,9 @@ $section = "reports";
                         </ul>
                     </li>
                     @foreach($datasets as $dataset)
-                        <li data-jstree='{"opened":false}' onclick="loadDataset({{$dataset->id}})">{{$dataset->table_title}}
+                        <li data-jstree='{"opened":false}'>{{$dataset->table_title}}
                             <ul>
+                                <li data-jstree='{"type": "datacount"}' onclick="loadDataset({{$dataset->id}})">Count of Records</li>
                                 @foreach($dataset->schema as $field)
                                     <li data-jstree='{"type":"{{$field->type}}"}' onclick="loadDatasetPoint({{$dataset->id}}, '{{$field->key}}');">{{$field->name}}</li>
                                 @endforeach
@@ -272,8 +273,12 @@ $section = "reports";
             $("#settings_cog").removeClass('fa-spin');
         };
 
-        @if(isset($table) && isset($key))
-        loadDataPoint("{{$table}}", "{{$key}}");
+        @if(isset($_GET['is_score']))
+        loadScore({{$_GET['score_id']}});
+        @elseif(isset($_GET['is_dataset']))
+        loadDataset({{$_GET['dataset_id']}});
+        @elseif(isset($_GET['is_datapoint']))
+        loadDatasetPoint({{$_GET['dataset_id']}}, '{{$_GET['key']}}');
         @else
         $('#map-wrapper').removeClass('col-md-12').addClass('col-md-9');
         $('#map-settings').removeClass('hidden');
@@ -282,6 +287,11 @@ $section = "reports";
         $('#hide-settings').click(function(){
             $('#map-wrapper').addClass('col-md-12').removeClass('col-md-9');
             $('#map-settings').addClass('hidden');
+        });
+
+        $('#settings_cog').click(function(){
+            $('#map-wrapper').removeClass('col-md-12').addClass('col-md-9');
+            $('#map-settings').removeClass('hidden');
         });
 
         var createLayerBox = function(layer, color, name)
@@ -395,6 +405,9 @@ $section = "reports";
             },
             'boolean': {
                 'icon': 'zmdi zmdi-file'
+            },
+            'datacount': {
+                'icon': 'zmdi zmdi-collection-item'
             }
         },
         'plugins': ['types']

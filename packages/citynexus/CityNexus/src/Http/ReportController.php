@@ -110,7 +110,7 @@ class ReportController extends Controller
                     break;
                 case 'geocoordinates':
                     $location = $property->location;
-                    $return["geocoordinates"] = 'Lat: ' . $location->lat. ', Long: ' . $property->long;
+                    $return["geocoordinates"] = 'Lat: ' . $location->lat. ', Lng: ' . $property->long;
                     break;
                 default:
                     null;
@@ -276,7 +276,7 @@ class ReportController extends Controller
 
         ksort($results);
 
-        $fp = fopen($path, 'w+');
+        $fp = fopen($path, 'w');
 
         foreach($results as $row)
         {
@@ -291,7 +291,7 @@ class ReportController extends Controller
         return 'success';
     }
 
-    private function exportDatasets($settings, $results)
+    public function exportDatasets($settings, $results)
     {
         $data = [];
 
@@ -521,6 +521,5 @@ class ReportController extends Controller
 
         return response('Success');
     }
-
 
 }

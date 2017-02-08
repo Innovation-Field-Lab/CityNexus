@@ -29,7 +29,9 @@ $section = 'exports';
                                 <button class="btn btn-primary btn-xs" onclick="jsonExport({{$export->id}})"> JSON Export</button>
                             </td>
                             <td>
+                                @unless(isset($export->elements['_type']) && $export->elements['_type'] == 'saved_search')
                                 <a class="btn btn-primary btn-xs" href="{{action('\CityNexus\CityNexus\Http\ReportController@getRefreshExport', [$export->id])}}">Refresh <icon class="fa fa-refresh"></icon></a>
+                                @endunless
                                 <button class="btn btn-danger btn-xs" onclick="deleteExport({{$export->id}})"><icon class="fa fa-trash"></icon></button>
                             </td>
                         </tr>

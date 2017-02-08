@@ -46,7 +46,7 @@ $section = 'reports';
                             <li data-jstree='{"opened":false}'> Scores
                                 <ul>
                                     @foreach($scores as $score)
-                                        <li data-jstree='{"type":"score"}' onclick="setAxis('ver', '_score', {{$score->id}}, 'float')">{{$score->name}} </li>
+                                        <li data-jstree='{"type":"score"}' onclick="setAxis('ver', '_score', {{$score->id}}, 'float', 'Score: {{$score->name}}')">{{$score->name}} </li>
                                     @endforeach
                                 </ul>
                             </li>
@@ -54,7 +54,7 @@ $section = 'reports';
                                 <li data-jstree='{"opened":false}'>{{$dataset->table_title}}
                                     <ul>
                                         @foreach($dataset->schema as $field)
-                                            <li data-jstree='{"type":"{{$field->type}}"}' onclick="setAxis('ver', {{$dataset->id}}, '{{$field->key}}', '{{$field->type}}');">{{$field->name}}</li>
+                                            <li data-jstree='{"type":"{{$field->type}}"}' onclick="setAxis('ver', {{$dataset->id}}, '{{$field->key}}', '{{$field->type}}', '{{$dataset->table_title}}: {{$field->name}}');">{{$field->name}}</li>
                                         @endforeach
                                     </ul>
                                 </li>
@@ -75,7 +75,7 @@ $section = 'reports';
                             <li data-jstree='{"opened":false}'> Scores
                                 <ul>
                                     @foreach($scores as $score)
-                                        <li data-jstree='{"type":"score"}' onclick="setAxis('hor', '_score', {{$score->id}}, 'float')">{{$score->name}} </li>
+                                        <li data-jstree='{"type":"score"}' onclick="setAxis('hor', '_score', {{$score->id}}, 'float', 'Score: {{$score->name}}')">{{$score->name}} </li>
                                     @endforeach
                                 </ul>
                             </li>
@@ -83,7 +83,7 @@ $section = 'reports';
                                 <li data-jstree='{"opened":false}'>{{$dataset->table_title}}
                                     <ul>
                                         @foreach($dataset->schema as $field)
-                                            <li data-jstree='{"type":"{{$field->type}}"}' onclick="setAxis('hor', {{$dataset->id}}, '{{$field->key}}', '{{$field->type}}');">{{$field->name}}</li>
+                                            <li data-jstree='{"type":"{{$field->type}}"}' onclick="setAxis('hor', {{$dataset->id}}, '{{$field->key}}', '{{$field->type}}', '{{$dataset->table_title}}: {{$field->name}}');">{{$field->name}}</li>
                                         @endforeach
                                     </ul>
                                 </li>
@@ -117,7 +117,7 @@ $section = 'reports';
             text {
                 stroke: none;
                 fill: #666666;
-                font-size: .6em;
+                font-size: 14px
                 font-family:"Helvetica Neue"
             }
             .label {
@@ -149,18 +149,20 @@ $section = 'reports';
 
             var dataRequest = {ver: {}, hor: {}};
 
-            var setAxis = function(axis, dataset, key, type)
+            var setAxis = function(axis, dataset, key, type, tag)
             {
                 dataRequest[axis] = {
-
+                    label: tag,
                     dataset: dataset,
                     key: key,
                     scope: null
                 };
 
+                console.log(event.target);
+
                 var settings =
                     '<div id="' + axis + '_detail">' +
-                        '<span class="label label-default">' + event.target.text + ' <i class="fa fa-remove" style="cursor: pointer" onclick="resetAxis(\'' + axis + '\')"></i></span></br>';
+                        '<span class="label label-default">' + tag + ' <i class="fa fa-remove" style="cursor: pointer" onclick="resetAxis(\'' + axis + '\')"></i></span></br>';
 
                 if(type == 'float' || type == 'integer')
                 {
@@ -182,6 +184,12 @@ $section = 'reports';
                                 '<label> ' +
                                 '<input type="radio" name="' + axis + '" id="' + axis + '_scope" value="mean" onclick="setScope(\'' + axis + '\', \'mean\')">' +
                                 ' Average of Records ' +
+                                '</label>' +
+                                '</div>' +
+                                '<div class=""> ' +
+                                '<label> ' +
+                                '<input type="radio" name="' + axis + '" id="' + axis + '_scope" value="sum" onclick="setScope(\'' + axis + '\', \'sum\')">' +
+                                ' Sum of Records ' +
                                 '</label>' +
                                 '</div>';
                     }
@@ -224,10 +232,10 @@ $section = 'reports';
             function showScatterPlot(data) {
                 // just to have some space around items.
                 var margins = {
-                    "left": 40,
+                    "left": 50,
                     "right": 30,
                     "top": 30,
-                    "bottom": 30
+                    "bottom": 40
                 };
                 var chartWrapper = $("#chart-wrapper");
                 var width = chartWrapper.width();
@@ -263,7 +271,9 @@ $section = 'reports';
                         .attr("text-anchor", "end")
                         .attr("x", width / 2)
                         .attr("y", height - 35)
-                        .text($('#h_datafield').val() + '[' + $('#h_table_name').val() + ']');
+                        .text(dataRequest.hor.label + ' [' + dataRequest.ver.label + ']');
+
+
                 // this is the actual definition of our x and y axes. The orientation refers to where the labels appear - for the x axis, below or above the line, and for the y axis, left or right of the line. Tick padding refers to how much space between the tick and the label. There are other parameters too - see https://github.com/mbostock/d3/wiki/SVG-Axes for more information
                 var xAxis = d3.svg.axis().scale(x).orient("bottom").tickPadding(2);
                 var yAxis = d3.svg.axis().scale(y).orient("left").tickPadding(2);
@@ -300,7 +310,7 @@ $section = 'reports';
                     tooltip.transition()
                             .duration(200)
                             .style("opacity", .9);
-                    tooltip.html( toTitleCase(d.address) + '</br> (' + d.x + ',' + d.y + ')')
+                    tooltip.html( toTitleCase(d.full_address) + '</br> (' + d.x + ',' + d.y + ')')
                             .style("left", (d3.event.pageX + 5) + "px")
                             .style("top", (d3.event.pageY - 25) + "px");
                 })

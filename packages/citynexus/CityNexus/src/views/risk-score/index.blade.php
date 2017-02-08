@@ -40,6 +40,7 @@ $section = 'scores';
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-default dropdown-toggle waves-effect" data-toggle="dropdown" aria-expanded="false"> Analysis <span class="caret"></span> </button>
                                         <ul class="dropdown-menu">
+                                            <li><a href="{{action('\CityNexus\CityNexus\Http\ViewController@getDotMap')}}?is_score=true&score_id={{$score->id}}">Dot Map</a></li>
                                             <li><a href="{{action('\CityNexus\CityNexus\Http\ViewController@getHeatMap')}}?table=citynexus_scores_{{$score->id}}&key=score">Heat Map</a></li>
                                             <li><a href="{{action('\CityNexus\CityNexus\Http\RiskScoreController@getPinMap', ['score_id' => $score->id])}}">Pin Map</a></li>
                                             <li><a href="{{action('\CityNexus\CityNexus\Http\ViewController@getDistribution', ['citynexus_scores_' . $score->id, 'score'])}}">Distribution Chart</a></li>

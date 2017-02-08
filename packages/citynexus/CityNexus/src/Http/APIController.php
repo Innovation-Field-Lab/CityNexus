@@ -87,6 +87,39 @@ class APIController extends Controller
     public function returnExport($request)
     {
         $export = Export::find($request->settings['export_id']);
-        return array_map('str_getcsv', file($export->source));
+
+        $data = array_map('str_getcsv', file($export->source));
+
+        $data_prep = [];
+        $keys = $data[0];
+        unset($data[0]);
+
+        foreach($data as $key => $item)
+        {
+            foreach($item as $k => $i)
+            {
+                $cache[$keys[$k]] = $i;
+            }
+
+            $data_prep[] = $cache;
+        }
+
+        return $data_prep;
+
     }
+
+    private function array_to_xml( $data, &$xml_data ) {
+        foreach( $data as $key => $value ) {
+            if( is_numeric($key) ){
+                $key = 'item'.$key; //dealing with <0/>..<n/> issues
+            }
+            if( is_array($value) ) {
+                $subnode = $xml_data->addChild($key);
+                $this->array_to_xml($value, $subnode);
+            } else {
+                $xml_data->addChild("$key",htmlspecialchars("$value"));
+            }
+        }
+    }
+
 }

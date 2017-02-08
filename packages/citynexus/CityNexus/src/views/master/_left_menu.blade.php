@@ -59,23 +59,26 @@
                     </li>
                 @endcan
 
-                @can('superAdmin')
-                    <li class="has_sub">
-                        <a href="javascript:void(0);" class="waves-effect @if(isset($section) && $section == 'reports') active @endif "><i class="fa fa-area-chart"></i> <span> Reports </span> <span class="menu-arrow"></span></a>
-                        <ul class="list-unstyled">
-                            <li class="@if(isset($pagename) &&  $pagename == 'Reports') active @endif"><a href="{{action('\CityNexus\CityNexus\Http\ReportController@getCreateProperty')}}">Create Property Report</a></li>
-                        </ul>
-                    </li>
-                @endcan
+                {{--@can('superAdmin')--}}
+                    {{--<li class="has_sub">--}}
+                        {{--<a href="javascript:void(0);" class="waves-effect @if(isset($section) && $section == 'reports') active @endif "><i class="fa fa-area-chart"></i> <span> Reports </span> <span class="menu-arrow"></span></a>--}}
+                        {{--<ul class="list-unstyled">--}}
+                            {{--<li class="@if(isset($pagename) &&  $pagename == 'Reports') active @endif"><a href="{{action('\CityNexus\CityNexus\Http\ReportController@getCreateProperty')}}">Create Property Report</a></li>--}}
+                        {{--</ul>--}}
+                    {{--</li>--}}
+                {{--@endcan--}}
 
                 @can('citynexus', ['scores', 'view'])
                     <li class="has_sub">
                         <a href="javascript:void(0);" class="waves-effect @if(isset($section) && $section == 'scores') active @endif "><i class="fa fa-tachometer"></i> <span> Scores </span> <span class="menu-arrow"></span></a>
                         <ul class="list-unstyled">
-                            <li><a href="{{action('\CityNexus\CityNexus\Http\RiskScoreController@getIndex')}}">All Scores</a></li>
-                            @can('citynexus', ['group' => 'datasets', 'method' => 'create'])
+                            <li class="@if(isset($pagename) &&  $pagename == 'All Scores') active @endif"><a href="{{action('\CityNexus\CityNexus\Http\RiskScoreController@getIndex')}}">All Scores</a></li>
+                            @can('citynexus', ['group' => 'scores', 'method' => 'create'])
                                 <li role="separator" class="divider"></li>
-                                <li><a href="{{action('\CityNexus\CityNexus\Http\RiskScoreController@getCreate')}}">Create New Score</a></li>
+                                <li class="@if(isset($pagename) &&  $pagename == 'Create New Score') active @endif"><a href="{{action('\CityNexus\CityNexus\Http\RiskScoreController@getCreate')}}">Create New Score</a></li>
+                            @endcan
+                            @can('citynexus', ['scores', 'upload'])
+                                <li class="@if(isset($pagename) &&  $pagename == 'Import Custom Score') active @endif"><a href="{{action('\CityNexus\CityNexus\Http\RiskScoreController@getUpload')}}">Import Custom Score</a></li>
                             @endcan
                         </ul>
                     </li>
@@ -91,6 +94,15 @@
                                 <li><a href="{{action('\CityNexus\CityNexus\Http\TablerController@getUploader')}}">New From Upload</a></li>
                                 <li><a href="{{action('\CityNexus\CityNexus\Http\DatasetController@getDropboxSync')}}">New From Dropbox</a></li>
                             @endcan
+                        </ul>
+                    </li>
+                @endcan
+                @can('citynexus', ['search', 'view'])
+                    <li class="has_sub">
+                        <a href="javascript:void(0);" class="waves-effect @if(isset($section) && $section == 'search') active @endif "><i class="fa fa-search"></i> <span> Search </span> <span class="menu-arrow"></span></a>
+                        <ul class="list-unstyled">
+                            <li class="@if(isset($pagename) &&  $pagename == 'Advanced Search') active @endif"><a href="{{action('\CityNexus\CityNexus\Http\SearchController@getAdvancedSearch')}}">Advanced Search</a></li>
+                            <li class="@if(isset($pagename) &&  $pagename == 'Saved Searches') active @endif"><a href="{{action('\CityNexus\CityNexus\Http\SearchController@getSavedSearches')}}">All Searches</a></li>
                         </ul>
                     </li>
                 @endcan

@@ -1,5 +1,5 @@
 <?php
-$pagename = 'Upload Risk Score';
+$pagename = 'Import Custom Score';
 $section = 'scores';
 ?>
 

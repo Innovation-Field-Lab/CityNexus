@@ -441,9 +441,10 @@ class ViewController extends Controller
                 $results[] = [
                     'x' => $i,
                     'y' => $ver[$key],
-                    'id' => $key,
+                    'property_id' => $key,
                     'full_address' => $property[$key]->full_address
                 ];
+
             }
         }
 
@@ -470,6 +471,8 @@ class ViewController extends Controller
     {
         $data = DB::table('citynexus_scores_' . $settings['key'])->get(['property_id','score']);
 
+        $return = [];
+
         foreach($data as $i) $return[$i->property_id] = $i->score;
 
         return $return;
@@ -482,11 +485,14 @@ class ViewController extends Controller
             case 'mean':
                 return $this->axisMean($settings);
                 break;
-            case 'count':
-                return $this->axisCount($settings);
+            case 'most-recent':
+                return $this->axisLatest($settings);
+                break;
+            case 'sum':
+                return $this->axisSum($settings);
                 break;
             default:
-                return $this->axisLatest($settings);
+                return $this->axisCount($settings);
                 break;
         }
     }
@@ -510,6 +516,29 @@ class ViewController extends Controller
         foreach($sets as $k => $i)
         {
             if($k != null) $return[$k] = array_sum($i) / count($i);
+        }
+
+        return $return;
+    }
+
+    private function axisSum($settings)
+    {
+        $table = Table::find($settings['dataset']);
+
+        $data = DB::table($table->table_name)->whereNotNull($settings['key'])->get(['property_id', $settings['key']]);
+
+        $sets = [];
+
+        $key = $settings['key'];
+        foreach($data as $i)
+        {
+            $sets[$i->property_id][] = $i->$key;
+        }
+
+        $return = [];
+        foreach($sets as $k => $i)
+        {
+            if($k != null) $return[$k] = array_sum($i);
         }
 
         return $return;
@@ -668,5 +697,31 @@ class ViewController extends Controller
         View::find($id)->delete();
         Session::flash('flash_success', 'View deleted.');
         return redirect(action('\CityNexus\CityNexus\Http\ViewController@getIndex'));
+    }
+
+    private function correlation($x, $y){
+
+        $length= count($x);
+        $mean1=array_sum($x) / $length;
+        $mean2=array_sum($y) / $length;
+
+        $a=0;
+        $b=0;
+        $axb=0;
+        $a2=0;
+        $b2=0;
+
+        for($i=0;$i<$length;$i++)
+        {
+            $a=$x[$i]-$mean1;
+            $b=$y[$i]-$mean2;
+            $axb=$axb+($a*$b);
+            $a2=$a2+ pow($a,2);
+            $b2=$b2+ pow($b,2);
+        }
+
+        $corr= $axb / sqrt($a2*$b2);
+
+        return $corr;
     }
 }

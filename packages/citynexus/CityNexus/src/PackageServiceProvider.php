@@ -71,6 +71,7 @@ class PackageServiceProvider extends ServiceProvider
         include_once __DIR__ . '/models/Export.php';
         include_once __DIR__ . '/models/APIRequest.php';
         include_once __DIR__ . '/models/APISecret.php';
+        include_once __DIR__ . '/models/Search.php';
 
         // Include jobs
         include_once __DIR__ . '/Jobs/UploadData.php';

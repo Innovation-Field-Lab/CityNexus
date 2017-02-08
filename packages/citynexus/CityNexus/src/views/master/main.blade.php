@@ -36,7 +36,7 @@
         </div> <!-- content -->
 
         <footer class="footer text-right">
-            2016 © CityNexus
+            {{date('Y')}} © CityNexus
         </footer>
 
     </div>

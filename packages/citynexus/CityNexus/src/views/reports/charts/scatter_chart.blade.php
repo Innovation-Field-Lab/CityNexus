@@ -170,7 +170,7 @@ $section = 'reports';
                     {
                         settings = settings +'<div class=""> ' +
                                 '<label> ' +
-                                '<input type="radio" name="' + axis + '" id="' + axis + '_scope" value="most-recent" onclick="setScope(\'' + axis + '\', \'most-recent\')" >' +
+                                '<input type="radio" name="' + axis + '" id="' + axis + '_scope" value="most-recent" onclick="setScope(\'' + axis + '\', \'most-recent\')" checked >' +
                                 ' Most Recent Record' +
                                 '</label>' +
                                 '</div>'+

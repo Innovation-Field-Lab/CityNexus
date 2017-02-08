@@ -269,7 +269,7 @@ $section = "reports";
             }
 
             layers[handle].addTo(mymap);
-            createLayerBox(handle, color, title);
+            createLayerBox(handle, color, title, markers.length);
             $("#settings_cog").removeClass('fa-spin');
         };
 
@@ -294,9 +294,9 @@ $section = "reports";
             $('#map-settings').removeClass('hidden');
         });
 
-        var createLayerBox = function(layer, color, name)
+        var createLayerBox = function(layer, color, name, length)
         {
-            var box = '<div class="card-box" id="layer_' + layer + '"><span class="fa fa-square" style="color: ' + color + '"></span> <b>' + name + '</b><span class="fa fa-trash pull-right" style="cursor: pointer" onclick="removeLayer(\'' + layer + '\')"></span></div>';
+            var box = '<div class="card-box" id="layer_' + layer + '"><span class="fa fa-square" style="color: ' + color + '"></span> <b>' + name + '</b> <small>(' + length + ')</small><span class="fa fa-trash pull-right" style="cursor: pointer" onclick="removeLayer(\'' + layer + '\')"></span></div>';
             $('#layerCards').append(box);
         };
 

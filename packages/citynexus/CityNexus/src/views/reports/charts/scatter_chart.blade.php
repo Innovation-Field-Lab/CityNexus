@@ -162,7 +162,7 @@ $section = 'reports';
 
                 var settings =
                     '<div id="' + axis + '_detail">' +
-                        '<span class="label label-default">' + tag + ' <i class="fa fa-remove" style="cursor: pointer" onclick="resetAxis(\'' + axis + '\')"></i></span></br>';
+                        '<span class="label label-default">' + tag + ' <i class="fa fa-remove" style="cursor: pointer" onclick="resetAxis(\'' + axis + '\')"></i></span></br></br>';
 
                 if(type == 'float' || type == 'integer')
                 {

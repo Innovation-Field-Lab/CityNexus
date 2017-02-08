@@ -8,6 +8,12 @@ $section = "reports";
 @section(config('citynexus.section'))
 
     <div class="col-md-12">
+        <div class="alert alert-info">
+            CityNexus is in the process of removing heat maps in their current incarnation, replacing them
+            with <a href="{{action('\CityNexus\CityNexus\Http\ViewController@getDotMap')}}">Dot Maps</a>.  You can learn
+            more about how to use Dot Maps in the <a href="https://citynexus.zendesk.com/hc/en-us/articles/115001033425">CityNexus Help Center</a>.
+            If you find that Dot Maps don't replace your need for Heat Maps let us know at <a href="mailto:support@citynexus.org">support@citynexus.org</a>.
+        </div>
         <div class="card-box">
             <div class="dropdown pull-right">
                 <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown"

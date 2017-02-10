@@ -67,15 +67,17 @@ class ViewController extends Controller
     public function getScatterChart($view_id = null)
     {
         $this->authorize('citynexus', ['reports', 'view']);
-        $datasets = Table::where('table_title', "!=", 'null')->orderBy('table_name')->get(['table_name', 'table_title', 'id']);
+        $datasets = Table::whereNotNull('table_title')->orderBy('table_name')->get(['table_name', 'table_title', 'id', 'scheme']);
+        $scores = Score::orderBy('name')->get();
         if($view_id != null)
         {
             $settings = View::find($view_id)->setting;
-            return view('citynexus::reports.charts.scatter_chart', compact('datasets', 'settings'));
+            return view('citynexus::reports.charts.scatter_chart', compact('datasets', 'scores', 'settings'));
         }
-        return view('citynexus::reports.charts.scatter_chart', compact('datasets'));
+        return view('citynexus::reports.charts.scatter_chart', compact('datasets', 'scores'));
 
     }
+
 
     public function getDistribution($table = null, $key = null, Request $request = null)
     {
@@ -274,6 +276,7 @@ class ViewController extends Controller
         $return['points'] = array_values($points);
         $return['max'] = $max * 1.1;
         $return['title'] = $dataset->table_title . " > " . $dataset->schema->$key->name;
+        $return['handle'] = $dataset->id . '_' . $key;
 
         return $return;
     }
@@ -320,6 +323,7 @@ class ViewController extends Controller
         $return['points'] = array_values($points);
         $return['max'] = $max * 1.1;
         $return['title'] = 'Record Count: ' . $dataset->table_title;
+        $return['handle'] = 'table_' . $dataset->id;
 
         return $return;
     }
@@ -360,6 +364,7 @@ class ViewController extends Controller
         $return['points'] = array_values($points);
         $return['max'] = $max * 1.1;
         $return['title'] = 'Property Score: ' . $score->name;
+        $return['handle'] = 'score_' . $score->id;
 
         return $return;
     }
@@ -417,6 +422,169 @@ class ViewController extends Controller
         return $data;
     }
 
+    public function postScatterDataSet(Request $request)
+    {
+
+        $ver = $this->getAxis($request->get('ver'));
+        $hor = $this->getAxis($request->get('hor'));
+
+        $pids = array_keys($hor);
+
+        $property = current((array) Property::find($pids)->keyBy('id'));
+
+        $results = [];
+
+        foreach($hor as $key => $i)
+        {
+            if(isset($ver[$key]))
+            {
+                $results[] = [
+                    'x' => $i,
+                    'y' => $ver[$key],
+                    'property_id' => $key,
+                    'full_address' => $property[$key]->full_address
+                ];
+
+            }
+        }
+
+        return $results;
+    }
+
+    private function getAxis($settings)
+    {
+
+        switch ($settings['dataset'])
+        {
+            case '_score':
+                return $this->axisScore($settings);
+                break;
+
+            default:
+                return $this->axisDataset($settings);
+                break;
+        }
+
+    }
+
+    private function axisScore($settings)
+    {
+        $data = DB::table('citynexus_scores_' . $settings['key'])->get(['property_id','score']);
+
+        $return = [];
+
+        foreach($data as $i) $return[$i->property_id] = $i->score;
+
+        return $return;
+    }
+
+    private function axisDataset($settings)
+    {
+        switch ($settings['scope'])
+        {
+            case 'mean':
+                return $this->axisMean($settings);
+                break;
+            case 'most-recent':
+                return $this->axisLatest($settings);
+                break;
+            case 'sum':
+                return $this->axisSum($settings);
+                break;
+            default:
+                return $this->axisCount($settings);
+                break;
+        }
+    }
+
+
+    private function axisMean($settings)
+    {
+        $table = Table::find($settings['dataset']);
+
+        $data = DB::table($table->table_name)->whereNotNull($settings['key'])->get(['property_id', $settings['key']]);
+
+        $sets = [];
+
+        $key = $settings['key'];
+        foreach($data as $i)
+        {
+            $sets[$i->property_id][] = $i->$key;
+        }
+
+        $return = [];
+        foreach($sets as $k => $i)
+        {
+            if($k != null) $return[$k] = array_sum($i) / count($i);
+        }
+
+        return $return;
+    }
+
+    private function axisSum($settings)
+    {
+        $table = Table::find($settings['dataset']);
+
+        $data = DB::table($table->table_name)->whereNotNull($settings['key'])->get(['property_id', $settings['key']]);
+
+        $sets = [];
+
+        $key = $settings['key'];
+        foreach($data as $i)
+        {
+            $sets[$i->property_id][] = $i->$key;
+        }
+
+        $return = [];
+        foreach($sets as $k => $i)
+        {
+            if($k != null) $return[$k] = array_sum($i);
+        }
+
+        return $return;
+    }
+
+    private function axisCount($settings)
+    {
+        $table = Table::find($settings['dataset']);
+
+        $data = DB::table($table->table_name)->whereNotNull($settings['key'])->whereNotNull('property_id')->get(['property_id', $settings['key']]);
+
+        $sets = [];
+
+        $key = $settings['key'];
+        foreach($data as $i)
+        {
+            $sets[$i->property_id][] = $i->$key;
+        }
+
+        $return = [];
+        foreach($sets as $k => $i)
+        {
+            if($k != null) $return[$k] = count($i);
+        }
+
+        return $return;
+    }
+
+    private function axisLatest($settings)
+    {
+        $table = Table::find($settings['dataset']);
+
+        $data = DB::table($table->table_name)->whereNotNull($settings['key'])->whereNotNull('property_id')->orderBy('created_at', 'DESC')->get(['property_id', $settings['key']]);
+
+        $key = $settings['key'];
+
+        $return = [];
+        foreach($data as $k => $i)
+        {
+            if(!isset($return[$i->property_id])) $return[$i->property_id] = $i->$key;
+        }
+
+        return $return;
+    }
+
+
     public function getScatterDataSet($h_tablename, $h_key, $v_tablename, $v_key )
     {
         $return = null;
@@ -424,25 +592,38 @@ class ViewController extends Controller
         // Build Horizontal Axis
         $horizontal = array_filter($this->getDataSet($h_tablename, $h_key));
 
+
         // Build Vertical Axis
 
         $vertical = array_filter($this->getDataSet($v_tablename, $v_key));
 
-
         // Build Combined Data
 
-        $properties = Property::all()->lists('full_address', 'id');
+        $properties = array_filter(array_keys($horizontal));
+
+        $properties = Property::find($properties);
 
         foreach($horizontal as $k => $i)
         {
             if(isset($vertical[$k])) {
 
+                if(isset($properties->find($k)->full_address))
+                {
+                    $address = $properties->find($k)->full_address;
+                }
+                else
+                {
+                    $address = null;
+                }
+
                 $return[] = [
-                    'address' => $properties[$k],
+                    'full_address' => $address,
                     'property_id' => $k,
                     'x' => floatval($i),
                     'y' => floatval($vertical[$k])
                 ];
+
+
             }
         }
 
@@ -516,5 +697,31 @@ class ViewController extends Controller
         View::find($id)->delete();
         Session::flash('flash_success', 'View deleted.');
         return redirect(action('\CityNexus\CityNexus\Http\ViewController@getIndex'));
+    }
+
+    private function correlation($x, $y){
+
+        $length= count($x);
+        $mean1=array_sum($x) / $length;
+        $mean2=array_sum($y) / $length;
+
+        $a=0;
+        $b=0;
+        $axb=0;
+        $a2=0;
+        $b2=0;
+
+        for($i=0;$i<$length;$i++)
+        {
+            $a=$x[$i]-$mean1;
+            $b=$y[$i]-$mean2;
+            $axb=$axb+($a*$b);
+            $a2=$a2+ pow($a,2);
+            $b2=$b2+ pow($b,2);
+        }
+
+        $corr= $axb / sqrt($a2*$b2);
+
+        return $corr;
     }
 }

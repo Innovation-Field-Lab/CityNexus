@@ -66,11 +66,11 @@
                             ],
                             [
                                     'permission' => "Delete Score",
-                                    'key' => 'score'
+                                    'key' => 'delete'
                             ],
                             [
-                                    'permission' => "Export Score",
-                                    'key' => 'score'
+                                    'permission' => "Upload Score",
+                                    'key' => 'upload'
                             ]
                     ]
             ],
@@ -137,6 +137,20 @@
                             [
                                     'permission' => "Create Properties Record",
                                     'key' => 'create',
+                            ]
+                    ]
+            ],
+            [
+                    'title' => 'Export',
+                    'key' => 'export',
+                    'permissions' => [
+                            [
+                                    'permission' => "View & Download Exports",
+                                    'key' => 'view'
+                            ],
+                            [
+                                    'permission' => "Create New Exports",
+                                    'key' => 'create'
                             ]
                     ]
             ],

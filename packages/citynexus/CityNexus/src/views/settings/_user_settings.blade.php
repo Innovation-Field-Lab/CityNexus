@@ -61,5 +61,16 @@
                    value="{{$user->department}}"/>
         </div>
     </div>
+    <div class="form-group">
+        <label for="department" class="control-label col-sm-4">API Secret</label>
+
+        <div class="col-sm-8">
+            @if($user->api)
+                •••••••• <span class="fa fa-key"></span>
+            @else
+                <button class="btn btn-primary btn-sm" onclick="return false;" id="generate_secret"><span class="fa fa-key"></span> Generate API Secret</button>
+            @endif
+        </div>
+    </div>
     <input type="submit" class="btn btn-primary" value="Update User">
 </form>

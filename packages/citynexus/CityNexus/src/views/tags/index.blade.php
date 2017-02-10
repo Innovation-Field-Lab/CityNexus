@@ -18,36 +18,60 @@ $section = 'properties';
         {{--</div>--}}
 
         <div class="portlet-body">
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                    <th>Tag Name</th>
-                    <th>Count</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach($tags as $tag)
+            <div id="table-wrapper" class="hidden">
+                <table id="datatable" class="table table-striped table-bordered">
+                    <thead>
                     <tr>
-                        <th>{{$tag->tag}}</th>
-                        <th>{{$tag->properties->count()}}</th>
-                        <td>
-                            {{--<a class="btn btn-sm btn-primary" href="/{{config('citynexus.root_directory')}}/tags/heat-map/{{$tag->id}}">Heat Map</a>--}}
-                            <a class="btn btn-sm btn-primary" href="/{{config('citynexus.root_directory')}}/tags/pin-map/{{$tag->id}}">Pin Map</a>
-                            <a class="btn btn-sm btn-primary" href="{{action('\CityNexus\CityNexus\Http\TagController@getList', ['id' => $tag->id])}}">List</a>
-                            <a class="btn btn-sm btn-primary" onclick="renameTag({{$tag->id}}, '{{$tag->tag}}')"> Rename Tags</a>
-                            <a class="btn btn-sm btn-warning" onclick="mergeTag({{$tag->id}})"> <i class="fa fa-code-fork"></i> Merge Tags</a>
-                            <a class="btn btn-sm btn-danger" href="{{action('\CityNexus\CityNexus\Http\TagController@getDelete', ['id' => $tag->id])}}"> <i class="fa fa-trash"></i> Delete</a>
-
-                        </td>
+                        <th>Tag Name</th>
+                        <th>Count</th>
+                        <th>Actions</th>
                     </tr>
-                @endforeach
-            </table>
+                    </thead>
+                    <tbody>
+                    @foreach($tags as $tag)
+                        <tr>
+                            <th>{{$tag->tag}}</th>
+                            <th>{{$tag->properties->count()}}</th>
+                            <td>
+                                {{--<a class="btn btn-sm btn-primary" href="/{{config('citynexus.root_directory')}}/tags/heat-map/{{$tag->id}}">Heat Map</a>--}}
+                                <a class="btn btn-sm btn-primary" href="{{action('\CityNexus\CityNexus\Http\ViewController@getDotMap')}}?is_score=true&score_id={{$tag->id}}">Dot Map</a>
+                                <a class="btn btn-sm btn-primary" href="{{action('\CityNexus\CityNexus\Http\TagController@getList', ['id' => $tag->id])}}">List</a>
+                                <a class="btn btn-sm btn-primary" onclick="renameTag({{$tag->id}}, '{{$tag->tag}}')"> Rename Tags</a>
+                                <a class="btn btn-sm btn-warning" onclick="mergeTag({{$tag->id}})"> <i class="fa fa-code-fork"></i> Merge Tags</a>
+                                <a class="btn btn-sm btn-danger" href="{{action('\CityNexus\CityNexus\Http\TagController@getDelete', ['id' => $tag->id])}}"> <i class="fa fa-trash"></i> Delete</a>
+
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 @stop
 
+@push('style')
+<!-- DataTables -->
+<link href="/vendor/citynexus/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+@endpush
+
 @push('js_footer')
+<script src="/vendor/citynexus/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/vendor/citynexus/plugins/datatables/dataTables.bootstrap.js"></script>
+
+<script src="/vendor/citynexus/pages/datatables.init.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#datatable').dataTable({
+            stateSave: true
+        });
+        $('#loading').addClass('hidden');
+        $('#table-wrapper').removeClass('hidden');
+    } );
+    TableManageButtons.init();
+
+</script>
 
 <script>
     function mergeTag(id)

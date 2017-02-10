@@ -23,7 +23,7 @@ $section = 'reports';
                 </ul>
             </div>
 
-            <h4 class="header-title m-t-0 m-b-30">Line Scatter Diagram</h4>
+            <h4 class="header-title m-t-0 m-b-30"> </h4>
             <div id="chart-wrapper">
                 <div id='chart'>
                     <div class="alert alert-info">
@@ -33,49 +33,72 @@ $section = 'reports';
             </div>
         </div>
     </div>
-    <form action="{{action('\CityNexus\CityNexus\Http\ViewController@getScatterChart')}}">
-
         <div class="col-sm-3">
 
             <div class="portlet">
                 <div class="portlet-heading portlet-default">
-                    <h3 class="portlet-title">Horizontal Variable</h3>
+                    <h3 class="portlet-title">Vertical Axis</h3>
                 </div>
-                <div class="panel-body">
-                    <select name="h_dataset" class="form-control dataset" id="h_dataset">
-                        <option value="">Select One</option>
-                        <option value=""></option>
-                        <option value="_scores">Existing Scores</option>
-                        <option value=""></option>
-                        @foreach($datasets as $i)
-                            <option value="{{$i->id}}">{{$i->table_title}}</option>
-                        @endforeach
-                    </select>
+                <div class="panel-body" id="ver_settings">
+                    <br>
+                    <div class="datasets" id="ver_datasets">
+                        <ul>
+                            <li data-jstree='{"opened":false}'> Scores
+                                <ul>
+                                    @foreach($scores as $score)
+                                        <li data-jstree='{"type":"score"}' onclick="setAxis('ver', '_score', {{$score->id}}, 'float', 'Score: {{$score->name}}')">{{$score->name}} </li>
+                                    @endforeach
+                                </ul>
+                            </li>
+                            @foreach($datasets as $dataset)
+                                <li data-jstree='{"opened":false}'>{{$dataset->table_title}}
+                                    <ul>
+                                        @foreach($dataset->schema as $field)
+                                            <li data-jstree='{"type":"{{$field->type}}"}' onclick="setAxis('ver', {{$dataset->id}}, '{{$field->key}}', '{{$field->type}}', '{{$dataset->table_title}}: {{$field->name}}');">{{$field->name}}</li>
+                                        @endforeach
+                                    </ul>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
                     <div id="h_datafields"></div>
                 </div>
             </div>
             <div class="portlet">
                 <div class="portlet-heading portlet-default">
-                    <h3 class="portlet-title">Vertical Variable</h3>
+                    <h3 class="portlet-title">Horizontal Axis</h3>
                 </div>
-                <div class="portlet-body">
-                    <select name="v_dataset" class="form-control dataset" id="v_dataset">
-                        <option value="">Select One</option>
-                        <option value=""></option>
-                        <option value="_scores">Existing Scores</option>
-                        <option value=""></option>
-                        @foreach($datasets as $i)
-                            <option value="{{$i->id}}">{{$i->table_title}}</option>
-                        @endforeach
-                    </select>
-
-                    <div id="v_datafields"></div>
+                <div class="panel-body" id="hor_settings">
+                    <br>
+                    <div class="datasets" id="hor_datasets">
+                        <ul>
+                            <li data-jstree='{"opened":false}'> Scores
+                                <ul>
+                                    @foreach($scores as $score)
+                                        <li data-jstree='{"type":"score"}' onclick="setAxis('hor', '_score', {{$score->id}}, 'float', 'Score: {{$score->name}}')">{{$score->name}} </li>
+                                    @endforeach
+                                </ul>
+                            </li>
+                            @foreach($datasets as $dataset)
+                                <li data-jstree='{"opened":false}'>{{$dataset->table_title}}
+                                    <ul>
+                                        @foreach($dataset->schema as $field)
+                                            <li data-jstree='{"type":"{{$field->type}}"}' onclick="setAxis('hor', {{$dataset->id}}, '{{$field->key}}', '{{$field->type}}', '{{$dataset->table_title}}: {{$field->name}}');">{{$field->name}}</li>
+                                        @endforeach
+                                    </ul>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    <div id="h_datafields"></div>
                 </div>
             </div>
+            <button class="btn btn-primary block" onclick="updateChart()" id="updateButton">Refresh Scatter Chart</button>
         </div>
 
         @stop
         @push('style')
+        <link href="/vendor/citynexus/plugins/jstree/style.css" rel="stylesheet" type="text/css" />
 
         <style>
             #chart-wrapper {
@@ -94,7 +117,7 @@ $section = 'reports';
             text {
                 stroke: none;
                 fill: #666666;
-                font-size: .6em;
+                font-size: 14px
                 font-family:"Helvetica Neue"
             }
             .label {
@@ -120,132 +143,189 @@ $section = 'reports';
 
         @push('js_footer')
         <script type="text/javascript" src="/vendor/citynexus/plugins/d3/d3.js"></script>
+        <script src="/vendor/citynexus/plugins/jstree/jstree.min.js"></script>
+
         <script>
-            $('.dataset').change(function( event ){
-                var selectId = event.currentTarget.id;
-                if(selectId == 'v_dataset') var axis = 'v';
-                if(selectId == 'h_dataset') var axis = 'h';
-                var dataset_id = $('#' + selectId).val();
-                $.ajax({
-                    url: '{{action('\CityNexus\CityNexus\Http\ViewController@getDataFields')}}/' + dataset_id + '/' + axis,
-                }).success(function (data) {
-                    $('#' + axis + '_datafields').html(data);
-                }).error(function (data)
+
+            var dataRequest = {ver: {}, hor: {}};
+
+            var setAxis = function(axis, dataset, key, type, tag)
+            {
+                dataRequest[axis] = {
+                    label: tag,
+                    dataset: dataset,
+                    key: key,
+                    scope: null
+                };
+
+                console.log(event.target);
+
+                var settings =
+                    '<div id="' + axis + '_detail">' +
+                        '<span class="label label-default">' + tag + ' <i class="fa fa-remove" style="cursor: pointer" onclick="resetAxis(\'' + axis + '\')"></i></span></br></br>';
+
+                if(type == 'float' || type == 'integer')
                 {
-                    Command: toastr["warning"]("Uh oh! Something went wrong. Check the console log")
-                    console.log(data)
-                })
-            });
+                    if(dataset != '_score')
+                    {
+                        settings = settings +'<div class=""> ' +
+                                '<label> ' +
+                                '<input type="radio" name="' + axis + '" id="' + axis + '_scope" value="most-recent" onclick="setScope(\'' + axis + '\', \'most-recent\')" checked >' +
+                                ' Most Recent Record' +
+                                '</label>' +
+                                '</div>'+
+                                '<div class=""> ' +
+                                '<label> ' +
+                                '<input type="radio" name="' + axis + '" id="' + axis + '_scope" value="count" onclick="setScope(\'' + axis + '\', \'count\')">' +
+                                ' Count of Records ' +
+                                '</label>' +
+                                '</div>' +
+                                '<div class=""> ' +
+                                '<label> ' +
+                                '<input type="radio" name="' + axis + '" id="' + axis + '_scope" value="mean" onclick="setScope(\'' + axis + '\', \'mean\')">' +
+                                ' Average of Records ' +
+                                '</label>' +
+                                '</div>' +
+                                '<div class=""> ' +
+                                '<label> ' +
+                                '<input type="radio" name="' + axis + '" id="' + axis + '_scope" value="sum" onclick="setScope(\'' + axis + '\', \'sum\')">' +
+                                ' Sum of Records ' +
+                                '</label>' +
+                                '</div>';
+                    }
+
+                }
+
+                settings = settings +  '</div>';
+
+                $('#' + axis + '_settings').append(settings);
+                $('#' + axis + '_datasets').addClass('hidden');
+            };
+
+            function resetAxis(axis) {
+                $('#' + axis + '_datasets').removeClass('hidden');
+                $('#' + axis + '_detail').remove();
+            };
+
+            function setScope(axis, scope) {
+                console.log(axis);
+                dataRequest[axis]['scope'] = scope;
+            };
+
         </script>
         <script>
-            function drawChart(hTable, hKey, vTable, vKey){
-                $('#chart').html('<div class="fa fa-spinner fa-spin"></div>');
-                var dataSet = scatterChart = d3.json("{{action('\CityNexus\CityNexus\Http\ViewController@getScatterDataSet')}}/" + hTable + '/' + hKey + '/' + vTable + '/' + vKey, function (dataSet) {
-                    console.log(dataSet);
-                    // call the method below
-                    showScatterPlot(dataSet);
-                    function showScatterPlot(data) {
-                        // just to have some space around items.
-                        var margins = {
-                            "left": 40,
-                            "right": 30,
-                            "top": 30,
-                            "bottom": 30
-                        };
-                        var chartWrapper = $("#chart-wrapper");
-                        var width = chartWrapper.width();
-                        var height = window.innerHeight - 300;
-                        // this will be our colour scale. An Ordinal scale.
-                        var colors = d3.scale.category10();
-                        // we add the SVG component to the scatter-load div
-                        $('#chart').html(null);
-                        var svg = d3.select("#chart").append("svg").attr("width", width).attr("height", height).append("g")
-                                .attr("transform", "translate(" + margins.left + "," + margins.top + ")");
-                        // this sets the scale that we're using for the X axis.
-                        // the domain define the min and max variables to show. In this case, it's the min and max prices of items.
-                        // this is made a compact piece of code due to d3.extent which gives back the max and min of the price variable within the dataset
-                        var x = d3.scale.linear()
-                                .domain(d3.extent(data, function (d) {
-                                    return d.x;
-                                }))
-                                // the range maps the domain to values from 0 to the width minus the left and right margins (used to space out the visualization)
-                                .range([0, width - margins.left - margins.right]);
-                        // this does the same as for the y axis but maps from the rating variable to the height to 0.
-                        var y = d3.scale.linear()
-                                .domain(d3.extent(data, function (d) {
-                                    return d.y;
-                                }))
-                                // Note that height goes first due to the weird SVG coordinate system
-                                .range([height - margins.top - margins.bottom, 0]);
-                        // we add the axes SVG component. At this point, this is just a placeholder. The actual axis will be added in a bit
-                        svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + y.range()[0] + ")");
-                        svg.append("g").attr("class", "y axis");
-                        // this is our X axis label. Nothing too special to see here.
-                        svg.append("text")
-                                .attr("fill", "#414241")
-                                .attr("text-anchor", "end")
-                                .attr("x", width / 2)
-                                .attr("y", height - 35)
-                                .text($('#h_datafield').val() + '[' + $('#h_table_name').val() + ']');
-                        // this is the actual definition of our x and y axes. The orientation refers to where the labels appear - for the x axis, below or above the line, and for the y axis, left or right of the line. Tick padding refers to how much space between the tick and the label. There are other parameters too - see https://github.com/mbostock/d3/wiki/SVG-Axes for more information
-                        var xAxis = d3.svg.axis().scale(x).orient("bottom").tickPadding(2);
-                        var yAxis = d3.svg.axis().scale(y).orient("left").tickPadding(2);
-                        // this is where we select the axis we created a few lines earlier. See how we select the axis item. in our svg we appended a g element with a x/y and axis class. To pull that back up, we do this svg select, then 'call' the appropriate axis object for rendering.
-                        svg.selectAll("g.y.axis").call(yAxis);
-                        svg.selectAll("g.x.axis").call(xAxis);
-                        // now, we can get down to the data part, and drawing stuff. We are telling D3 that all nodes (g elements with class node) will have data attached to them. The 'key' we use (to let D3 know the uniqueness of items) will be the name. Not usually a great key, but fine for this example.
-                        var data = svg.selectAll("g.node").data(data, function (d) {
-                            return d.full_address;
-                        });
-                        // we 'enter' the data, making the SVG group (to contain a circle and text) with a class node. This corresponds with what we told the data it should be above.
-                        var dataGroup = data.enter().append("g").attr("class", "node")
-                                // this is how we set the position of the items. Translate is an incredibly useful function for rotating and positioning items
-                                .attr('transform', function (d) {
-                                    return "translate(" + x(d.x) + "," + y(d.y) + ")";
-                                });
-                        // add the tooltip area to the webpage
-                        var tooltip = d3.select("body").append("div")
-                                .attr("class", "tooltip")
-                                .style("opacity", 0);
-                        // we add our first graphics element! A circle!
-                        function toTitleCase(str)
-                        {
-                            return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
-                        }
-                        dataGroup.append("circle")
-                                .attr("r", 5)
-                                .attr("class", "dot")
-                                .style("fill", function (d) {
-                                    // remember the ordinal scales? We use the colors scale to get a colour for our manufacturer. Now each node will be coloured
-                                    // by who makes the chocolate.
-                                    return colors(1);
-                                }).on("mouseover", function(d) {
-                                    tooltip.transition()
-                                            .duration(200)
-                                            .style("opacity", .9);
-                                    tooltip.html( toTitleCase(d.address) + '</br> (' + d.x + ',' + d.y + ')')
-                                            .style("left", (d3.event.pageX + 5) + "px")
-                                            .style("top", (d3.event.pageY - 25) + "px");
-                                })
-                                .on("click", function(d){
-                                    var win = window.open("{{action('\CityNexus\CityNexus\Http\PropertyController@getShow')}}/" + d.property_id , '_blank');
-                                    win.focus();
-                                })
-                                .on("mouseout", function(d) {
-                                    tooltip.transition()
-                                            .duration(500)
-                                            .style("opacity", 0);
-                                });
+
+
+            function updateChart() {
+
+                $.ajax({
+                    url: "{{action('\CityNexus\CityNexus\Http\ViewController@postScatterDataSet')}}?_token={{csrf_token()}}",
+                    type: "post",
+                    data: dataRequest,
+                    success: function (data) {
+                        showScatterPlot(data);
                     }
-                    $(window).resize(function(){
-                        showScatterPlot(dataSet);
-                    }).error(function(data)
-                    {
-                        $('#chart').html('<div class="fa fa-alert"></div>');
-                        Command: toastr["warning"](name, "Uh oh. Something went wrong.");
-                    });
                 });
             }
+
+
+            function showScatterPlot(data) {
+                // just to have some space around items.
+                var margins = {
+                    "left": 50,
+                    "right": 30,
+                    "top": 30,
+                    "bottom": 40
+                };
+                var chartWrapper = $("#chart-wrapper");
+                var width = chartWrapper.width();
+                var height = window.innerHeight - 300;
+                // this will be our colour scale. An Ordinal scale.
+                var colors = d3.scale.category10();
+                // we add the SVG component to the scatter-load div
+                $('#chart').html(null);
+                var svg = d3.select("#chart").append("svg").attr("width", width).attr("height", height).append("g")
+                        .attr("transform", "translate(" + margins.left + "," + margins.top + ")");
+                // this sets the scale that we're using for the X axis.
+                // the domain define the min and max variables to show. In this case, it's the min and max prices of items.
+                // this is made a compact piece of code due to d3.extent which gives back the max and min of the price variable within the dataset
+                var x = d3.scale.linear()
+                        .domain(d3.extent(data, function (d) {
+                            return d.x;
+                        }))
+                        // the range maps the domain to values from 0 to the width minus the left and right margins (used to space out the visualization)
+                        .range([0, width - margins.left - margins.right]);
+                // this does the same as for the y axis but maps from the rating variable to the height to 0.
+                var y = d3.scale.linear()
+                        .domain(d3.extent(data, function (d) {
+                            return d.y;
+                        }))
+                        // Note that height goes first due to the weird SVG coordinate system
+                        .range([height - margins.top - margins.bottom, 0]);
+                // we add the axes SVG component. At this point, this is just a placeholder. The actual axis will be added in a bit
+                svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + y.range()[0] + ")");
+                svg.append("g").attr("class", "y axis");
+                // this is our X axis label. Nothing too special to see here.
+                svg.append("text")
+                        .attr("fill", "#414241")
+                        .attr("text-anchor", "end")
+                        .attr("x", width / 2)
+                        .attr("y", height - 35)
+                        .text(dataRequest.hor.label + ' [' + dataRequest.ver.label + ']');
+
+
+                // this is the actual definition of our x and y axes. The orientation refers to where the labels appear - for the x axis, below or above the line, and for the y axis, left or right of the line. Tick padding refers to how much space between the tick and the label. There are other parameters too - see https://github.com/mbostock/d3/wiki/SVG-Axes for more information
+                var xAxis = d3.svg.axis().scale(x).orient("bottom").tickPadding(2);
+                var yAxis = d3.svg.axis().scale(y).orient("left").tickPadding(2);
+                // this is where we select the axis we created a few lines earlier. See how we select the axis item. in our svg we appended a g element with a x/y and axis class. To pull that back up, we do this svg select, then 'call' the appropriate axis object for rendering.
+                svg.selectAll("g.y.axis").call(yAxis);
+                svg.selectAll("g.x.axis").call(xAxis);
+                // now, we can get down to the data part, and drawing stuff. We are telling D3 that all nodes (g elements with class node) will have data attached to them. The 'key' we use (to let D3 know the uniqueness of items) will be the name. Not usually a great key, but fine for this example.
+                var data = svg.selectAll("g.node").data(data, function (d) {
+                    return d.full_address;
+                });
+                // we 'enter' the data, making the SVG group (to contain a circle and text) with a class node. This corresponds with what we told the data it should be above.
+                var dataGroup = data.enter().append("g").attr("class", "node")
+                // this is how we set the position of the items. Translate is an incredibly useful function for rotating and positioning items
+                        .attr('transform', function (d) {
+                            return "translate(" + x(d.x) + "," + y(d.y) + ")";
+                        });
+                // add the tooltip area to the webpage
+                var tooltip = d3.select("body").append("div")
+                        .attr("class", "tooltip")
+                        .style("opacity", 0);
+                // we add our first graphics element! A circle!
+                function toTitleCase(str)
+                {
+                    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+                }
+                dataGroup.append("circle")
+                        .attr("r", 5)
+                        .attr("class", "dot")
+                        .style("fill", function (d) {
+                            // remember the ordinal scales? We use the colors scale to get a colour for our manufacturer. Now each node will be coloured
+                            // by who makes the chocolate.
+                            return colors(1);
+                        }).on("mouseover", function(d) {
+                    tooltip.transition()
+                            .duration(200)
+                            .style("opacity", .9);
+                    tooltip.html( toTitleCase(d.full_address) + '</br> (' + d.x + ',' + d.y + ')')
+                            .style("left", (d3.event.pageX + 5) + "px")
+                            .style("top", (d3.event.pageY - 25) + "px");
+                })
+                        .on("click", function(d){
+                            var win = window.open("{{action('\CityNexus\CityNexus\Http\PropertyController@getShow')}}/" + d.property_id , '_blank');
+                            win.focus();
+                        })
+                        .on("mouseout", function(d) {
+                            tooltip.transition()
+                                    .duration(500)
+                                    .style("opacity", 0);
+                        });
+            }
+
+
             function saveView() {
                 var v_table = $('#v_dataset').val();
                 var h_table = $('#h_dataset').val();
@@ -310,5 +390,40 @@ $section = 'reports';
             drawChart('{{$settings->h_table}}', '{{$settings->h_key}}', '{{$settings->v_table}}', '{{$settings->v_key}}');
             @endif
         </script>
+        <script>
+            $('.datasets').jstree({
+                'core': {
+                    'themes': {
+                        'responsive': false
+                    }
+                },
+                'types': {
+                    'default': {
+                        'icon': 'fa fa-folder'
+                    },
+                    'score': {
+                        'icon': 'zmdi zmdi-pin'
+                    },
+                    'integer': {
+                        'icon': 'zmdi zmdi-n-1-square'
+                    },
+                    'string': {
+                        'icon': 'ti-text'
+                    },
+                    'datetime': {
+                        'icon': 'ti-calendar'
+                    },
+                    'float': {
+                        'icon': 'zmdi zmdi-n-1-square'
+                    },
+                    'boolean': {
+                        'icon': 'zmdi zmdi-file'
+                    }
+                },
+                'plugins': ['types']
+            });
+
+        </script>
+
 
     @endpush

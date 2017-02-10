@@ -59,6 +59,7 @@
     };
 
     var tags = {!! json_encode($tags) !!};
+
     $('#new-tag-input .typeahead').typeahead({
                 hint: true,
                 highlight: true,

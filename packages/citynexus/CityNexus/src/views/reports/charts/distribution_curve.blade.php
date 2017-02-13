@@ -209,7 +209,7 @@ $section = 'reports';
 @endif
 
 <script>
-    $('#dataset').change(function( event ){
+    $('#dataset').change(function(){
         var dataset_id = $('#dataset').val();
         $.ajax({
             url: '{{action('\CityNexus\CityNexus\Http\ViewController@getDataFields')}}/' + dataset_id + '/null/distribution',

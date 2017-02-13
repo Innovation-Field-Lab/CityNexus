@@ -1,13 +1,18 @@
 @if(isset($scores))
     <br>
     <b>Select Existing Score</b>
-    <select id="table_name" class="form-control" id="datafield">
+    <select class="form-control" id="datafield">
         <option value="">[Select Score]</option>
         @foreach($scores as $i)
             <option value="citynexus_scores_{{$i->id}}">{{$i->name}}</option>
         @endforeach
     </select>
-    <input type='hidden' id="datafield" value="score">
+    <script>
+        $("#datafield").change(function()
+        {
+            window.location = "{{action('\CityNexus\CityNexus\Http\ViewController@getDistribution')}}/" + $('#datafield').val() + '/score';
+        });
+    </script>
 @else
     <input type="hidden" id="table_id" value="{{$dataset->id}}">
     <input type="hidden" id="table_title" value="{{$dataset->table_title}}">
@@ -22,11 +27,11 @@
             @endif
         @endforeach
     </select>
+    <script>
+        $("#datafield").change(function()
+        {
+            window.location = "{{action('\CityNexus\CityNexus\Http\ViewController@getDistribution')}}/" + $('#table_name').val() + '/' + $('#datafield').val();
+        });
+    </script>
 @endif
 
-<script>
-    $("#datafield").change(function()
-    {
-        window.location = "{{action('\CityNexus\CityNexus\Http\ViewController@getDistribution')}}/" + $('#table_name').val() + '/' + $('#datafield').val();
-    });
-</script>

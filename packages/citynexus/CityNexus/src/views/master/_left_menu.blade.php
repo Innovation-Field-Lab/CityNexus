@@ -97,15 +97,15 @@
                         </ul>
                     </li>
                 @endcan
-                @can('citynexus', ['search', 'view'])
-                    <li class="has_sub">
-                        <a href="javascript:void(0);" class="waves-effect @if(isset($section) && $section == 'search') active @endif "><i class="fa fa-search"></i> <span> Search </span> <span class="menu-arrow"></span></a>
-                        <ul class="list-unstyled">
-                            <li class="@if(isset($pagename) &&  $pagename == 'Advanced Search') active @endif"><a href="{{action('\CityNexus\CityNexus\Http\SearchController@getAdvancedSearch')}}">Advanced Search</a></li>
-                            <li class="@if(isset($pagename) &&  $pagename == 'Saved Searches') active @endif"><a href="{{action('\CityNexus\CityNexus\Http\SearchController@getSavedSearches')}}">All Searches</a></li>
-                        </ul>
-                    </li>
-                @endcan
+                {{--@can('citynexus', ['search', 'view'])--}}
+                    {{--<li class="has_sub">--}}
+                        {{--<a href="javascript:void(0);" class="waves-effect @if(isset($section) && $section == 'search') active @endif "><i class="fa fa-search"></i> <span> Search </span> <span class="menu-arrow"></span></a>--}}
+                        {{--<ul class="list-unstyled">--}}
+                            {{--<li class="@if(isset($pagename) &&  $pagename == 'Advanced Search') active @endif"><a href="{{action('\CityNexus\CityNexus\Http\SearchController@getAdvancedSearch')}}">Advanced Search</a></li>--}}
+                            {{--<li class="@if(isset($pagename) &&  $pagename == 'Saved Searches') active @endif"><a href="{{action('\CityNexus\CityNexus\Http\SearchController@getSavedSearches')}}">All Searches</a></li>--}}
+                        {{--</ul>--}}
+                    {{--</li>--}}
+                {{--@endcan--}}
                 @can('citynexus', ['export', 'view'])
                     <li class="has_sub">
                         <a href="javascript:void(0);" class="waves-effect @if(isset($section) && $section == 'exports') active @endif "><i class="fa fa-download"></i> <span> Export Reports </span> <span class="menu-arrow"></span></a>

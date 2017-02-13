@@ -34,7 +34,7 @@ $section = 'properties';
                             <th>{{$tag->properties->count()}}</th>
                             <td>
                                 {{--<a class="btn btn-sm btn-primary" href="/{{config('citynexus.root_directory')}}/tags/heat-map/{{$tag->id}}">Heat Map</a>--}}
-                                <a class="btn btn-sm btn-primary" href="{{action('\CityNexus\CityNexus\Http\ViewController@getDotMap')}}?is_score=true&score_id={{$tag->id}}">Dot Map</a>
+                                <a class="btn btn-sm btn-primary" href="{{action('\CityNexus\CityNexus\Http\TagController@getPinMap', [$tag->id])}}">Pin Map</a>
                                 <a class="btn btn-sm btn-primary" href="{{action('\CityNexus\CityNexus\Http\TagController@getList', ['id' => $tag->id])}}">List</a>
                                 <a class="btn btn-sm btn-primary" onclick="renameTag({{$tag->id}}, '{{$tag->tag}}')"> Rename Tags</a>
                                 <a class="btn btn-sm btn-warning" onclick="mergeTag({{$tag->id}})"> <i class="fa fa-code-fork"></i> Merge Tags</a>

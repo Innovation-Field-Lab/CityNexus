@@ -424,11 +424,11 @@ class ViewController extends Controller
 
     public function postScatterDataSet(Request $request)
     {
-
         $ver = $this->getAxis($request->get('ver'));
         $hor = $this->getAxis($request->get('hor'));
 
         $pids = array_keys($hor);
+
 
         $property = current((array) Property::find($pids)->keyBy('id'));
 
@@ -436,7 +436,7 @@ class ViewController extends Controller
 
         foreach($hor as $key => $i)
         {
-            if(isset($ver[$key]))
+            if(isset($ver[$key]) && isset($property[$key]))
             {
                 $results[] = [
                     'x' => $i,
@@ -453,7 +453,6 @@ class ViewController extends Controller
 
     private function getAxis($settings)
     {
-
         switch ($settings['dataset'])
         {
             case '_score':

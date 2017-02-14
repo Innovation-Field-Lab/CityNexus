@@ -1,10 +1,12 @@
 <?php
 namespace CityNexus\CityNexus;
 use App\Jobs\Job;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Storage;
@@ -13,8 +15,9 @@ use Toin0u\Geocoder\Facade\Geocoder;
 
 class BackUpTable extends Job implements SelfHandling, ShouldQueue
 {
-    use InteractsWithQueue, SerializesModels;
+    use InteractsWithQueue, SerializesModels, DispatchesJobs;
     private $table_name;
+    private $email;
 
     /**
      * Create a new job instance.
@@ -23,9 +26,11 @@ class BackUpTable extends Job implements SelfHandling, ShouldQueue
      * @param string $table_id
      * @param Property $upload_id
      */
-    public function __construct($table_name)
+    public function __construct($table_name, $email)
     {
         $this->table_name = $table_name;
+        $this->email = $email;
+
     }
     /**
      * Execute the job.
@@ -58,9 +63,18 @@ class BackUpTable extends Job implements SelfHandling, ShouldQueue
 
         fclose($fp);
 
-        $s3 = Storage::disk('s3');
-        $filePath = '/db_table_backups/' . date('dmY') . '/' . time() . '_' . $this->table_name . '.csv' ;
-        $s3->put($filePath, file_get_contents($path), 'public');
+        $request = new APIRequest();
+        $request->request = str_random(24);
+        $request->user_id = Auth::Id();
+        $request->settings = [
+            'type' => 'download',
+            'source' => $path
+        ];
 
+        $request->save();
+
+        $content = '<p>The file you have requested is now available:<br> <a href="' . action('\CityNexus\CityNexus\Http\APIController@getRequest', [$request->request]) . '">' . action('\CityNexus\CityNexus\Http\APIController@getRequest', [$request->request]) . '</a>.</p><p>This message will self destruct in 24 hours.</p>';
+
+        $this->dispatch(new SendEmail($this->email, 'Download you requested', $content));
     }
 }

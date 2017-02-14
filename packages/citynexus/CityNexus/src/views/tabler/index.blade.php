@@ -48,6 +48,10 @@ $section = 'datasets';
                                         @can('citynexus', ['datasets', 'delete'])
                                         <li><a href="{{action('\CityNexus\CityNexus\Http\TablerController@getRemoveTable', [$table->id])}}">Hide Table</a></li>
                                         @endcan
+                                        @can('citynexus', ['export', 'create'])
+                                        <li><a href="/{{config('citynexus.tabler_root')}}/download-table/{{$table->table_name}}">Download CSV</a></li>
+                                        @endcan
+
                                     </ul>
                                 </div>
                                 @endcan

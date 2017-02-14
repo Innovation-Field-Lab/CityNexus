@@ -3,10 +3,12 @@
 namespace CityNexus\CityNexus\Http;
 
 use Carbon\Carbon;
+use CityNexus\CityNexus\BackUpTable;
 use CityNexus\CityNexus\ProcessData;
 use CityNexus\CityNexus\Property;
 use CityNexus\CityNexus\Upload;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Session;
@@ -445,26 +447,11 @@ class TablerController extends Controller
 
     public function getDownloadTable($table_name)
     {
-        set_time_limit(240);
-        try{
+        $this->dispatch(new BackUpTable($table_name, Auth::getUser()->email));
 
+        Session::flash('flash_success', "Your download request has been queued.  When completed you will receive an email.");
 
-        if($table_name != 'users' && $table_name != 'password_reset' && $table_name != 'api_keys')
-        DB::setFetchMode(\PDO::FETCH_ASSOC);
-        $table = DB::table($table_name)->select('*')->get();
-        $file = Excel::create($table_name, function($excel) use($table) {
-            $excel->sheet('Sheet 1', function($sheet) use($table) {
-                $sheet->fromArray($table);
-            });
-        })->download('csv');
-        }
-        catch(\Exception $e)
-        {
-            Session::flash('flash_danger', $e);
-            return redirect()->back();
-        }
-
-        return $file;
+        return redirect()->back();
     }
 
     public function getDataFields($id)

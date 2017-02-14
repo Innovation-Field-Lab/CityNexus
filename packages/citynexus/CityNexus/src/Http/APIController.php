@@ -13,7 +13,6 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Salaback\Tabler\Table;
 
 class APIController extends Controller
 {
@@ -62,10 +61,25 @@ class APIController extends Controller
         {
             case 'export':
                 return $this->returnExport($req);
+                break;
+
+            case 'download':
+                return $this->returnDownload($req);
+                break;
         }
 
     }
 
+    private function returnDownload($req)
+    {
+        if($req->created_at->diffInHours(Carbon::now()) < 24)
+        {
+            return response()->download($req->settings['source']);
+        }
+        else
+            return "This link is expired";
+
+    }
     public function getExport($id = null)
     {
         $request = new APIRequest();

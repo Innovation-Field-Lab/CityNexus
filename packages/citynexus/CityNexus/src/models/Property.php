@@ -31,7 +31,7 @@ class Property extends Model
 
     public function notes()
     {
-        return $this->hasMany('\CityNexus\CityNexus\Note');
+        return $this->hasMany('\CityNexus\CityNexus\Note')->orderBy('created_at', 'DESC');
     }
 
     public function tags()

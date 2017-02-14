@@ -75,6 +75,6 @@ class BackUpTable extends Job implements SelfHandling, ShouldQueue
 
         $content = '<p>The file you have requested is now available:<br> <a href="' . action('\CityNexus\CityNexus\Http\APIController@getRequest', [$request->request]) . '">' . action('\CityNexus\CityNexus\Http\APIController@getRequest', [$request->request]) . '</a>.</p><p>This message will self destruct in 24 hours.</p>';
 
-        $this->dispatch(new SendEmail($this->email, 'Download you requested', $content));
+        $this->dispatch(new SendEmail($this->email, 'Download you requested: ' . $this->table_name, $content));
     }
 }

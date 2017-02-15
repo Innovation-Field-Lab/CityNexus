@@ -18,6 +18,7 @@ class BackUpTable extends Job implements SelfHandling, ShouldQueue
     use InteractsWithQueue, SerializesModels, DispatchesJobs;
     private $table_name;
     private $email;
+    private $user_id;
 
     /**
      * Create a new job instance.
@@ -26,10 +27,11 @@ class BackUpTable extends Job implements SelfHandling, ShouldQueue
      * @param string $table_id
      * @param Property $upload_id
      */
-    public function __construct($table_name, $email)
+    public function __construct($table_name, $email, $user_id)
     {
         $this->table_name = $table_name;
         $this->email = $email;
+        $this->user_id = $user_id;
 
     }
     /**
@@ -65,7 +67,7 @@ class BackUpTable extends Job implements SelfHandling, ShouldQueue
 
         $request = new APIRequest();
         $request->request = str_random(24);
-        $request->user_id = Auth::Id();
+        $request->user_id = $this->user_id;
         $request->settings = [
             'type' => 'download',
             'source' => $path

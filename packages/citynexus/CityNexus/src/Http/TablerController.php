@@ -447,7 +447,7 @@ class TablerController extends Controller
 
     public function getDownloadTable($table_name)
     {
-        $this->dispatch(new BackUpTable($table_name, Auth::getUser()->email));
+        $this->dispatch(new BackUpTable($table_name, Auth::getUser()->email, Auth::Id()));
 
         Session::flash('flash_success', "Your download request has been queued.  When completed you will receive an email.");
 

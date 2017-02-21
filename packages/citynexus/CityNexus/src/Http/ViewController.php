@@ -273,6 +273,8 @@ class ViewController extends Controller
             if($max < $i->$key) $max = $i->$key;
         }
 
+        $points = $this->createInfoFlags($points);
+
         $return['points'] = array_values($points);
         $return['max'] = $max * 1.1;
         $return['title'] = $dataset->table_title . " > " . $dataset->schema->$key->name;
@@ -319,6 +321,7 @@ class ViewController extends Controller
             }
         }
 
+        $points = $this->createInfoFlags($points);
 
         $return['points'] = array_values($points);
         $return['max'] = $max * 1.1;
@@ -360,11 +363,37 @@ class ViewController extends Controller
             }
         }
 
+        $points = $this->createInfoFlags($points);
 
         $return['points'] = array_values($points);
         $return['max'] = $max * 1.1;
         $return['title'] = 'Property Score: ' . $score->name;
         $return['handle'] = 'score_' . $score->id;
+
+        return $return;
+    }
+
+    private function createInfoFlags($points)
+    {
+        $return = [];
+
+        foreach($points as $point)
+        {
+            if(isset($return[$point['lat'] . '-' . $point['lng']]['value']))
+            {
+                $return[$point['lat'] . '-' . $point['lng']]['value'] = ($return[$point['lat'] . '-' . $point['lng']]['value'] / $return[$point['lat'] . '-' . $point['lng']]['count']) + ($point['value'] / $return[$point['lat'] . '-' . $point['lng']]['count']) ;
+                $return[$point['lat'] . '-' . $point['lng']]['message'] = $return[$point['lat'] . '-' . $point['lng']]['message'] . '(' . $point['value'] . ')' . ' - <a href="' . $point['url'] . '" target="_blank">' . $point['name'] . '</a></br>';
+                $return[$point['lat'] . '-' . $point['lng']]['count'] = $return[$point['lat'] . '-' . $point['lng']]['count'] + 1;
+            }
+            else
+            {
+                $return[$point['lat'] . '-' . $point['lng']]['value'] = $point['value'];
+                $return[$point['lat'] . '-' . $point['lng']]['count'] = 1;
+                $return[$point['lat'] . '-' . $point['lng']]['lat'] = $point['lat'];
+                $return[$point['lat'] . '-' . $point['lng']]['lng'] = $point['lng'];
+                $return[$point['lat'] . '-' . $point['lng']]['message'] = '(' . $point['value'] . ')' . ' - <a href="' . $point['url'] . '" target="_blank">' . $point['name'] . '</a></br>';
+            }
+        }
 
         return $return;
     }

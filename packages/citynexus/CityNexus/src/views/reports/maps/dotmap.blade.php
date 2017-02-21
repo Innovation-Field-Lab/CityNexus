@@ -264,7 +264,7 @@ $section = "reports";
                             fill: true,
                             fillColor: color,
                             fillOpacity: (markers[i].value/max) + .1
-                        } ).bindPopup( '<b>Value: ' + markers[i].value + '</b><br><a href="' + markers[i].url + '" target="_blank">' + markers[i].name + '</a>' )
+                        } ).bindPopup( markers[i].message )
                 );
             }
 

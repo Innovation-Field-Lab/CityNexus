@@ -13,7 +13,7 @@ class AddReplyToNote extends Migration
     public function up()
     {
         Schema::table('citynexus_notes', function (Blueprint $table) {
-            $table->integer('reply_to');
+            $table->integer('reply_to')->unsigned()->nullable();
         });
     }
 
@@ -25,7 +25,7 @@ class AddReplyToNote extends Migration
     public function down()
     {
         Schema::table('citynexus_notes', function (Blueprint $table) {
-            //
+            $table->dropColumn('reply_to');
         });
     }
 }

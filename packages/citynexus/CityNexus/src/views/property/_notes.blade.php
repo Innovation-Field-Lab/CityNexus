@@ -57,15 +57,16 @@
             }
         }).success(function( data )
         {
-            if($('#reply_note_id').val() != null)
+            if($('#reply_note_id').val() != '')
             {
                 $('#reply-notes-' + $('#reply_note_id').val()).prepend( data ).removeClass('hidden');
             }
             else {
                 $('#notes').prepend( data );
+                $('#no-notes').addClass('hidden');
+                window.location.href = "#notes";
             }
             $('#note').val( null );
-            $('#no-notes').addClass('hidden');
         })
     };
 

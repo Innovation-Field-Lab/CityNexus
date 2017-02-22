@@ -28,7 +28,7 @@ class NoteController extends Controller
                 'property_id' => 'required'
             ]);
 
-        if($request->exists('reply_to'))
+        if($request->get('reply_to') == null)
         {
             $note = $this->saveReplyNote($request);
         } else {

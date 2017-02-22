@@ -21,4 +21,9 @@ class Note extends Model {
     {
         return $this->belongsTo('\CityNexus\CityNexus\Property');
     }
+
+    public function replies()
+    {
+        return $this->hasMany('\CityNexus\CityNexus\Note', 'reply_to')->orderBy('created_at');
+    }
 }

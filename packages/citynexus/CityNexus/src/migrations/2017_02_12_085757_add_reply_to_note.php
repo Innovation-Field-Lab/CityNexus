@@ -13,7 +13,7 @@ class AddReplyToNote extends Migration
     public function up()
     {
         Schema::table('citynexus_notes', function (Blueprint $table) {
-            $table->integer('reply_to');
+            $table->integer('reply_to')->unsigned()->nullable();
         });
     }
 

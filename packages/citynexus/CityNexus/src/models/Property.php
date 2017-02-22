@@ -31,7 +31,7 @@ class Property extends Model
 
     public function notes()
     {
-        return $this->hasMany('\CityNexus\CityNexus\Note')->orderBy('created_at', 'DESC');
+        return $this->hasMany('\CityNexus\CityNexus\Note')->orderBy('created_at', 'DESC')->whereNull('reply_to');
     }
 
     public function tags()

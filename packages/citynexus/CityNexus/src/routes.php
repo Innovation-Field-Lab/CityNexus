@@ -10,7 +10,6 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
 Route::controller("api-query", '\CityNexus\CityNexus\Http\APIController');
 
 Route::controller("/citynexus/help", '\CityNexus\CityNexus\Http\HelpController');

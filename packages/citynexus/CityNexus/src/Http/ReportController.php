@@ -209,8 +209,6 @@ class ReportController extends Controller
 
         $properties = Property::find(array_keys($results));
 
-        $plist = [];
-
         $plist[0]['property_id'] = 'property_id';
         if(isset($export->elements['property']['full_address']))
         {
@@ -256,29 +254,33 @@ class ReportController extends Controller
             if(isset($export->elements['property']['coordinates']))
             {
                 $plist[$property->id]['lat'] = $property->lat;
-                $plist[$property->id]['long'] = $property->long;
+                $plist[$property->id]['lng'] = $property->long;
             }
 
         }
 
-        foreach($results as $pid => $result)
+
+        foreach($results[0] as $key)
         {
-            if(isset($plist[$pid]))
+            foreach($results as $id => $value)
             {
-                $results[$pid] = array_merge($plist[$pid], $results[$pid]);
+                if(isset($results[$id][$key]))
+                {
+                    $plist[$id][$key] = $results[$id][$key];
+                }
+                else{
+                    $plist[$id][$key] = null;
+                }
             }
-            else
-            {
-                $results[$pid] = array_merge((array) Property::where('id', $pid)->pluck('id', 'full_address', 'lat', 'long'), $results[$pid]);
-            }
-
         }
 
-        ksort($results);
+        ksort($plist);
 
         $fp = fopen($path, 'w');
 
-        foreach($results as $row)
+        $plist[0] = array_merge($plist[0], $results[0]);
+
+        foreach($plist as $row)
         {
             fputcsv($fp, $row);
         }
@@ -380,6 +382,11 @@ class ReportController extends Controller
 
             $results[0][$name] = $name;
 
+            foreach($results as $result)
+            {
+                $result[$name] = null;
+            }
+
             foreach ($data as $i)
             {
                 $results[$i->property_id][$name] = $i->score;
@@ -391,6 +398,7 @@ class ReportController extends Controller
 
     private function processMostRecent($table, $key, $data, $results)
     {
+
         foreach($data as $pid => $datasets)
         {
             // Add name to titles
@@ -436,6 +444,7 @@ class ReportController extends Controller
 
     private function processMean($table, $key, $data, $results)
     {
+
         foreach($data as $pid => $datasets)
         {
             // Add name to titles
@@ -491,6 +500,11 @@ class ReportController extends Controller
 
     private function processCount($table, $key, $data, $results)
     {
+        foreach($results as $result)
+        {
+            $result[$table . '_' . $key] = null;
+        }
+
         foreach($data as $pid => $datasets)
         {
             // Add name to titles

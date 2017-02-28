@@ -19,6 +19,13 @@ $section = "exports";
                         @endforeach
                         </ul>
                     </li>
+                    <li data-jstree='{"opened":false}'> Tags
+                        <ul>
+                            @foreach($tags as $tag)
+                                <li data-jstree='{"type":"tag"}' onclick="addTag('{{$tag->tag}}', {{$tag->id}})">{{$tag->tag}}</li>
+                            @endforeach
+                        </ul>
+                    </li>
                     @foreach($datasets as $dataset)
                         <li data-jstree='{"opened":false}'>{{$dataset->table_title}}
                             <ul>
@@ -183,6 +190,27 @@ $section = "exports";
                 '<i class="fa fa-trash-o pull-right" style="color: red; cursor: pointer" onclick="$(\'#' + id + '\').remove()"></i>' +
                 '<input type="hidden" name="elements[scores][' + score_id + ']" value="' + score_id +'">' +
                 '<h4 class="header-title m-t-0"> Score > ' + name +  ' </h4> ' +
+                '</div>';
+
+        $('#elements').append(element);
+    }
+    var addTag = function(name, tag_id)
+    {
+        var element;
+        var id = Math.random().toString(36).substring(7);
+        element = '<div class="card-box" id="' + id + '"> ' +
+                '<i class="fa fa-trash-o pull-right" style="color: red; cursor: pointer" onclick="$(\'#' + id + '\').remove()"></i>' +
+                '<input type="hidden" name="elements[tags][' + tag_id + ']" value="' + tag_id +'">' +
+                '<h4 class="header-title m-t-0"> Score > ' + name +  ' </h4> ' +
+                '<label for="" class="radio-inline">' +
+                '<input type="radio" name="elements[tags][' + tag_id + '][' + id + '][method]" value="tagged" checked> Currently Tagged ' +
+                '</label>' +
+                '<label for="" class="radio-inline">' +
+                '<input type="radio" name="elements[tags][' + tag_id + '][' + id + '][method]" value="deleted"> Previously Tagged ' +
+                '</label>' +
+                '<label for="" class="radio-inline"> ' +
+                '<input type="radio" name="elements[tags][' + tag_id + '][' + id + '][method]" value="all"> Ever Tagged ' +
+                '</label> ' +
                 '</div>';
 
         $('#elements').append(element);

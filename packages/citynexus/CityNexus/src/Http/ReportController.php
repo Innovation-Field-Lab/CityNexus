@@ -1,11 +1,13 @@
 <?php
 namespace CityNexus\CityNexus\Http;
 use App\Http\Controllers\Controller;
+use App\User;
 use CityNexus\CityNexus\Export;
 use CityNexus\CityNexus\Property;
 use CityNexus\CityNexus\GenerateScore;
 use CityNexus\CityNexus\Report;
 use CityNexus\CityNexus\Score;
+use CityNexus\CityNexus\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use CityNexus\CityNexus\Geocode;
@@ -31,7 +33,8 @@ class ReportController extends Controller
     {
         $datasets = Table::whereNotNull('table_name')->orderBy('table_title')->get();
         $scores = Score::all();
-        return view('citynexus::reports.export.builder', compact('datasets', 'scores'));
+        $tags = Tag::all();
+        return view('citynexus::reports.export.builder', compact('datasets', 'scores', 'tags'));
     }
 
     public function postExportSave(Request $request)
@@ -206,6 +209,7 @@ class ReportController extends Controller
         $results = [];
         if(isset($elements['datasets'])) $results = $this->exportDatasets($elements['datasets'], $results);
         if(isset($elements['scores'])) $results = $this->exportScores($elements['scores'], $results);
+        if(isset($elements['tags'])) $results = $this->exportTags($elements['tags'], $results);
 
         $properties = Property::find(array_keys($results));
 
@@ -391,6 +395,62 @@ class ReportController extends Controller
             {
                 $results[$i->property_id][$name] = $i->score;
             }
+        }
+
+        return $results;
+    }
+
+    private function exportTags($tags, $results)
+    {
+
+        foreach($tags as $id => $group)
+        {
+            foreach($group as $i)
+
+            {
+                $tag = Tag::find($id);
+
+
+
+                switch ($i['method'])
+                {
+                    case 'tagged':
+                        $properties = $tag->properties;
+                        $name = 'tagged_' . str_replace(' ', '_', strtolower($tag->name));
+                        $results[0][$name] = $name;
+                        foreach($properties as $property)
+                        {
+                            $results[$property->id][$name] = $property->pivot->created_at . ", " . User::find($property->pivot->created_by)->fullname();
+                        }
+                        break;
+                    case 'deleted':
+                        $properties = $tag->onlyTrashed()->properties;
+                        $name = 'deleted_tagged_' . str_replace(' ', '_', strtolower($tag->name));
+                        $results[0][$name] = $name;
+                        foreach($properties as $property)
+                        {
+                            $results[$property->id][$name] = $property->pivot->deleted_at . ", " . User::find($property->pivot->deleted_by)->fullname();
+                        }
+                        break;
+                    default:
+                        $properties = $tag->withTrashed()->properties;
+                        $name = 'tag_' . str_replace(' ', '_', strtolower($tag->name));
+                        $results[0][$name] = $name;
+                        foreach($properties as $property)
+                        {
+                            if(isset($property->pivot->deleted_at))
+                            {
+                                $results[$property->id][$name] = 'tagged at: ' . $property->pivot->created_at . ", deleted at:" . $property->pivot->deleted_at;
+                            }
+                            else {
+                                $results[$property->id][$name] = 'tagged at: ' . $property->pivot->deleted_at;
+                            }
+                        }
+                        break;
+                }
+
+            }
+
         }
 
         return $results;

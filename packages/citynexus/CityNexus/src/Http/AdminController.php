@@ -414,4 +414,39 @@ class AdminController extends Controller
 
     }
 
+    public function postCustomLogin(Request $request)
+    {
+        $this->validate($request, [
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+
+        $email = strtolower($request->get('email'));
+
+        if (Auth::attempt(['email' => $email, 'password' => $request->get('password')])) {
+            // Authentication passed...
+            return redirect()->intended('/');
+        }
+        else
+        {
+            Session::flash('flash_info', "Sorry! That user or password doesn't match our records. Please try again.");
+            return redirect()->back();
+        }
+    }
+
+    public function getLowerCaseEmails()
+    {
+        $users = User::all();
+
+        foreach($users as $user)
+        {
+            $user->email = strtolower($user->email);
+            $user->save();
+        }
+
+        Session::flash('flash_success', "All emails made lowercase.");
+
+        return redirect()->back();
+    }
+
 }

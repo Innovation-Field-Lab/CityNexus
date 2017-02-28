@@ -29,7 +29,8 @@
         @endforeach
     </div>
 
-
-
+    <br>
+    <br>
+    <a href="{{action('\CityNexus\CityNexus\Http\AdminController@getLowerCaseEmails')}}">Make all user emails lowercase.</a>
 
 @stop

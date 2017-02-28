@@ -99,8 +99,6 @@ class CitynexusSettingsController extends Controller
          $user = User::find($request->get('user_id'));
          $update = $request->all();
          $update['permissions'] = json_encode($request->get('permissions'));
-         $update['email'] = strtolower($update['email']);
-        dd($update);
          $user->update($update);
          Session::flash('flash_success', "User updated.");
          return redirect()->back();

@@ -58,7 +58,7 @@ class CitynexusSettingsController extends Controller
 
             $user->first_name = $request->get('first_name');
             $user->last_name = $request->get('last_name');
-            $user->email = $request->get('email');
+            $user->email = strtolower($request->get('email'));
             $user->password = str_random();
             $user->super_admin = $request->get('super_admin');
             $user->title = $request->get('title');
@@ -99,6 +99,8 @@ class CitynexusSettingsController extends Controller
          $user = User::find($request->get('user_id'));
          $update = $request->all();
          $update['permissions'] = json_encode($request->get('permissions'));
+         $update['email'] = strtolower($update['email']);
+        dd($update);
          $user->update($update);
          Session::flash('flash_success', "User updated.");
          return redirect()->back();
@@ -120,7 +122,8 @@ class CitynexusSettingsController extends Controller
 
     public function postUpdateUserSettings( $id, Request $request)
     {
-
+        $user = $request->get('user');
+        dd($user);
         User::find($id)->update($request->get('user'));
         return response('Success');
 
@@ -154,6 +157,7 @@ class CitynexusSettingsController extends Controller
         }
 
         $user->update($request->all());
+        $user->email = strtolower($user->email);
 
         $user->save();
 

@@ -17,7 +17,7 @@ Route::get('/home', function () {
 
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');
-Route::post('auth/login', 'Auth\AuthController@postLogin');
+Route::post('auth/login', '\CityNexus\CityNexus\Http\AdminController@postCustomLogin');
 Route::get('auth/logout', 'Auth\AuthController@getLogout');
 
 // Registration routes...

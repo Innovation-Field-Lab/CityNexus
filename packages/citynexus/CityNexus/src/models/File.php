@@ -23,6 +23,14 @@ class File extends Model
         return $this->belongsTo('\CityNexus\CityNexus\Location');
     }
 
+    public function getImage()
+    {
+        $return['source'] = $this->current->source;
+        $return['caption'] = $this->caption;
+        $return['description'] = $this->description;
+        return $return;
+    }
+
     public function getFile()
     {
         return $this->current->source;

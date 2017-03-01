@@ -57,7 +57,7 @@ class FileController extends Controller
 
     public function getShow($id)
     {
-        return File::find($id)->getFile();
+        return File::find($id)->getImage();
     }
 
     public function getDownload($id)

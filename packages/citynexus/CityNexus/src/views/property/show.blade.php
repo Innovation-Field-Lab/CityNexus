@@ -39,6 +39,40 @@ $section = 'properties';
 @extends(config('citynexus.template'))
 
 @section(config('citynexus.section'))
+    <?php $ghost = \CityNexus\CityNexus\Tag::where('tag', 'Haunted')->first(); ?>
+    @if($ghost != null && $property->tags->contains($ghost->id))
+        <style>
+            #ghost {
+                width: 250px;
+                position: absolute;
+                top: 35%;
+                left: -105%;
+                transform-origin: bottom left;
+                z-index: 200;
+            }
+
+            #ghost {
+                -webkit-animation: ghost-move 1s 1s ease-out forwards;
+                animation: ghost-move 1s 1s ease-out forwards;
+                -webkit-animation-duration: 7s;
+                animation-duration: 7s;
+            }
+            @-webkit-keyframes ghost-move {
+                100% {
+                    left: 200%;
+                    transform: scale(2);
+                }
+            }
+            @keyframes ghost-move {
+                100% {
+                    left:200%;
+                    transform: scale(2);
+                }
+            }
+        </style>
+        <img id="ghost" src="/img/ghost.png">
+
+    @endif
 
     <div class="card-box">
         <div class="panel-body">
@@ -180,6 +214,7 @@ $section = 'properties';
     }
 </script>
 
+
 @endpush
 
 @push('style')
@@ -252,6 +287,8 @@ $section = 'properties';
     .gist {
         font-size: 14px;
     }
+
+
 
 </style>
 

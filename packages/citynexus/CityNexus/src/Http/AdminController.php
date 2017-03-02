@@ -76,11 +76,11 @@ class AdminController extends Controller
             {
                 if($without_pid)
                 {
-                    $this->dispatch(new ProcessData($i, $table_name, true));
+                    $this->dispatch(new ProcessData($i->id, $table_name, true));
                 }
                 else
                 {
-                    $this->dispatch(new ProcessData($i, $table_name));
+                    $this->dispatch(new ProcessData($i->id, $table_name));
                 }
             }
 

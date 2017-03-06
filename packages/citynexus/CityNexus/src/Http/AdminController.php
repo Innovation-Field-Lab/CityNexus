@@ -7,6 +7,7 @@ use App\User;
 use Carbon\Carbon;
 use CityNexus\CityNexus\BackUpTable;
 use CityNexus\CityNexus\CreateRaw;
+use CityNexus\CityNexus\CreateUnique;
 use CityNexus\CityNexus\Error;
 use CityNexus\CityNexus\GeocodeJob;
 use CityNexus\CityNexus\Location;
@@ -447,6 +448,25 @@ class AdminController extends Controller
         Session::flash('flash_success', "All emails made lowercase.");
 
         return redirect()->back();
+    }
+
+    public function getClearUniques($id)
+    {
+        $table = Table::find($id);
+        $unique_id = \GuzzleHttp\json_decode($table->settings)->unique_id;
+
+        if($unique_id != null)
+        {
+            $values = DB::table($table->table_name)
+                ->select(DB::raw('DISTINCT ' . $unique_id))->get();
+            $chunks = array_chunk($values, 100);
+
+            foreach($chunks as $chunk)
+            {
+                $this->dispatch(new CreateUnique($table->table_name, $unique_id, $chunk));
+            }
+        }
+
     }
 
 }

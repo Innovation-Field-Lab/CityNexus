@@ -328,8 +328,17 @@ class TablerController extends Controller
     {
         $aliases = $request->alias;
         $id = $request->get('p_id');
+        $this->mergeProperties($id, $aliases);
+
+        Session::flash('flash_success', "Records have been merged.");
+        return redirect(action('\CityNexus\CityNexus\Http\PropertyController@getShow', ['property_id' => $id]));
+    }
+
+    public function mergeProperties($id, $ids)
+    {
         $datasets = DB::table('tabler_tables')->whereNotNull('table_name')->lists('table_name');
-        foreach($aliases as $i)
+
+        foreach($ids as $i)
         {
             DB::table('citynexus_images')->where('property_id', $i)->update(['property_id' => $id]);
             DB::table('citynexus_notes')->where('property_id', $i)->update(['property_id' => $id]);
@@ -346,9 +355,6 @@ class TablerController extends Controller
 
             Property::find($i)->delete();
         }
-
-        Session::flash('flash_success', "Records have been merged.");
-        return redirect(action('\CityNexus\CityNexus\Http\PropertyController@getShow', ['property_id' => $id]));
     }
 
     public function getDemergeProperty($id)

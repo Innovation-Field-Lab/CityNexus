@@ -6,6 +6,7 @@ use App\Jobs\FakeLocation;
 use App\User;
 use Carbon\Carbon;
 use CityNexus\CityNexus\BackUpTable;
+use CityNexus\CityNexus\CleanApartments;
 use CityNexus\CityNexus\CreateRaw;
 use CityNexus\CityNexus\CreateUnique;
 use CityNexus\CityNexus\Error;
@@ -467,6 +468,22 @@ class AdminController extends Controller
             }
         }
 
+    }
+
+    public function getClearDupApartments()
+    {
+        $properties =  $values = DB::table('citynexus_properties')
+            ->select(DB::raw('DISTINCT house_number, street_name, street_type'))
+            ->whereNotNull('unit')->get();
+    
+        $chunks = array_chunk($properties, 50);
+        
+        foreach ($chunks as $chunk)
+        {
+            $this->dispatch(new CleanApartments($chunk));
+        }
+
+        return 'done';
     }
 
 }

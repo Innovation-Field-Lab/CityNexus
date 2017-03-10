@@ -42,7 +42,7 @@ class CreateUnique extends Job implements SelfHandling, ShouldQueue
             if($value->$uid != null)
             {
                 $values = DB::table($this->table)->where($this->column, $value->$uid)->orderBy('created_at', 'DESC')->get();
-                $first = array_shift($values);
+                array_shift($values);
                 foreach($values as $i)
                 {
                     DB::table($this->table)->where('id', $i->id)->delete();

@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use CityNexus\CityNexus\BackUpTable;
 use CityNexus\CityNexus\CheckForDuplicates;
 use CityNexus\CityNexus\CleanApartments;
+use CityNexus\CityNexus\ClearProperty;
 use CityNexus\CityNexus\CreateRaw;
 use CityNexus\CityNexus\CreateUnique;
 use CityNexus\CityNexus\Error;
@@ -334,36 +335,18 @@ class AdminController extends Controller
 
         if(isset($_GET{'doit'}))
         {
-            $datasets = DB::table('tabler_tables')->whereNotNull('table_name')->lists('table_name');
 
-            foreach ($properties as $i) {
 
-                $count = 0;
-                $count += DB::table('citynexus_images')->where('property_id', $i->id)->count();
-                $count += DB::table('citynexus_notes')->where('property_id', $i->id)->count();
-                $count += DB::table('citynexus_properties')->where('alias_of', $i->id)->count();
-                $count += DB::table('citynexus_taskables')->where('citynexus_taskable_id', $i->id)->where('citynexus_taskable_type', 'CityNexus\CityNexus\Property')->count();
-                $count += DB::table('property_tag')->where('property_id', $i->id)->count();
-                if($count == 0)
-                {
-                    foreach ($datasets as $tn) {
-                        if (Schema::hasTable($tn)) {
-                            DB::table($tn)->where('property_id', $i->id)->update(['property_id' => null]);
-                        }
-                    }
-                    DB::table('citynexus_raw_addresses')->where('property_id', $i->id)->delete();
-
-                    $i->delete();
-                }
+            foreach($properties as $property)
+            {
+                $this->dispatch(new ClearProperty($property->id));
             }
-
-            return 'success';
 
         }
 
         else
         {
-            return $properties;
+            return count($properties);
         }
 
     }
@@ -389,28 +372,10 @@ class AdminController extends Controller
 
         if(isset($_GET{'doit'}))
         {
-            $datasets = DB::table('tabler_tables')->whereNotNull('table_name')->lists('table_name');
 
             foreach ($properties as $i) {
 
-                $count = 0;
-                $count += DB::table('citynexus_images')->where('property_id', $i->id)->count();
-                $count +=DB::table('citynexus_notes')->where('property_id', $i->id)->count();
-                $count +=DB::table('citynexus_properties')->where('alias_of', $i->id)->count();
-                $count +=DB::table('citynexus_taskables')->where('citynexus_taskable_id', $i->id)->where('citynexus_taskable_type', 'CityNexus\CityNexus\Property')->count();
-                $count +=DB::table('property_tag')->where('property_id', $i->id)->count();
-
-                if($count == 0)
-                {
-                    foreach ($datasets as $tn) {
-                        if (Schema::hasTable($tn)) {
-                            DB::table($tn)->where('property_id', $i->id)->update(['property_id' => null]);
-                        }
-                    }
-                    $count +=DB::table('citynexus_raw_addresses')->where('property_id', $i->id)->delete();
-
-                    $i->delete();
-                }
+                $this->dispatch(new ClearProperty($i->id));
             }
 
             return 'success';

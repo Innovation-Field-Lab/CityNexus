@@ -330,27 +330,98 @@ class AdminController extends Controller
     public function getDropZeroAddresses()
     {
 
-        $properties = Property::where('house_number', 0)->get();
-        $datasets = DB::table('tabler_tables')->whereNotNull('table_name')->lists('table_name');
+        $properties = Property::whereNull('house_number')->orWhere('house_number', 0)->get();
 
-        foreach ($properties as $i) {
-            DB::table('citynexus_images')->where('property_id', $i->id)->update(['property_id' => null]);
-            DB::table('citynexus_notes')->where('property_id', $i->id)->update(['property_id' => null]);
-            DB::table('citynexus_properties')->where('alias_of', $i->id)->update(['alias_of' => null]);
-            DB::table('citynexus_raw_addresses')->where('property_id', $i->id)->update(['property_id' => null]);
-            DB::table('citynexus_taskables')->where('citynexus_taskable_id', $i->id)->where('citynexus_taskable_type', 'CityNexus\CityNexus\Property')->delete();
-            DB::table('property_tag')->where('property_id', $i->id)->delete();
+        if(isset($_GET{'doit'}))
+        {
+            $datasets = DB::table('tabler_tables')->whereNotNull('table_name')->lists('table_name');
 
-            foreach ($datasets as $tn) {
-                if (Schema::hasTable($tn)) {
-                    DB::table($tn)->where('property_id', $i->id)->update(['property_id' => null]);
+            foreach ($properties as $i) {
+
+                $count = 0;
+                $count += DB::table('citynexus_images')->where('property_id', $i->id)->count();
+                $count += DB::table('citynexus_notes')->where('property_id', $i->id)->count();
+                $count += DB::table('citynexus_properties')->where('alias_of', $i->id)->count();
+                $count += DB::table('citynexus_taskables')->where('citynexus_taskable_id', $i->id)->where('citynexus_taskable_type', 'CityNexus\CityNexus\Property')->count();
+                $count += DB::table('property_tag')->where('property_id', $i->id)->count();
+                if($count == 0)
+                {
+                    foreach ($datasets as $tn) {
+                        if (Schema::hasTable($tn)) {
+                            DB::table($tn)->where('property_id', $i->id)->update(['property_id' => null]);
+                        }
+                    }
+                    DB::table('citynexus_raw_addresses')->where('property_id', $i->id)->delete();
+
+                    $i->delete();
                 }
             }
 
-            $i->delete();
+            return 'success';
+
         }
 
-        return 'success';
+        else
+        {
+            return $properties;
+        }
+
+    }
+
+    public function getDropBadAddresses()
+    {
+
+        $allproperties = Property::all();
+
+        $properties = [];
+
+        foreach($allproperties as $property)
+        {
+            if(!is_numeric($property->house_number)) $properties[] = $property;
+        }
+
+        foreach($properties as $key => $item)
+        {
+            if(1 === preg_match('~[0-9]~', $item->house_number)){
+                unset($properties[$key]);
+            }
+        }
+
+        if(isset($_GET{'doit'}))
+        {
+            $datasets = DB::table('tabler_tables')->whereNotNull('table_name')->lists('table_name');
+
+            foreach ($properties as $i) {
+
+                $count = 0;
+                $count += DB::table('citynexus_images')->where('property_id', $i->id)->count();
+                $count +=DB::table('citynexus_notes')->where('property_id', $i->id)->count();
+                $count +=DB::table('citynexus_properties')->where('alias_of', $i->id)->count();
+                $count +=DB::table('citynexus_raw_addresses')->where('property_id', $i->id)->count();
+                $count +=DB::table('citynexus_taskables')->where('citynexus_taskable_id', $i->id)->where('citynexus_taskable_type', 'CityNexus\CityNexus\Property')->count();
+                $count +=DB::table('property_tag')->where('property_id', $i->id)->count();
+
+                if($count == 0)
+                {
+                    foreach ($datasets as $tn) {
+                        if (Schema::hasTable($tn)) {
+                            DB::table($tn)->where('property_id', $i->id)->update(['property_id' => null]);
+                        }
+                    }
+
+                    $i->delete();
+                }
+            }
+
+            return 'success';
+
+        }
+
+        else
+        {
+            return $properties;
+        }
+
     }
 
     public function getDropNoData()

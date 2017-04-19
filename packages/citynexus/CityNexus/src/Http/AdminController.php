@@ -397,7 +397,6 @@ class AdminController extends Controller
                 $count += DB::table('citynexus_images')->where('property_id', $i->id)->count();
                 $count +=DB::table('citynexus_notes')->where('property_id', $i->id)->count();
                 $count +=DB::table('citynexus_properties')->where('alias_of', $i->id)->count();
-                $count +=DB::table('citynexus_raw_addresses')->where('property_id', $i->id)->count();
                 $count +=DB::table('citynexus_taskables')->where('citynexus_taskable_id', $i->id)->where('citynexus_taskable_type', 'CityNexus\CityNexus\Property')->count();
                 $count +=DB::table('property_tag')->where('property_id', $i->id)->count();
 
@@ -408,6 +407,7 @@ class AdminController extends Controller
                             DB::table($tn)->where('property_id', $i->id)->update(['property_id' => null]);
                         }
                     }
+                    $count +=DB::table('citynexus_raw_addresses')->where('property_id', $i->id)->delete();
 
                     $i->delete();
                 }

@@ -37,7 +37,7 @@ class CheckForDuplicates extends Job implements SelfHandling, ShouldQueue
     public function handle()
     {
         $property = Property::find($this->id);
-        $test = DB::table('citynexus_properties')->where('full_address', trim($property->full_address))->pluck('id');
+        $test = DB::table('citynexus_properties')->where('full_address', trim($property->full_address))->lists('id');
 
         if(count($test) > 1)
         {

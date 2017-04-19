@@ -473,7 +473,7 @@ class AdminController extends Controller
 
     public function getMergeProperties()
     {
-        $properties = Property::pluck('id');
+        $properties = Property::all();
         foreach ($properties as $property)
         {
             $this->dispatch(new CheckForDuplicates($property->id));

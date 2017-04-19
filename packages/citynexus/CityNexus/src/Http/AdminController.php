@@ -473,13 +473,34 @@ class AdminController extends Controller
 
     public function getMergeProperties()
     {
+        $Tabler = new TablerController();
         $properties = Property::all();
-        foreach ($properties as $property)
+
+        $sorted = [];
+
+        foreach($properties as $property)
         {
-            $this->dispatch(new CheckForDuplicates($property->id));
+            $sorted[trim($property->full_address)][] = $property->id;
         }
 
-        return $properties->count();
+        foreach ($sorted as $key => $item)
+        {
+            if(count($item) == 1) unset($sorted[$key]);
+        }
+
+        if(isset($_GET['doit']))
+        {
+            foreach ($sorted as $item)
+            {
+
+                $first = array_shift($item);
+
+                $Tabler->mergeProperties($first, $item);
+            }
+        }
+
+        return $sorted;
+
     }
 
     public function getClearDupApartments()

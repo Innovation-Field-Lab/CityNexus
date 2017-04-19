@@ -6,6 +6,7 @@ use App\Jobs\FakeLocation;
 use App\User;
 use Carbon\Carbon;
 use CityNexus\CityNexus\BackUpTable;
+use CityNexus\CityNexus\CheckForDuplicates;
 use CityNexus\CityNexus\CleanApartments;
 use CityNexus\CityNexus\CreateRaw;
 use CityNexus\CityNexus\CreateUnique;
@@ -468,6 +469,17 @@ class AdminController extends Controller
             }
         }
 
+    }
+
+    public function getMergeProperties()
+    {
+        $properties = Property::pluck('id');
+        foreach ($properties as $property)
+        {
+            $this->dispatch(new CheckForDuplicates($property->id));
+        }
+
+        return $properties->count();
     }
 
     public function getClearDupApartments()

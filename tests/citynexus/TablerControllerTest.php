@@ -111,4 +111,86 @@ class TablerControllerTest extends TestCase
 
         $this->assertEquals(null, $alias->alias_of);
     }
+
+    public function testUniqueIdUpload()
+    {
+        // Bring in helpers
+        $tabler = new \CityNexus\CityNexus\Http\TablerController();
+        $builder = new \CityNexus\CityNexus\TableBuilder();
+
+
+        // Create fake table.
+        $table = \CityNexus\CityNexus\Table::create([
+            'table_title' => 'Test Table',
+            'scheme' => json_encode([
+                'unique_id' => [
+                    'show' => 'on',
+                    'name' => 'Unique Id',
+                    'key' => 'unique_id',
+                    'type' => 'integer',
+                    'sync' => '',
+                    'push' => '',
+                    'meta' => ''
+                ],
+                'data' => [
+                    'show' => 'on',
+                    'name' => 'Data',
+                    'key' => 'data',
+                    'type' => 'string',
+                    'sync' => '',
+                    'push' => '',
+                    'meta' => ''
+                ]
+            ]),
+            'settings' => json_encode([
+                'unique_id' => 'unique_id'
+            ])
+        ]);
+
+        $builder->create($table);
+
+        // Create upload record
+        $upload = \CityNexus\CityNexus\Upload::create([
+            'table_id' => $table->id,
+            'note' => 'test',
+        ]);
+
+        // Add singe fake row.
+        \Illuminate\Support\Facades\DB::table($table->table_name)
+            ->insert(
+                ['unique_id' => 1,
+                    'data' => 'oh, hello',
+                    'upload_id' => 1,
+                    'created_at' => \Carbon\Carbon::now(),
+                    'updated_at' => \Carbon\Carbon::now()]);
+
+
+        // create sample data with one over lap
+        $data = [
+            [
+                'unique_id' => 1,
+                'data' => 'hey there'
+            ],
+            [
+                'unique_id' => 2,
+                'data' => 'hey there'
+            ],
+            [
+                'unique_id' => 3,
+                'data' => 'hey there'
+            ],
+        ];
+
+        // send to the processer function
+        $tabler->processUpload($table, $data, $upload->id);
+
+
+        // Check what is in the DB
+        $results = \Illuminate\Support\Facades\DB::table($table->table_name)->get();
+
+        // Test that there are only three items in db
+        $this->assertSame(count($results), 3);
+    }
+
+
 }

@@ -41,6 +41,9 @@ class TableBuilder
             });
         }
 
+        $table->table_name = $table_name;
+        $table->save();
+
         return $table_name;
     }
 

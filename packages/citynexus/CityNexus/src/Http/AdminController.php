@@ -15,6 +15,7 @@ use CityNexus\CityNexus\Error;
 use CityNexus\CityNexus\GeocodeJob;
 use CityNexus\CityNexus\Location;
 use CityNexus\CityNexus\MergeProps;
+use CityNexus\CityNexus\MigrateGeocode;
 use CityNexus\CityNexus\ProcessData;
 use CityNexus\CityNexus\Property;
 use CityNexus\CityNexus\Upload;
@@ -552,6 +553,16 @@ class AdminController extends Controller
         }
 
         return 'done';
+    }
+
+    public function getFixGeocodes()
+    {
+        $properties = Property::lists('id')->chunk(100);
+
+        foreach($properties as $chunk)
+        {
+            $this->dispatch(new MigrateGeocode($chunk));
+        }
     }
 
 }

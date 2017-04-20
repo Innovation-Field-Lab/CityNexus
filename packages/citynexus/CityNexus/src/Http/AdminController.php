@@ -336,7 +336,6 @@ class AdminController extends Controller
         if(isset($_GET{'doit'}))
         {
 
-
             foreach($properties as $property)
             {
                 $this->dispatch(new ClearProperty($property->id));

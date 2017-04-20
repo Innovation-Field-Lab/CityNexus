@@ -28,7 +28,7 @@ class ClearProperty extends Job implements SelfHandling, ShouldQueue
      */
     public function __construct($id)
     {
-        $this->id;
+        $this->id = $id;
     }
     /**
      * Execute the job.
@@ -37,12 +37,12 @@ class ClearProperty extends Job implements SelfHandling, ShouldQueue
      */
     public function handle()
     {
+
         $datasets = DB::table('tabler_tables')->whereNotNull('table_name')->lists('table_name');
 
         $count = 0;
         $count += DB::table('citynexus_images')->where('property_id', $this->id)->count();
         $count += DB::table('citynexus_notes')->where('property_id', $this->id)->count();
-        $count += DB::table('citynexus_properties')->where('alias_of', $this->id)->count();
         $count += DB::table('citynexus_taskables')->where('citynexus_taskable_id', $this->id)->where('citynexus_taskable_type', 'CityNexus\CityNexus\Property')->count();
         $count += DB::table('property_tag')->where('property_id', $this->id)->count();
         if($count == 0)
@@ -53,9 +53,10 @@ class ClearProperty extends Job implements SelfHandling, ShouldQueue
                 }
             }
             DB::table('citynexus_raw_addresses')->where('property_id', $this->id)->delete();
+            DB::table('citynexus_properties')->where('id', $this->id)->delete();
 
-            Property::find($this->id)->delete();
         }
+
 
     }
 }

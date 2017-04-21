@@ -14,6 +14,7 @@ use CityNexus\CityNexus\CreateUnique;
 use CityNexus\CityNexus\Error;
 use CityNexus\CityNexus\GeocodeJob;
 use CityNexus\CityNexus\Location;
+use CityNexus\CityNexus\MergeProperties;
 use CityNexus\CityNexus\MergeProps;
 use CityNexus\CityNexus\MigrateGeocode;
 use CityNexus\CityNexus\ProcessData;
@@ -531,11 +532,11 @@ class AdminController extends Controller
 
                 $first = array_shift($item);
 
-                $Tabler->mergeProperties($first, $item);
+                $this->dispatch(new MergeProperties($first, $item));
             }
         }
 
-        return $sorted;
+        return count($sorted);
 
     }
 

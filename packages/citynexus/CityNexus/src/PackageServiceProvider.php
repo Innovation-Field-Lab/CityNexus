@@ -85,6 +85,7 @@ class PackageServiceProvider extends ServiceProvider
         include_once __DIR__ . '/Jobs/CleanApartments.php';
         include_once __DIR__ . '/Jobs/ClearProperty.php';
         include_once __DIR__ . '/Jobs/MigrateGeocode.php';
+        include_once __DIR__ . '/Jobs/MergeProperties.php';
 
         // Included Policies
         include_once __DIR__ . '/Policies/CityNexusPolicy.php';

@@ -213,6 +213,8 @@ class ReportController extends Controller
 
         $properties = Property::find(array_keys($results));
 
+
+
         $plist[0]['property_id'] = 'property_id';
         if(isset($export->elements['property']['full_address']))
         {

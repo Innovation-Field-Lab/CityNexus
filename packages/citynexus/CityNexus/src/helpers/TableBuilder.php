@@ -339,16 +339,27 @@ class TableBuilder
             if (isset($settings->timestamp) && $settings->timestamp != null) {
                 $record['created_at'] = $record[$settings->timestamp];
             }
-
             try{
-
-                DB::table($table)->where('id', $id)->update($record);
+                $this->updateRecord($table, $record, $id, $dataset->setting->unique_id);
             }
             catch(\Exception $e)
             {
                 Error::create(['location' => 'processRecord - Insert Record', 'data' => json_encode([ 'id' => $id, 'table' => $table])]);
             }
 
+    }
+
+    private function updateRecord($table, $record, $id, $unique_id = null)
+    {
+        if($unique_id && DB::table($table)->where($unique_id, $record[$unique_id])->count())
+        {
+            DB::table($table)->where($unique_id, $record[$unique_id])->update($record);
+            DB::table($table)->where('id', $id)->delete();
+        }
+        else
+        {
+            DB::table($table)->where('id', $id)->update($record);
+        }
     }
 
     public function processRecordWithoutId($id, $table)

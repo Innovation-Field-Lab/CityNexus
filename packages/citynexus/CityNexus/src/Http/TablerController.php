@@ -249,10 +249,7 @@ class TablerController extends Controller
         try
         {
             $upload = null;
-            if(isset($settings->unique_id) && $settings->unique_id != null) {
-                $uid = $settings->unique_id;
-                $existing = DB::table($table->table_name)->lists($uid);
-            }
+            $unique = false;
             if(!Schema::hasColumn($table->table_name, 'processed_at'))
             {
                 Schema::table($table->table_name, function(Blueprint $table){
@@ -262,8 +259,9 @@ class TablerController extends Controller
 
             foreach($data as $i)
             {
-                if(isset($existing))
+                if(isset($settings->unique_id) && $settings->unique_id != null)
                 {
+                    $unique = true;
                     $upload[$i[$settings->unique_id]] = ['raw' => json_encode($i), 'processed_at' => $now, 'upload_id' => $upload_id, 'created_at' => $now, 'updated_at' => $now];
                 }
                 else{
@@ -271,16 +269,6 @@ class TablerController extends Controller
                 }
             }
 
-            if(isset($existing))
-            {
-                foreach($existing as $test)
-                {
-                    if(isset($upload[$test]))
-                    {
-                        unset($upload[$test]);
-                    }
-                }
-            }
 
             if(count($upload) > 0)
             {
@@ -289,10 +277,8 @@ class TablerController extends Controller
                 $new_ids = DB::table($table->table_name)->where('upload_id', $upload_id)->lists('id');
 
                 $new_ids = array_chunk($new_ids, 100);
-                foreach($new_ids as $record)
-                {
-                    $this->dispatch(new ProcessData($record, $table->table_name));
-                }
+                foreach($new_ids as $record) $this->dispatch(new ProcessData($record, $table->table_name));
+
             }
         }
         catch(Exception $e)

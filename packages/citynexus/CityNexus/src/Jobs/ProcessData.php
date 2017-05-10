@@ -26,7 +26,6 @@ class ProcessData extends Job implements SelfHandling, ShouldQueue
     {
         $this->id = $id;
         $this->table = $table;
-        $this->wo_pid = $wo_pid;
     }
     /**
      * Execute the job.

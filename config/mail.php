@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'from' => ['address' => 'postmaster@citynexus.org', 'name' => 'CityNexus'],
+    'from' => ['address' => 'postmaster@app.citynexus.org', 'name' => 'CityNexus'],
 
     /*
     |--------------------------------------------------------------------------
@@ -80,7 +80,7 @@ return [
     |
     */
 
-    'username' => env('MAIL_USERNAME', 'postmaster@citynexus.org'),
+    'username' => env('MAIL_USERNAME', 'postmaster@app.citynexus.org'),
 
     /*
     |--------------------------------------------------------------------------

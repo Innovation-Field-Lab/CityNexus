@@ -412,7 +412,7 @@ class ReportController extends Controller
             {
                 $tag = Tag::find($id);
 
-
+                $pids = [];
 
                 switch ($i['method'])
                 {

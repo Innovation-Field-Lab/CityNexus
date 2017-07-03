@@ -426,7 +426,7 @@ class ReportController extends Controller
                         }
                         break;
                     case 'deleted':
-                        $properties = $tag->onlyTrashed()->properties;
+                        $properties = Property::findMany(DB::table('property_tag')->where('tag_id', $tag->id)->whereNotNull('deleted_at')->pluck('property_id'));
                         $name = 'deleted_tagged_' . str_replace(' ', '_', strtolower($tag->name));
                         $results[0][$name] = $name;
                         foreach($properties as $property)
@@ -435,7 +435,7 @@ class ReportController extends Controller
                         }
                         break;
                     default:
-                        $properties = $tag->withTrashed()->properties;
+                        $properties = Property::findMany(DB::table('property_tag')->where('tag_id', $tag->id)->pluck('property_id'));
                         $name = 'tag_' . str_replace(' ', '_', strtolower($tag->name));
                         $results[0][$name] = $name;
                         foreach($properties as $property)

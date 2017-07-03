@@ -426,26 +426,32 @@ class ReportController extends Controller
                         }
                         break;
                     case 'deleted':
-                        $properties = Property::findMany(DB::table('property_tag')->where('tag_id', $tag->id)->whereNotNull('deleted_at')->pluck('property_id'));
+                        $tags = DB::table('property_tag')->where('tag_id', $tag->id)->whereNotNull('deleted_at')->get(['property_id', 'deleted_by', 'deleted_at']);
+                        foreach($tags as $i) $pids[] = $i->property_id;
+                        $properties = Property::findMany($pids);
+                        foreach($tags as $i) $tag_model[$i->property_id] = $i;
                         $name = 'deleted_tagged_' . str_replace(' ', '_', strtolower($tag->name));
                         $results[0][$name] = $name;
+
                         foreach($properties as $property)
                         {
-                            $results[$property->id][$name] = $property->pivot->deleted_at . ", " . User::find($property->pivot->deleted_by)->fullname();
+                            $results[$property->id][$name] = $tag_model[$property->id]->deleted_at . ", " . User::find($tag_model[$property->id]->deleted_by)->fullname();
                         }
                         break;
                     default:
-                        $properties = Property::findMany(DB::table('property_tag')->where('tag_id', $tag->id)->pluck('property_id'));
-                        $name = 'tag_' . str_replace(' ', '_', strtolower($tag->name));
+                        $tags = DB::table('property_tag')->where('tag_id', $tag->id)->whereNotNull('deleted_at')->get(['property_id', 'deleted_by', 'deleted_at', 'created_at', 'created_by']);
+                        foreach($tags as $i) $pids[] = $i->property_id;
+                        $properties = Property::findMany($pids);
+                        foreach($tags as $i) $tag_model[$i->property_id] = $i;                        $name = 'tag_' . str_replace(' ', '_', strtolower($tag->name));
                         $results[0][$name] = $name;
                         foreach($properties as $property)
                         {
                             if(isset($property->pivot->deleted_at))
                             {
-                                $results[$property->id][$name] = 'tagged at: ' . $property->pivot->created_at . ", deleted at:" . $property->pivot->deleted_at;
+                                $results[$property->id][$name] = 'tagged at: ' . $tag_model[$property->id]->created_at . ", deleted at:" . $tag_model[$property->id]->deleted_at;
                             }
                             else {
-                                $results[$property->id][$name] = 'tagged at: ' . $property->pivot->deleted_at;
+                                $results[$property->id][$name] = 'tagged at: ' . $tag_model[$property->id]->deleted_at;
                             }
                         }
                         break;

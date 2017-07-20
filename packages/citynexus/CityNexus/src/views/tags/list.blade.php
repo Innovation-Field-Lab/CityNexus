@@ -32,6 +32,7 @@ $section = 'properties';
                         <tr>
                             <th>Id</th>
                             <th>Address</th>
+                            <th>Added At</th>
                             {{--<th>Added By</th>--}}
                             <th></th>
                         </tr>
@@ -41,6 +42,7 @@ $section = 'properties';
                             <tr>
                                 <td>{{$item->id}}</td>
                                 <td>{{ucwords($item->full_address)}}</td>
+                                <td>{{$item->pivot->created_at}}</td>
                                 {{--<td>@if(isset($item->pivot->created_by)){{\App\User::find($item->pivot->created_by)->full_name}}@endif</td>--}}
                                 <td>
                                     @can('citynexus', ['group' => 'properties', 'method' => 'show'])

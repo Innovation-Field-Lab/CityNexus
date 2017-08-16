@@ -418,7 +418,7 @@ class ReportController extends Controller
                 {
                     case 'tagged':
                         $properties = $tag->properties;
-                        $name = 'tagged_' . str_replace(' ', '_', strtolower($tag->name));
+                        $name = 'tagged_' . str_replace(' ', '_', strtolower($tag->tag));
                         $results[0][$name] = $name;
                         foreach($properties as $property)
                         {
@@ -430,7 +430,7 @@ class ReportController extends Controller
                         foreach($tags as $i) $pids[] = $i->property_id;
                         $properties = Property::findMany($pids);
                         foreach($tags as $i) $tag_model[$i->property_id] = $i;
-                        $name = 'deleted_tagged_' . str_replace(' ', '_', strtolower($tag->name));
+                        $name = 'deleted_tagged_' . str_replace(' ', '_', strtolower($tag->tag));
                         $results[0][$name] = $name;
 
                         foreach($properties as $property)
@@ -442,7 +442,7 @@ class ReportController extends Controller
                         $tags = DB::table('property_tag')->where('tag_id', $tag->id)->whereNotNull('deleted_at')->get(['property_id', 'deleted_by', 'deleted_at', 'created_at', 'created_by']);
                         foreach($tags as $i) $pids[] = $i->property_id;
                         $properties = Property::findMany($pids);
-                        foreach($tags as $i) $tag_model[$i->property_id] = $i;                        $name = 'tag_' . str_replace(' ', '_', strtolower($tag->name));
+                        foreach($tags as $i) $tag_model[$i->property_id] = $i;                        $name = 'tag_' . str_replace(' ', '_', strtolower($tag->tag));
                         $results[0][$name] = $name;
                         foreach($properties as $property)
                         {

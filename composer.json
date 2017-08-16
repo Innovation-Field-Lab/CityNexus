@@ -22,7 +22,8 @@
         "guzzlehttp/guzzle": "~5.3|~6.0",
         "anlutro/curl": "^1.4",
         "oefenweb/statistics": "^1.1",
-        "mcordingley/regression": "^2.1"
+        "mcordingley/regression": "^2.1",
+        "akeneo-labs/spreadsheet-parser": "^1.2"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
